@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"xiazhi.icu","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"xiazhi.icu","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="简介单调栈实际上也是栈，但他利用了一些巧妙的逻辑，让每次新元素入栈后，栈内元素都保持有序（单调递增或单调递减），那么，这个逻辑是什么，其实很简单，以栈底-栈顶单调递增为例，每次新元素入栈时，让栈内元素与新元素判断，比新元素大的栈内元素出栈即可。 用途单调栈的用途并不广泛，只处理一种典型问题，Next Greater Element 单调栈模板下面举一个例子说明其模板，现有这样一道题：给你一个数组n">
@@ -165,7 +165,7 @@
     <link itemprop="mainEntityOfPage" href="https://xiazhi.icu/2022/03/04/%E5%8D%95%E8%B0%83%E6%A0%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/author.jpg">
       <meta itemprop="name" content="夏至">
       <meta itemprop="description" content="欢迎来到夏至的个人博客,此博客由夏至搭建，主要用于分享本人在学习生活过程中的一些心得，不定时更新">
     </span>
@@ -198,7 +198,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -218,13 +232,13 @@
 <p><em>O（n^2）</em></p>
 <ul>
 <li>单调栈法：把数组元素想象成并列的数，元素大小想象成树的高度，在某个位置时，后面<br>可见的第一颗树就是它的 Next Greater Number.<ul>
-<li>实现代码(C++)：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">  vector&lt;int&gt; res(nums.size()); // 存放答案的数组</span><br><span class="line">  stack&lt;int&gt; s;</span><br><span class="line">  // 倒着往栈里放</span><br><span class="line">  for (int i = nums.size() - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">      // 判定个子高矮</span><br><span class="line">      while (!s.empty() &amp;&amp; s.top() &lt;= nums[i]) &#123;</span><br><span class="line">          // 矮个起开，反正也被挡着了。。。</span><br><span class="line">          s.pop();</span><br><span class="line">      &#125;</span><br><span class="line">      // nums[i] 身后的 next great number</span><br><span class="line">      res[i] = s.empty() ? -1 : s.top();</span><br><span class="line">      s.push(nums[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  return res;&#125;</span><br></pre></td></tr></table></figure>
+<li>实现代码(C++)：<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">nextGreaterElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">  <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">res</span><span class="params">(nums.size())</span></span>; <span class="comment">// 存放答案的数组</span></span><br><span class="line">  stack&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">  <span class="comment">// 倒着往栈里放</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">      <span class="comment">// 判定个子高矮</span></span><br><span class="line">      <span class="keyword">while</span> (!s.<span class="built_in">empty</span>() &amp;&amp; s.<span class="built_in">top</span>() &lt;= nums[i]) &#123;</span><br><span class="line">          <span class="comment">// 矮个起开，反正也被挡着了。。。</span></span><br><span class="line">          s.<span class="built_in">pop</span>();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// nums[i] 身后的 next great number</span></span><br><span class="line">      res[i] = s.<span class="built_in">empty</span>() ? <span class="number">-1</span> : s.<span class="built_in">top</span>();</span><br><span class="line">      s.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;&#125;</span><br></pre></td></tr></table></figure>
 这就是单调栈解决问题的模板，倒着入栈其实就是正着出栈，while循环是排除两颗高树间<br>的矮树，这个算法的复杂度只有O（n），尽管它存在for循环嵌套while循环，但要分析一个<br>算法的时间复杂度，要从整体入手，总共有n个元素，每个元素都被push入栈一次，最多被<br>pop一次，没有对于操作，计算规模与元素规模还是成正比的，也就是O（n）复杂度</li>
 </ul>
 </li>
 </ul>
 <h3 id="单调栈模板改良处理环形数组"><a href="#单调栈模板改良处理环形数组" class="headerlink" title="单调栈模板改良处理环形数组"></a>单调栈模板改良处理环形数组</h3><p>同求next Greater Number 如果要求环形数组，怎么办<br>比如输入一个数组[2,1,2,4,3].返回数组[4,2,4,-1,4]拥有了环形属性，最后一个元素3绕<br>了一圈后找到了比自己大的元素4.<br>这种情况一般都是通过%运算符求模(余数)，来获得环形特效<br>对于这个问题还是要用单调栈解题模板，对环形需求，常用套路是将数组长度翻倍，我们也<br>可以不构造新数组，而是用循环数组来模拟数组长度翻倍的效果<br>示例代码（C++）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; nextGreaterElements(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">    int n = nums.size();</span><br><span class="line">    vector&lt;int&gt; res(n);</span><br><span class="line">    stack&lt;int&gt; s;</span><br><span class="line">    // 假装这个数组长度翻倍了</span><br><span class="line">    for (int i = 2 * n - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">        // 索引要求模，其他的和模板一样</span><br><span class="line">        while (!s.empty() &amp;&amp; s.top() &lt;= nums[i % n]) &#123;</span><br><span class="line">            s.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        res[i % n] = s.empty() ? -1 : s.top();</span><br><span class="line">        s.push(nums[i % n]);</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">nextGreaterElements</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">res</span><span class="params">(n)</span></span>;</span><br><span class="line">    stack&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">    <span class="comment">// 假装这个数组长度翻倍了</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span> * n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="comment">// 索引要求模，其他的和模板一样</span></span><br><span class="line">        <span class="keyword">while</span> (!s.<span class="built_in">empty</span>() &amp;&amp; s.<span class="built_in">top</span>() &lt;= nums[i % n]) &#123;</span><br><span class="line">            s.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        res[i % n] = s.<span class="built_in">empty</span>() ? <span class="number">-1</span> : s.<span class="built_in">top</span>();</span><br><span class="line">        s.<span class="built_in">push</span>(nums[i % n]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>参考博客：[labuladong的算法小抄-单调栈结构解决三道算法题](<a target="_blank" rel="noopener" href="https://labuladong/">https://labuladong</a>.<br>gitee.io/algo/2/21/51/)</p>
 
     </div>
@@ -315,6 +329,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="夏至"
+      src="/images/author.jpg">
   <p class="site-author-name" itemprop="name">夏至</p>
   <div class="site-description" itemprop="description">欢迎来到夏至的个人博客,此博客由夏至搭建，主要用于分享本人在学习生活过程中的一些心得，不定时更新</div>
 </div>
@@ -368,8 +384,18 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">夏至</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">18k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16 分钟</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
@@ -395,7 +421,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
