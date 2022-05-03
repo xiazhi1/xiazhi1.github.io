@@ -20,19 +20,28 @@
     var CONFIG = {"hostname":"xiazhi.icu","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="递归算法什么是递归？递归，在计算机科学中是指一种通过重复把问题分解为同类的子问题而解决问题的方法，通俗来讲，递归表现为函数调用函数本身。在知乎上有一个比喻递归非常形象的例子。   “递归最恰当的比喻，就是查词典。我们使用的词典，本身就是递归，为了解释一个词，需要使用更多的词。当你查一个词，发现这个词的解释中某个词仍然不懂，于是你开始查这第二个词，可惜，第二个词里仍然有不懂的词，于是查第三个词，这样">
+  <meta name="description" content="图的存储结构前言最近笔者在准备数据结构考试，故复习了些课本知识，发下自己对与图的存储结构还有诸多遗漏，故特意整理了些图的存储结构笔记，图的存储结构相对来说比较复杂，望大家复习时不要遗漏 邻接矩阵该储存方式是由两个数组来表示图1，一个一维数组储存图中顶点信息，一个二维数组(即为邻接矩阵)储存图中的边或弧的信息具体实例：无向图可以很容易看出无向图的边数组是一个对称矩阵。有了该矩阵后，我们可以：  判定">
 <meta property="og:type" content="article">
-<meta property="og:title" content="递归算法">
-<meta property="og:url" content="https://xiazhi.icu/2022/02/01/%E9%80%92%E5%BD%92/index.html">
+<meta property="og:title" content="图的存储结构">
+<meta property="og:url" content="https://xiazhi.icu/2022/05/02/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="递归算法什么是递归？递归，在计算机科学中是指一种通过重复把问题分解为同类的子问题而解决问题的方法，通俗来讲，递归表现为函数调用函数本身。在知乎上有一个比喻递归非常形象的例子。   “递归最恰当的比喻，就是查词典。我们使用的词典，本身就是递归，为了解释一个词，需要使用更多的词。当你查一个词，发现这个词的解释中某个词仍然不懂，于是你开始查这第二个词，可惜，第二个词里仍然有不懂的词，于是查第三个词，这样">
+<meta property="og:description" content="图的存储结构前言最近笔者在准备数据结构考试，故复习了些课本知识，发下自己对与图的存储结构还有诸多遗漏，故特意整理了些图的存储结构笔记，图的存储结构相对来说比较复杂，望大家复习时不要遗漏 邻接矩阵该储存方式是由两个数组来表示图1，一个一维数组储存图中顶点信息，一个二维数组(即为邻接矩阵)储存图中的边或弧的信息具体实例：无向图可以很容易看出无向图的边数组是一个对称矩阵。有了该矩阵后，我们可以：  判定">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-01T09:15:01.000Z">
-<meta property="article:modified_time" content="2022-02-01T09:17:32.543Z">
+<meta property="og:image" content="https://s2.loli.net/2022/05/02/jKxgNmBUbHko5ZX.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/02/znGTpIKuiC6NfH8.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/03/uTWl1rjJwQHo3AN.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/03/jcmVLbKYsDCf1yk.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/03/1QYCHpEr6waGAxh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/03/Y1nJSLVyEWPbI6t.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/03/yOtG873msjzWafh.png">
+<meta property="article:published_time" content="2022-05-02T02:33:11.000Z">
+<meta property="article:modified_time" content="2022-05-03T03:21:48.898Z">
 <meta property="article:author" content="夏至">
+<meta property="article:tag" content="数据结构与算法">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/02/jKxgNmBUbHko5ZX.png">
 
-<link rel="canonical" href="https://xiazhi.icu/2022/02/01/%E9%80%92%E5%BD%92/">
+<link rel="canonical" href="https://xiazhi.icu/2022/05/02/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/">
 
 
 <script id="page-configurations">
@@ -45,7 +54,7 @@
   };
 </script>
 
-  <title>递归算法 | 夏至的个人博客</title>
+  <title>图的存储结构 | 夏至的个人博客</title>
   
 
 
@@ -187,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xiazhi.icu/2022/02/01/%E9%80%92%E5%BD%92/">
+    <link itemprop="mainEntityOfPage" href="https://xiazhi.icu/2022/05/02/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/author.jpg">
@@ -200,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          递归算法
+          图的存储结构
         </h1>
 
         <div class="post-meta">
@@ -209,17 +218,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-02-01 17:15:01 / 修改时间：17:17:32" itemprop="dateCreated datePublished" datetime="2022-02-01T17:15:01+08:00">2022-02-01</time>
+              <time title="创建时间：2022-05-02 10:33:11" itemprop="dateCreated datePublished" datetime="2022-05-02T10:33:11+08:00">2022-05-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-03 11:21:48" itemprop="dateModified" datetime="2022-05-03T11:21:48+08:00">2022-05-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">算法学习笔记</span></a>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">数据结构学习笔记</span></a>
                 </span>
             </span>
 
@@ -236,7 +251,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>847</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -255,38 +270,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="递归算法"><a href="#递归算法" class="headerlink" title="递归算法"></a>递归算法</h2><h2 id="什么是递归？"><a href="#什么是递归？" class="headerlink" title="什么是递归？"></a>什么是递归？</h2><p>递归，在计算机科学中是指一种通过重复把问题分解为同类的子问题而解决问题的方法，通俗来讲，递归表现为函数调用函数本身。在知乎上有一个比喻递归非常形象的例子。<br>   “递归最恰当的比喻，就是查词典。我们使用的词典，本身就是递归，为了解释一个词，需要使用更多的词。当你查一个词，发现这个词的解释中某个词仍然不懂，于是你开始查这第二个词，可惜，第二个词里仍然有不懂的词，于是查第三个词，这样查下去，直到有一个词的解释是你完全能看懂的，那么递归走到了尽头，然后你开始后退，逐个明白之前查过的每一个词，最终，你明白了最开始那个词的意思。”</p>
-<h3 id="递归的特点"><a href="#递归的特点" class="headerlink" title="递归的特点"></a>递归的特点</h3><p>事实上，递归有两个显著的特征，终止条件和自身调用：</p>
-<ul>
-<li><strong>自身调用</strong>：原问题可以分解为子问题，子问题和原问题的求解方法是一致的，都是调用自身的同一个函数</li>
-<li><strong>终止条件</strong>：递归必须有一个终止的条件，即不能无线循环的调用自己</li>
-</ul>
-<h3 id="递归与栈的关系"><a href="#递归与栈的关系" class="headerlink" title="递归与栈的关系"></a>递归与栈的关系</h3><p>递归的过程也可以理解为出入栈的过程<br>比如说我们利用递归计算3的阶乘，因为3&gt;1,所以进入下一个递归，2&gt;1，再进入下一个递归，1=1，开始计算，依序返回，在这里，我们可以发现先进去的3反而是最后执行的，这就类似于栈的性质</p>
-<h3 id="递归的经典应用场景"><a href="#递归的经典应用场景" class="headerlink" title="递归的经典应用场景"></a>递归的经典应用场景</h3><ul>
-<li>阶乘问题</li>
-<li>二叉树深度</li>
-<li>汉诺塔问题</li>
-<li>斐波那契数列</li>
-<li>快速排序，归并排序（分治算法中体现递归）</li>
-<li>遍历文件，解析xml文件</li>
-</ul>
-<h3 id="递归解题思路"><a href="#递归解题思路" class="headerlink" title="递归解题思路"></a>递归解题思路</h3><ol>
-<li>定义函数功能</li>
-<li>寻找递归终止条件</li>
-<li>递推函数的等价关系式</li>
+        <h1 id="图的存储结构"><a href="#图的存储结构" class="headerlink" title="图的存储结构"></a>图的存储结构</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近笔者在准备数据结构考试，故复习了些课本知识，发下自己对与图的存储结构还有诸多遗漏，故特意整理了些图的存储结构笔记，图的存储结构相对来说比较复杂，望大家复习时不要遗漏</p>
+<h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><p>该储存方式是由两个数组来表示图1，一个一维数组储存图中顶点信息，一个二维数组(即为邻接矩阵)储存图中的边或弧的信息<br>具体实例：<br><strong>无向图</strong><br><img src="https://s2.loli.net/2022/05/02/jKxgNmBUbHko5ZX.png" alt="邻接矩阵-无向图.png"><br>可以很容易看出无向图的边数组是一个对称矩阵。<br>有了该矩阵后，我们可以：</p>
+<ol>
+<li>判定任意两顶点是否有边无边</li>
+<li>确定某个顶点的度。就是该顶点的行(列)的元素之和。</li>
+<li>求某顶点的所有邻接点就是把矩阵该行元素全部扫描一遍，为一的就是邻接点</li>
 </ol>
-<h3 id="递归存在的问题"><a href="#递归存在的问题" class="headerlink" title="递归存在的问题"></a>递归存在的问题</h3><ol>
-<li>递归调用层级太多，导致栈溢出问题</li>
-<li>递归重复计算，导致效率低下</li>
-</ol>
-<h4 id="栈溢出问题："><a href="#栈溢出问题：" class="headerlink" title="栈溢出问题："></a>栈溢出问题：</h4><ul>
-<li>每一次函数调用在内存栈中分配空间，然而每个进程的栈容量是有限的</li>
-<li>当递归调用的层级太多时就会，就会超出栈的容量，从而导致调用栈溢出</li>
-<li>其实，我们在前面小节也讨论了。递归过程类似于出栈入栈，如果递归次数过多，栈的深度就需要越深，最后栈容量就不够了</li>
-</ul>
-<h4 id="重复计算导致效率低下"><a href="#重复计算导致效率低下" class="headerlink" title="重复计算导致效率低下"></a>重复计算导致效率低下</h4><p>递归处理时，有些问题如果不加以处理，会造成多次重复计算，降低程序的运行效率</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/tqGKHZzSyDBgEp-oWsOztQ">https://mp.weixin.qq.com/s/tqGKHZzSyDBgEp-oWsOztQ</a>
- </p>
+<p><strong>有向图</strong><br><img src="https://s2.loli.net/2022/05/02/znGTpIKuiC6NfH8.png" alt="邻接矩阵-有向图.png"><br>有向图讲究的入度和出度，入度对应列，出度对应行<br><strong>带权值的有向图</strong><br>就把有向图中为0的地方数组改为无穷，其余地方的值为该边上的权值即可<br><strong>缺点</strong><br>对于边数相对顶点较少的图，这种结构对储存空间造成极大浪费</p>
+<h2 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h2><p>顶点用一个一维数组储存，便于读取顶点信息，其次还要储存一个指向第一个邻接点的指针，便于查找该顶点的边信息<br>顶点所有邻接点构成一个线性表，用单链表储存，无向图称为顶点的边表，有向图称为顶点作为弧尾的出边表<br>具体实例如下：<br><strong>无向图</strong><br><img src="https://s2.loli.net/2022/05/03/uTWl1rjJwQHo3AN.png" alt="邻接表-无向图.png"><br>每个节点有data，firstedge两个域表示，data储存顶点信息，firstedge指针域，指向边表的第一个节点，边表节点由adjvex和next两个域组成，adjvex储存邻接点在顶点表的下标，next指向边表下一个节点的指针</p>
+<p><strong>有向图</strong><br>有向图的邻接表结构是类似的，但由于它有方向，我们以顶点为弧尾储存边表，很容易可以得到每个顶点的出度，如果要得到每个顶点的入度，可构建一个逆邻接表<br>示意图如下<br><img src="https://s2.loli.net/2022/05/03/jcmVLbKYsDCf1yk.png" alt="邻接表-有向图.png"></p>
+<p><strong>带权值的有向图</strong><br>只需在边表节点定义中加一个weight的数据域，储存权值信息即可<br><strong>缺点</strong><br>对于有向图来说，邻接表不能同时了解入度出度问题</p>
+<h2 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h2><p>顶点表节点包括data，firstin，firstout，分别表示数据，入边表头指针，出边表头指针<br>边表节点结构包括tailvex，headvex，headlink，taillink，分别代表弧起点，弧终点，入边表指针域，指向终点相同的下一条边，出边表指针域，指向起点相同的下一条边，如果是网，还可以增加一个weight域来储存权值<br>示意图如下：<br><img src="https://s2.loli.net/2022/05/03/1QYCHpEr6waGAxh.png" alt="十字链表.png"></p>
+<p><strong>优缺点</strong><br>好处在于容易找到顶点的入出度，但其结构复杂点，但创建时间复杂度和邻接表相同，所以在有向图的应用中，它是一个非常好的模型</p>
+<h2 id="邻接多重表"><a href="#邻接多重表" class="headerlink" title="邻接多重表"></a>邻接多重表</h2><p>只需要在邻接表基础上，对边表节点进行一些改造，重新定义的边表结构如下：ivex，ilink，jvex，jlink，分别为边对应的两个顶点下标，指向依附ivex的下一条边，指向依附jvex的下一条边<br><img src="https://s2.loli.net/2022/05/03/Y1nJSLVyEWPbI6t.png" alt="邻接多重表.png"></p>
+<p><strong>与邻接表的区别</strong><br>一条边在邻接表中要用两个节点表示，而在邻接多重表中只有一个节点，这样对边的操作更方便</p>
+<h2 id="边集数组"><a href="#边集数组" class="headerlink" title="边集数组"></a>边集数组</h2><p>有两个一维数组构成，一个储存顶点信息，一个储存边的信息，边数组数据元素由边起点下标begin，终点下标end，权值weight组成，它不适合对顶点操作，更适合对边的操作<br><img src="https://s2.loli.net/2022/05/03/yOtG873msjzWafh.png" alt="边集数组.png"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>程杰《大话数据结构》</p>
 
     </div>
 
@@ -295,6 +295,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag"># 数据结构与算法</a>
+          </div>
 
         
 
@@ -303,12 +306,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/02/01/%E5%88%86%E6%B2%BB/" rel="prev" title="分治算法">
-      <i class="fa fa-chevron-left"></i> 分治算法
+    <a href="/2022/04/12/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="prev" title="线索二叉树">
+      <i class="fa fa-chevron-left"></i> 线索二叉树
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/02/01/%E8%A7%82%E5%BD%B1%E6%9D%82%E8%B0%88/" rel="next" title="肖申克的救赎">
-      肖申克的救赎 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/05/03/%E9%94%A6%E6%A0%87%E8%B5%9B%E6%8E%92%E5%BA%8F/" rel="next" title="锦标赛排序">
+      锦标赛排序 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -368,7 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">递归算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%80%92%E5%BD%92%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什么是递归？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">递归的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E4%B8%8E%E6%A0%88%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.2.</span> <span class="nav-text">递归与栈的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E7%9A%84%E7%BB%8F%E5%85%B8%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.3.</span> <span class="nav-text">递归的经典应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">2.4.</span> <span class="nav-text">递归解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.5.</span> <span class="nav-text">递归存在的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">2.5.1.</span> <span class="nav-text">栈溢出问题：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E8%AE%A1%E7%AE%97%E5%AF%BC%E8%87%B4%E6%95%88%E7%8E%87%E4%BD%8E%E4%B8%8B"><span class="nav-number">2.5.2.</span> <span class="nav-text">重复计算导致效率低下</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">图的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="nav-number">1.2.</span> <span class="nav-text">邻接矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">邻接表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8"><span class="nav-number">1.4.</span> <span class="nav-text">十字链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E5%A4%9A%E9%87%8D%E8%A1%A8"><span class="nav-number">1.5.</span> <span class="nav-text">邻接多重表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%B9%E9%9B%86%E6%95%B0%E7%BB%84"><span class="nav-number">1.6.</span> <span class="nav-text">边集数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.7.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
