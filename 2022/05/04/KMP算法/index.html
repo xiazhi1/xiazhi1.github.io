@@ -20,17 +20,20 @@
     var CONFIG = {"hostname":"xiazhi.icu","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="每个优秀的人，都有一段沉默的时光。那段时光，是付出了很多努力却得不到结果的日子，我们把它叫做扎根。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="夏至的个人博客">
-<meta property="og:url" content="https://xiazhi.icu/categories/%E8%A7%82%E5%BD%B1%E6%9D%82%E8%B0%88/index.html">
+  <meta name="description" content="KMP算法前言KMP算法绝对是每一本数据结构书籍都会讲的算法，应该算是知名度最高的算法之一，可惜的是，我反反复复学了很多次都没完全学懂，一直处于一种似懂非懂的状态中，最近因为复习，下决心要弄懂KMP算法，在网上看了很多相关博客，想把它们记录下来，以便复习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP算法">
+<meta property="og:url" content="https://xiazhi.icu/2022/05/04/KMP%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="每个优秀的人，都有一段沉默的时光。那段时光，是付出了很多努力却得不到结果的日子，我们把它叫做扎根。">
+<meta property="og:description" content="KMP算法前言KMP算法绝对是每一本数据结构书籍都会讲的算法，应该算是知名度最高的算法之一，可惜的是，我反反复复学了很多次都没完全学懂，一直处于一种似懂非懂的状态中，最近因为复习，下决心要弄懂KMP算法，在网上看了很多相关博客，想把它们记录下来，以便复习">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-04T03:04:06.000Z">
+<meta property="article:modified_time" content="2022-05-08T08:44:36.019Z">
 <meta property="article:author" content="夏至">
+<meta property="article:tag" content="数据结构与算法">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://xiazhi.icu/categories/%E8%A7%82%E5%BD%B1%E6%9D%82%E8%B0%88/">
+<link rel="canonical" href="https://xiazhi.icu/2022/05/04/KMP%E7%AE%97%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -38,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>分类: 观影杂谈 | 夏至的个人博客</title>
+  <title>KMP算法 | 夏至的个人博客</title>
   
 
 
@@ -178,51 +181,120 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">观影杂谈
-          <small>分类</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xiazhi.icu/2022/05/04/KMP%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="每个优秀的人，都有一段沉默的时光。那段时光，是付出了很多努力却得不到结果的日子，我们把它叫做扎根。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          KMP算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-05-04 11:04:06" itemprop="dateCreated datePublished" datetime="2022-05-04T11:04:06+08:00">2022-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-08 16:44:36" itemprop="dateModified" datetime="2022-05-08T16:44:36+08:00">2022-05-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">算法学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>127</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+        <h1 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>KMP算法绝对是每一本数据结构书籍都会讲的算法，应该算是知名度最高的算法之一，可惜的是，我反反复复学了很多次都没完全学懂，一直处于一种似懂非懂的状态中，最近因为复习，下决心要弄懂KMP算法，在网上看了很多相关博客，想把它们记录下来，以便复习</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-02-01T17:18:56+08:00"
-              content="2022-02-01">
-          02-01
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag"># 数据结构与算法</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/01/%E8%A7%82%E5%BD%B1%E6%9D%82%E8%B0%88/" itemprop="url">
-            <span itemprop="name">肖申克的救赎</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/03/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%9F%E6%88%90%E6%A0%91/" rel="prev" title="表达式生成树">
+      <i class="fa fa-chevron-left"></i> 表达式生成树
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/08/Gin%E5%AD%A6%E4%B9%A0/" rel="next" title="Gin学习">
+      Gin学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -275,6 +347,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KMP%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">KMP算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -352,12 +425,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">24k</span>
+    <span title="站点总字数">32k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">22 分钟</span>
+    <span title="站点阅读时长">29 分钟</span>
 </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
 
