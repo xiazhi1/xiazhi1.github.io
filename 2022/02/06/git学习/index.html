@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"xiazhi.icu","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+    var CONFIG = {"hostname":"xiazhi.icu","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="Git学习创建版本库123456789$ mkdir learngit&#x2F;&#x2F;创建目录$ cd learngit&#x2F;&#x2F;切换目录$ pwd&#x2F;&#x2F;显示当前目录$ ls -ah&#x2F;&#x2F;显示目录$ git init&#x2F;&#x2F;把目录变成可管理的仓库$ git add &#x2F;&#x2F;把文件添加到仓库$ git commit -m&quot;&quot;&#x2F;&#x2F;git commit告诉Git，把文件提交到仓库，-m用于添加对这次操作的说明$">
@@ -45,7 +45,7 @@
     lang   : 'zh-CN'
   };
 </script>
-
+<script src="/lib/fireworks.js"></script>
   <title>git学习 | 夏至的个人博客</title>
   
 
@@ -256,14 +256,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h1><h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir learngit//创建目录</span><br><span class="line">$ cd learngit//切换目录</span><br><span class="line">$ pwd//显示当前目录</span><br><span class="line">$ ls -ah//显示目录</span><br><span class="line">$ git init//把目录变成可管理的仓库</span><br><span class="line">$ git add //把文件添加到仓库</span><br><span class="line">$ git commit -m&quot;&quot;//git commit告诉Git，把文件提交到仓库，-m用于添加对这次操作的说明</span><br><span class="line">$ cat readme.txt//查看readme.txt的内容</span><br><span class="line">/Users/michael/learngit</span><br></pre></td></tr></table></figure>
+        <h1 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h1><h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs git">$ mkdir learngit//创建目录<br>$ cd learngit//切换目录<br>$ pwd//显示当前目录<br>$ ls -ah//显示目录<br>$ git init//把目录变成可管理的仓库<br>$ git add //把文件添加到仓库<br>$ git commit -m&quot;&quot;//git commit告诉Git，把文件提交到仓库，-m用于添加对这次操作的说明<br>$ cat readme.txt//查看readme.txt的内容<br>/Users/michael/learngit<br></code></pre></td></tr></table></figure>
 <p>在Windows中当输入完txt内容后，按esc加：wq退出输入模式</p>
-<h2 id="时光机穿梭"><a href="#时光机穿梭" class="headerlink" title="时光机穿梭"></a>时光机穿梭</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> git status 命令可以让我们时刻掌握仓库当前的状态</span><br><span class="line"><span class="variable">$</span> git <span class="built_in">diff</span>顾名思义就是查看difference，显示的格式正是Unix通用的<span class="built_in">diff</span>格式</span><br><span class="line">提交修改和提交新文件步骤一样，<span class="variable">$</span> git add <span class="variable">$</span> git commit;不过在执行第二步之前可以运行 git status 看看当前仓库的状态</span><br></pre></td></tr></table></figure>
+<h2 id="时光机穿梭"><a href="#时光机穿梭" class="headerlink" title="时光机穿梭"></a>时光机穿梭</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> git status 命令可以让我们时刻掌握仓库当前的状态<br><span class="hljs-variable">$</span> git <span class="hljs-built_in">diff</span>顾名思义就是查看difference，显示的格式正是Unix通用的<span class="hljs-built_in">diff</span>格式<br>提交修改和提交新文件步骤一样，<span class="hljs-variable">$</span> git add <span class="hljs-variable">$</span> git commit;不过在执行第二步之前可以运行 git status 看看当前仓库的状态<br></code></pre></td></tr></table></figure>
 
 <h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p><code>git log</code>命令显示从最近到最远的提交日志，如果嫌输出信息太多，看得眼花缭乱的，可以试试加上<code>--pretty=oneline</code>参数</p>
 <p>我们要把当前版本<code>append GPL</code>回退到上一个版本<code>add distributed</code>，就可以使用<code>git reset</code>命令</p>
 <p>首先，Git必须知道当前版本是哪个版本，在Git中，用<code>HEAD</code>表示当前版本，也就是最新的提交<code>1094adb...</code>（注意我的提交ID和你的肯定不一样），上一个版本就是<code>HEAD^</code>，上上一个版本就是<code>HEAD^^</code>，当然往上100个版本写100个<code>^</code>比较容易数不过来，所以写成<code>HEAD~100</code>。</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="keyword">reset</span> <span class="comment">--hard HEAD^</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">$ git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard HEAD^</span><br></code></pre></td></tr></table></figure>
 
 <p>最新的那个版本<code>append GPL</code>已经看不到了！好比你从21世纪坐时光穿梭机来到了19世纪，想再回去已经回不去了，肿么办？</p>
 <p>办法其实还是有的，只要上面的命令行窗口还没有被关掉，你就可以顺着往上找啊找啊，找到那个<code>append GPL</code>的<code>commit id</code>是<code>1094adb...</code>，于是就可以指定回到未来的某个版本</p>
@@ -291,13 +291,13 @@
 <p>另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本</p>
 <p><code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
 <p> 小提示：先手动删除文件，然后使用git rm <file>和git add<file>效果是一样的。</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout <span class="comment">-- test.txt</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">$ git checkout <span class="hljs-comment">-- test.txt</span><br></code></pre></td></tr></table></figure>
 
 <p><code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
 <p> 注意：从来没有被添加到版本库就被删除的文件，是无法恢复的！</p>
 <p>命令<code>git rm</code>用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失<strong>最近一次提交后你修改的内容</strong>。</p>
 <h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>1.创建自己的SSH Key</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>ssh-keygen -t rsa -C <span class="string">&quot;youremail@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>ssh-keygen -t rsa -C <span class="hljs-string">&quot;youremail@example.com&quot;</span><br></code></pre></td></tr></table></figure>
 
 <p>如果一切顺利的话，可以在用户主目录里找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。</p>
 <p>第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：</p>
@@ -309,7 +309,7 @@
 <p>分布式版本系统的最大好处之一是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作，而SVN在没有联网的时候是拒绝干活的！当有网络的时候，再把本地提交推送一下就完成了同步，真是太方便了！</p>
 <h3 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a>从远程库克隆</h3><p>要克隆一个仓库，首先必须知道仓库的地址，然后使用<code>git clone</code>命令克隆。</p>
 <p>Git支持多种协议，包括<code>https</code>，但<code>ssh</code>协议速度最快。</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="keyword">clone</span> <span class="title">git</span>@github.com:michaelliao/gitskills.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">$ git <span class="hljs-keyword">clone</span> <span class="hljs-title">git</span>@github.com:michaelliao/gitskills.git<br></code></pre></td></tr></table></figure>
 
 <h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><h3 id="创建并合并分支"><a href="#创建并合并分支" class="headerlink" title="创建并合并分支"></a>创建并合并分支</h3><p>Git鼓励大量使用分支：</p>
 <p>查看分支：<code>git branch</code></p>
@@ -333,7 +333,7 @@
 <p>在master分支上修复的bug，想要合并到当前dev分支，可以用<code>git cherry-pick &lt;commit&gt;</code>命令，把bug提交的修改“复制”到当前分支，避免重复劳动。</p>
 <h3 id="Feature分支"><a href="#Feature分支" class="headerlink" title="Feature分支"></a>Feature分支</h3><p>开发一个新feature，最好新建一个分支；</p>
 <p>如果要丢弃一个没有被合并过的分支，可以通过<code>git branch -D &lt;name&gt;</code>强行删除。</p>
-<h3 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h3><h4 id="推送分支"><a href="#推送分支" class="headerlink" title="推送分支"></a>推送分支</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">push</span> <span class="built_in">origin</span> &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h3><h4 id="推送分支"><a href="#推送分支" class="headerlink" title="推送分支"></a>推送分支</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">$ git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -343,7 +343,7 @@
 <li>bug分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；</li>
 <li>feature分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。</li>
 </ul>
-<h4 id="抓取分支"><a href="#抓取分支" class="headerlink" title="抓取分支"></a>抓取分支</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull<span class="regexp">//</span>抓取分支</span><br></pre></td></tr></table></figure>
+<h4 id="抓取分支"><a href="#抓取分支" class="headerlink" title="抓取分支"></a>抓取分支</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ git pull<span class="hljs-regexp">//</span>抓取分支<br></code></pre></td></tr></table></figure>
 
 <h4 id="多人协作工作模式"><a href="#多人协作工作模式" class="headerlink" title="多人协作工作模式"></a>多人协作工作模式</h4><ol>
 <li>首先，可以试图用<code>git push origin &lt;branch-name&gt;</code>推送自己的修改；</li>
@@ -352,13 +352,13 @@
 <li>没有冲突或者解决掉冲突后，再用<code>git push origin &lt;branch-name&gt;</code>推送就能成功！</li>
 <li>如果<code>git pull</code>提示<code>no tracking information</code>，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream-to &lt;branch-name&gt; origin/&lt;branch-name&gt;</code>。</li>
 </ol>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git pull</span><br><span class="line">There <span class="keyword">is</span> <span class="keyword">no</span> tracking information <span class="keyword">for</span> the current branch.</span><br><span class="line">Please specify which branch you want <span class="keyword">to</span> merge with.</span><br><span class="line">See git-pull(<span class="number">1</span>) <span class="keyword">for</span> details.</span><br><span class="line"></span><br><span class="line">    git pull <span class="symbol">&lt;remote&gt;</span> <span class="symbol">&lt;branch&gt;</span></span><br><span class="line"></span><br><span class="line">If you wish <span class="keyword">to</span> <span class="keyword">set</span> tracking information <span class="keyword">for</span> this branch you can <span class="keyword">do</span> <span class="keyword">so</span> with:</span><br><span class="line"></span><br><span class="line">    git branch --<span class="keyword">set</span>-upstream-<span class="keyword">to</span>=origin/<span class="symbol">&lt;branch&gt;</span> dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs vim">$ git pull<br>There <span class="hljs-keyword">is</span> <span class="hljs-keyword">no</span> tracking information <span class="hljs-keyword">for</span> the current branch.<br>Please specify which branch you want <span class="hljs-keyword">to</span> merge with.<br>See git-pull(<span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> details.<br><br>    git pull <span class="hljs-symbol">&lt;remote&gt;</span> <span class="hljs-symbol">&lt;branch&gt;</span><br><br>If you wish <span class="hljs-keyword">to</span> <span class="hljs-keyword">set</span> tracking information <span class="hljs-keyword">for</span> this branch you can <span class="hljs-keyword">do</span> <span class="hljs-keyword">so</span> with:<br><br>    git branch --<span class="hljs-keyword">set</span>-upstream-<span class="hljs-keyword">to</span>=origin/<span class="hljs-symbol">&lt;branch&gt;</span> dev<br></code></pre></td></tr></table></figure>
 
 <p><code>git pull</code>也失败了，原因是没有指定本地<code>dev</code>分支与远程<code>origin/dev</code>分支的链接，根据提示，设置<code>dev</code>和<code>origin/dev</code>的链接：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git branch <span class="attribute">--set-upstream-to</span>=origin/dev dev</span><br><span class="line">Branch <span class="string">&#x27;dev&#x27;</span> <span class="builtin-name">set</span> up <span class="keyword">to</span> track remote branch <span class="string">&#x27;dev&#x27;</span> <span class="keyword">from</span> <span class="string">&#x27;origin&#x27;</span>.</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ git branch <span class="hljs-attribute">--set-upstream-to</span>=origin/dev dev<br>Branch <span class="hljs-string">&#x27;dev&#x27;</span> <span class="hljs-builtin-name">set</span> up <span class="hljs-keyword">to</span> track remote branch <span class="hljs-string">&#x27;dev&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;origin&#x27;</span>.<br></code></pre></td></tr></table></figure>
 
 <p>再pull：</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git pull</span><br><span class="line">Auto-merging env.txt</span><br><span class="line"><span class="keyword">CONFLICT</span> (<span class="keyword">add</span>/<span class="keyword">add</span>): Merge <span class="keyword">conflict</span> <span class="keyword">in</span> env.txt</span><br><span class="line">Automatic merge failed; fix conflicts <span class="keyword">and</span> <span class="keyword">then</span> <span class="keyword">commit</span> the result.</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">$ git pull<br>Auto-merging env.txt<br><span class="hljs-keyword">CONFLICT</span> (<span class="hljs-keyword">add</span>/<span class="hljs-keyword">add</span>): Merge <span class="hljs-keyword">conflict</span> <span class="hljs-keyword">in</span> env.txt<br>Automatic merge failed; fix conflicts <span class="hljs-keyword">and</span> <span class="hljs-keyword">then</span> <span class="hljs-keyword">commit</span> the result.<br></code></pre></td></tr></table></figure>
 
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
 <li><p>查看远程库信息，使用<code>git remote -v</code>；</p>
@@ -377,7 +377,7 @@
 </li>
 <li><p>rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比</p>
 <p>指令是</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>git rebase</span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git rebase<br></code></pre></td></tr></table></figure>
 
 <h3 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h3><p>发布一个版本时，我们通常先在版本库中打一个标签（tag），这样，就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。</p>
 <p>Git的标签虽然是版本库的快照，但其实它就是指向某个commit的指针（跟分支很像对不对？但是分支可以移动，标签不能移动），所以，创建和删除标签都是瞬间完成的。</p>
