@@ -74,7 +74,9 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="夏至的个人博客" type="application/atom+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="夏至的个人博客" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -264,7 +266,7 @@
 <ul>
 <li>哈夫曼编码是从底向顶的构造哈夫曼树，我们每次挑取两个权值最小的元素连接构成某节点的左右子树，然后把两个左右子树的权值相加，赋给连接这两颗子树的节点，再接着这么操作，就可以把一个字符串按权重大小编码且不影响读取，字符根节点往左为0，往右为1，那么出现频率最高的字符的位数一定是最小的，这样一来就可以减小空间成本</li>
 <li>哈夫曼编码使用贪心算法的地方在于，他没有对整体数据进行分析，也是每次运行优先挑取两个权值最小的树，也就是局部最优解，这里就反映出了贪心算法的本质。</li>
-<li>流程示例<br><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg-blog.csdnimg.cn%2F2018120514551994.png%3Fx-oss-process%3Dimage%2Fwatermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNTk0NTU0%2Csize_16%2Ccolor_FFFFFF%2Ct_70&refer=http%3A%2F%2Fimg-blog.csdnimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1646208341&t=fe7ae4698acc0bcbf76d0734ca3ebdd9" alt="alt 哈夫曼树构建流程"></li>
+<li>流程示例<br><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg-blog.csdnimg.cn%2F2018120514551994.png%3Fx-oss-process%3Dimage%2Fwatermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNTk0NTU0%2Csize_16%2Ccolor_FFFFFF%2Ct_70&amp;refer=http%3A%2F%2Fimg-blog.csdnimg.cn&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1646208341&amp;t=fe7ae4698acc0bcbf76d0734ca3ebdd9" alt="alt 哈夫曼树构建流程"></li>
 </ul>
 </li>
 </ol>

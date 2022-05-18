@@ -77,7 +77,9 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="夏至的个人博客" type="application/atom+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="夏至的个人博客" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -237,14 +239,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -260,19 +262,15 @@
 <h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>单调栈的用途并不广泛，只处理一种典型问题，Next Greater Element</p>
 <h3 id="单调栈模板"><a href="#单调栈模板" class="headerlink" title="单调栈模板"></a>单调栈模板</h3><p>下面举一个例子说明其模板，现有这样一道题：给你一个数组nums，请你返回一个等长的结<br>果数组，结果数组中对应索引储存着下一个更大元素，如果没有更大的元素，就存-1，例如<br>输入数组 nums = [2,1,2,4,3],返回数组[4,2,4,-1,-1]<br>解释：第一个2后面比2大的数是4，第二个2后面比2大的数是4，4后面没有比4大的数，填<br>-1，3后面没有比3大的数，填-1.</p>
 <ul>
-<li>暴力解法：对每个元素的后面进行扫描，找到第一个更大的元素就可以了，时间复杂度为 </li>
-</ul>
-<p><em>O（n^2）</em></p>
-<ul>
+<li>暴力解法：对每个元素的后面进行扫描，找到第一个更大的元素就可以了，时间复杂度为<br><em>O（n^2）</em></li>
 <li>单调栈法：把数组元素想象成并列的数，元素大小想象成树的高度，在某个位置时，后面<br>可见的第一颗树就是它的 Next Greater Number.<ul>
 <li>实现代码(C++)：<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">nextGreaterElement</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>  <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">res</span><span class="hljs-params">(nums.size())</span></span>; <span class="hljs-comment">// 存放答案的数组</span><br>  stack&lt;<span class="hljs-keyword">int</span>&gt; s;<br>  <span class="hljs-comment">// 倒着往栈里放</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = nums.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>      <span class="hljs-comment">// 判定个子高矮</span><br>      <span class="hljs-keyword">while</span> (!s.<span class="hljs-built_in">empty</span>() &amp;&amp; s.<span class="hljs-built_in">top</span>() &lt;= nums[i]) &#123;<br>          <span class="hljs-comment">// 矮个起开，反正也被挡着了。。。</span><br>          s.<span class="hljs-built_in">pop</span>();<br>      &#125;<br>      <span class="hljs-comment">// nums[i] 身后的 next great number</span><br>      res[i] = s.<span class="hljs-built_in">empty</span>() ? <span class="hljs-number">-1</span> : s.<span class="hljs-built_in">top</span>();<br>      s.<span class="hljs-built_in">push</span>(nums[i]);<br>  &#125;<br>  <span class="hljs-keyword">return</span> res;&#125;<br></code></pre></td></tr></table></figure>
 这就是单调栈解决问题的模板，倒着入栈其实就是正着出栈，while循环是排除两颗高树间<br>的矮树，这个算法的复杂度只有O（n），尽管它存在for循环嵌套while循环，但要分析一个<br>算法的时间复杂度，要从整体入手，总共有n个元素，每个元素都被push入栈一次，最多被<br>pop一次，没有对于操作，计算规模与元素规模还是成正比的，也就是O（n）复杂度</li>
 </ul>
 </li>
 </ul>
-<h3 id="单调栈模板改良处理环形数组"><a href="#单调栈模板改良处理环形数组" class="headerlink" title="单调栈模板改良处理环形数组"></a>单调栈模板改良处理环形数组</h3><p>同求next Greater Number 如果要求环形数组，怎么办<br>比如输入一个数组[2,1,2,4,3].返回数组[4,2,4,-1,4]拥有了环形属性，最后一个元素3绕<br>了一圈后找到了比自己大的元素4.<br>这种情况一般都是通过%运算符求模(余数)，来获得环形特效<br>对于这个问题还是要用单调栈解题模板，对环形需求，常用套路是将数组长度翻倍，我们也<br>可以不构造新数组，而是用循环数组来模拟数组长度翻倍的效果<br>示例代码（C++）：</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">nextGreaterElements</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">res</span><span class="hljs-params">(n)</span></span>;<br>    stack&lt;<span class="hljs-keyword">int</span>&gt; s;<br>    <span class="hljs-comment">// 假装这个数组长度翻倍了</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span> * n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>        <span class="hljs-comment">// 索引要求模，其他的和模板一样</span><br>        <span class="hljs-keyword">while</span> (!s.<span class="hljs-built_in">empty</span>() &amp;&amp; s.<span class="hljs-built_in">top</span>() &lt;= nums[i % n]) &#123;<br>            s.<span class="hljs-built_in">pop</span>();<br>        &#125;<br>        res[i % n] = s.<span class="hljs-built_in">empty</span>() ? <span class="hljs-number">-1</span> : s.<span class="hljs-built_in">top</span>();<br>        s.<span class="hljs-built_in">push</span>(nums[i % n]);<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-<p>参考博客：[labuladong的算法小抄-单调栈结构解决三道算法题](<a target="_blank" rel="noopener" href="https://labuladong/">https://labuladong</a>.<br>gitee.io/algo/2/21/51/)</p>
+<h3 id="单调栈模板改良处理环形数组"><a href="#单调栈模板改良处理环形数组" class="headerlink" title="单调栈模板改良处理环形数组"></a>单调栈模板改良处理环形数组</h3><p>同求next Greater Number 如果要求环形数组，怎么办<br>比如输入一个数组[2,1,2,4,3].返回数组[4,2,4,-1,4]拥有了环形属性，最后一个元素3绕<br>了一圈后找到了比自己大的元素4.<br>这种情况一般都是通过%运算符求模(余数)，来获得环形特效<br>对于这个问题还是要用单调栈解题模板，对环形需求，常用套路是将数组长度翻倍，我们也<br>可以不构造新数组，而是用循环数组来模拟数组长度翻倍的效果<br>示例代码（C++）：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">nextGreaterElements</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">res</span><span class="hljs-params">(n)</span></span>;<br>    stack&lt;<span class="hljs-keyword">int</span>&gt; s;<br>    <span class="hljs-comment">// 假装这个数组长度翻倍了</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span> * n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>        <span class="hljs-comment">// 索引要求模，其他的和模板一样</span><br>        <span class="hljs-keyword">while</span> (!s.<span class="hljs-built_in">empty</span>() &amp;&amp; s.<span class="hljs-built_in">top</span>() &lt;= nums[i % n]) &#123;<br>            s.<span class="hljs-built_in">pop</span>();<br>        &#125;<br>        res[i % n] = s.<span class="hljs-built_in">empty</span>() ? <span class="hljs-number">-1</span> : s.<span class="hljs-built_in">top</span>();<br>        s.<span class="hljs-built_in">push</span>(nums[i % n]);<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><br></code></pre></td></tr></table></figure><br>参考博客：<a target="_blank" rel="noopener" href="https://labuladong.
+gitee.io/algo/2/21/51/">labuladong的算法小抄-单调栈结构解决三道算法题</a></p>
 
     </div>
 

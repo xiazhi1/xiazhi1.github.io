@@ -74,7 +74,9 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="夏至的个人博客" type="application/atom+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="夏至的个人博客" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -249,7 +251,7 @@
           <h1 id="hexo-d-提交spawn-failed-的解决办法"><a href="#hexo-d-提交spawn-failed-的解决办法" class="headerlink" title="hexo d 提交spawn failed 的解决办法"></a>hexo d 提交spawn failed 的解决办法</h1><h2 id="网络问题"><a href="#网络问题" class="headerlink" title="网络问题"></a>网络问题</h2><p>这个问题很多都是因为网络问题引起的<br>我们可以</p>
 <ul>
 <li>重启电脑(请首先尝试)</li>
-<li>科学上网问题<h2 id="本地文件问题"><a href="#本地文件问题" class="headerlink" title="本地文件问题"></a>本地文件问题</h2><h3 id="重置git的deploy文件夹"><a href="#重置git的deploy文件夹" class="headerlink" title="重置git的deploy文件夹"></a>重置git的deploy文件夹</h3>删除博客文件夹的.deploy_git文件夹，然后在对这个文件git bash 后输入 git config –global core.autocrlf false <h3 id="多系统混合编写"><a href="#多系统混合编写" class="headerlink" title="多系统混合编写"></a>多系统混合编写</h3>笔者就亲身经历过，可能是因为当时在同一台电脑上运行Linux和Windows，cd进.deploy_git文件夹，输入git config –-global core.autocrlf false。<h3 id="end"><a href="#end" class="headerlink" title="end"></a>end</h3>最后直接hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</li>
+<li>科学上网问题<h2 id="本地文件问题"><a href="#本地文件问题" class="headerlink" title="本地文件问题"></a>本地文件问题</h2><h3 id="重置git的deploy文件夹"><a href="#重置git的deploy文件夹" class="headerlink" title="重置git的deploy文件夹"></a>重置git的deploy文件夹</h3>删除博客文件夹的.deploy_git文件夹，然后在对这个文件git bash 后输入 git config —global core.autocrlf false <h3 id="多系统混合编写"><a href="#多系统混合编写" class="headerlink" title="多系统混合编写"></a>多系统混合编写</h3>笔者就亲身经历过，可能是因为当时在同一台电脑上运行Linux和Windows，cd进.deploy_git文件夹，输入git config –-global core.autocrlf false。<h3 id="end"><a href="#end" class="headerlink" title="end"></a>end</h3>最后直接hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</li>
 </ul>
 
       
@@ -517,14 +519,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -540,19 +542,15 @@
 <h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>单调栈的用途并不广泛，只处理一种典型问题，Next Greater Element</p>
 <h3 id="单调栈模板"><a href="#单调栈模板" class="headerlink" title="单调栈模板"></a>单调栈模板</h3><p>下面举一个例子说明其模板，现有这样一道题：给你一个数组nums，请你返回一个等长的结<br>果数组，结果数组中对应索引储存着下一个更大元素，如果没有更大的元素，就存-1，例如<br>输入数组 nums = [2,1,2,4,3],返回数组[4,2,4,-1,-1]<br>解释：第一个2后面比2大的数是4，第二个2后面比2大的数是4，4后面没有比4大的数，填<br>-1，3后面没有比3大的数，填-1.</p>
 <ul>
-<li>暴力解法：对每个元素的后面进行扫描，找到第一个更大的元素就可以了，时间复杂度为 </li>
-</ul>
-<p><em>O（n^2）</em></p>
-<ul>
+<li>暴力解法：对每个元素的后面进行扫描，找到第一个更大的元素就可以了，时间复杂度为<br><em>O（n^2）</em></li>
 <li>单调栈法：把数组元素想象成并列的数，元素大小想象成树的高度，在某个位置时，后面<br>可见的第一颗树就是它的 Next Greater Number.<ul>
 <li>实现代码(C++)：<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">nextGreaterElement</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>  <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">res</span><span class="hljs-params">(nums.size())</span></span>; <span class="hljs-comment">// 存放答案的数组</span><br>  stack&lt;<span class="hljs-keyword">int</span>&gt; s;<br>  <span class="hljs-comment">// 倒着往栈里放</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = nums.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>      <span class="hljs-comment">// 判定个子高矮</span><br>      <span class="hljs-keyword">while</span> (!s.<span class="hljs-built_in">empty</span>() &amp;&amp; s.<span class="hljs-built_in">top</span>() &lt;= nums[i]) &#123;<br>          <span class="hljs-comment">// 矮个起开，反正也被挡着了。。。</span><br>          s.<span class="hljs-built_in">pop</span>();<br>      &#125;<br>      <span class="hljs-comment">// nums[i] 身后的 next great number</span><br>      res[i] = s.<span class="hljs-built_in">empty</span>() ? <span class="hljs-number">-1</span> : s.<span class="hljs-built_in">top</span>();<br>      s.<span class="hljs-built_in">push</span>(nums[i]);<br>  &#125;<br>  <span class="hljs-keyword">return</span> res;&#125;<br></code></pre></td></tr></table></figure>
 这就是单调栈解决问题的模板，倒着入栈其实就是正着出栈，while循环是排除两颗高树间<br>的矮树，这个算法的复杂度只有O（n），尽管它存在for循环嵌套while循环，但要分析一个<br>算法的时间复杂度，要从整体入手，总共有n个元素，每个元素都被push入栈一次，最多被<br>pop一次，没有对于操作，计算规模与元素规模还是成正比的，也就是O（n）复杂度</li>
 </ul>
 </li>
 </ul>
-<h3 id="单调栈模板改良处理环形数组"><a href="#单调栈模板改良处理环形数组" class="headerlink" title="单调栈模板改良处理环形数组"></a>单调栈模板改良处理环形数组</h3><p>同求next Greater Number 如果要求环形数组，怎么办<br>比如输入一个数组[2,1,2,4,3].返回数组[4,2,4,-1,4]拥有了环形属性，最后一个元素3绕<br>了一圈后找到了比自己大的元素4.<br>这种情况一般都是通过%运算符求模(余数)，来获得环形特效<br>对于这个问题还是要用单调栈解题模板，对环形需求，常用套路是将数组长度翻倍，我们也<br>可以不构造新数组，而是用循环数组来模拟数组长度翻倍的效果<br>示例代码（C++）：</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">nextGreaterElements</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">res</span><span class="hljs-params">(n)</span></span>;<br>    stack&lt;<span class="hljs-keyword">int</span>&gt; s;<br>    <span class="hljs-comment">// 假装这个数组长度翻倍了</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span> * n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>        <span class="hljs-comment">// 索引要求模，其他的和模板一样</span><br>        <span class="hljs-keyword">while</span> (!s.<span class="hljs-built_in">empty</span>() &amp;&amp; s.<span class="hljs-built_in">top</span>() &lt;= nums[i % n]) &#123;<br>            s.<span class="hljs-built_in">pop</span>();<br>        &#125;<br>        res[i % n] = s.<span class="hljs-built_in">empty</span>() ? <span class="hljs-number">-1</span> : s.<span class="hljs-built_in">top</span>();<br>        s.<span class="hljs-built_in">push</span>(nums[i % n]);<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-<p>参考博客：[labuladong的算法小抄-单调栈结构解决三道算法题](<a target="_blank" rel="noopener" href="https://labuladong/">https://labuladong</a>.<br>gitee.io/algo/2/21/51/)</p>
+<h3 id="单调栈模板改良处理环形数组"><a href="#单调栈模板改良处理环形数组" class="headerlink" title="单调栈模板改良处理环形数组"></a>单调栈模板改良处理环形数组</h3><p>同求next Greater Number 如果要求环形数组，怎么办<br>比如输入一个数组[2,1,2,4,3].返回数组[4,2,4,-1,4]拥有了环形属性，最后一个元素3绕<br>了一圈后找到了比自己大的元素4.<br>这种情况一般都是通过%运算符求模(余数)，来获得环形特效<br>对于这个问题还是要用单调栈解题模板，对环形需求，常用套路是将数组长度翻倍，我们也<br>可以不构造新数组，而是用循环数组来模拟数组长度翻倍的效果<br>示例代码（C++）：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">nextGreaterElements</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> n = nums.<span class="hljs-built_in">size</span>();<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">res</span><span class="hljs-params">(n)</span></span>;<br>    stack&lt;<span class="hljs-keyword">int</span>&gt; s;<br>    <span class="hljs-comment">// 假装这个数组长度翻倍了</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span> * n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>        <span class="hljs-comment">// 索引要求模，其他的和模板一样</span><br>        <span class="hljs-keyword">while</span> (!s.<span class="hljs-built_in">empty</span>() &amp;&amp; s.<span class="hljs-built_in">top</span>() &lt;= nums[i % n]) &#123;<br>            s.<span class="hljs-built_in">pop</span>();<br>        &#125;<br>        res[i % n] = s.<span class="hljs-built_in">empty</span>() ? <span class="hljs-number">-1</span> : s.<span class="hljs-built_in">top</span>();<br>        s.<span class="hljs-built_in">push</span>(nums[i % n]);<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><br></code></pre></td></tr></table></figure><br>参考博客：<a target="_blank" rel="noopener" href="https://labuladong.
+gitee.io/algo/2/21/51/">labuladong的算法小抄-单调栈结构解决三道算法题</a></p>
 
       
     </div>
@@ -637,12 +635,10 @@
           <h1 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h1><h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs git">$ mkdir learngit//创建目录<br>$ cd learngit//切换目录<br>$ pwd//显示当前目录<br>$ ls -ah//显示目录<br>$ git init//把目录变成可管理的仓库<br>$ git add //把文件添加到仓库<br>$ git commit -m&quot;&quot;//git commit告诉Git，把文件提交到仓库，-m用于添加对这次操作的说明<br>$ cat readme.txt//查看readme.txt的内容<br>/Users/michael/learngit<br></code></pre></td></tr></table></figure>
 <p>在Windows中当输入完txt内容后，按esc加：wq退出输入模式</p>
 <h2 id="时光机穿梭"><a href="#时光机穿梭" class="headerlink" title="时光机穿梭"></a>时光机穿梭</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> git status 命令可以让我们时刻掌握仓库当前的状态<br><span class="hljs-variable">$</span> git <span class="hljs-built_in">diff</span>顾名思义就是查看difference，显示的格式正是Unix通用的<span class="hljs-built_in">diff</span>格式<br>提交修改和提交新文件步骤一样，<span class="hljs-variable">$</span> git add <span class="hljs-variable">$</span> git commit;不过在执行第二步之前可以运行 git status 看看当前仓库的状态<br></code></pre></td></tr></table></figure>
-
 <h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p><code>git log</code>命令显示从最近到最远的提交日志，如果嫌输出信息太多，看得眼花缭乱的，可以试试加上<code>--pretty=oneline</code>参数</p>
 <p>我们要把当前版本<code>append GPL</code>回退到上一个版本<code>add distributed</code>，就可以使用<code>git reset</code>命令</p>
 <p>首先，Git必须知道当前版本是哪个版本，在Git中，用<code>HEAD</code>表示当前版本，也就是最新的提交<code>1094adb...</code>（注意我的提交ID和你的肯定不一样），上一个版本就是<code>HEAD^</code>，上上一个版本就是<code>HEAD^^</code>，当然往上100个版本写100个<code>^</code>比较容易数不过来，所以写成<code>HEAD~100</code>。</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">$ git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard HEAD^</span><br></code></pre></td></tr></table></figure>
-
 <p>最新的那个版本<code>append GPL</code>已经看不到了！好比你从21世纪坐时光穿梭机来到了19世纪，想再回去已经回不去了，肿么办？</p>
 <p>办法其实还是有的，只要上面的命令行窗口还没有被关掉，你就可以顺着往上找啊找啊，找到那个<code>append GPL</code>的<code>commit id</code>是<code>1094adb...</code>，于是就可以指定回到未来的某个版本</p>
 <p>版本号没必要写全，前几位就可以了，Git会自动去找。当然也不能只写前一两位，因为Git可能会找到多个版本号，就无法确定是哪一个了。</p>
@@ -670,13 +666,11 @@
 <p><code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
 <p> 小提示：先手动删除文件，然后使用git rm <file>和git add<file>效果是一样的。</p>
 <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">$ git checkout <span class="hljs-comment">-- test.txt</span><br></code></pre></td></tr></table></figure>
-
 <p><code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
 <p> 注意：从来没有被添加到版本库就被删除的文件，是无法恢复的！</p>
 <p>命令<code>git rm</code>用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失<strong>最近一次提交后你修改的内容</strong>。</p>
 <h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>1.创建自己的SSH Key</p>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>ssh-keygen -t rsa -C <span class="hljs-string">&quot;youremail@example.com&quot;</span><br></code></pre></td></tr></table></figure>
-
 <p>如果一切顺利的话，可以在用户主目录里找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。</p>
 <p>第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：</p>
 <p>然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴<code>id_rsa.pub</code>文件的内容：</p>
@@ -688,7 +682,6 @@
 <h3 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a>从远程库克隆</h3><p>要克隆一个仓库，首先必须知道仓库的地址，然后使用<code>git clone</code>命令克隆。</p>
 <p>Git支持多种协议，包括<code>https</code>，但<code>ssh</code>协议速度最快。</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">$ git <span class="hljs-keyword">clone</span> <span class="hljs-title">git</span>@github.com:michaelliao/gitskills.git<br></code></pre></td></tr></table></figure>
-
 <h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><h3 id="创建并合并分支"><a href="#创建并合并分支" class="headerlink" title="创建并合并分支"></a>创建并合并分支</h3><p>Git鼓励大量使用分支：</p>
 <p>查看分支：<code>git branch</code></p>
 <p>创建分支：<code>git branch &lt;name&gt;</code></p>
@@ -712,9 +705,6 @@
 <h3 id="Feature分支"><a href="#Feature分支" class="headerlink" title="Feature分支"></a>Feature分支</h3><p>开发一个新feature，最好新建一个分支；</p>
 <p>如果要丢弃一个没有被合并过的分支，可以通过<code>git branch -D &lt;name&gt;</code>强行删除。</p>
 <h3 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h3><h4 id="推送分支"><a href="#推送分支" class="headerlink" title="推送分支"></a>推送分支</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">$ git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> &lt;分支名&gt;<br></code></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li><code>master</code>分支是主分支，因此要时刻与远程同步；</li>
 <li><code>dev</code>分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；</li>
@@ -722,7 +712,6 @@
 <li>feature分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。</li>
 </ul>
 <h4 id="抓取分支"><a href="#抓取分支" class="headerlink" title="抓取分支"></a>抓取分支</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ git pull<span class="hljs-regexp">//</span>抓取分支<br></code></pre></td></tr></table></figure>
-
 <h4 id="多人协作工作模式"><a href="#多人协作工作模式" class="headerlink" title="多人协作工作模式"></a>多人协作工作模式</h4><ol>
 <li>首先，可以试图用<code>git push origin &lt;branch-name&gt;</code>推送自己的修改；</li>
 <li>如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并；</li>
@@ -731,13 +720,10 @@
 <li>如果<code>git pull</code>提示<code>no tracking information</code>，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream-to &lt;branch-name&gt; origin/&lt;branch-name&gt;</code>。</li>
 </ol>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs vim">$ git pull<br>There <span class="hljs-keyword">is</span> <span class="hljs-keyword">no</span> tracking information <span class="hljs-keyword">for</span> the current branch.<br>Please specify which branch you want <span class="hljs-keyword">to</span> merge with.<br>See git-pull(<span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> details.<br><br>    git pull <span class="hljs-symbol">&lt;remote&gt;</span> <span class="hljs-symbol">&lt;branch&gt;</span><br><br>If you wish <span class="hljs-keyword">to</span> <span class="hljs-keyword">set</span> tracking information <span class="hljs-keyword">for</span> this branch you can <span class="hljs-keyword">do</span> <span class="hljs-keyword">so</span> with:<br><br>    git branch --<span class="hljs-keyword">set</span>-upstream-<span class="hljs-keyword">to</span>=origin/<span class="hljs-symbol">&lt;branch&gt;</span> dev<br></code></pre></td></tr></table></figure>
-
 <p><code>git pull</code>也失败了，原因是没有指定本地<code>dev</code>分支与远程<code>origin/dev</code>分支的链接，根据提示，设置<code>dev</code>和<code>origin/dev</code>的链接：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ git branch <span class="hljs-attribute">--set-upstream-to</span>=origin/dev dev<br>Branch <span class="hljs-string">&#x27;dev&#x27;</span> <span class="hljs-builtin-name">set</span> up <span class="hljs-keyword">to</span> track remote branch <span class="hljs-string">&#x27;dev&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;origin&#x27;</span>.<br></code></pre></td></tr></table></figure>
-
 <p>再pull：</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">$ git pull<br>Auto-merging env.txt<br><span class="hljs-keyword">CONFLICT</span> (<span class="hljs-keyword">add</span>/<span class="hljs-keyword">add</span>): Merge <span class="hljs-keyword">conflict</span> <span class="hljs-keyword">in</span> env.txt<br>Automatic merge failed; fix conflicts <span class="hljs-keyword">and</span> <span class="hljs-keyword">then</span> <span class="hljs-keyword">commit</span> the result.<br></code></pre></td></tr></table></figure>
-
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
 <li><p>查看远程库信息，使用<code>git remote -v</code>；</p>
 </li>
@@ -756,7 +742,6 @@
 <li><p>rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比</p>
 <p>指令是</p>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>git rebase<br></code></pre></td></tr></table></figure>
-
 <h3 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h3><p>发布一个版本时，我们通常先在版本库中打一个标签（tag），这样，就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。</p>
 <p>Git的标签虽然是版本库的快照，但其实它就是指向某个commit的指针（跟分支很像对不对？但是分支可以移动，标签不能移动），所以，创建和删除标签都是瞬间完成的。</p>
 <p>。tag就是一个让人容易记住的有意义的名字，它跟某个commit绑在一起</p>
@@ -769,14 +754,14 @@
 </li>
 <li><p>命令<code>git tag</code>可以查看所有标签。</p>
 </li>
-<li><p> 注意：标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。</p>
-</li>
-</ul>
+<li><p>注意：标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。</p>
 <h4 id="操作标签"><a href="#操作标签" class="headerlink" title="操作标签"></a>操作标签</h4><ul>
 <li>命令<code>git push origin &lt;tagname&gt;</code>可以推送一个本地标签；</li>
 <li>命令<code>git push origin --tags</code>可以推送全部未推送过的本地标签；</li>
 <li>命令<code>git tag -d &lt;tagname&gt;</code>可以删除一个本地标签；</li>
 <li>命令<code>git push origin :refs/tags/&lt;tagname&gt;</code>可以删除一个远程标签  </li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1076,7 +1061,7 @@
 <li>熟悉素材，选取合适的音乐</li>
 <li>将素材和音乐导入pr素材窗口中</li>
 </ol>
-<h4 id="剪辑流程"><a href="#剪辑流程" class="headerlink" title="剪辑流程"></a>剪辑流程</h4><ol start="3">
+<h4 id="剪辑流程"><a href="#剪辑流程" class="headerlink" title="剪辑流程"></a>剪辑流程</h4><ol>
 <li>反复感受音乐，对音乐做一个节奏和情绪上的区分</li>
 <li>选取偏努力的和刻苦一些的素材，在素材窗口中，选取出入点，截取合适的段落，将素材拖到视频轨道上</li>
 <li>对于前半段音乐节奏比较快的地方，选取的素材相应的要短一些，剪辑点可以密一些</li>
@@ -1086,18 +1071,12 @@
 <li>导出视频</li>
 </ol>
 <h4 id="寻找剪辑点（干货）"><a href="#寻找剪辑点（干货）" class="headerlink" title="寻找剪辑点（干货）"></a>寻找剪辑点（干货）</h4><ol>
-<li><p>空格键Space播放和暂停</p>
-</li>
-<li><p>Left Right键 ：向前向后一帧 （比较细致，可以一直按，这样速度快一点）</p>
-</li>
-<li><p>shift+Left Right键：向前向后五帧（这个比较快）</p>
-</li>
-<li><p>J 左穿梭/倒放<br>K 停止穿梭<br>L 右穿梭/正放</p>
-</li>
-<li><p>Shift + L 慢速右穿梭<br>Shift + J 慢速左穿梭</p>
-</li>
-<li><p>穿梭键如果连按，可以加速，K和Space都可以停止播放<br>时间线窗口中时间帧的管理</p>
-</li>
+<li>空格键Space播放和暂停</li>
+<li>Left Right键 ：向前向后一帧 （比较细致，可以一直按，这样速度快一点）</li>
+<li>shift+Left Right键：向前向后五帧（这个比较快）</li>
+<li>J 左穿梭/倒放<br>K 停止穿梭<br>L 右穿梭/正放</li>
+<li>Shift + L 慢速右穿梭<br>Shift + J 慢速左穿梭</li>
+<li>穿梭键如果连按，可以加速，K和Space都可以停止播放<br>时间线窗口中时间帧的管理</li>
 <li><p>End 跳转到序列-素材结束点<br>Home 跳转到序列-素材开始点<br>Shift + End 跳转到所选素材结束点<br>Up 跳转上一个编辑点<br>Down 跳转下一个编辑点</p>
 </li>
 <li><p>i o:设出入点<br>Shift + I 跳转入店<br>Shift + O 跳转出点<br>‘ 提取<br>， 插入<br>. 覆盖</p>
@@ -1221,8 +1200,7 @@
 <li>其实，我们在前面小节也讨论了。递归过程类似于出栈入栈，如果递归次数过多，栈的深度就需要越深，最后栈容量就不够了</li>
 </ul>
 <h4 id="重复计算导致效率低下"><a href="#重复计算导致效率低下" class="headerlink" title="重复计算导致效率低下"></a>重复计算导致效率低下</h4><p>递归处理时，有些问题如果不加以处理，会造成多次重复计算，降低程序的运行效率</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/tqGKHZzSyDBgEp-oWsOztQ">https://mp.weixin.qq.com/s/tqGKHZzSyDBgEp-oWsOztQ</a>
- </p>
+<p>参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/tqGKHZzSyDBgEp-oWsOztQ">https://mp.weixin.qq.com/s/tqGKHZzSyDBgEp-oWsOztQ</a></p>
 
       
     </div>

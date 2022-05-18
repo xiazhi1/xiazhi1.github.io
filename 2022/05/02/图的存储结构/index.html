@@ -85,7 +85,9 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="夏至的个人博客" type="application/atom+xml">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="夏至的个人博客" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -275,10 +277,8 @@
 <ol>
 <li>判定任意两顶点是否有边无边</li>
 <li>确定某个顶点的度。就是该顶点的行(列)的元素之和。</li>
-<li>求某顶点的所有邻接点就是把矩阵该行元素全部扫描一遍，为一的就是邻接点</li>
+<li>求某顶点的所有邻接点就是把矩阵该行元素全部扫描一遍，为一的就是邻接点<br><strong>有向图</strong><br><img src="https://s2.loli.net/2022/05/02/znGTpIKuiC6NfH8.png" alt="邻接矩阵-有向图.png"><br>有向图讲究的入度和出度，入度对应列，出度对应行<br><strong>带权值的有向图</strong><br>就把有向图中为0的地方数组改为无穷，其余地方的值为该边上的权值即可<br><strong>缺点</strong><br>对于边数相对顶点较少的图，这种结构对储存空间造成极大浪费<h2 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h2>顶点用一个一维数组储存，便于读取顶点信息，其次还要储存一个指向第一个邻接点的指针，便于查找该顶点的边信息<br>顶点所有邻接点构成一个线性表，用单链表储存，无向图称为顶点的边表，有向图称为顶点作为弧尾的出边表<br>具体实例如下：<br><strong>无向图</strong><br><img src="https://s2.loli.net/2022/05/03/uTWl1rjJwQHo3AN.png" alt="邻接表-无向图.png"><br>每个节点有data，firstedge两个域表示，data储存顶点信息，firstedge指针域，指向边表的第一个节点，边表节点由adjvex和next两个域组成，adjvex储存邻接点在顶点表的下标，next指向边表下一个节点的指针</li>
 </ol>
-<p><strong>有向图</strong><br><img src="https://s2.loli.net/2022/05/02/znGTpIKuiC6NfH8.png" alt="邻接矩阵-有向图.png"><br>有向图讲究的入度和出度，入度对应列，出度对应行<br><strong>带权值的有向图</strong><br>就把有向图中为0的地方数组改为无穷，其余地方的值为该边上的权值即可<br><strong>缺点</strong><br>对于边数相对顶点较少的图，这种结构对储存空间造成极大浪费</p>
-<h2 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h2><p>顶点用一个一维数组储存，便于读取顶点信息，其次还要储存一个指向第一个邻接点的指针，便于查找该顶点的边信息<br>顶点所有邻接点构成一个线性表，用单链表储存，无向图称为顶点的边表，有向图称为顶点作为弧尾的出边表<br>具体实例如下：<br><strong>无向图</strong><br><img src="https://s2.loli.net/2022/05/03/uTWl1rjJwQHo3AN.png" alt="邻接表-无向图.png"><br>每个节点有data，firstedge两个域表示，data储存顶点信息，firstedge指针域，指向边表的第一个节点，边表节点由adjvex和next两个域组成，adjvex储存邻接点在顶点表的下标，next指向边表下一个节点的指针</p>
 <p><strong>有向图</strong><br>有向图的邻接表结构是类似的，但由于它有方向，我们以顶点为弧尾储存边表，很容易可以得到每个顶点的出度，如果要得到每个顶点的入度，可构建一个逆邻接表<br>示意图如下<br><img src="https://s2.loli.net/2022/05/03/jcmVLbKYsDCf1yk.png" alt="邻接表-有向图.png"></p>
 <p><strong>带权值的有向图</strong><br>只需在边表节点定义中加一个weight的数据域，储存权值信息即可<br><strong>缺点</strong><br>对于有向图来说，邻接表不能同时了解入度出度问题</p>
 <h2 id="十字链表"><a href="#十字链表" class="headerlink" title="十字链表"></a>十字链表</h2><p>顶点表节点包括data，firstin，firstout，分别表示数据，入边表头指针，出边表头指针<br>边表节点结构包括tailvex，headvex，headlink，taillink，分别代表弧起点，弧终点，入边表指针域，指向终点相同的下一条边，出边表指针域，指向起点相同的下一条边，如果是网，还可以增加一个weight域来储存权值<br>示意图如下：<br><img src="https://s2.loli.net/2022/05/03/1QYCHpEr6waGAxh.png" alt="十字链表.png"></p>
