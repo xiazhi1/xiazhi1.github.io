@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言 最小生成树由一个经典的架电线的问题引出：在n个村庄间架电线，现在已经知道各村庄的相对距离，如果你是工程师，请问如何设计能使得总造价最小">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最小生成树(Prim算法，Kruskcal算法)">
+<meta property="og:url" content="http://xiazhi1.github.io/2022/05/11/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/index.html">
+<meta property="og:site_name" content="夏至的个人博客">
+<meta property="og:description" content="前言 最小生成树由一个经典的架电线的问题引出：在n个村庄间架电线，现在已经知道各村庄的相对距离，如果你是工程师，请问如何设计能使得总造价最小">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/05/12/9SoUqmLdXEpjTGz.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/12/4B8ck6RtxqHmw9u.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/12/n4ofahW37AziSxJ.png">
+<meta property="article:published_time" content="2022-05-11T03:19:12.000Z">
+<meta property="article:modified_time" content="2022-05-18T01:01:47.787Z">
+<meta property="article:author" content="夏至">
+<meta property="article:tag" content="数据结构与算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/12/9SoUqmLdXEpjTGz.png">
+
+<link rel="canonical" href="http://xiazhi1.github.io/2022/05/11/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>最小生成树(Prim算法，Kruskcal算法) | 夏至的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夏至的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2022/05/11/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          最小生成树(Prim算法，Kruskcal算法)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-05-11 11:19:12" itemprop="dateCreated datePublished" datetime="2022-05-11T11:19:12+08:00">2022-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-18 09:01:47" itemprop="dateModified" datetime="2022-05-18T09:01:47+08:00">2022-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">数据结构学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>前言</h1>
+<p>最小生成树由一个经典的架电线的问题引出：在n个村庄间架电线，现在已经知道各村庄的相对距离，如果你是工程师，请问如何设计能使得总造价最小</p>
+<span id="more"></span>
+<h2 id="解决思路">解决思路</h2>
+<p>首先可以分析得到这显然是一个带权值的图，即网结构，我们的目标可以抽象为用n-1条边把一个连通图连接起来，并使得权值最小，这就是我们常说的最小生成树问题，最经典的两种算法是：prim算法和kruskcal算法，下文将一一介绍<br>
+<img src="https://s2.loli.net/2022/05/12/9SoUqmLdXEpjTGz.png" alt="最小生成树.png"></p>
+<h1>prim算法</h1>
+<h2 id="算法思路">算法思路</h2>
+<p><strong>该算法的核心是以某顶点为起点，逐步找各顶点上最小权值的边来构建最小生成树</strong>，因为这里涉及到顶点与顶点的带权值边信息，所以我们考虑使用邻接矩阵作为储存结构来实现，如果不清楚邻接矩阵，请戳<a target="_blank" rel="noopener" href="https://xiazhi.icu/2022/05/02/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/">图的存储结构</a><br>
+<img src="https://s2.loli.net/2022/05/12/4B8ck6RtxqHmw9u.png" alt="最小生成树-邻接矩阵.png"><br>
+这样一来，我们已经有了一个以邻接矩阵为存储结构的网，我们下面该如何求最小生成树呢?其实很简单，我们在prim算法的开头就说过，<strong>该算法的核心是以某顶点为起点，逐步找各顶点上最小权值的边来构建最小生成树</strong>，我们就先去一个顶点来研究，默认为v0，然后把v0在邻接矩阵中所对应的那一行信息取出(用一个lowcost数组保存)，目的是研究以v0为起点，与其相连最近的顶点。然后我们遍历一遍lowcost数组，找到其数组中除了本节点(即v0-0)外的最小值，记录下它的值与下标-<em>此时的low cost数组中lowcost[0]=0,表示该位置对应节点已加入最小生成树</em>，连接该下标所对应的顶点与v0，构成第一条电线，在这里对应的是v1，在找到v1后，我们把lowcost该位置的值设为0，表示该节点已经被纳入了最小生成树，然后我们再去取出v1在邻接矩阵中对应行的信息，将其与lowcost数组的对应值相比较，若更小则修改lowcost值，<strong>该操作的目的是找到v0,v1这两行连接信息中的最小值来形成第二根电线</strong>，接下来的操作也和上面的操作类似了，直到所有节点都添加到最小生成树中，lowcost数组全部置为0，表明最小生成树生成完毕。</p>
+<h2 id="实现代码">实现代码</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/* Prim算法生成最小生成树 */</span><br><span class="line">void MiniSpanTree_Prim(MGraph G)&#123;</span><br><span class="line">	int min, i, j, k;</span><br><span class="line">	int adjvex[MAXVEX];	//保存相关顶点下标</span><br><span class="line">	int lowcost[MAXVEX];	//保存相关顶点间边的权值</span><br><span class="line">	lowcast[0] = 0;	//初始化第一个权值为0，即v0加入生成树，lowcost的值为0，在这里就是此下标的顶点已经加入生成树</span><br><span class="line">	adjvex[0] = 0;	//初始化第一个顶点下标为0</span><br><span class="line">	for(i = 1;i&lt;G.numVertexes;i++)&#123;	//循环除下标为0外的全部顶点</span><br><span class="line">		lowcost[i] = G.arc[0][i];		//将v0顶点与之有边的权值存入数组</span><br><span class="line">		adjvex[i] = 0;	//初始化都为v0的下标</span><br><span class="line">	&#125;</span><br><span class="line">	for(i=1;i&lt;G.numVertexes;i++)&#123;</span><br><span class="line">		min = INFINITY;	//初始化最小权值为无穷大，通常设置为很大的数字</span><br><span class="line">		j = 1;</span><br><span class="line">		k = 0;</span><br><span class="line">		while(j&lt;G.numVertexes)&#123;		//循环全部顶点</span><br><span class="line">			if(lowcost[j] != 0 &amp;&amp; lowcost[j] &lt; min)&#123;	//如果权值不为0且权值小于min</span><br><span class="line">				min = lowcost[j];		//让当前权值成为最小值</span><br><span class="line">				k = j;		//将当前最小值的下标存入k</span><br><span class="line">			&#125;</span><br><span class="line">			j++;</span><br><span class="line">		&#125;</span><br><span class="line">		printf(&quot;(%d,%d)&quot;,adjvex[k],k);	//打印当前顶点边中权值最小边</span><br><span class="line">		lowcost[k] = 0;	//将当前顶点的权值设置为0，表示此顶点已经完成任务</span><br><span class="line">		for(j=1;j&lt;G.numVertexes;j++)&#123;	//循环所有顶点</span><br><span class="line">			if(lowcost[j] != 0 &amp;&amp; G.arc[k][j] &lt; lowcost[j])&#123;	//若下标为k顶点各边权值小于此前这些顶点未被加入生成树权值</span><br><span class="line">				lowcost[j] = G.arc[k][j];		//将较小权值存入lowcost</span><br><span class="line">				adjvex[j] = k;	//将下标为k的顶点存入adjvex</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>由算法代码中的循环嵌套可知该算法时间复杂度为O(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>)</p>
+<h1>Kruskal算法</h1>
+<h2 id="算法思路-2">算法思路</h2>
+<p>与prim算法不同的是，prim算法以顶点为目标构造最小生成树，而Kruskal算法直接以边的目标去构造，每次找最小权值的边来构成最小生成树，但是，<strong>因为我们在构建时是以边为目标，必须要考虑边的闭环问题,因为可能出现要铺设九个村庄的电线，但在三个村庄间就出现了闭环，导致存在环与环之间无法互联的现象，这个问题出现的原因是因为我们如果只研究边的权值大小，会忽略顶点与顶点互联的要求</strong>，因为是对边的权值大小直接进行研究，这里我们最好使用边集数组作为存储结构，不会请戳<a target="_blank" rel="noopener" href="https://xiazhi.icu/2022/05/02/%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/">图的存储结构</a><br>
+这里我们需要先将边集数组按照权值从小到大进行下转换。<br>
+<img src="https://s2.loli.net/2022/05/12/n4ofahW37AziSxJ.png" alt="最小生成树-边集数组.png"><br>
+我们对边集数组做循环遍历，每当你要添加一个边时，必须先调用一个find函数来判断该边对应的起点和终点在当前的最小生成树数组中是否会构成闭环，如果会，则舍弃接着往后，不会则添加，这个find函数借助了一个parent数组，我们将其初始化为0，每当添加一条边，就将对应起点的parent数组值修改为该边的终点，然后find函数判断连线顶点的尾部下标，如果和原来尾部对应下标经find函数处理返回值一致，说明形成了环，舍弃该边</p>
+<h2 id="实现代码-2">实现代码</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/* kruskal算法生成最小生成树 */</span><br><span class="line">void MiniSpanTree(MGraph G)&#123;	//生成最小生成树</span><br><span class="line">	int i, n, m;</span><br><span class="line">	Edge edges[MAXEDGE];	//定义边集数组</span><br><span class="line">	int parent[MAXVEX];	//定义一数组用来判断边与边是否形成环路</span><br><span class="line">	/* 此处省略将邻接矩阵G转化为边集数组edges并按权由小到大排序的代码 */</span><br><span class="line">	for(i = 0;i&lt;G.numVertexes;i++)</span><br><span class="line">		parent[i] = 0;	//初始化数组值为0</span><br><span class="line">	for(i = 0;i&lt;G.numEdges;i++)&#123;	//循环每一条边</span><br><span class="line">		n = Find(parent, edges[i].begin);</span><br><span class="line">		m = Find(parent, edges[i].end);</span><br><span class="line">		if(n != m)&#123;		//假如n与m不等，说明此边没有与现有生成树形成环路</span><br><span class="line">			parent[n] = m;	//将此边的结尾顶点放入下标为起点的parent中，表示此顶点已经在生成树集合中</span><br><span class="line">			printf(&quot;(%d,%d) %d&quot;, edges[i].begin, edges[i].end, edges[i].weight);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int Find(int* parent, int f)&#123;	//查找连线顶点的尾部下标</span><br><span class="line">	while(parent[f] &gt; 0)</span><br><span class="line">		f = parent[f];</span><br><span class="line">	return f;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该算法的时间复杂度为O(eloge),e为边数</p>
+<h1>总结</h1>
+<p>对比两个算法来说，Kruskcal算法主要针对边来展开，边数少的时候效率会非常高，对于稀疏图有很大的优势，而Prim算法对于稠密图，边上非常多的情况会更好一些(个人认为是因为边数少是Kruskcal出现闭环的可能性小，在这种情况下，其效率会比Prim算法高很多，然后边数多了以后，出现闭环的可能性大大增加，导致其效率反而不如Prim算法了)</p>
+<h2 id="参考资料">参考资料</h2>
+<p>《大话数据结构》程杰</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag"># 数据结构与算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/08/Gin%E5%AD%A6%E4%B9%A0/" rel="prev" title="Gin学习">
+      <i class="fa fa-chevron-left"></i> Gin学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/17/%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%89%E5%85%83%E7%BB%84%E8%A1%A8%E7%A4%BA/" rel="next" title="稀疏矩阵的三元组表示">
+      稀疏矩阵的三元组表示 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">解决思路</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">prim算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">实现代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Kruskal算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF-2"><span class="nav-number">3.1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81-2"><span class="nav-number">3.2.</span> <span class="nav-text">实现代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">夏至</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏至</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

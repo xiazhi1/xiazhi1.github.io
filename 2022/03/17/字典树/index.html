@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="字典树 简介 字典树，又称单词查找树、前缀树，是一种树形结构，属于哈希树的变种，在统计、排序、保存大量字符串时具有很小的时间复杂度，常用于搜索引擎系统用于文本词频的统计，其优点在于利用字符串的公共前缀来减少查询时间，最大限度减少没有意义的字符串比较，查找效率比哈希树高。 比如我有&quot;a&quot;,“apple”,“appeal”,“bee”,“beef”,&quot;cat&quot;这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字典树">
+<meta property="og:url" content="http://xiazhi1.github.io/2022/03/17/%E5%AD%97%E5%85%B8%E6%A0%91/index.html">
+<meta property="og:site_name" content="夏至的个人博客">
+<meta property="og:description" content="字典树 简介 字典树，又称单词查找树、前缀树，是一种树形结构，属于哈希树的变种，在统计、排序、保存大量字符串时具有很小的时间复杂度，常用于搜索引擎系统用于文本词频的统计，其优点在于利用字符串的公共前缀来减少查询时间，最大限度减少没有意义的字符串比较，查找效率比哈希树高。 比如我有&quot;a&quot;,“apple”,“appeal”,“bee”,“beef”,&quot;cat&quot;这">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/03/26/pMQFd1OTDjorUu4.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/17/tjBVbDG73lKdsMZ.png">
+<meta property="article:published_time" content="2022-03-17T12:01:50.000Z">
+<meta property="article:modified_time" content="2022-03-26T06:24:33.818Z">
+<meta property="article:author" content="夏至">
+<meta property="article:tag" content="数据结构与算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/03/26/pMQFd1OTDjorUu4.png">
+
+<link rel="canonical" href="http://xiazhi1.github.io/2022/03/17/%E5%AD%97%E5%85%B8%E6%A0%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>字典树 | 夏至的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夏至的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2022/03/17/%E5%AD%97%E5%85%B8%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          字典树
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-17 20:01:50" itemprop="dateCreated datePublished" datetime="2022-03-17T20:01:50+08:00">2022-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-26 14:24:33" itemprop="dateModified" datetime="2022-03-26T14:24:33+08:00">2022-03-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">数据结构学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>字典树</h1>
+<h2 id="简介">简介</h2>
+<p>字典树，又称单词查找树、前缀树，是一种树形结构，属于哈希树的变种，在统计、排序、保存大量字符串时具有很小的时间复杂度，常用于搜索引擎系统用于文本词频的统计，其优点在于利用字符串的公共前缀来减少查询时间，最大限度减少没有意义的字符串比较，查找效率比哈希树高。<br>
+比如我有&quot;a&quot;,“apple”,“appeal”,“bee”,“beef”,&quot;cat&quot;这七个单词，就能够组成下面图示的字典树，如果我们需要获得&quot;apple&quot;这个单词的信息，按顺序访问对应的结点即可<br>
+<img src="https://s2.loli.net/2022/03/26/pMQFd1OTDjorUu4.png" alt="字典树.png"></p>
+<h3 id="字典树的性质">字典树的性质</h3>
+<ol>
+<li>根节点不包含字符，除根节点外每个结点有且仅有有一个字符</li>
+<li>从根节点到某一节点，路径上经过的字符连接起来，为该节点对应的字符串</li>
+<li>每个节点的所有子节点包含字符各不相同</li>
+</ol>
+<h3 id="字典树的应用">字典树的应用</h3>
+<ol>
+<li>字典：字符串集合对应一定的信息</li>
+<li>计算热词：统计字符串在集合中出现的元素</li>
+<li>串的快速检索：给出N个单词组成的熟词表，以及一篇全用小写英文书写的文章，按最早出现的顺序写出所有不在熟词表中的生词，我们可以把熟词建成字典树，然后读入文章进行比较</li>
+<li>串排序：给出N个互不相同的仅由一个单词构成的英文名，让他们按字典序从小到大输出，采用数组的方式创建字典树，这棵树的每个节点的儿子很显然按照其字母大小排序，对这棵树进行先序遍历即可</li>
+<li>最长公共前缀：对所有串建立字典树，对两个串的最长公共前缀长度就是他们所在节点的公共祖先个数</li>
+</ol>
+<h2 id="具体实现">具体实现</h2>
+<h3 id="顺序储存结构">顺序储存结构</h3>
+<h4 id="节点结构体定义">节点结构体定义</h4>
+<p>我们先开辟一个足够大的数组，这里我们使用静态链表的思想，用游标表示节点的后继，我们在结构体中开辟一个数组来描述节点的后继，这里可以确定其长度为26，然后再定义一个bool类型，判定是否为单词的结尾</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># define MAXSIZE 26</span><br><span class="line">struct node&#123;</span><br><span class="line">    bool flag;</span><br><span class="line">    int next[MAXSIZE];</span><br><span class="line">&#125;trie[100001]</span><br></pre></td></tr></table></figure>
+<h4 id="插入操作">插入操作</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">void Insert(char *str,int *space)</span><br><span class="line">&#123;</span><br><span class="line">    \*space表示第一个空闲节点的下标,str为插入的字符串，idx为挖掘层数，order将字符转化为在字母表中的顺序</span><br><span class="line">    *\</span><br><span class="line">    int order;</span><br><span class="line">    int idx; //从第一层开始向下挖掘</span><br><span class="line">    for(int i=0;i&lt;strlen(str);++i)</span><br><span class="line">    &#123;</span><br><span class="line">        order = str[i]-&#x27;a&#x27;;</span><br><span class="line">        if(trie[idx].next[order] == 0)//idx没有该字符的子节点</span><br><span class="line">        &#123;</span><br><span class="line">            trie[idx].next[order] = space++;//启用第space号节点，copy新节点的编号</span><br><span class="line">            idx = trie[idx].next[order];//idx节点对应的后继为space</span><br><span class="line">            trie[idx].flag = false;//标记新节点不是单词的结尾</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">         idx = trie[idx].next[order];//前缀存在继续挖掘</span><br><span class="line">    &#125;</span><br><span class="line">    trie[idx].flag = true;//表示单词结尾</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询操作">查询操作</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bool Find(char *str)</span><br><span class="line">&#123;</span><br><span class="line">    int order;</span><br><span class="line">    int idx=1;</span><br><span class="line">    for(int i=0;i&lt;strlen(str);++i)</span><br><span class="line">    &#123;</span><br><span class="line">        order = str[i]-&#x27;a&#x27;;</span><br><span class="line">        if(trie[idx].next[order]==0)//若字母失配，匹配结束</span><br><span class="line">        &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        idx = trie[idx].next[order];//存在对应字母，匹配继续</span><br><span class="line">    &#125;</span><br><span class="line">    if (trie[idx].flag == false)//若成功匹配，但不为单词结尾</span><br><span class="line">        return false;</span><br><span class="line">    else</span><br><span class="line">        return true;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="链式储存结构">链式储存结构</h3>
+<h4 id="节点结构体定义-2">节点结构体定义</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct Node</span><br><span class="line">&#123;</span><br><span class="line">    Node *next[26];</span><br><span class="line">    bool flag;</span><br><span class="line">&#125;Node, *Trie;</span><br></pre></td></tr></table></figure>
+<h4 id="插入操作-2">插入操作</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void buildTrie(Trie root,char *word)</span><br><span class="line">&#123;</span><br><span class="line">    Trie pre = root;</span><br><span class="line">    Trie ptr;</span><br><span class="line">    int order;</span><br><span class="line">    for(int i=0;i&lt;strlen(word);++i)//字母序对应后继不存在</span><br><span class="line">    &#123;</span><br><span class="line">        order = word[i]-&#x27;a&#x27;;</span><br><span class="line">        if(pre-&gt;next[order] == NULL)</span><br><span class="line">        &#123;</span><br><span class="line">            ptr = (Node *)malloc(sizeof(Node));//初始化新节点</span><br><span class="line">            for(int j=0;j&lt;26;++j)</span><br><span class="line">                ptr-&gt;next[j]==NULL;</span><br><span class="line">            ptr-&gt;fail = NULL;</span><br><span class="line">            ptr-&gt;flag = false;</span><br><span class="line">            pre-&gt;next[order] = ptr;//插入新节点</span><br><span class="line">        &#125;</span><br><span class="line">        pre = ptr-&gt;next[order];//用新节点作为下一次循环的根节点</span><br><span class="line">    &#125;</span><br><span class="line">    pre-&gt;flag = true;//修改flag表示为单词结尾</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查询操作-2">查询操作</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">bool Find(char * str)</span><br><span class="line">&#123;</span><br><span class="line">    int order;</span><br><span class="line">    Trie pre= root</span><br><span class="line">    Trie ptr;</span><br><span class="line">    int length = strlen(str);</span><br><span class="line">    if(!length)</span><br><span class="line">    &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=0;i&lt;length;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        order = str[i]-&#x27;a&#x27;;</span><br><span class="line">        if(pre-&gt;next[order] == NULL &amp;&amp; pre!=root)</span><br><span class="line">        &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        pre = pre-&gt;next[order];</span><br><span class="line">    &#125;</span><br><span class="line">    if(pre-&gt;flag==false)</span><br><span class="line">    &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="例题详解">例题详解</h3>
+<h4 id="leetcode-720-词典中最长的单词">leetcode 720(词典中最长的单词)</h4>
+<p>题目描述如下：<br>
+<img src="https://s2.loli.net/2022/03/17/tjBVbDG73lKdsMZ.png" alt="760.png"></p>
+<h5 id="思路和算法">思路和算法</h5>
+<p>由于符合要求的单词的每个前缀都是符合要求的单词，因此可以使用字典树存储所有符合要求的单词。<br>
+创建字典树，遍历数组 words,并将每个单词插入字典树。当所有的单词都插入字典树之后，将答案初始化为空字符串，再次遍历数组 words，判断每个单词是否是符合要求的单词，并更新答案。如果一个单词是符合要求的单词，则比较当前单词与答案，如果当前单词的长度大于答案的长度，或者当前单词的长度等于答案的长度且当前单词的字典序小于答案的字典序，则将答案更新为当前单词。</p>
+<h5 id="代码">代码</h5>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#define MAX_STR_LEN 32</span><br><span class="line"></span><br><span class="line">typedef struct Trie &#123;</span><br><span class="line">    struct Trie * children[26];</span><br><span class="line">    bool isEnd;</span><br><span class="line">&#125; Trie;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void initTrie(Trie * trie) &#123;</span><br><span class="line">    for (int i = 0; i &lt; 26; i++) &#123;</span><br><span class="line">        trie-&gt;children[i] = NULL;</span><br><span class="line">    &#125;</span><br><span class="line">    trie-&gt;isEnd = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool insertTrie(Trie * trie, const char * word) &#123;</span><br><span class="line">    Trie * node = trie;</span><br><span class="line">    int len = strlen(word);</span><br><span class="line">    for (int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">        char ch = word[i];</span><br><span class="line">        int index = ch - &#x27;a&#x27;;</span><br><span class="line">        if (node-&gt;children[index] == NULL) &#123;</span><br><span class="line">            node-&gt;children[index] = (Trie *)malloc(sizeof(Trie));</span><br><span class="line">            initTrie(node-&gt;children[index]);</span><br><span class="line">        &#125;</span><br><span class="line">        node = node-&gt;children[index];</span><br><span class="line">    &#125;</span><br><span class="line">    node-&gt;isEnd = true;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool searchTrie(const Trie * trie, const char * word) &#123;</span><br><span class="line">    Trie * node = trie;</span><br><span class="line">    int len = strlen(word);</span><br><span class="line">    for (int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">        char ch = word[i];</span><br><span class="line">        int index = ch - &#x27;a&#x27;;</span><br><span class="line">        if (node-&gt;children[index] == NULL || !node-&gt;children[index]-&gt;isEnd) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        node = node-&gt;children[index];</span><br><span class="line">    &#125;</span><br><span class="line">    return node != NULL &amp;&amp; node-&gt;isEnd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">char * longestWord(char ** words, int wordsSize)&#123;</span><br><span class="line">    Trie * trie = (Trie *)malloc(sizeof(Trie));</span><br><span class="line">    initTrie(trie);</span><br><span class="line">    for (int i = 0; i &lt; wordsSize; i++) &#123;</span><br><span class="line">        insertTrie(trie, words[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    char * longest = &quot;&quot;;</span><br><span class="line">    for (int i = 0; i &lt; wordsSize; i++) &#123;</span><br><span class="line">        if (searchTrie(trie, words[i])) &#123;</span><br><span class="line">            if (strlen(words[i]) &gt; strlen(longest) || (strlen(words[i]) == strlen(longest) &amp;&amp; strcmp(words[i], longest) &lt; 0)) &#123;</span><br><span class="line">                longest = words[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return longest;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>参考资料：<br>
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/linfangnan/p/12655724.html">乌漆WhiteMoon：数据结构：字典树</a><br>
+<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-word-in-dictionary/">leetcode 730 词典中最长的单词</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag"># 数据结构与算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/04/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="prev" title="单调栈">
+      <i class="fa fa-chevron-left"></i> 单调栈
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/19/Linux-%E6%89%BE%E5%9B%9Eroot%E5%AF%86%E7%A0%81/" rel="next" title="Linux">
+      Linux <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">字典树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">字典树的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E5%85%B8%E6%A0%91%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">字典树的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E5%82%A8%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">顺序储存结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">节点结构体定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">插入操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">查询操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E5%82%A8%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.2.</span> <span class="nav-text">链式储存结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9A%E4%B9%89-2"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">节点结构体定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C-2"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">插入操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C-2"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">查询操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.2.3.</span> <span class="nav-text">例题详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#leetcode-720-%E8%AF%8D%E5%85%B8%E4%B8%AD%E6%9C%80%E9%95%BF%E7%9A%84%E5%8D%95%E8%AF%8D"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">leetcode 720(词典中最长的单词)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%E5%92%8C%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.3.1.1.</span> <span class="nav-text">思路和算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.3.1.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">夏至</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏至</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

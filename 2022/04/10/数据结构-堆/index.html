@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="简述 首先堆又被称为完全二叉堆，因为它是一种逻辑上基于完全二叉树，物理上基于线性数据结构(如数组，链表等)的数据结构，堆根据其有序性可以被分为两种：大根堆(最大堆)-大根堆在逻辑上二叉树结构中满足根节点&gt;子节点，小根堆(最小堆)-小根堆在逻辑上二叉树结构满足根节点&lt;子节点 常见应用  利用堆的性质找出一个序列中最大最小的元素 堆排序 建立优先级队列，快速获取队列中优先级最高\低的任务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-堆">
+<meta property="og:url" content="http://xiazhi1.github.io/2022/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/index.html">
+<meta property="og:site_name" content="夏至的个人博客">
+<meta property="og:description" content="简述 首先堆又被称为完全二叉堆，因为它是一种逻辑上基于完全二叉树，物理上基于线性数据结构(如数组，链表等)的数据结构，堆根据其有序性可以被分为两种：大根堆(最大堆)-大根堆在逻辑上二叉树结构中满足根节点&gt;子节点，小根堆(最小堆)-小根堆在逻辑上二叉树结构满足根节点&lt;子节点 常见应用  利用堆的性质找出一个序列中最大最小的元素 堆排序 建立优先级队列，快速获取队列中优先级最高\低的任务">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/p2vDjPuXJs3iS6M.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/AkqT9yxutWCc2LM.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/EewJOgZ5jr32a7p.gif">
+<meta property="og:image" content="https://s2.loli.net/2022/05/18/Fad4QHSLjnrvOUE.png">
+<meta property="article:published_time" content="2022-04-10T06:35:23.000Z">
+<meta property="article:modified_time" content="2022-05-18T02:11:42.265Z">
+<meta property="article:author" content="夏至">
+<meta property="article:tag" content="数据结构与算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/04/10/p2vDjPuXJs3iS6M.png">
+
+<link rel="canonical" href="http://xiazhi1.github.io/2022/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据结构-堆 | 夏至的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夏至的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2022/04/10/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构-堆
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-10 14:35:23" itemprop="dateCreated datePublished" datetime="2022-04-10T14:35:23+08:00">2022-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-18 10:11:42" itemprop="dateModified" datetime="2022-05-18T10:11:42+08:00">2022-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">数据结构学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>简述</h1>
+<p>首先堆又被称为完全二叉堆，因为它是一种逻辑上基于完全二叉树，物理上基于线性数据结构(如数组，链表等)的数据结构，堆根据其有序性可以被分为两种：大根堆(最大堆)-大根堆在逻辑上二叉树结构中满足根节点&gt;子节点，小根堆(最小堆)-小根堆在逻辑上二叉树结构满足根节点&lt;子节点</p>
+<h1>常见应用</h1>
+<ol>
+<li>利用堆的性质找出一个序列中最大最小的元素</li>
+<li>堆排序</li>
+<li>建立优先级队列，快速获取队列中优先级最高\低的任务</li>
+<li>在n个元素中排出前k大元素的问题，可以建立一个小根堆，依次读入n个元素并调整，当堆的规模达到k+1时，剔除第一个元素，剩下k个较大元素，保持堆的规模不超过k，然后一直循环</li>
+</ol>
+<h1>具体操作</h1>
+<p>下面介绍的操作以大根堆为例</p>
+<h2 id="堆的插入">堆的插入</h2>
+<p>每次插入都先将新数据放在数组最后，由于从这个新数据的父节点到根节点必然为一个有序的序列，在插入后，我们需要从下而上依次比较使堆整体有序，比如我们有这样一个堆数组[10,7,2,5,1]，下面我们往这个堆插入16，具体流程图如下<br>
+<img src="https://s2.loli.net/2022/04/10/p2vDjPuXJs3iS6M.png" alt="堆示意图.png"></p>
+<h2 id="堆的删除">堆的删除</h2>
+<p>堆中删除需要把最后一个数据的值赋给根节点，然后再从根节点开始开始从上而下的调整，再从根节点开始进行一次从上向下调整，不断将根节点与其子节点比较调整直到堆恢复有序，下面，我们还是以堆数组[10,7,2,5,1]为例，下面我们删除10，具体流程图如下<br>
+<img src="https://s2.loli.net/2022/04/10/AkqT9yxutWCc2LM.png" alt="堆示意图2.png"></p>
+<h1>堆的实现代码</h1>
+<p>由于最近在学python，所以使用python代码实现，其他版本请百度,同时，因为最大堆和最小堆实现方式类似，下面我们只给出最大堆代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">class Array(object):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Achieve an Array by Python list</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def __init__(self, size = 32):</span><br><span class="line">        self._size = size</span><br><span class="line">        self._items = [None] * size</span><br><span class="line"></span><br><span class="line">    def __getitem__(self, index):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        Get items</span><br><span class="line">        :param index: get a value by index</span><br><span class="line">        :return: value</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        return self._items[index]</span><br><span class="line"></span><br><span class="line">    def __setitem__(self, index, value):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        set item</span><br><span class="line">        :param index: giving a index you want to teset</span><br><span class="line">        :param value: the value you want to set</span><br><span class="line">        :return:</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        self._items[index] = value</span><br><span class="line"></span><br><span class="line">    def __len__(self):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :return: the length of array</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        return self._size</span><br><span class="line"></span><br><span class="line">    def clear(self, value=None):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        clear the Array</span><br><span class="line">        :param value: set all value to None</span><br><span class="line">        :return: None</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        for i in range(self._size):</span><br><span class="line">            self._items[i] = value</span><br><span class="line"></span><br><span class="line">    def __iter__(self):</span><br><span class="line">        for item in self._items:</span><br><span class="line">            yield item</span><br><span class="line">            </span><br><span class="line">class MaxHeap(object):</span><br><span class="line">    def __init__(self, maxsize=None):</span><br><span class="line">        self.maxsize = maxsize</span><br><span class="line">        self._elements = Array(maxsize)</span><br><span class="line">        self._count = 0</span><br><span class="line"></span><br><span class="line">    def __len__(self):</span><br><span class="line">        return self._count</span><br><span class="line"></span><br><span class="line">    def add(self, value):</span><br><span class="line">        if self._count &gt;= self.maxsize:</span><br><span class="line">            raise Exception(&#x27;full&#x27;)</span><br><span class="line">        self._elements[self._count] = value</span><br><span class="line">        self._count += 1</span><br><span class="line">        self._siftup(self._count-1)  # 维持堆的特性</span><br><span class="line"></span><br><span class="line">    def _siftup(self, ndx):</span><br><span class="line">        if ndx &gt; 0:</span><br><span class="line">            parent = int((ndx-1)/2)</span><br><span class="line">            if self._elements[ndx] &gt; self._elements[parent]:    # 如果插入的值大于 parent，一直交换</span><br><span class="line">                self._elements[ndx], self._elements[parent] = self._elements[parent], self._elements[ndx]</span><br><span class="line">                self._siftup(parent)    # 递归</span><br><span class="line"></span><br><span class="line">    def extract(self):</span><br><span class="line">        if self._count &lt;= 0:</span><br><span class="line">            raise Exception(&#x27;empty&#x27;)</span><br><span class="line">        value = self._elements[0]    # 保存 root 值</span><br><span class="line">        self._count -= 1</span><br><span class="line">        self._elements[0] = self._elements[self._count]    # 最右下的节点放到root后siftDown</span><br><span class="line">        self._siftdown(0)    # 维持堆特性</span><br><span class="line">        return value</span><br><span class="line"></span><br><span class="line">    def _siftdown(self, ndx):</span><br><span class="line">        left = 2 * ndx + 1</span><br><span class="line">        right = 2 * ndx + 2</span><br><span class="line">        # determine which node contains the larger value</span><br><span class="line">        largest = ndx</span><br><span class="line">        if (left &lt; self._count and     # 有左孩子</span><br><span class="line">                self._elements[left] &gt;= self._elements[largest] and</span><br><span class="line">                self._elements[left] &gt;= self._elements[right]):  # 原书这个地方没写实际上找的未必是largest</span><br><span class="line">            largest = left</span><br><span class="line">        elif right &lt; self._count and self._elements[right] &gt;= self._elements[largest]:</span><br><span class="line">            largest = right</span><br><span class="line">        if largest != ndx:</span><br><span class="line">            self._elements[ndx], self._elements[largest] = self._elements[largest], self._elements[ndx]</span><br><span class="line">            self._siftdown(largest)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def test_maxheap():</span><br><span class="line">    import random</span><br><span class="line">    n = 5</span><br><span class="line">    h = MaxHeap(n)</span><br><span class="line">    for i in range(n):</span><br><span class="line">        h.add(i)</span><br><span class="line">    for i in reversed(range(n)):</span><br><span class="line">        assert i == h.extract()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1>Python中heapq模板</h1>
+<p>Python中创建一个堆可以直接使用list的创建方式H = [], 或者使用heapify()函数将一个存在的列表转为堆。</p>
+<p>这个模块提供了下面几种堆的操作：<br>
+heapq.heappush(heap, item)<br>
+往堆中插入一个值，同时要保持为最小堆。</p>
+<p>heapq.heappop(heap)<br>
+返回堆中的最小值，并把它从堆中删除，同时保持为最小堆；如果堆为空，发生 IndexError。直接通过heap[0]可以获取最小值并不从堆中把它删除。</p>
+<p>heapq.heappushpop(heap, item)<br>
+向堆中插入值后再弹出堆中的最小值，这个函数的速度比直接使用heappush() 和heappop()的效率更加高。</p>
+<p>heapq.heapreplace(heap, item)<br>
+弹出和返回堆中的最小值再插入一个新的值。堆的大小没有改变。如果堆为空，产生 IndexError。<br>
+这一个操作也比直接使用heappush() 和heappop()的效率更加高，尤其适合使用在固定堆大小不变的情况。<br>
+与上一个函数相比，这个函数返回的值可能要比将要插入到堆的值大。</p>
+<p>heapq.heapify(x)<br>
+将一个list转为最小堆，线性时间复杂度，O(n).</p>
+<h1>重要应用-堆排序</h1>
+<h2 id="简述">简述</h2>
+<p>堆排序主要分为两个步骤</p>
+<ol>
+<li>建堆
+<ul>
+<li>升序：建大堆</li>
+<li>降序：建小堆</li>
+</ul>
+</li>
+<li>利用堆删除的思想来排序，建堆和堆删除中都用到了向下调整，所以关键是要掌握向下调整<br>
+下面以升序为例简述下堆排序的流程：</li>
+</ol>
+<ul>
+<li>首先应该建一个大堆，不能直接使用堆来实现，可以将需要排序的数组看作是一个堆，但需要把数组结构变为堆</li>
+<li>从堆倒数第二行最右边开始依次往下调整直到调整到堆顶，这样就可以把数组调整成一个堆</li>
+<li>然后按照堆删的思想将堆顶域堆底的数据交换，不同的是这里不删除最后一个元素</li>
+<li>这样一来最大元素就在最后一个位置，然后从堆顶向下调整到倒数第二个元素，这样次大元素在堆顶，重复到只剩堆顶为止<br>
+流程图如下：<br>
+<img src="https://s2.loli.net/2022/05/18/EewJOgZ5jr32a7p.gif" alt="堆排序示例.gif"></li>
+</ul>
+<h2 id="实现代码">实现代码</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">// 堆排序</span><br><span class="line">void AdjustDown(int* a, int n, int root)//向下调整</span><br><span class="line">&#123;</span><br><span class="line">	assert(a);</span><br><span class="line">	int parent = root;</span><br><span class="line">	int child = parent * 2 + 1;</span><br><span class="line">	while (child &lt; n)</span><br><span class="line">	&#123;</span><br><span class="line">		if (child + 1 &lt; n &amp;&amp; a[child + 1] &gt; a[child])</span><br><span class="line">		&#123;</span><br><span class="line">			child++;</span><br><span class="line">		&#125;</span><br><span class="line">		if (a[child] &gt; a[parent])</span><br><span class="line">		&#123;</span><br><span class="line">			Swap(&amp;a[child], &amp;a[parent]);</span><br><span class="line">			parent = child;</span><br><span class="line">			child = parent * 2 + 1;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">void HeapSort(int* a, int n)</span><br><span class="line">&#123;</span><br><span class="line">	assert(a);</span><br><span class="line"> </span><br><span class="line">    //建堆</span><br><span class="line">	for (int i = (n - 1 - 1) / 2; i &gt;= 0; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		AdjustDown(a, n, i);</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">    //交换</span><br><span class="line">	for (int i = n - 1; i &gt; 0; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		Swap(&amp;a[i], &amp;a[0]);</span><br><span class="line">		AdjustDown(a, i, 0);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="具体应用">具体应用</h2>
+<p>给定数组{33,44,21,8,19,123,46,78,11}如何求解其第一趟堆排序后的结果？<br>
+<img src="https://s2.loli.net/2022/05/18/Fad4QHSLjnrvOUE.png" alt="堆排序.png"></p>
+<h2 id="总结">总结</h2>
+<p>从上面的例子，我们可以看出，其实堆排序就是在树形结构下对父子节点不断进行交换，选出最大的放在堆顶，然后将对堆顶元素与堆底倒数第x个元素交换(x为当前循环趟数)，这样就起到了一趟选出一个剩余数组中最大值并放于剩余数组末尾的目的。它的特点是，一趟排序就能确定一个元素的最终位置，因为用了二叉树结构进行辅助排序，其时间复杂度显然为O(logn)</p>
+<h1>leetcode例题</h1>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-product-after-k-increments/">6039-K次增加后的最大乘积</a></p>
+<p>参考资料：<br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaomucgwlmx/article/details/103522410">OH,CGWLMXUP的博客</a><br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_23869697/article/details/82735088">西檬饭的博客</a><br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/Edward_Asia/article/details/121419975">风继续吹TT的博客</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag"># 数据结构与算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/19/hexo-d%20%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" rel="prev" title="hexo">
+      <i class="fa fa-chevron-left"></i> hexo
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/12/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="next" title="线索二叉树">
+      线索二叉树 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">常见应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">具体操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E6%8F%92%E5%85%A5"><span class="nav-number">3.1.</span> <span class="nav-text">堆的插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E7%9A%84%E5%88%A0%E9%99%A4"><span class="nav-number">3.2.</span> <span class="nav-text">堆的删除</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">堆的实现代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">Python中heapq模板</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">重要应用-堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0"><span class="nav-number">6.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="nav-number">6.2.</span> <span class="nav-text">实现代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%BA%94%E7%94%A8"><span class="nav-number">6.3.</span> <span class="nav-text">具体应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">leetcode例题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">夏至</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏至</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
