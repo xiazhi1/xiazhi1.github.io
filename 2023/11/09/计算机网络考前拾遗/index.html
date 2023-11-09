@@ -20,16 +20,24 @@
     var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="[toc] 前言 本文只针对华中科技大学电子信息与通信学院计算机网络考试要求进行知识点归纳总结与提炼，内容不保证能满足各位读者的需求。 第一章：绪论 计算机网络的定义和发展历史(了解) 网络:网络由若干节点和连接这些节点的链路组成 互联网：多个网络通过路由器互连起来，构成一个覆盖范围更大的网络，即互联网,互联网是网络的网络 因特网：因特网是世界上最大的互连网络 简答：列表对比说明互联网(Inter">
+  <meta name="description" content="更新中… 前言 本文只针对华中科技大学电子信息与通信学院计算机网络考试要求进行知识点归纳总结与提炼，内容不保证能满足各位读者的需求。 第一章：绪论 计算机网络的定义和发展历史(了解) 网络:网络由若干节点和连接这些节点的链路组成 互联网：多个网络通过路由器互连起来，构成一个覆盖范围更大的网络，即互联网,互联网是网络的网络 因特网：因特网是世界上最大的互连网络 发展历史：计算机网络最早的起源来自美国">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络考前拾遗">
 <meta property="og:url" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="[toc] 前言 本文只针对华中科技大学电子信息与通信学院计算机网络考试要求进行知识点归纳总结与提炼，内容不保证能满足各位读者的需求。 第一章：绪论 计算机网络的定义和发展历史(了解) 网络:网络由若干节点和连接这些节点的链路组成 互联网：多个网络通过路由器互连起来，构成一个覆盖范围更大的网络，即互联网,互联网是网络的网络 因特网：因特网是世界上最大的互连网络 简答：列表对比说明互联网(Inter">
+<meta property="og:description" content="更新中… 前言 本文只针对华中科技大学电子信息与通信学院计算机网络考试要求进行知识点归纳总结与提炼，内容不保证能满足各位读者的需求。 第一章：绪论 计算机网络的定义和发展历史(了解) 网络:网络由若干节点和连接这些节点的链路组成 互联网：多个网络通过路由器互连起来，构成一个覆盖范围更大的网络，即互联网,互联网是网络的网络 因特网：因特网是世界上最大的互连网络 发展历史：计算机网络最早的起源来自美国">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-20-35-18.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-20-45-41.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-00-22.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-23-16.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-40-13.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-44-52.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-46-15.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-46-40.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-48-38.png">
 <meta property="article:published_time" content="2023-11-09T11:36:21.000Z">
-<meta property="article:modified_time" content="2023-11-09T12:36:08.510Z">
+<meta property="article:modified_time" content="2023-11-09T13:51:35.259Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
@@ -187,7 +195,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-11-09 19:36:21 / 修改时间：20:36:08" itemprop="dateCreated datePublished" datetime="2023-11-09T19:36:21+08:00">2023-11-09</time>
+              <time title="创建时间：2023-11-09 19:36:21 / 修改时间：21:51:35" itemprop="dateCreated datePublished" datetime="2023-11-09T19:36:21+08:00">2023-11-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,16 +218,139 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>[toc]</p>
+        <p>更新中…</p>
 <h2 id="前言">前言</h2>
 <p>本文只针对华中科技大学电子信息与通信学院计算机网络考试要求进行知识点归纳总结与提炼，内容不保证能满足各位读者的需求。</p>
 <h2 id="第一章：绪论">第一章：绪论</h2>
 <h3 id="计算机网络的定义和发展历史-了解">计算机网络的定义和发展历史(了解)</h3>
 <p>网络:网络由若干<strong>节点</strong>和连接这些节点的<strong>链路</strong>组成<br>
 互联网：多个网络通过路由器互连起来，构成一个覆盖范围更大的网络，即互联网,互联网是网络的网络<br>
-因特网：因特网是世界上最大的互连网络</p>
+因特网：因特网是世界上最大的互连网络<br>
+发展历史：计算机网络最早的起源来自美国军方搭建的APANET</p>
 <p><strong>简答：列表对比说明互联网(Internet)和互连网(internet)两个概念的异同。</strong><br>
 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-20-35-18.png" alt></p>
+<h3 id="理解设计计算机网络的技术需求-理解">理解设计计算机网络的技术需求(理解)</h3>
+<h3 id="电路交换与分组交换-掌握">电路交换与分组交换(掌握)</h3>
+<p><strong>简答：简要说明电路交换的要点</strong><br>
+电路交换的要点包括:通信时需要经历三个阶段:建立连接、传送数据、释放连接;通信的双方之间需要建立一个专用的链路;通信过程中,沿着建立链路传输的数据无需路由;通信结束后,连接断开,链路资源被释放</p>
+<p><strong>简答：简要说明分组交换的要点</strong><br>
+分组交换的要点包括:将完整的报文分割成为较小的数据段,在每个数据段前面加上必要的控制信息组成首部,就构成了分组;通信过程中,沿途交换机采用“存储-转发”方式,根据分组首部中的目的地信息进行转发;通信过程中,各数据分组被独立路由和转发。</p>
+<p><img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-20-45-41.png" alt></p>
+<h2 id="第二章：网络体系结构">第二章：网络体系结构</h2>
+<h3 id="层次化体系结构的原理-掌握">层次化体系结构的原理(掌握)</h3>
+<p><strong>简答：简述网络体系结构采用分层设计的好处</strong><br>
+采用分层的网络体系结构的优势包括但不限于:<br>
+(1)各层之间可以独立设计,便于分工协作,实现产业标准化;<br>
+(2)层次化设计的灵活性好,一层发生变化不影响上下层;<br>
+(3)层次化设计的扩展性好,各层可选用不同的技术来适应不同的应用需求。</p>
+<h3 id="网络体系结构的相关概念-理解">网络体系结构的相关概念(理解)</h3>
+<ol>
+<li>实体：任何可发送或接收数据的硬件或软件进程</li>
+<li>对等实体：收发双方相同层次中的实体</li>
+<li>协议：控制两个对等实体进行逻辑通信的规则的集合</li>
+<li>协议的三要素：<br>
+(1) 语法,即数据与控制信息的结构或格式。<br>
+(2) 语义,即需要发出何种控制信息、完成何种动作以及做出何种响应。<br>
+(3) 同步,即事件实现顺序的详细说明。</li>
+</ol>
+<p><strong>简答：层次化网络体系结构中的服务与协议有何区别?</strong><br>
+层次化网络体系结构中,服务是垂直的,定义了该层能够代表它的用户完成的操作。上层是服务用户,下层是服务提供者。协议是水平的,定义的是对等实体间交换数据的格式、内容、时序,协议的实现保证了能够向上层提供服务。</p>
+<h3 id="三种体系架构的模型与差异-掌握">三种体系架构的模型与差异(掌握)</h3>
+<p><img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-00-22.png" alt="三种体系架构"></p>
+<p><strong>简答：简述ISO/OSI参考模型各层功能与协议数据单元</strong><br>
+ISO/OSI参考模型各层功能自底向上分别为:<br>
+(1)物理层:实现数据bitt在物理链路上的传输;数据单元：数据位(Bit)<br>
+(2)数据链路层:处理相邻网络结点之间数据帧的传输;数据单元：数据帧<br>
+(3)网络层:处理互联网络中主机之间的分组传输;数据单元：数据分组<br>
+(4)传输层:实现终端主机进程之间的通信;数据单元：数据段<br>
+(5)会话层:实现通信的会话管理等功能;数据单元：数据<br>
+(6)表示层:实现不同表达形式数据之间的转换;数据单元：数据<br>
+(7)应用层:实现应用特定操作,向用户提供相应的服务.数据单元：数据</p>
+<p><strong>简答：自上而下简述计算机网络体系结构的五层参考模型</strong><br>
+网络体系结构的五层模型,自上向下依次为应用层、传输层、网络层、数据链路层、物理层。<br>
+应用层:为用户的应用进程提供服务<br>
+传输层:为两个主机中进程之间的通信提供端到端服务<br>
+网络层:为分组交换网上的不同主机提供通信服务<br>
+数据链路层:在相邻结点间的链路上透明传送数据<br>
+物理层:在传输媒质上实现透明的比特流传送</p>
+<h3 id="计算机网络的性能指标的计算方法-掌握">计算机网络的性能指标的计算方法(掌握)</h3>
+<ol>
+<li>速率：连接在计算机网络上的主机在数字信道上传送比特的速率，也称为比特率或数据率，基本单位：bit/s（bps），常用单位:kbps/Mbps <strong>这里的换算需要与计算机存储里面换算做区分，计算速率时:1k=1000,计算内存时：1k=1024</strong></li>
+<li>带宽：表示网络的通信线路传送数据的能力，表示单位时间内从网络中某一点到另一点所能通过的<strong>最高数据率</strong>,单位与速率单位相同</li>
+<li>吞吐量：表示单位时间内通过某个网络(或信道、接口)的数据量；用于测量实际上到底由多少数据量能通过网络，其受<strong>网络带宽或额定速率的限制</strong></li>
+<li>时延：
+<ul>
+<li>发送时延：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mtext>分组长度</mtext><mtext>发送速率</mtext></mfrac></mrow><annotation encoding="application/x-tex">\frac{分组长度}{发送速率}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2173em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">发送速率</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">分组长度</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>传播时延：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mtext>信道长度</mtext><mtext>电磁波传播速率</mtext></mfrac></mrow><annotation encoding="application/x-tex">\frac{信道长度}{电磁波传播速率}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2173em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">电磁波传播速率</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">信道长度</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>处理时延：一般不便于计算</li>
+<li>排队时延：一般不考虑<br>
+总时延=发送时延+传播时延+处理时延+排队时延</li>
+</ul>
+</li>
+<li>时延带宽积：其值等于传播时延*带宽，时延带宽积可视为以比特为单位的链路长度,等效于第一个比特到达接收方时发送方可以发送的比特数(链路满载)。</li>
+<li>往返时延(RTT):链路双向交互一次的时间</li>
+</ol>
+<h2 id="第三章：直连网络">第三章：直连网络</h2>
+<h3 id="直连网络的概念-了解">直连网络的概念(了解)</h3>
+<p>直连网络：所有的主机通过某种物理媒质直接连接，是最简单的网络形式</p>
+<p><strong>物理层的四个特性</strong>：<br>
+机械特性：指明接口所用的接线器的形状和尺寸、引线数目和排列、固定和锁定装置等等。<br>
+电气特性：指明在接口电缆的各条线上出现的电压的范围。<br>
+功能特性：指明某条线上出现的某一电平的电压表示何意。<br>
+规程特性：指明对于不同功能的各种可能事件的出现顺序。</p>
+<h3 id="不同组帧方法-了解">不同组帧方法(了解)</h3>
+<p>组帧方法主要分为以下两种：</p>
+<ol>
+<li>面向字节的协议：把每一帧看作一个字节集合，两种方法：字符计数法，起止标记法</li>
+<li>面向比特的协议：把数据帧看作比特的集合</li>
+</ol>
+<h3 id="差错控制的概念-理解">差错控制的概念(理解)</h3>
+<p>为什么进行差错检测？ 实际的通信链路都不是理想的，比特在传输过程中可能会产生差错，这称为比特差错，使用差错检测码来检测是否产生比特差错，是数据链路层的重要问题之一。</p>
+<p>常用的差错检测方法：</p>
+<ol>
+<li>奇偶校验：添加一位奇偶校验位，能检测奇数个比特差错</li>
+<li>循环冗余校验(CRC)：检测出一定数量的差错，其主要步骤如下：<br>
+<img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-23-16.png" alt></li>
+</ol>
+<h3 id="可靠传输的概念和基本实现机制-掌握">可靠传输的概念和基本实现机制(掌握)</h3>
+<p>可靠传输：上文提到的比特差错只是传输差错的一种，传输差错还包括分组丢失，分组失序，分租重复</p>
+<p>可靠传输的协议实现主要有以下几种：<br>
+停止等待协议（ARQ协议）<br>
+连续ARQ协议：包含两种策略：GO-BACK-N 和 选择性重传<br>
+滑动窗口协议</p>
+<p>停止等待协议示意图<br>
+<img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-40-13.png" alt="停止等待协议示意图"></p>
+<p>连续ARQ协议两种策略的优缺点分析：<br>
+<img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-44-52.png" alt></p>
+<p>滑动窗口协议的示意图：<br>
+<img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-46-15.png" alt><br>
+<img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-46-40.png" alt></p>
+<p><strong>简答：简述数据链路层实现可靠传输的基本方法。</strong><br>
+数据链路层实现可靠传输的基本设计方法包括:<br>
+l 确认机制:接收方给发送方发送ACK,反馈已正确接收的数据帧;<br>
+l 超时机制:发送方启动计时器,一旦出现超时则自动重传未确认的数据帧;<br>
+l 帧序号:标记数据帧,以便识别重复的数据帧</p>
+<h3 id="滑动窗口参数的计算方法-掌握">滑动窗口参数的计算方法(掌握)</h3>
+<p>滑动窗口参数的要求如下图所示<br>
+<img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-48-38.png" alt></p>
+<h3 id="传统共享介质MAC协议的设计要点-理解">传统共享介质MAC协议的设计要点(理解)</h3>
+<p><strong>简答：为什么在传统以太网的协议设计中,数据帧存在最短帧长的限制?</strong><br>
+传统以太网的MAC层协议为CSMA/CD,其中CD称为冲突检测,主要解决信号传播时延导致的媒质接入问题。在争用信道过程中,结点边发送数据边监听信道,如果在一个争用周期范围内未检测到冲突发生,则成功占用信道。IEEE 802.3规定当某个结点完成一帧数据接收后,首先要判断接收的帧长度,如果接收帧长度小于规定的帧最小长度,则表明冲突发生。</p>
+<h3 id="CSMA-CD协议的原理-掌握">CSMA/CD协议的原理(掌握)</h3>
+<p><strong>简答：简述传统以太网的CSMA/CD算法要点</strong><br>
+CSMA/CD全称为带有冲突检测的载波侦听多路接入(Carrier Sense Multiple Access with Collision Detect)。其基本思想是载波监听,多点接入,碰撞检测。每个站点发送数据之前必须侦听信道的忙、闲状态;如果信道空闲,立即发送数据,同时进行冲突检测;如果信道忙,站点继续侦听总线,直到信道变成空闲。如果在数据发送过程中检测到冲突,将立即停止发送数据并等待一段随机长的时间,然后重复上述过程。</p>
+<h3 id="无线局域网MAC协议设计要点-理解">无线局域网MAC协议设计要点(理解)</h3>
+<p><strong>简答：CSMA/CD算法为何不能应用于无线局域网</strong><br>
+CSMA/CD算法需要硬件一边发送数据一边监听共享链路的占用情况,在冲突窗口时间内没有检测出冲突就确定为发送成功。这些设计在无线链路上难以满足。首先,在无线网卡实现信号的同时发送和接收的难度和代价较高;其次,无线通信环境中信号传输路径复杂,存在绕射、折射、反射等多径,难以估算传输延时和判断是否存在冲突。</p>
+<h3 id="CSMA-CA协议的原理-理解">CSMA/CA协议的原理(理解)</h3>
+<p><strong>简答：无线局域网CSMA/CA如何实现冲突避免?</strong><br>
+冲突避免 Collision Avoidance,又称为虚拟载波侦听 (Virtual Carrier Sense),通过信令协商达到实际载波侦听的效果。协议约定在发送数据帧之前交换控制信息,发送方询问“Request to Send” (RTS),接收方收到 RTS后响应 “Clear to Send” (CTS),发送方收到 CTS, 则开始发送数据。在此过程中,如果其他结点收到 RTS或者 CTS,则停止发送,避免冲突。</p>
+<h2 id="参考文献">参考文献</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1c4411d7jb/?spm_id_from=333.1007.top_right_bar_window_default_collection.content.click">湖科大计算机网络微课堂</a></li>
+<li>Computer Networks: A Systems Approach, 5th Edition</li>
+<li>华中科技大学电子信息与通信学院计算机网络课程组提供的优秀课件和资料</li>
+</ol>
 
     </div>
 
@@ -300,7 +431,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E7%BB%AA%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text">第一章：绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2-%E4%BA%86%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">计算机网络的定义和发展历史(了解)</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E7%BB%AA%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text">第一章：绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2-%E4%BA%86%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">计算机网络的定义和发展历史(了解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E8%AE%BE%E8%AE%A1%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E6%8A%80%E6%9C%AF%E9%9C%80%E6%B1%82-%E7%90%86%E8%A7%A3"><span class="nav-number">2.2.</span> <span class="nav-text">理解设计计算机网络的技术需求(理解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2%E4%B8%8E%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2-%E6%8E%8C%E6%8F%A1"><span class="nav-number">2.3.</span> <span class="nav-text">电路交换与分组交换(掌握)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">第二章：网络体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%82%E6%AC%A1%E5%8C%96%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%9A%84%E5%8E%9F%E7%90%86-%E6%8E%8C%E6%8F%A1"><span class="nav-number">3.1.</span> <span class="nav-text">层次化体系结构的原理(掌握)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5-%E7%90%86%E8%A7%A3"><span class="nav-number">3.2.</span> <span class="nav-text">网络体系结构的相关概念(理解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%B7%AE%E5%BC%82-%E6%8E%8C%E6%8F%A1"><span class="nav-number">3.3.</span> <span class="nav-text">三种体系架构的模型与差异(掌握)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95-%E6%8E%8C%E6%8F%A1"><span class="nav-number">3.4.</span> <span class="nav-text">计算机网络的性能指标的计算方法(掌握)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E7%9B%B4%E8%BF%9E%E7%BD%91%E7%BB%9C"><span class="nav-number">4.</span> <span class="nav-text">第三章：直连网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E8%BF%9E%E7%BD%91%E7%BB%9C%E7%9A%84%E6%A6%82%E5%BF%B5-%E4%BA%86%E8%A7%A3"><span class="nav-number">4.1.</span> <span class="nav-text">直连网络的概念(了解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%BB%84%E5%B8%A7%E6%96%B9%E6%B3%95-%E4%BA%86%E8%A7%A3"><span class="nav-number">4.2.</span> <span class="nav-text">不同组帧方法(了解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E6%8E%A7%E5%88%B6%E7%9A%84%E6%A6%82%E5%BF%B5-%E7%90%86%E8%A7%A3"><span class="nav-number">4.3.</span> <span class="nav-text">差错控制的概念(理解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6-%E6%8E%8C%E6%8F%A1"><span class="nav-number">4.4.</span> <span class="nav-text">可靠传输的概念和基本实现机制(掌握)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%8F%82%E6%95%B0%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95-%E6%8E%8C%E6%8F%A1"><span class="nav-number">4.5.</span> <span class="nav-text">滑动窗口参数的计算方法(掌握)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8MAC%E5%8D%8F%E8%AE%AE%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9-%E7%90%86%E8%A7%A3"><span class="nav-number">4.6.</span> <span class="nav-text">传统共享介质MAC协议的设计要点(理解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSMA-CD%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%8E%9F%E7%90%86-%E6%8E%8C%E6%8F%A1"><span class="nav-number">4.7.</span> <span class="nav-text">CSMA&#x2F;CD协议的原理(掌握)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91MAC%E5%8D%8F%E8%AE%AE%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9-%E7%90%86%E8%A7%A3"><span class="nav-number">4.8.</span> <span class="nav-text">无线局域网MAC协议设计要点(理解)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSMA-CA%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%8E%9F%E7%90%86-%E7%90%86%E8%A7%A3"><span class="nav-number">4.9.</span> <span class="nav-text">CSMA&#x2F;CA协议的原理(理解)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
