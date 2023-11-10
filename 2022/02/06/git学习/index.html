@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Git学习 创建版本库 123456789$ mkdir learngit&#x2F;&#x2F;创建目录$ cd learngit&#x2F;&#x2F;切换目录$ pwd&#x2F;&#x2F;显示当前目录$ ls -ah&#x2F;&#x2F;显示目录$ git init&#x2F;&#x2F;把目录变成可管理的仓库$ git add &#x2F;&#x2F;把文件添加到仓库$ git commit -m&quot;&quot;&#x2F;&#x2F;git commit告诉Git，把文件提交到仓库，-m用于添加对这次操作的说明">
+  <meta name="description" content="Git学习 创建版本库 123456789$ mkdir learngit&#x2F;&#x2F;创建目录$ cd learngit&#x2F;&#x2F;切换目录$ pwd&#x2F;&#x2F;显示当前目录$ ls -ah&#x2F;&#x2F;显示目录$ git init&#x2F;&#x2F;把目录变成可管理的仓库$ git add &#x2F;&#x2F;把文件添加到仓库$ git commit -m&quot;&quot;&#x2F;&#x2F;git commit告诉Git，把文件提交到仓库，-m用于添加对这次操作的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git学习">
 <meta property="og:url" content="http://xiazhi1.github.io/2022/02/06/git%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="Git学习 创建版本库 123456789$ mkdir learngit&#x2F;&#x2F;创建目录$ cd learngit&#x2F;&#x2F;切换目录$ pwd&#x2F;&#x2F;显示当前目录$ ls -ah&#x2F;&#x2F;显示目录$ git init&#x2F;&#x2F;把目录变成可管理的仓库$ git add &#x2F;&#x2F;把文件添加到仓库$ git commit -m&quot;&quot;&#x2F;&#x2F;git commit告诉Git，把文件提交到仓库，-m用于添加对这次操作的说明">
+<meta property="og:description" content="Git学习 创建版本库 123456789$ mkdir learngit&#x2F;&#x2F;创建目录$ cd learngit&#x2F;&#x2F;切换目录$ pwd&#x2F;&#x2F;显示当前目录$ ls -ah&#x2F;&#x2F;显示目录$ git init&#x2F;&#x2F;把目录变成可管理的仓库$ git add &#x2F;&#x2F;把文件添加到仓库$ git commit -m&quot;&quot;&#x2F;&#x2F;git commit告诉Git，把文件提交到仓库，-m用于添加对这次操作的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-06T10:17:38.000Z">
 <meta property="article:modified_time" content="2022-02-06T10:19:50.420Z">
@@ -198,6 +198,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -208,7 +215,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1>Git学习</h1>
+        <h1 id="git学习">Git学习</h1>
 <h2 id="创建版本库">创建版本库</h2>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir learngit//创建目录</span><br><span class="line">$ cd learngit//切换目录</span><br><span class="line">$ pwd//显示当前目录</span><br><span class="line">$ ls -ah//显示目录</span><br><span class="line">$ git init//把目录变成可管理的仓库</span><br><span class="line">$ git add //把文件添加到仓库</span><br><span class="line">$ git commit -m&quot;&quot;//git commit告诉Git，把文件提交到仓库，-m用于添加对这次操作的说明</span><br><span class="line">$ cat readme.txt//查看readme.txt的内容</span><br><span class="line">/Users/michael/learngit</span><br></pre></td></tr></table></figure>
 <p>在Windows中当输入完txt内容后，按esc加：wq退出输入模式</p>
@@ -248,7 +255,7 @@
 <p>现在你有两个选择，一是确实要从版本库中删除该文件，那就用命令<code>git rm</code>删掉，并且<code>git commit</code></p>
 <p>另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本</p>
 <p><code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
-<p>小提示：先手动删除文件，然后使用git rm <file>和git add<file>效果是一样的。</p>
+<p>小提示：先手动删除文件，然后使用git rm <file>和git add<file>效果是一样的。</file></file></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- test.txt</span><br></pre></td></tr></table></figure>
 <p><code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
 <p>注意：从来没有被添加到版本库就被删除的文件，是无法恢复的！</p>
@@ -290,11 +297,11 @@
 <p>你和你的小伙伴们每个人都在<code>dev</code>分支上干活，每个人都有自己的分支，时不时地往<code>dev</code>分支上合并就可以了。</p>
 <p>Git分支十分强大，在团队开发中应该充分应用。</p>
 <p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而<code>fast forward</code>合并就看不出来曾经做过合并</p>
-<h3 id="Bug分支">Bug分支</h3>
+<h3 id="bug分支">Bug分支</h3>
 <p>修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；</p>
 <p>当手头工作没有完成时，先把工作现场<code>git stash</code>一下，然后去修复bug，修复后，再<code>git stash pop</code>，回到工作现场；工作区是干净的，刚才的工作现场存到哪去了？用<code>git stash list</code>命令看看</p>
 <p>在master分支上修复的bug，想要合并到当前dev分支，可以用<code>git cherry-pick &lt;commit&gt;</code>命令，把bug提交的修改“复制”到当前分支，避免重复劳动。</p>
-<h3 id="Feature分支">Feature分支</h3>
+<h3 id="feature分支">Feature分支</h3>
 <p>开发一个新feature，最好新建一个分支；</p>
 <p>如果要丢弃一个没有被合并过的分支，可以通过<code>git branch -D &lt;name&gt;</code>强行删除。</p>
 <h3 id="多人协作">多人协作</h3>
@@ -309,7 +316,7 @@
 <h4 id="抓取分支">抓取分支</h4>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull//抓取分支</span><br></pre></td></tr></table></figure>
 <h4 id="多人协作工作模式">多人协作工作模式</h4>
-<ol>
+<ol type="1">
 <li>首先，可以试图用<code>git push origin &lt;branch-name&gt;</code>推送自己的修改；</li>
 <li>如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并；</li>
 <li>如果合并有冲突，则解决冲突，并在本地提交；</li>
@@ -323,30 +330,16 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git pull</span><br><span class="line">Auto-merging env.txt</span><br><span class="line">CONFLICT (add/add): Merge conflict in env.txt</span><br><span class="line">Automatic merge failed; fix conflicts and then commit the result.</span><br></pre></td></tr></table></figure>
 <h4 id="小结">小结</h4>
 <ul>
-<li>
-<p>查看远程库信息，使用<code>git remote -v</code>；</p>
-</li>
-<li>
-<p>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p>
-</li>
-<li>
-<p>从本地推送分支，使用<code>git push origin branch-name</code>，如果推送失败，先用<code>git pull</code>抓取远程的新提交；</p>
-</li>
-<li>
-<p>在本地创建和远程分支对应的分支，使用<code>git checkout -b branch-name origin/branch-name</code>，本地和远程分支的名称最好一致；</p>
-</li>
-<li>
-<p>建立本地分支和远程分支的关联，使用<code>git branch --set-upstream branch-name origin/branch-name</code>；</p>
-</li>
-<li>
-<p>从远程抓取分支，使用<code>git pull</code>，如果有冲突，要先处理冲突。</p>
-<h3 id="Rebase">Rebase</h3>
+<li><p>查看远程库信息，使用<code>git remote -v</code>；</p></li>
+<li><p>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p></li>
+<li><p>从本地推送分支，使用<code>git push origin branch-name</code>，如果推送失败，先用<code>git pull</code>抓取远程的新提交；</p></li>
+<li><p>在本地创建和远程分支对应的分支，使用<code>git checkout -b branch-name origin/branch-name</code>，本地和远程分支的名称最好一致；</p></li>
+<li><p>建立本地分支和远程分支的关联，使用<code>git branch --set-upstream branch-name origin/branch-name</code>；</p></li>
+<li><p>从远程抓取分支，使用<code>git pull</code>，如果有冲突，要先处理冲突。</p>
+<h3 id="rebase">Rebase</h3>
 <ul>
-<li>
-<p>rebase操作可以把本地未push的分叉提交历史整理成直线；</p>
-</li>
-<li>
-<p>rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比</p>
+<li><p>rebase操作可以把本地未push的分叉提交历史整理成直线；</p></li>
+<li><p>rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比</p>
 <p>指令是</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase</span><br></pre></td></tr></table></figure>
 <h3 id="标签管理">标签管理</h3>
@@ -355,32 +348,20 @@
 <p>。tag就是一个让人容易记住的有意义的名字，它跟某个commit绑在一起</p>
 <h4 id="创造标签">创造标签</h4>
 <ul>
-<li>
-<p>标签不是按时间顺序列出，而是按字母排序的</p>
-</li>
-<li>
-<p>命令<code>git tag &lt;tagname&gt;</code>用于新建一个标签，默认为<code>HEAD</code>，也可以指定一个commit id；</p>
-</li>
-<li>
-<p>命令<code>git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;</code>可以指定标签信息；</p>
-</li>
-<li>
-<p>命令<code>git tag</code>可以查看所有标签。</p>
-</li>
-<li>
-<p>注意：标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。</p>
-</li>
+<li><p>标签不是按时间顺序列出，而是按字母排序的</p></li>
+<li><p>命令<code>git tag &lt;tagname&gt;</code>用于新建一个标签，默认为<code>HEAD</code>，也可以指定一个commit id；</p></li>
+<li><p>命令<code>git tag -a &lt;tagname&gt; -m "blablabla..."</code>可以指定标签信息；</p></li>
+<li><p>命令<code>git tag</code>可以查看所有标签。</p></li>
+<li><p>注意：标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。</p></li>
 </ul>
-<h4 id="操作标签">操作标签</h4>
+<p>#### 操作标签</p>
 <ul>
 <li>命令<code>git push origin &lt;tagname&gt;</code>可以推送一个本地标签；</li>
 <li>命令<code>git push origin --tags</code>可以推送全部未推送过的本地标签；</li>
 <li>命令<code>git tag -d &lt;tagname&gt;</code>可以删除一个本地标签；</li>
 <li>命令<code>git push origin :refs/tags/&lt;tagname&gt;</code>可以删除一个远程标签</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 </ul>
 
     </div>
@@ -465,7 +446,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Git学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">创建版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E5%85%89%E6%9C%BA%E7%A9%BF%E6%A2%AD"><span class="nav-number">1.2.</span> <span class="nav-text">时光机穿梭</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="nav-number">1.2.1.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="nav-number">1.2.2.</span> <span class="nav-text">工作区和暂存区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E4%BF%AE%E6%94%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">管理修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="nav-number">1.2.4.</span> <span class="nav-text">撤销修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.5.</span> <span class="nav-text">删除文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">1.3.</span> <span class="nav-text">远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="nav-number">1.3.1.</span> <span class="nav-text">添加远程库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E5%85%8B%E9%9A%86"><span class="nav-number">1.3.2.</span> <span class="nav-text">从远程库克隆</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">分支管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">创建并合并分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81"><span class="nav-number">1.4.2.</span> <span class="nav-text">解决冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E7%AD%96%E7%95%A5"><span class="nav-number">1.4.3.</span> <span class="nav-text">分支管理策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug%E5%88%86%E6%94%AF"><span class="nav-number">1.4.4.</span> <span class="nav-text">Bug分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature%E5%88%86%E6%94%AF"><span class="nav-number">1.4.5.</span> <span class="nav-text">Feature分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C"><span class="nav-number">1.4.6.</span> <span class="nav-text">多人协作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E5%88%86%E6%94%AF"><span class="nav-number">1.4.6.1.</span> <span class="nav-text">推送分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%93%E5%8F%96%E5%88%86%E6%94%AF"><span class="nav-number">1.4.6.2.</span> <span class="nav-text">抓取分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.4.6.3.</span> <span class="nav-text">多人协作工作模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.4.6.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rebase"><span class="nav-number">1.4.7.</span> <span class="nav-text">Rebase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="nav-number">1.4.8.</span> <span class="nav-text">标签管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E9%80%A0%E6%A0%87%E7%AD%BE"><span class="nav-number">1.4.8.1.</span> <span class="nav-text">创造标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%A0%87%E7%AD%BE"><span class="nav-number">1.4.8.2.</span> <span class="nav-text">操作标签</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">Git学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">创建版本库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E5%85%89%E6%9C%BA%E7%A9%BF%E6%A2%AD"><span class="nav-number">1.2.</span> <span class="nav-text">时光机穿梭</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="nav-number">1.2.1.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="nav-number">1.2.2.</span> <span class="nav-text">工作区和暂存区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E4%BF%AE%E6%94%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">管理修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="nav-number">1.2.4.</span> <span class="nav-text">撤销修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.5.</span> <span class="nav-text">删除文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-number">1.3.</span> <span class="nav-text">远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="nav-number">1.3.1.</span> <span class="nav-text">添加远程库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E5%85%8B%E9%9A%86"><span class="nav-number">1.3.2.</span> <span class="nav-text">从远程库克隆</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">分支管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">创建并合并分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81"><span class="nav-number">1.4.2.</span> <span class="nav-text">解决冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E7%AD%96%E7%95%A5"><span class="nav-number">1.4.3.</span> <span class="nav-text">分支管理策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bug%E5%88%86%E6%94%AF"><span class="nav-number">1.4.4.</span> <span class="nav-text">Bug分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#feature%E5%88%86%E6%94%AF"><span class="nav-number">1.4.5.</span> <span class="nav-text">Feature分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C"><span class="nav-number">1.4.6.</span> <span class="nav-text">多人协作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E5%88%86%E6%94%AF"><span class="nav-number">1.4.6.1.</span> <span class="nav-text">推送分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%93%E5%8F%96%E5%88%86%E6%94%AF"><span class="nav-number">1.4.6.2.</span> <span class="nav-text">抓取分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.4.6.3.</span> <span class="nav-text">多人协作工作模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.4.6.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rebase"><span class="nav-number">1.4.7.</span> <span class="nav-text">Rebase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="nav-number">1.4.8.</span> <span class="nav-text">标签管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E9%80%A0%E6%A0%87%E7%AD%BE"><span class="nav-number">1.4.8.1.</span> <span class="nav-text">创造标签</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -479,7 +460,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -529,6 +510,26 @@
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 

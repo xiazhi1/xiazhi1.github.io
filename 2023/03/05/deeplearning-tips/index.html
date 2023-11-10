@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="前言 笔者在刚接触深度学习时，曾因为找不到系统实验指南而抓耳挠腮，十分痛苦，在搜索了无数次资源加上n次痛苦的debug后终于跑起了第一个深度学习实验，为了记录下自己的debug心得和为后来者提供一些建议，所以写下此博客，不足之处，望多多指正 初期准备 系统选择 尽可能选择Linux系统，因为大部分论文实验都是在Linux系统下操作开发，可能到Windows系统上会有一些“水土不服”（别问我是怎么知">
+  <meta name="description" content="前言 笔者在刚接触深度学习时，曾因为找不到系统实验指南而抓耳挠腮，十分痛苦，在搜索了无数次资源加上n次痛苦的debug后终于跑起了第一个深度学习实验，为了记录下自己的debug心得和为后来者提供一些建议，所以写下此博客，不足之处，望多多指正 初期准备 系统选择 尽可能选择Linux系统，因为大部分论文实验都是在Linux系统下操作开发，可能到Windows系统上会有一些“水土不服”（别问我">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习训练Tips">
 <meta property="og:url" content="http://xiazhi1.github.io/2023/03/05/deeplearning-tips/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="前言 笔者在刚接触深度学习时，曾因为找不到系统实验指南而抓耳挠腮，十分痛苦，在搜索了无数次资源加上n次痛苦的debug后终于跑起了第一个深度学习实验，为了记录下自己的debug心得和为后来者提供一些建议，所以写下此博客，不足之处，望多多指正 初期准备 系统选择 尽可能选择Linux系统，因为大部分论文实验都是在Linux系统下操作开发，可能到Windows系统上会有一些“水土不服”（别问我是怎么知">
+<meta property="og:description" content="前言 笔者在刚接触深度学习时，曾因为找不到系统实验指南而抓耳挠腮，十分痛苦，在搜索了无数次资源加上n次痛苦的debug后终于跑起了第一个深度学习实验，为了记录下自己的debug心得和为后来者提供一些建议，所以写下此博客，不足之处，望多多指正 初期准备 系统选择 尽可能选择Linux系统，因为大部分论文实验都是在Linux系统下操作开发，可能到Windows系统上会有一些“水土不服”（别问我">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/03/05/a7ELmUqVIp4ZPxe.png">
 <meta property="article:published_time" content="2023-03-05T12:09:47.000Z">
@@ -201,6 +201,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -211,25 +218,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1>前言</h1>
+        <h1 id="前言">前言</h1>
 <p>笔者在刚接触深度学习时，曾因为找不到系统实验指南而抓耳挠腮，十分痛苦，在搜索了无数次资源加上n次痛苦的debug后终于跑起了第一个深度学习实验，为了记录下自己的debug心得和为后来者提供一些建议，所以写下此博客，不足之处，望多多指正</p>
-<h1>初期准备</h1>
+<h1 id="初期准备">初期准备</h1>
 <h2 id="系统选择">系统选择</h2>
-<p>尽可能选择Linux系统，因为大部分论文实验都是在Linux系统下操作开发，可能到Windows系统上会有一些“水土不服”（别问我是怎么知道的。。。）<br>
-推荐租云服务器:便宜的服务器平台：<a target="_blank" rel="noopener" href="https://www.autodl.com/home">AutoDL</a>[应该是市面上最便宜的，学生认证有优惠]<br>
-免费的服务器平台：<a target="_blank" rel="noopener" href="https://colab.research.google.com/">Google Colab</a>[12小时会自动断开，不过免费，分配的卡也还不错！]<br>
-如果自己电脑显卡较好且内存充足，可以选择装虚拟机后显卡直通或装双系统，其中显卡直通笔者没试过，装双系统有点折磨，且不太方便（两个系统不能同时在线）</p>
+<p>尽可能选择Linux系统，因为大部分论文实验都是在Linux系统下操作开发，可能到Windows系统上会有一些“水土不服”（别问我是怎么知道的。。。） 推荐租云服务器:便宜的服务器平台：<a target="_blank" rel="noopener" href="https://www.autodl.com/home">AutoDL</a>[应该是市面上最便宜的，学生认证有优惠] 免费的服务器平台：<a target="_blank" rel="noopener" href="https://colab.research.google.com/">Google Colab</a>[12小时会自动断开，不过免费，分配的卡也还不错！] 如果自己电脑显卡较好且内存充足，可以选择装虚拟机后显卡直通或装双系统，其中显卡直通笔者没试过，装双系统有点折磨，且不太方便（两个系统不能同时在线）</p>
 <h2 id="深度学习环境配置">深度学习环境配置</h2>
-<p>这里网上教程很多，这里推荐一个我当时配的参考博客：<br>
-<a target="_blank" rel="noopener" href="https://www.cnblogs.com/LXP-Never/p/15151578.html#blogTitle0">凌逆战的博客</a></p>
-<h1>具体实操</h1>
-<p>这里我以当时我配的CVPR2020 best paper（Unsupervised Learning of Probably Symmetric Deformable 3D Objects from Images in the Wild）举例：<br>
-首先打开论文查看论文代码位置：<br>
-<img src="https://s2.loli.net/2023/03/05/a7ELmUqVIp4ZPxe.png" alt="训练tips_1.png"><br>
-点击代码位置后在GitHub中下载代码<br>
-然后根据项目处的readme文件按步骤一步步配置<br>
-Tips：请注意创建虚拟环境，详细请看<a target="_blank" rel="noopener" href="https://blog.csdn.net/SARACH_WONG/article/details/89328307">conda创建环境</a><br>
-通过创建环境我们可以在一台主机上同时配上不同实验的实验环境并进行训练</p>
+<p>这里网上教程很多，这里推荐一个我当时配的参考博客： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/LXP-Never/p/15151578.html#blogTitle0">凌逆战的博客</a></p>
+<h1 id="具体实操">具体实操</h1>
+<p>这里我以当时我配的CVPR2020 best paper（Unsupervised Learning of Probably Symmetric Deformable 3D Objects from Images in the Wild）举例： 首先打开论文查看论文代码位置： <img src="https://s2.loli.net/2023/03/05/a7ELmUqVIp4ZPxe.png" alt="训练tips_1.png"> 点击代码位置后在GitHub中下载代码 然后根据项目处的readme文件按步骤一步步配置 Tips：请注意创建虚拟环境，详细请看<a target="_blank" rel="noopener" href="https://blog.csdn.net/SARACH_WONG/article/details/89328307">conda创建环境</a> 通过创建环境我们可以在一台主机上同时配上不同实验的实验环境并进行训练</p>
 
     </div>
 
@@ -314,7 +311,7 @@ Tips：请注意创建虚拟环境，详细请看<a target="_blank" rel="noopene
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">初期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.</span> <span class="nav-text">系统选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">深度学习环境配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">具体实操</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">初期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%80%89%E6%8B%A9"><span class="nav-number">2.1.</span> <span class="nav-text">系统选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">深度学习环境配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E6%93%8D"><span class="nav-number">3.</span> <span class="nav-text">具体实操</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -328,7 +325,7 @@ Tips：请注意创建虚拟环境，详细请看<a target="_blank" rel="noopene
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -378,6 +375,26 @@ Tips：请注意创建虚拟环境，详细请看<a target="_blank" rel="noopene
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 

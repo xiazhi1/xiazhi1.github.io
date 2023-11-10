@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="华中科技大学模拟与电路系统（三）实验汇总 并行IO接口实验 实验任务 嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：   点击BTNC 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该二进制数的低8 位对应的二进制数值0 或1 显示到8 个七段数码管上。   点击BTNU 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，">
+  <meta name="description" content="华中科技大学模拟与电路系统（三）实验汇总 并行IO接口实验 实验任务 嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：  点击BTNC 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该二进制数的低8 位对应的二进制数值0 或1 显示到8 个七段数码管上。 点击BTNU 按键时，计算机读入一组16 位独立开关状态作为一个二进制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mips">
 <meta property="og:url" content="http://xiazhi1.github.io/2023/05/15/mips/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="华中科技大学模拟与电路系统（三）实验汇总 并行IO接口实验 实验任务 嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：   点击BTNC 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该二进制数的低8 位对应的二进制数值0 或1 显示到8 个七段数码管上。   点击BTNU 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，">
+<meta property="og:description" content="华中科技大学模拟与电路系统（三）实验汇总 并行IO接口实验 实验任务 嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：  点击BTNC 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该二进制数的低8 位对应的二进制数值0 或1 显示到8 个七段数码管上。 点击BTNU 按键时，计算机读入一组16 位独立开关状态作为一个二进制">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-15T08:27:25.000Z">
 <meta property="article:modified_time" content="2023-05-15T08:30:22.157Z">
@@ -188,6 +188,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -198,24 +205,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1>华中科技大学模拟与电路系统（三）实验汇总</h1>
-<h2 id="并行IO接口实验">并行IO接口实验</h2>
+        <h1 id="华中科技大学模拟与电路系统三实验汇总">华中科技大学模拟与电路系统（三）实验汇总</h1>
+<h2 id="并行io接口实验">并行IO接口实验</h2>
 <h3 id="实验任务">实验任务</h3>
 <p>嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：</p>
-<ol>
-<li>
-<p>点击BTNC 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该二进制数的低8 位对应的二进制数值0 或1 显示到8 个七段数码管上。</p>
-</li>
-<li>
-<p>点击BTNU 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该16 进制数据各位数字对应的字符0~F 显示到低4 位七段数码管上（高4 位七段数码管不显示）。</p>
-</li>
-<li>
-<p>点击BTND 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该数据表示的无符号十进制数各位数字对应的字符0~9 显示到低5 位七段数码管上（高3 位七段数码管不显示）。</p>
-</li>
+<ol type="1">
+<li><p>点击BTNC 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该二进制数的低8 位对应的二进制数值0 或1 显示到8 个七段数码管上。</p></li>
+<li><p>点击BTNU 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该16 进制数据各位数字对应的字符0~F 显示到低4 位七段数码管上（高4 位七段数码管不显示）。</p></li>
+<li><p>点击BTND 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该数据表示的无符号十进制数各位数字对应的字符0~9 显示到低5 位七段数码管上（高3 位七段数码管不显示）。</p></li>
 </ol>
 <p>程序控制方式提示：程序以七段数码管动态显示控制循环为主体，在循环体内的延时函数内循环读取按键键值以及开关状态，并根据按键值做相应处理。</p>
 <h3 id="实验源码">实验源码</h3>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;xil_io.h&quot;</span><br><span class="line">#include &quot;stdio.h&quot;</span><br><span class="line">#include &quot;xgpio.h&quot;</span><br><span class="line">#include &quot;sleep.h&quot;</span><br><span class="line">#include &quot;xtmrctr.h&quot;</span><br><span class="line">#include &quot;xintc_l.h&quot;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char button = 0x0;</span><br><span class="line">    char segtable[16]=&#123;0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x8e&#125;;</span><br><span class="line">    short segcode[8]=&#123;0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff&#125;;</span><br><span class="line">    short pos=0xff7f;</span><br><span class="line">    Xil_Out16(XPAR_GPIO_0_BASEADDR+XGPIO_TRI_OFFSET,0xffff);</span><br><span class="line">    Xil_Out16(XPAR_GPIO_1_BASEADDR+XGPIO_TRI_OFFSET,0X0);</span><br><span class="line">    Xil_Out16(XPAR_GPIO_1_BASEADDR+XGPIO_TRI2_OFFSET,0x0);</span><br><span class="line">    Xil_Out8(XPAR_GPIO_2_BASEADDR+XGPIO_TRI_OFFSET,0x1f);</span><br><span class="line">    while(1)</span><br><span class="line">    &#123;</span><br><span class="line">        while((Xil_In8(XPAR_GPIO_2_BASEADDR+XGPIO_DATA_OFFSET)&amp;0X1f)!=0)</span><br><span class="line">        &#123;</span><br><span class="line">            button = Xil_In8(XPAR_GPIO_2_BASEADDR + XGPIO_DATA_OFFSET)&amp;0x1f;</span><br><span class="line">            short sw = Xil_In16(XPAR_GPIO_0_BASEADDR+XGPIO_DATA_OFFSET);</span><br><span class="line">			while((Xil_In8(XPAR_GPIO_2_BASEADDR + XGPIO_DATA_OFFSET)&amp;0x1f)!=0);</span><br><span class="line">            switch (button)</span><br><span class="line">            &#123;</span><br><span class="line">            case 0x1:</span><br><span class="line">                for(int j=0;j&lt;8;j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        segcode[7-j]=segtable[(sw&gt;&gt;j)&amp;0x1];</span><br><span class="line">                    &#125;</span><br><span class="line">                break;</span><br><span class="line">            case 0x2:</span><br><span class="line">                    for(int j=0;j&lt;4;j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        segcode[7-j]=segtable[(sw&gt;&gt;(4*j))&amp;0xf];</span><br><span class="line">                    &#125;</span><br><span class="line">                    for(int j=4;j&lt;8;j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        segcode[7-j]=0xff;</span><br><span class="line">                    &#125;</span><br><span class="line">                break;</span><br><span class="line">            case 0x10:</span><br><span class="line">                int a=sw;</span><br><span class="line">                for(int j=0;j&lt;5;j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    switch (a%10)</span><br><span class="line">                    &#123;</span><br><span class="line">                        &#123;</span><br><span class="line">                            case(0):segcode[7-j]=segtable[0];break;</span><br><span class="line">                            case(1):segcode[7-j]=segtable[1];break;</span><br><span class="line">                            case(2):segcode[7-j]=segtable[2];break;</span><br><span class="line">                            case(3):segcode[7-j]=segtable[3];break;</span><br><span class="line">                            case(4):segcode[7-j]=segtable[4];break;</span><br><span class="line">                            case(5):segcode[7-j]=segtable[5];break;</span><br><span class="line">                            case(6):segcode[7-j]=segtable[6];break;</span><br><span class="line">                            case(7):segcode[7-j]=segtable[7];break;</span><br><span class="line">                            case(8):segcode[7-j]=segtable[8];break;</span><br><span class="line">                            case(9):segcode[7-j]=segtable[9];break;</span><br><span class="line">                        &#125;    </span><br><span class="line">                    &#125;</span><br><span class="line">                    a/=10;</span><br><span class="line">                &#125;</span><br><span class="line">                    for(int j=5;j&lt;8;j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        segcode[7-j]=0xff;</span><br><span class="line">                    &#125;</span><br><span class="line">                break;                </span><br><span class="line">            default:</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;8;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Xil_Out8(XPAR_AXI_GPIO_1_BASEADDR+XGPIO_DATA_OFFSET,pos);</span><br><span class="line">        Xil_Out8(XPAR_AXI_GPIO_1_BASEADDR+XGPIO_DATA2_OFFSET,segcode[i]);</span><br><span class="line">        for(int j=0;j&lt;10000;j++);</span><br><span class="line">        pos=pos&gt;&gt;1;</span><br><span class="line">    &#125;</span><br><span class="line">    pos=0xff7f;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -295,7 +297,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">华中科技大学模拟与电路系统（三）实验汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8CIO%E6%8E%A5%E5%8F%A3%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.1.</span> <span class="nav-text">并行IO接口实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.1.1.</span> <span class="nav-text">实验任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%BA%90%E7%A0%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">实验源码</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%8E%E4%B8%AD%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6%E6%A8%A1%E6%8B%9F%E4%B8%8E%E7%94%B5%E8%B7%AF%E7%B3%BB%E7%BB%9F%E4%B8%89%E5%AE%9E%E9%AA%8C%E6%B1%87%E6%80%BB"><span class="nav-number">1.</span> <span class="nav-text">华中科技大学模拟与电路系统（三）实验汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8Cio%E6%8E%A5%E5%8F%A3%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.1.</span> <span class="nav-text">并行IO接口实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.1.1.</span> <span class="nav-text">实验任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%BA%90%E7%A0%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">实验源码</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -309,7 +311,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -359,6 +361,26 @@
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
