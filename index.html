@@ -182,7 +182,21 @@
               <time title="创建时间：2023-11-09 21:53:59" itemprop="dateCreated datePublished" datetime="2023-11-09T21:53:59+08:00">2023-11-09</time>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -244,7 +258,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-10 15:55:22" itemprop="dateModified" datetime="2023-11-10T15:55:22+08:00">2023-11-10</time>
+                <time title="修改时间：2023-11-10 19:57:21" itemprop="dateModified" datetime="2023-11-10T19:57:21+08:00">2023-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,7 +270,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -374,17 +402,80 @@
 <p><strong>简答：简述中继器、集线器、网桥、交换机等设备的区别</strong> 这4 种设备都是用于互联、扩展局域网的连接设备,但它们工作的层次和实现的功能不同: (1)中继器(Repeater),工作在物理层,解决数字信号在长距离基带传输中的失真和衰减问题,通过信号再生提升信号波形和强度的质量。 (2)集线器(Hub),工作在物理层,相当于一个多端口的中继器。集线器可以将多个结点连接成为一个共享式以太网。 (3)网桥(Network Bridge),工作在数据链路层,可以互联不同的物理层、不同的 MAC 子层以及不同速率的以大网,具有过滤帧、存储转发帧的功能。 (4)交换机(Switch),,工作在数据链路层,相当于一个多端口的网桥。允许端口之间建立多个并发的连接,实现多个结点之间的并发传输。</p>
 <h2 id="第五章网络互联">第五章：网络互联</h2>
 <h3 id="ip尽力服务的服务模型ip数据包转发原理理解">IP尽力服务的服务模型，IP数据包转发原理(理解)</h3>
+<p><strong>"IP尽力服务"</strong>是一种服务模型，也称为“Best Effort Service”，是指在计算机网络中，网络设备尽其所能地传输数据，但不保证数据包的可靠性、顺序或时延。这种服务模型主要用于互联网中的IP网络，其中数据包以最佳可能的方式进行传输，但网络不提供对数据包的任何特殊处理或保证。</p>
+<p><strong>IP数据包转发原理</strong>：</p>
+<ol type="1">
+<li>数据包的封装</li>
+<li>路由器查找</li>
+<li>数据包转发</li>
+<li>数据包到达目标设备</li>
+</ol>
+<p><strong>简答：解释Everything over IP和IP over Everything的含义</strong> Everything over IP:从协议栈来看,TCP/IP网络可以为各式各样的应用提供服务,在IP层上面可以有很多的应用程序。 IP over everything:从协议栈看,TCP/IP网络也允许IP协议在各种异构网络构成互联网上运行,在IP层以上无需关心下层的物理网络实现。</p>
 <h3 id="ipv4分段与重组的概念与计算掌握">IPv4分段与重组的概念与计算(掌握)</h3>
-<h3 id="ipv4地址设计和规划的概念与计算方法掌握">IPv4地址设计和规划的概念与计算方法(掌握)</h3>
-<h3 id="cidr地址规划掌握">CIDR地址规划(掌握)</h3>
+<p>IPv4分段与重组是一种处理大数据包的机制，允许将大于网络链路允许的最大传输单元（MTU）的IPv4数据包进行分割，并在到达目的地后重新组装这些分段。这是为了适应网络链路上的不同MTU和确保数据的正确传输。</p>
+<p>在了解如何计算IPv4的分段和重组之前，我们需要了解IPv4数据报的首部格式 其示意图如下： <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-18-38-31.png"></p>
+<p>各参数含义如下： 1. 版本：表示IP协议版本 2. 首部长度，取值以4为单位，最小值为5，20字节，最大值为15，表明首部包含20字节固定部分和最大40字节可变部分 3. 可选字段：用于排错，很少使用 4. 填充字段：确保首部长度为4的整数倍，用全0填充 5. 区分服务：很少使用 6. 总长度：表示IP数据报总长度 7. 标识：属于同一数据包的各分片应该具有相同标识 8. 标志：各比特定义为: - DF位：1/0 表示是否允许分片 - MF位：1/0 表示后面是否还有分片 - 保留位：必须为0 9. 片偏移：指出其数据载荷部分在原数据基础上偏移了多少位，以八个字节为单位</p>
+<p>其计算常涉及到如何将大数据包分为更小的片段进行传输，具体操作可以通过下图来理解 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-18-34-47.png"></p>
+<p>值得注意的是：<strong>在IP层的计算中，IP实际的数据段需要减去首部长度，但如果题目说的是TCP传输层的报文传入下层IP层传输，则不需要减去TCP传输层的首部长度，因为IP层的数据载荷就是整个TCP报文</strong></p>
+<h3 id="ipv4地址以及cidr设计和规划的概念与计算方法掌握">IPv4地址以及CIDR设计和规划的概念与计算方法(掌握)</h3>
+<h4 id="ipv4的分类编址">IPv4的分类编址</h4>
+<p>IP地址往往进行分类编址 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-18-56-24.png"></p>
+<p><strong>且在每个网络的主机号中，全0的最小地址作为网络地址，全1的最大地址作为广播地址不可分配</strong></p>
+<p>常用的3类网络的网络数和主机数的关系如下： <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-18-59-13.png"></p>
+<h4 id="ipv4划分子网">IPv4划分子网</h4>
+<p>对于网络中的网络，我们往往是直接在该网络中分配子网，而不是申请新的网络号，这可表述为<strong>借用主机地址作为网络地址</strong> 我们可以用IP地址与子网掩码相与得到网络地址，其计算如下： <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-04-24.png"></p>
+<p><strong>给定一个分类的IP地址和子网掩码，即可计算子网划分细节</strong>： 1. <span class="math inline">\(子网数量=2^{子网掩码1数-网络号}\)</span> 2. <span class="math inline">\(子网可分配IP地址数量=2^{子网掩码0数}-3\)</span> 3. <span class="math inline">\(子网网络地址=子网地址，子网广播地址=下一个子网地址-1\)</span> 4. <span class="math inline">\(子网最小地址=子网地址+1，子网最大地址=下一个子网地址-2\)</span></p>
+<h4 id="ipv4无分类编址超网--cidr">IPv4无分类编址(超网)--CIDR</h4>
+<p>CIDR使用斜线记法，在<strong>斜线后面写上网络前缀所占比特数量</strong> <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-12-35.png"></p>
+<p><strong>简答：说明IP地址与硬件地址的区别</strong> IP地址是连接互联网上的主机标识符;IP地址也被称为逻辑地址,其分配可以被静态指定也可以被动态分配;IPv4是32bit的,IPv6是128bit的。 硬件地址也被称为物理地址,用于标识每个网络接口设备;IEEE系列标准规定了MAC地址的格式,由48bit构成,由网卡制造商在生产时内置。</p>
 <h3 id="arp协议dhcp协议nat协议icmp协议了解">ARP协议，DHCP协议，NAT协议，ICMP协议(了解)</h3>
+<p>ARP协议用于将IP地址映射到MAC地址 DHCP协议用于将域名映射到IP地址 NAT协议用于在私有网络和公共网络中映射IP地址，允许多个设备享有一个IP地址 ICMP用于IP网络上的检错</p>
+<p><strong>简答：ARP协议向网络层提供了转换地址的服务,是否属于数据链路层?</strong> 这种说法是错误的。ARP 不是向网络层提供服务,它本身就是网络层的一部分,帮助向传输层提供服务。数据链路层不存在IP地址问题,数据链路层协议把比特串从线路的一端传送到另一端。</p>
 <h3 id="基于距离向量和基于链路状态的路由算法的原理与计算掌握">基于距离向量和基于链路状态的路由算法的原理与计算(掌握)</h3>
+<p><strong>简答：简述距离向量路由算法原理,该算法有哪些不足?</strong> 该算法定义距离向量信息为当前结点到达每一个其他结点的代价,通过邻结点之间多轮次两两交换距离向量信息,基于Bellman-ford算法逐步更新到全网其它结点的最短路径下一跳。 该算法的不足包括,构造距离向量需要知道全网结点数量规模,可能产生无穷计算问题。</p>
+<p><strong>简答：“好消息传得快,坏消息传得慢”描述的是哪个路由算法,如何克服?</strong> 这是距离向量路由算法的缺点。其原因是,路由交换时依赖两两信息交换,无法得到全局准确信息,导致计算到无穷。该问题无法通过算法改进彻底解决,在该算法对应的RIP协议中,通过设定路由跳数最大值来加以克服。RIP约定值为16即表示不可达,避免计算到无穷。</p>
+<p><strong>简答：对比距离向量路由算法和链路状态路由算法的差异。</strong> 距离向量路由算法:与邻结点交互全局信息,每个结点仅与直接相连的结点通信,交互的信息是到达其余所有结点的距离,路由计算采用Bellman-ford算法。 链路状态路由算法:与全局结点交互局部信息,每个结点通过洪泛方式与其他所有结点通信,交互的信息是该结点相连链路的状态,路由计算采用Dijkstra算法。</p>
 <h3 id="路由器与交换机的区别掌握">路由器与交换机的区别(掌握)</h3>
+<p><strong>简答：作为中间设备,转发器、网桥、路由器和网关有何区别?</strong> 将网络互相连接起来要使用一些中间设备: (1) 物理层使用的中间设备叫做转发器。 (2) 数据链路层使用的中间设备叫做网桥或桥接器。 (3) 网络层使用的中间设备叫做路由器。 (4) 在网络层以上使用的中间设备叫做网关。用网关连接两个不兼容的系统需要在高层进行协议的转换。</p>
 <h3 id="自治系统的概念域内路由与域间路由的概念理解">自治系统的概念，域内路由与域间路由的概念(理解)</h3>
+<h4 id="自治系统">自治系统</h4>
+<p>因特网将整个互联网划分为许多较小的自治系统 AS。 一个自治系统是一个互联网，其最重要的特点就是自治系统有权自主地决定在本系统内应采用何种路由选择协议。 一个自治系统内的所有网络都属于一个行政单位(例如，一个公司，一所大学，政府的一个部门，等等)来管辖。 一个自治系统的所有路由器在本自治系统内都必须是连通的。</p>
+<h4 id="域内路由与域间路由">域内路由与域间路由</h4>
+<p><strong>简答：IGP和EGP这两类协议的主要区别是什么?</strong> IGP是内部网关协议,即在一个自治系统内部使用的路由选择协议,代表性的包括RIP和OSPF协议。IGP的路由选择主要采用最短路径的算法。 EGP是外部网关协议,用于自治系统之间路由选择,目前使用最多的外部网关协议是BGP协议。EGP的路由选择受多种因素影响,通常不使用最短路径。</p>
 <h3 id="路径向量路由算法的原理与bgp协议实现理解">路径向量路由算法的原理与BGP协议实现(理解)</h3>
+<p><strong>路径向量路由算法</strong> 想法： 对距离向量进行扩展使其能够快速检测环路 支持灵活的路由策略 避免无穷计算问题</p>
+<p>核心思想 : 通告整条路径 距离向量 : 发送到每一个目的地 d 的距离向量 路径向量 : 发送到每一个目的地 d 的路径向量</p>
+<p><strong>BGP协议</strong></p>
+<ol type="1">
+<li>边界网关协议 BGP 只能是力求寻找一条能够到达目的网络且比较好的路由 （不能兜圈子），而并非要寻找一条最佳路由</li>
+<li>每一个自治系统的管理员要选择至少一个路由器作为该自治系统的 BGP 发言人</li>
+<li>一个 BGP 发言人与其他自治系统中的 BGP 发言人要交换路由信息，就要先建立 TCP 连接，然后在此连接上交换BGP 报文以建立 BGP 会话 ( session)，利用 BGP 会话交换路由信息。使用 TCP 连接交换路由信息的两个 BGP 发言人，彼此成为对方的邻站或对等站 。</li>
+</ol>
+<p><strong>简答：RIP、OSPF、BGP的承载协议有何不同,有何考虑?</strong> RIP采用UDP协议。RIP在1980年代早期开发,其只需要与邻结点交互信息。UDP虽然无可靠性保证,但传输开销较小,可以满足RIP的需求。 OSPF采用IP协议。OSPF在1980年代末期开发,其需要在全网交互信息。当时TCP/IP架构已经形成,直接使用IP协议,易于在路由器上实现链路状态信息的洪泛。 BGP采用TCP协议。BGB协议在不同的自治系统之间交换路由信息,交换域间路由信息需要可靠传输保证,所以选择TCP。</p>
 <h3 id="ipv6协议了解">IPv6协议(了解)</h3>
+<p><img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-23-41.png"></p>
 <h2 id="第六章端到端协议">第六章：端到端协议</h2>
-<h3 id="传输协议udp的实现要点理解">传输协议UDP的实现要点(理解)</h3>
+<h3 id="传输协议udp与tcp的实现要点和对比理解">传输协议UDP与TCP的实现要点和对比(理解)</h3>
+<p>UDP协议的实现要点： 1. 无连接的 2. 支持单播、多播和广播 3. 面向应用报文 4. 向上传提供无连接不可靠传输服务(适用于IP电话，视频会议等实时应用) 5. 首部短，仅8字节</p>
+<p>TCP协议实现要点： 1. 面向连接 2. 一对一可靠通信 3. 面向字节流 4. 可靠传输，使用流量控制和拥塞控制 5. 首部最小20字节，最大60字节</p>
+<p>UDP与TCP的对比 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-32-56.png"></p>
+<p><strong>简答：为什么说UDP是面向报文的,而TCP是面向字节流的?</strong> UDP对应用程序交下来的报文,在添加首部后就向下交付IP层。UDP待交付的报文,既不合并,也不拆分,因此UDP是面向报文的。 TCP将应用层发送的报文看成是一串字节流,并对把每一个字节都进行编号,传输保证每一个字节都正确无误地传送到对方。因此TCP是面向字节流的。</p>
+<h3 id="tcp连接的三次握手与四次挥手掌握">TCP连接的三次握手与四次挥手(掌握)</h3>
+<p><img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-47-26.png"> <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-48-36.png"></p>
+<p><strong>简答：为什么在TCP连接建立时要使用三报文握手?</strong> 如果不采用三报文握手,而是仅仅两报文握手。一旦滞留在网络中某处的陈旧的SYN报文段抵达接收方,就会让接收方误以为这是一个新的连接而进入连接等待状态,导致接收方资源被占用而无法释放。</p>
+<p><strong>简答：为什么TCP连接释放比连接建立过程多一次交互?</strong> TCP三次握手是确保两个站点都对当前建立连接进行确认,避免两个站点过去发送的连接建立请求延后到达后导致一方进入资源等待状态而空等。 TCP四次挥手在三次握手基础上增加一次,原因是接收方需要等待上层应用将数据取走,因此接收方一次表示确认收到释放请求,一次再发起释放请求。</p>
+<h3 id="tcp流量控制滑动窗口掌握">TCP流量控制(滑动窗口)(掌握)</h3>
+<p>流量控制：让发送方的发送速率不要太快，要让接收方来得及接收 一般我们采用滑动窗口机制可以很方便的在TCP连接上实现对发送方的流量控制</p>
+<p><img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-46-04.png"> <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-45-43.png"></p>
+<p><strong>简答：TCP发送窗口的大小取决于流量控制还是拥塞控制?</strong> TCP发送窗口的上限值是Min [rwnd,cwnd],即发送窗口的数值不能超过接收窗口和拥塞窗口中的较小的一个。当接收窗口小于拥塞窗口时,发送窗口的大小取决于流量控制,即取决于接收端的接收能力;当拥塞窗口小于接收窗口时,则发送窗口的大小取决于拥塞控制,即取决于整个网络的拥塞状况。</p>
+<h2 id="第七章拥塞控制">第七章：拥塞控制</h2>
+<h3 id="拥塞控制的概念以及与流量控制的区别理解">拥塞控制的概念以及与流量控制的区别(理解)</h3>
+<p><strong>简答：流量控制和拥塞控制的最主要的区别是什么?</strong> 流量控制是在一条TCP连接中的接收端采用的措施,用来限制对方(发送端)发送报文段的速率,以免在接收端来不及接收。流量控制只控制一个发送端。 拥塞控制是用来控制TCP连接中发送端发送报文段的速率,以免使互联网中的某处产生过载。拥塞控制可能会同时控制许多个发送端,限制它们的发送速率。</p>
+<h3 id="tcp拥塞控制的主要机制掌握">TCP拥塞控制的主要机制(掌握)</h3>
+<p>常用的机制主要是慢开始和拥塞避免 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-52-05.png"></p>
+<p>为了进一步改进性能，又提出了快重传和快恢复算法 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-54-26.png"> <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-55-01.png"></p>
+<h3 id="tcp拥塞控制与流量控制的综合计算掌握">TCP拥塞控制与流量控制的综合计算(掌握)</h3>
+<p>仅举一例 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-56-31.png"></p>
 <h2 id="参考文献">参考文献</h2>
 <ol type="1">
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1c4411d7jb/?spm_id_from=333.1007.top_right_bar_window_default_collection.content.click">湖科大计算机网络微课堂</a></li>
@@ -438,7 +529,21 @@
               <time title="创建时间：2023-05-15 16:27:25 / 修改时间：16:30:22" itemprop="dateCreated datePublished" datetime="2023-05-15T16:27:25+08:00">2023-05-15</time>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -517,7 +622,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>635</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -590,7 +709,21 @@
                 <time title="修改时间：2023-11-10 15:07:33" itemprop="dateModified" datetime="2023-11-10T15:07:33+08:00">2023-11-10</time>
               </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -750,7 +883,21 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -832,7 +979,21 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -925,7 +1086,21 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -1000,7 +1175,21 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>127</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -1070,7 +1259,21 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
 
         </div>
       </header>
@@ -1212,6 +1415,16 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">夏至</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">54k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">49 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
