@@ -270,20 +270,6 @@
   </url>
   
   <url>
-    <loc>http://xiazhi1.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2023-11-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://xiazhi1.github.io/tags/Linux/</loc>
-    <lastmod>2023-11-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://xiazhi1.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2023-11-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -292,6 +278,20 @@
   
   <url>
     <loc>http://xiazhi1.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
+    <lastmod>2023-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://xiazhi1.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2023-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://xiazhi1.github.io/tags/Linux/</loc>
     <lastmod>2023-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -321,6 +321,13 @@
   </url>
   
   <url>
+    <loc>http://xiazhi1.github.io/categories/AI%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2023-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://xiazhi1.github.io/categories/GO/</loc>
     <lastmod>2023-11-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -329,13 +336,6 @@
   
   <url>
     <loc>http://xiazhi1.github.io/categories/%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2023-11-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://xiazhi1.github.io/categories/AI%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
