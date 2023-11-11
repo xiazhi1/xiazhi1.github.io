@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="华中科技大学模拟与电路系统（三）实验汇总 并行IO接口实验 实验任务 嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：  点击BTNC 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该二进制数的低8 位对应的二进制数值0 或1 显示到8 个七段数码管上。 点击BTNU 按键时，计算机读入一组16 位独立开关状态作为一个二进制">
+  <meta name="description" content="华中科技大学模拟与电路系统（三）实验汇总 并行IO接口实验 实验任务 嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mips">
 <meta property="og:url" content="http://xiazhi1.github.io/2023/05/15/mips/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="华中科技大学模拟与电路系统（三）实验汇总 并行IO接口实验 实验任务 嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：  点击BTNC 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该二进制数的低8 位对应的二进制数值0 或1 显示到8 个七段数码管上。 点击BTNU 按键时，计算机读入一组16 位独立开关状态作为一个二进制">
+<meta property="og:description" content="华中科技大学模拟与电路系统（三）实验汇总 并行IO接口实验 实验任务 嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-15T08:27:25.000Z">
-<meta property="article:modified_time" content="2023-05-15T08:30:22.157Z">
+<meta property="article:modified_time" content="2023-11-11T10:40:10.730Z">
 <meta property="article:author" content="夏至">
 <meta name="twitter:card" content="summary">
 
@@ -206,10 +206,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-05-15 16:27:25 / 修改时间：16:30:22" itemprop="dateCreated datePublished" datetime="2023-05-15T16:27:25+08:00">2023-05-15</time>
+              <time title="创建时间：2023-05-15 16:27:25" itemprop="dateCreated datePublished" datetime="2023-05-15T16:27:25+08:00">2023-05-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-11 18:40:10" itemprop="dateModified" datetime="2023-11-11T18:40:10+08:00">2023-11-11</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -247,6 +253,7 @@
 <h2 id="并行io接口实验">并行IO接口实验</h2>
 <h3 id="实验任务">实验任务</h3>
 <p>嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：</p>
+<span id="more"></span>
 <ol type="1">
 <li><p>点击BTNC 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该二进制数的低8 位对应的二进制数值0 或1 显示到8 个七段数码管上。</p></li>
 <li><p>点击BTNU 按键时，计算机读入一组16 位独立开关状态作为一个二进制数据，并将该16 进制数据各位数字对应的字符0~F 显示到低4 位七段数码管上（高4 位七段数码管不显示）。</p></li>
@@ -351,7 +358,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -412,12 +419,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">54k</span>
+    <span title="站点总字数">53k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">49 分钟</span>
+    <span title="站点阅读时长">48 分钟</span>
 </div>
 
         

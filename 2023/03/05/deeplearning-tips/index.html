@@ -20,16 +20,16 @@
     var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言 笔者在刚接触深度学习时，曾因为找不到系统实验指南而抓耳挠腮，十分痛苦，在搜索了无数次资源加上n次痛苦的debug后终于跑起了第一个深度学习实验，为了记录下自己的debug心得和为后来者提供一些建议，所以写下此博客，不足之处，望多多指正 初期准备 系统选择 尽可能选择Linux系统，因为大部分论文实验都是在Linux系统下操作开发，可能到Windows系统上会有一些“水土不服”（别问我">
+  <meta name="description" content="前言 笔者在刚接触深度学习时，曾因为找不到系统实验指南而抓耳挠腮，十分痛苦，在搜索了无数次资源加上n次痛苦的debug后终于跑起了第一个深度学习实验，为了记录下自己的debug心得和为后来者提供一些建议，所以写下此博客，不足之处，望多多指正">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习训练Tips">
 <meta property="og:url" content="http://xiazhi1.github.io/2023/03/05/deeplearning-tips/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="前言 笔者在刚接触深度学习时，曾因为找不到系统实验指南而抓耳挠腮，十分痛苦，在搜索了无数次资源加上n次痛苦的debug后终于跑起了第一个深度学习实验，为了记录下自己的debug心得和为后来者提供一些建议，所以写下此博客，不足之处，望多多指正 初期准备 系统选择 尽可能选择Linux系统，因为大部分论文实验都是在Linux系统下操作开发，可能到Windows系统上会有一些“水土不服”（别问我">
+<meta property="og:description" content="前言 笔者在刚接触深度学习时，曾因为找不到系统实验指南而抓耳挠腮，十分痛苦，在搜索了无数次资源加上n次痛苦的debug后终于跑起了第一个深度学习实验，为了记录下自己的debug心得和为后来者提供一些建议，所以写下此博客，不足之处，望多多指正">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/03/05/a7ELmUqVIp4ZPxe.png">
 <meta property="article:published_time" content="2023-03-05T12:09:47.000Z">
-<meta property="article:modified_time" content="2023-03-05T13:15:51.872Z">
+<meta property="article:modified_time" content="2023-11-11T10:36:56.561Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="人工智能">
@@ -210,10 +210,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-03-05 20:09:47 / 修改时间：21:15:51" itemprop="dateCreated datePublished" datetime="2023-03-05T20:09:47+08:00">2023-03-05</time>
+              <time title="创建时间：2023-03-05 20:09:47" itemprop="dateCreated datePublished" datetime="2023-03-05T20:09:47+08:00">2023-03-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-11 18:36:56" itemprop="dateModified" datetime="2023-11-11T18:36:56+08:00">2023-11-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -258,6 +264,7 @@
       
         <h1 id="前言">前言</h1>
 <p>笔者在刚接触深度学习时，曾因为找不到系统实验指南而抓耳挠腮，十分痛苦，在搜索了无数次资源加上n次痛苦的debug后终于跑起了第一个深度学习实验，为了记录下自己的debug心得和为后来者提供一些建议，所以写下此博客，不足之处，望多多指正</p>
+<span id="more"></span>
 <h1 id="初期准备">初期准备</h1>
 <h2 id="系统选择">系统选择</h2>
 <p>尽可能选择Linux系统，因为大部分论文实验都是在Linux系统下操作开发，可能到Windows系统上会有一些“水土不服”（别问我是怎么知道的。。。） 推荐租云服务器:便宜的服务器平台：<a target="_blank" rel="noopener" href="https://www.autodl.com/home">AutoDL</a>[应该是市面上最便宜的，学生认证有优惠] 免费的服务器平台：<a target="_blank" rel="noopener" href="https://colab.research.google.com/">Google Colab</a>[12小时会自动断开，不过免费，分配的卡也还不错！] 如果自己电脑显卡较好且内存充足，可以选择装虚拟机后显卡直通或装双系统，其中显卡直通笔者没试过，装双系统有点折磨，且不太方便（两个系统不能同时在线）</p>
@@ -365,7 +372,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -426,12 +433,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">54k</span>
+    <span title="站点总字数">53k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">49 分钟</span>
+    <span title="站点阅读时长">48 分钟</span>
 </div>
 
         

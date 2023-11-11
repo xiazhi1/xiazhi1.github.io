@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/05/03/PduZa8y5MegBIEp.png">
 <meta property="article:published_time" content="2022-05-03T03:21:16.000Z">
-<meta property="article:modified_time" content="2022-05-22T07:33:41.269Z">
+<meta property="article:modified_time" content="2023-11-11T10:39:13.148Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="数据结构与算法">
 <meta name="twitter:card" content="summary">
@@ -217,7 +217,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-22 15:33:41" itemprop="dateModified" datetime="2022-05-22T15:33:41+08:00">2022-05-22</time>
+                <time title="修改时间：2023-11-11 18:39:13" itemprop="dateModified" datetime="2023-11-11T18:39:13+08:00">2023-11-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,7 +263,10 @@
       
         <h1 id="次优查找树">次优查找树</h1>
 <h2 id="前言">前言</h2>
-<p>关于静态查找表中对特定关键字进行顺序查找，折半查找或者分块查找，都是在查找表中各关键词被查找概率相同的前提下进行的，然而在查找表中各关键字查找概率不同的情况下，折半查找的效果其实是不好的。在查找成功的情况下，描述查找过程的判定树其带权路径长度之和（用PH表示）最小时，查找性能最优，称该二叉树为静态最优查找树 其中: PH = 所有节点所在的层次数*每个节点对应的概率值 由于构造最优查找树花费的时间代价较高，而且有一种构造方式创建的判定树的查找性能同最优查找树只差1%-2%，称这种极度接近于最优查找树的二叉树为次优查找树 ## 创建方法 首先取出标准每个关键字及其对应的权值，采用如下公式计算出每个关键字对应的一个值： <span class="math inline">\(\triangle P_i= \left|\sum\limits_{j=i+1}^hw_j-\sum\limits_{j=1}^{i-1}w_j\right|\)</span> 其中 wj 表示每个关键字的权值（被查找到的概率），h 表示关键字的个数。 表中有多少关键字，就会有多少个 △Pi ，取其中最小的做为次优查找树的根结点，然后将表中关键字从第 i 个关键字的位置分成两部分，分别作为该根结点的左子树和右子树。同理，左子树和右子树也这么处理，直到最后构成次优查找树完成。 ## 代码实现 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">typedef int KeyType;　　// 定义关键字类型</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    KeyType key;</span><br><span class="line">&#125;ElemType;　　// 定义元素类型</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">typedef struct BiTNode</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    struct BiTNode *lchild, *rchild;</span><br><span class="line">&#125;BiTNode, *BiTree;</span><br><span class="line"></span><br><span class="line">// 定义变量</span><br><span class="line">int i;</span><br><span class="line">int min;</span><br><span class="line">int dw;</span><br><span class="line"></span><br><span class="line">//创建次优查找树，R数组为查找表，sw数组为存储的各关键字的概率（权值），low和high表示的sw数组中的权值的范围</span><br><span class="line">void SecondOptimal(BiTree T, ElemType R[], float sw[], int low, int high)</span><br><span class="line">&#123;</span><br><span class="line">    // 由有序表R[low...high]及其累计权值表sw（其中sw[0]==0）递归构造次优查找树</span><br><span class="line">    i = low;</span><br><span class="line">    min = abs(sw[high] - sw[low]);</span><br><span class="line">    dw = sw[high] + sw[low - 1];</span><br><span class="line">    // 选择最小的△Pi值</span><br><span class="line">    for (int j = low+1; j &lt;=high; j++)</span><br><span class="line">　　&#123;</span><br><span class="line">        if (abs(dw - sw[j] - sw[j-1]) &lt; min)</span><br><span class="line">　　　　 &#123;</span><br><span class="line">            i = j;</span><br><span class="line">            min = abs(dw - sw[j] - sw[j - 1]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    T = (BiTree)malloc(sizeof(BiTNode));</span><br><span class="line">    T-&gt;data = R[i];　　// 生成结点（第一次生成根）</span><br><span class="line">    if (i == low) </span><br><span class="line">　　 　　T-&gt;lchild = NULL;　　// 左子树空</span><br><span class="line">    else SecondOptimal(T-&gt;lchild, R, sw, low, i - 1);　　// 构造左子树</span><br><span class="line">    if (i == high) </span><br><span class="line">　　 　　T-&gt;rchild = NULL;　　//右子树空</span><br><span class="line">    else </span><br><span class="line">　　　　SecondOptimal(T-&gt;rchild, R, sw, i + 1, high);　　//构造右子树   </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> ## 具体实例 <img src="https://s2.loli.net/2022/05/03/PduZa8y5MegBIEp.png" alt="次优生成树.png"> <strong>注意</strong> 在建立次优查找树时，由于只根据各关键字的P的值进行构建，没有考虑单个关键字的相应权值大小，有时会出现根节点权值比孩子节点权值还小，这时需要适当调整二者位置</p>
+<p>关于静态查找表中对特定关键字进行顺序查找，折半查找或者分块查找，都是在查找表中各关键词被查找概率相同的前提下进行的，然而在查找表中各关键字查找概率不同的情况下，折半查找的效果其实是不好的。在查找成功的情况下，描述查找过程的判定树其带权路径长度之和（用PH表示）最小时，查找性能最优，称该二叉树为静态最优查找树 其中: PH = 所有节点所在的层次数*每个节点对应的概率值 由于构造最优查找树花费的时间代价较高，而且有一种构造方式创建的判定树的查找性能同最优查找树只差1%-2%，称这种极度接近于最优查找树的二叉树为次优查找树</p>
+<span id="more"></span>
+<h2 id="创建方法">创建方法</h2>
+<p>首先取出标准每个关键字及其对应的权值，采用如下公式计算出每个关键字对应的一个值： <span class="math inline">\(\triangle P_i= \left|\sum\limits_{j=i+1}^hw_j-\sum\limits_{j=1}^{i-1}w_j\right|\)</span> 其中 wj 表示每个关键字的权值（被查找到的概率），h 表示关键字的个数。 表中有多少关键字，就会有多少个 △Pi ，取其中最小的做为次优查找树的根结点，然后将表中关键字从第 i 个关键字的位置分成两部分，分别作为该根结点的左子树和右子树。同理，左子树和右子树也这么处理，直到最后构成次优查找树完成。 ## 代码实现 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">typedef int KeyType;　　// 定义关键字类型</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    KeyType key;</span><br><span class="line">&#125;ElemType;　　// 定义元素类型</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">typedef struct BiTNode</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    struct BiTNode *lchild, *rchild;</span><br><span class="line">&#125;BiTNode, *BiTree;</span><br><span class="line"></span><br><span class="line">// 定义变量</span><br><span class="line">int i;</span><br><span class="line">int min;</span><br><span class="line">int dw;</span><br><span class="line"></span><br><span class="line">//创建次优查找树，R数组为查找表，sw数组为存储的各关键字的概率（权值），low和high表示的sw数组中的权值的范围</span><br><span class="line">void SecondOptimal(BiTree T, ElemType R[], float sw[], int low, int high)</span><br><span class="line">&#123;</span><br><span class="line">    // 由有序表R[low...high]及其累计权值表sw（其中sw[0]==0）递归构造次优查找树</span><br><span class="line">    i = low;</span><br><span class="line">    min = abs(sw[high] - sw[low]);</span><br><span class="line">    dw = sw[high] + sw[low - 1];</span><br><span class="line">    // 选择最小的△Pi值</span><br><span class="line">    for (int j = low+1; j &lt;=high; j++)</span><br><span class="line">　　&#123;</span><br><span class="line">        if (abs(dw - sw[j] - sw[j-1]) &lt; min)</span><br><span class="line">　　　　 &#123;</span><br><span class="line">            i = j;</span><br><span class="line">            min = abs(dw - sw[j] - sw[j - 1]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    T = (BiTree)malloc(sizeof(BiTNode));</span><br><span class="line">    T-&gt;data = R[i];　　// 生成结点（第一次生成根）</span><br><span class="line">    if (i == low) </span><br><span class="line">　　 　　T-&gt;lchild = NULL;　　// 左子树空</span><br><span class="line">    else SecondOptimal(T-&gt;lchild, R, sw, low, i - 1);　　// 构造左子树</span><br><span class="line">    if (i == high) </span><br><span class="line">　　 　　T-&gt;rchild = NULL;　　//右子树空</span><br><span class="line">    else </span><br><span class="line">　　　　SecondOptimal(T-&gt;rchild, R, sw, i + 1, high);　　//构造右子树   </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> ## 具体实例 <img src="https://s2.loli.net/2022/05/03/PduZa8y5MegBIEp.png" alt="次优生成树.png"> <strong>注意</strong> 在建立次优查找树时，由于只根据各关键字的P的值进行构建，没有考虑单个关键字的相应权值大小，有时会出现根节点权值比孩子节点权值还小，这时需要适当调整二者位置</p>
 <h2 id="总结">总结</h2>
 <p>由于使用次优查找树和最优查找树的性能差距很小，构造次优查找树的算法的时间复杂度为 O(nlogn)，因此可以使用次优查找树表示概率不等的查找表对应的静态查找表（又称为静态树表）。 ## 参考资料 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/lishanlei/p/10707664.html">如是说的博客</a></p>
 
@@ -288,8 +291,8 @@
       <i class="fa fa-chevron-left"></i> 锦标赛排序
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/05/03/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%9F%E6%88%90%E6%A0%91/" rel="next" title="表达式生成树">
-      表达式生成树 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/05/08/Gin%E5%AD%A6%E4%B9%A0/" rel="next" title="Gin学习">
+      Gin学习 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -349,7 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A1%E4%BC%98%E6%9F%A5%E6%89%BE%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">次优查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A1%E4%BC%98%E6%9F%A5%E6%89%BE%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">次优查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">创建方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -365,7 +368,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -426,12 +429,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">54k</span>
+    <span title="站点总字数">53k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">49 分钟</span>
+    <span title="站点阅读时长">48 分钟</span>
 </div>
 
         
