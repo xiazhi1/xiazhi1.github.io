@@ -54,7 +54,7 @@
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-55-01.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-56-31.png">
 <meta property="article:published_time" content="2023-11-09T11:36:21.000Z">
-<meta property="article:modified_time" content="2023-11-11T08:34:15.578Z">
+<meta property="article:modified_time" content="2023-11-12T03:09:09.169Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
@@ -242,7 +242,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-11 16:34:15" itemprop="dateModified" datetime="2023-11-11T16:34:15+08:00">2023-11-11</time>
+                <time title="修改时间：2023-11-12 11:09:09" itemprop="dateModified" datetime="2023-11-12T11:09:09+08:00">2023-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -404,7 +404,7 @@
 </ol>
 <p>停止等待协议示意图 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-40-13.png" alt="停止等待协议示意图"></p>
 <p>连续ARQ协议两种策略的优缺点分析： <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-44-52.png"></p>
-<p><strong>注意，Go-Back-N协议如果帧序号为n个bit，其每次最多连续能传的帧数=<span class="math inline">\(2^{n}-1\)</span>，因为如果传<span class="math inline">\(2^n\)</span>个帧，如果接收方确认帧丢失，则会导致接收方无法辨别发送方发送的帧的新旧</strong></p>
+<p><strong>注意，Go-Back-N协议如果帧序号为n个bit，其每次最多连续能传的帧数=<span class="math inline">\(2^{n}-1\)</span>，因为如果传<span class="math inline">\(2^n\)</span>个帧，如果接收方确认帧丢失，则会导致接收方无法辨别发送方发送的帧的新旧，GO-BACK-N也可以看为滑动窗口策略的一种特殊情况，即接收窗口为1</strong></p>
 <p>滑动窗口协议的示意图： <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-46-15.png"> <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-46-40.png"></p>
 <p>三种协议的对比 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-11-11-19-01.png"></p>
 <p><strong>简答：简述数据链路层实现可靠传输的基本方法。</strong></p>
@@ -415,7 +415,10 @@
 <li>帧序号:标记数据帧,以便识别重复的数据帧</li>
 </ol>
 <h3 id="滑动窗口参数的计算方法掌握">滑动窗口参数的计算方法(掌握)</h3>
-<p>滑动窗口参数的要求如下图所示 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-48-38.png"></p>
+<p>选择重传策略的滑动窗口参数的要求如下图所示 <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-09-21-48-38.png"></p>
+<p><strong>广义来说：滑动窗口对于窗口的大小的限制可表述为：<span class="math inline">\(发送窗口+接收窗口\le2^{帧序号bit数}\)</span></strong></p>
+<p><strong>具体细分到Go-Back-N协议和选择重传协议有：<span class="math display">\[Go-Back-N 发送窗口大小\le 2^{帧序号比特数}-1,\\
+选择重传发送窗口大小\le 2^{帧序号比特数-1} \]</span></strong></p>
 <h3 id="传统共享介质mac协议的设计要点理解">传统共享介质MAC协议的设计要点(理解)</h3>
 <p><strong>简答：为什么在传统以太网的协议设计中,数据帧存在最短帧长的限制?</strong></p>
 <p>传统以太网的MAC层协议为CSMA/CD,其中CD称为冲突检测,主要解决信号传播时延导致的媒质接入问题。在争用信道过程中,结点边发送数据边监听信道,如果在一个争用周期范围内未检测到冲突发生,则成功占用信道。IEEE 802.3规定当某个结点完成一帧数据接收后,首先要判断接收的帧长度,如果接收帧长度小于规定的帧最小长度,则表明冲突发生。</p>
@@ -430,6 +433,7 @@
 <p>冲突避免 Collision Avoidance,又称为虚拟载波侦听 (Virtual Carrier Sense),通过信令协商达到实际载波侦听的效果。协议约定在发送数据帧之前交换控制信息,发送方询问“Request to Send” (RTS),接收方收到 RTS后响应 “Clear to Send” (CTS),发送方收到 CTS, 则开始发送数据。在此过程中,如果其他结点收到 RTS或者 CTS,则停止发送,避免冲突。</p>
 <h2 id="第四章分组交换网络">第四章：分组交换网络</h2>
 <h3 id="数据报交换虚电路交换的原理理解">数据报交换、虚电路交换的原理(理解)</h3>
+<p><strong>虚电路交换方法的健壮性不如数据报交换方法</strong></p>
 <p><strong>简答：对比虚电路和数据报两种分组交换技术</strong></p>
 <p>数据报交换的思想是网络不负责提供可靠传输保证,分组中包括源/目的地址,沿途交换机根据该地址独立处理和转发分组。 虚电路交换的思想是网络提供可靠传输保证,传输过程包括连接建立、数据传输、连接释放等阶段。在连接建立过程中,交换机协商分配局部的虚电路号并预留资源;数据传输过程中,分组首部内包含有本地交换所需的虚电路号,交换机根据虚电路号转发分组。</p>
 <h3 id="局域网扩展网桥生成树算法的基本概念理解">局域网扩展，网桥，生成树算法的基本概念(理解)</h3>
@@ -515,9 +519,9 @@
 <p><strong>给定一个分类的IP地址和子网掩码，即可计算子网划分细节</strong>：</p>
 <ol type="1">
 <li><span class="math inline">\(子网数量=2^{子网掩码1数-网络号}\)</span></li>
-<li><span class="math inline">\(子网可分配IP地址数量=2^{子网掩码0数}-3\)</span></li>
+<li><span class="math inline">\(子网可分配给主机的IP地址数量=2^{子网掩码0数}-2\)</span></li>
 <li><span class="math inline">\(子网网络地址=子网地址，子网广播地址=下一个子网地址-1\)</span></li>
-<li><span class="math inline">\(子网最小地址=子网地址+1，子网最大地址=下一个子网地址-2\)</span></li>
+<li><span class="math inline">\(子网分配给主机的最小地址=子网地址+1，子网分配给主机的最大地址=下一个子网地址-2\)</span></li>
 </ol>
 <h4 id="ipv4无分类编址超网--cidr">IPv4无分类编址(超网)--CIDR</h4>
 <p>CIDR使用斜线记法，在<strong>斜线后面写上网络前缀所占比特数量</strong> <img src="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/2023-11-10-19-12-35.png"></p>
@@ -794,7 +798,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">48 分钟</span>
+    <span title="站点阅读时长">49 分钟</span>
 </div>
 
         
