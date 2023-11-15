@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-26-29.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-28-20.png">
 <meta property="article:published_time" content="2023-11-11T07:50:03.000Z">
-<meta property="article:modified_time" content="2023-11-15T01:45:53.181Z">
+<meta property="article:modified_time" content="2023-11-15T02:01:32.871Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="数字信号处理">
 <meta name="twitter:card" content="summary">
@@ -54,7 +54,7 @@
   };
 </script>
 
-  <title>数字信号处理第二章知识小结 | 夏至的个人博客</title>
+  <title>数字信号处理第二章知识小结 | 夏至的个人博客</title><meta name="robots" content="noindex">
   
 
 
@@ -223,7 +223,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-15 09:45:53" itemprop="dateModified" datetime="2023-11-15T09:45:53+08:00">2023-11-15</time>
+                <time title="修改时间：2023-11-15 10:01:32" itemprop="dateModified" datetime="2023-11-15T10:01:32+08:00">2023-11-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -337,30 +337,30 @@ u(n)=\sum_{k=\infty}^n\delta(k)\quad u(n)=\sum_{k=0}^\infty\delta(n-k)\]</span><
 </ol>
 <h2 id="连续时间信号的取样">连续时间信号的取样</h2>
 <h3 id="取样信号的时域频域表示">取样信号的时域频域表示</h3>
-<p>取样信号为<span class="math inline">\(\hat{x_a}(t)=x_a(t)p(t)=\sum_{n=-\infin}^\infin x_a(t)\delta(t-nT),p(t)=\sum_{n=-\infin}^\infin \delta(t-nT)\)</span>,其频谱则为<span class="math inline">\(\hat{X_a}(j\Omega)=FT[x_a(t)p(t)]=\frac{1}{2\pi}X_a(j\Omega)*P(j\Omega)=\frac{1}{T}\sum_{r=-\infin}^\infin X_a(j\Omega-jr\Omega_s),P(j\Omega)=\frac{2\pi}{T}\sum_{n=-\infin}^\infin\delta(j\Omega-jr\Omega_s)\)</span></p>
+<p>取样信号为<span class="math inline">\(\hat{x_a}(t)=x_a(t)p(t)=\sum_{n=-\infty}^\infty x_a(t)\delta(t-nT),p(t)=\sum_{n=-\infty}^\infty \delta(t-nT)\)</span>,其频谱则为<span class="math inline">\(\\\hat{X_a}(j\Omega)=FT[x_a(t)p(t)]=\frac{1}{2\pi}X_a(j\Omega)*P(j\Omega)=\frac{1}{T}\sum_{r=-\infty}^\infty X_a(j\Omega-jr\Omega_s)\\P(j\Omega)=\frac{2\pi}{T}\sum_{n=-\infty}^\infty\delta(j\Omega-jr\Omega_s)\)</span></p>
 <p><strong>这表明取样信号的频谱就是模拟信号频谱的周期延拓，延拓周期的取样角频率为<span class="math inline">\(\Omega_s\)</span></strong></p>
 <p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-14-21-56-22.png"></p>
 <p><strong>若要不产生混叠，则要求<span class="math inline">\(\Omega_s\ge2\Omega_0,\Omega_s：奈奎斯特频率,\Omega_s/2\)</span>：折叠频率</strong></p>
 <h3 id="频率归一化">频率归一化</h3>
 <p>频率归一化讨论的是离散时间信号<span class="math inline">\(x(n)\)</span>的频谱<span class="math inline">\(X(e^{jw})\)</span>和取样信号<span class="math inline">\(\hat{x_a}(t)\)</span>的频谱<span class="math inline">\(\hat{X_a}(j\Omega)\)</span>之间的关系</p>
-<p>取样信号的频谱为：<span class="math display">\[\hat{X_a}(j\Omega)=FT[\hat{x_a}(t)]=FT[x_a(t)p(t)]=FT[\sum_{n=-\infin}^\infin x_a(t)\delta(t-nT)]\\=\sum_{n=-\infin}^\infin x_a(nT)\cdot FT[\delta(t-nT)]=\sum_{n=-\infin}^\infin x_a(nT)e^{-j\Omega nT}\]</span></p>
+<p>取样信号的频谱为：<span class="math display">\[\hat{X_a}(j\Omega)=FT[\hat{x_a}(t)]=FT[x_a(t)p(t)]=FT[\sum_{n=-\infty}^\infty x_a(t)\delta(t-nT)]\\=\sum_{n=-\infty}^\infty x_a(nT)\cdot FT[\delta(t-nT)]=\sum_{n=-\infty}^\infty x_a(nT)e^{-j\Omega nT}\]</span></p>
 <p>而离散时间信号的FT变换为： <span class="math display">\[X(e^{jw})|_{w=\Omega T}=\hat{X_a}(j\Omega)\]</span></p>
-<p>比较可得出<span class="math display">\[X(e^{jw})|_{w=\Omega T}=\hat{X_a}(j\Omega)=\frac{1}{T}\sum_{r=-\infin}^\infin X_a(j\Omega-jr\Omega_s)\\=\frac{1}{T}\sum_{r=-\infin}^\infin X_a(j\frac{w}{T}-jr\frac{2\pi}{T})\]</span></p>
+<p>比较可得出<span class="math display">\[X(e^{jw})|_{w=\Omega T}=\hat{X_a}(j\Omega)=\frac{1}{T}\sum_{r=-\infty}^\infty X_a(j\Omega-jr\Omega_s)\\=\frac{1}{T}\sum_{r=-\infty}^\infty X_a(j\frac{w}{T}-jr\frac{2\pi}{T})\]</span></p>
 <p><strong>即在<span class="math inline">\(w=\Omega T\)</span>的条件下，离散时间信号的频谱与取样信号的相等，由于<span class="math inline">\(w=\Omega T=\frac{2\pi f}{f_s}(f_s为取样频率)\)</span>是<span class="math inline">\(f\)</span>对<span class="math inline">\(f_s\)</span>归一化的结果，因此可认为离散时间信号频谱是模拟信号频谱的周期延拓且在频率轴上进行归一化的结果</strong></p>
 <h3 id="信号重建">信号重建</h3>
-<p>如果取样信号频谱不存在混叠，让取样信号通过一理性低通滤波器，其特性为<span class="math inline">\(H(j\Omega)=\begin{cases}  T,|\Omega|\le\Omega_s/2\\  0,|\Omega|&gt;\Omega_s/2 \end{cases}\)</span>,其频谱特性为<span class="math inline">\(H(j\Omega)\hat{X_a}(j\Omega)=X_a(j\Omega),|\Omega\le\Omega_s/2|\)</span>,输出信号则为<span class="math display">\[x_a(t)=\frac{1}{2\pi}\int_{-\frac{\Omega_s}{2}}^{\frac{\Omega_s}{2}} X_a(j\Omega)e^{j\Omega t}\, {\rm d}\Omega=\sum_{n=-\infin}^\infin x(nT)\cdot S_a(t-nT)\\Sa(t-nT)=\frac{sin[\frac{\pi}{T}(t-NT)]}{\frac{\pi}{T}(t-nT)}为内插函数\]</span><strong>此处积分的详细步骤略过，结论：取样信号经过理想LPF后，完全可以把信号还原，而不损失任何信息，由于插值的唯一性，还原的信号也是唯一的</strong></p>
+<p>如果取样信号频谱不存在混叠，让取样信号通过一理性低通滤波器，其特性为<span class="math inline">\(H(j\Omega)=\begin{cases}  T,|\Omega|\le\Omega_s/2\\  0,|\Omega|&gt;\Omega_s/2 \end{cases}\)</span>,其频谱特性为<span class="math inline">\(H(j\Omega)\hat{X_a}(j\Omega)=X_a(j\Omega),|\Omega\le\Omega_s/2|\)</span>,输出信号则为<span class="math display">\[x_a(t)=\frac{1}{2\pi}\int_{-\frac{\Omega_s}{2}}^{\frac{\Omega_s}{2}} X_a(j\Omega)e^{j\Omega t}\, {\rm d}\Omega=\sum_{n=-\infty}^\infty x(nT)\cdot S_a(t-nT)\\Sa(t-nT)=\frac{sin[\frac{\pi}{T}(t-NT)]}{\frac{\pi}{T}(t-nT)}为内插函数\]</span><strong>此处积分的详细步骤略过，结论：取样信号经过理想LPF后，完全可以把信号还原，而不损失任何信息，由于插值的唯一性，还原的信号也是唯一的</strong></p>
 <h3 id="离散时间信号的取样">离散时间信号的取样</h3>
 <p>其思路与连续时间信号取样类似</p>
 <p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-12-53.png"></p>
-<p>其可以看为一个信号调制的过程：<span class="math inline">\(x_p(n)=\sum_{n=-\infin}^\infin x(Nk)\delta(n-kN)\)</span>,频域表示为<span class="math inline">\(X_p(w)=\frac{1}{N}\sum_{n=0}^{N-1}X(w-kw_s),w_s\)</span>为取样频率，且<span class="math inline">\(w_s=\frac{2\pi}{N}\)</span> <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-16-29.png"></p>
+<p>其可以看为一个信号调制的过程：<span class="math inline">\(x_p(n)=\sum_{n=-\infty}^\infty x(Nk)\delta(n-kN)\)</span>,频域表示为<span class="math inline">\(X_p(w)=\frac{1}{N}\sum_{n=0}^{N-1}X(w-kw_s),w_s\)</span>为取样频率，且<span class="math inline">\(w_s=\frac{2\pi}{N}\)</span> <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-16-29.png"></p>
 <p><strong>为了不发生混叠，取样频率同样需满足<span class="math inline">\(w_s\ge2w_M\)</span></strong></p>
-<p>若要恢复序列<span class="math inline">\(x(n)\)</span>，同样可以采用低通滤波器滤波恢复，其频率特性为<span class="math inline">\(H(w)=\begin{cases}  N,|w|\le w_s/2\\  0,|w|&gt; w_s/2 \end{cases}\)</span>,恢复的序列<span class="math inline">\(x_r(n)=\sum_{k=-\infin}^\infin x(kN)\frac{N}{\pi(n-kN)}sin[\frac{w_s}{2}(n-kN)]\)</span></p>
+<p>若要恢复序列<span class="math inline">\(x(n)\)</span>，同样可以采用低通滤波器滤波恢复，其频率特性为<span class="math inline">\(H(w)=\begin{cases}  N,|w|\le w_s/2\\  0,|w|&gt; w_s/2 \end{cases}\)</span>,恢复的序列<span class="math inline">\(x_r(n)=\sum_{k=-\infty}^\infty x(kN)\frac{N}{\pi(n-kN)}sin[\frac{w_s}{2}(n-kN)]\)</span></p>
 <h3 id="离散时间信号的取样和内插">离散时间信号的取样和内插</h3>
-<p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-25-46.png"> <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-26-29.png"> 1. 离散时间信号的抽取/减取样：<span class="math inline">\(x_d(n)=x(nN)=x_p(nN),FT(x_d(n))=X_d(w)=\sum_{n=-\infin}^\infin x_p(n)e^{-jwn/N}=X_p(w/N)=\sum_{n=-\infin}^\infin x_p(nN)e^{-jwn}\)</span></p>
+<p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-25-46.png"> <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-26-29.png"></p>
+<p>离散时间信号的抽取/减取样：</p>
+<p><span class="math inline">\(x_d(n)=x(nN)=x_p(nN)\\FT(x_d(n))=X_d(w)=\sum_{n=-\infty}^\infty x_p(n)e^{-jwn/N}\\=X_p(w/N)=\sum_{n=-\infty}^\infty x_p(nN)e^{-jwn}\)</span></p>
 <p><strong>取样序列和抽取序列的频谱只是频率尺度不同，注意，只有进行"过采样"，才允许进一步降低采样率，即进行“减采样”</strong></p>
-<ol start="2" type="1">
-<li>离散时间信号的内插/增采样：是抽取的逆过程，现在每相邻两个序列之间插入N-1个零值，再用低通滤波器得到内插后序列 <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-28-20.png"></li>
-</ol>
+<p>离散时间信号的内插/增采样：是抽取的逆过程，现在每相邻两个序列之间插入N-1个零值，再用低通滤波器得到内插后序列 <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-28-20.png"></p>
 <h2 id="全通系统和最小相位系统">全通系统和最小相位系统</h2>
 <ol type="1">
 <li>全通系统：全通系统是幅度响应<span class="math inline">\(|H(e^{jw})|\equiv C\)</span>（C为常数）的系统，系统函数:<span class="math inline">\(H_{ap}(z)=\frac{z^{-1}-a^*}{1-az^{-1}}\)</span>（一阶系统）,对于单位取样为实数的多阶系统，有<span class="math inline">\(H_{ap}(z)=A\prod^M_c\frac{z^{-1}-d_k}{1-d_kz^{-1}}\prod^M_r\frac{(z^{-1}-e_k^*)(z^{-1}-e_k)}{(1-e_kz^{-1})(1-e_k^*z^{-1})},|d_k|,|e_k|&lt;1\)</span>,<strong>全通系统的特点是每个极点<span class="math inline">\(z_p\)</span>都有一个与之配对的共轭倒数零点<span class="math inline">\(z_o=\frac{1}{z_p^*}\)</span>,且一阶全通滤波器的相位响应单调递减</strong></li>
@@ -368,7 +368,7 @@ u(n)=\sum_{k=\infty}^n\delta(k)\quad u(n)=\sum_{k=0}^\infty\delta(n-k)\]</span><
 <li>全通系统与最小相位系统级联：任何系统可表述为一个最小相位系统和一个全通系统级联,<span class="math inline">\(H(z)=H_min(z)H_{ap}(z)\)</span></li>
 <li>相位延迟与群延迟：数字滤波器的相位延迟：<span class="math inline">\(T_p(w)=-\frac{\phi(w)}{w}\)</span>表示输入是频率为<span class="math inline">\(w\)</span>的单一正弦波的延迟时间，群延迟则定义为<span class="math inline">\(T_g(w)=-\frac{d\phi(w)}{dw}\)</span>表示某一频率<span class="math inline">\(w\)</span>邻域内的延迟性质</li>
 </ol>
-
+<!-- flag of hidden posts -->
     </div>
 
     
@@ -384,13 +384,6 @@ u(n)=\sum_{k=\infty}^n\delta(k)\quad u(n)=\sum_{k=0}^\infty\delta(n-k)\]</span><
 
 
         
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/" rel="prev" title="计算机网络考前拾遗">
-      <i class="fa fa-chevron-left"></i> 计算机网络考前拾遗
-    </a></div>
-      <div class="post-nav-item"></div>
-    </div>
       </footer>
     
   </article>
@@ -464,7 +457,7 @@ u(n)=\sum_{k=\infty}^n\delta(k)\quad u(n)=\sum_{k=0}^\infty\delta(n-k)\]</span><
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -477,7 +470,7 @@ u(n)=\sum_{k=\infty}^n\delta(k)\quad u(n)=\sum_{k=0}^\infty\delta(n-k)\]</span><
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -525,12 +518,12 @@ u(n)=\sum_{k=\infty}^n\delta(k)\quad u(n)=\sum_{k=0}^\infty\delta(n-k)\]</span><
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">58k</span>
+    <span title="站点总字数">53k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">53 分钟</span>
+    <span title="站点阅读时长">49 分钟</span>
 </div>
 
         
