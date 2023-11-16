@@ -1150,4 +1150,126 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
         <tag>数据结构与算法</tag>
       </tags>
   </entry>
+  <entry>
+    <title>数字信号处理第三章知识小结</title>
+    <url>/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="引言">引言</h2>
+<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-21-27-51.png"></p>
+<ol type="1">
+<li>连续傅里叶变换(FT)：连续时间,连续频率的傅里叶变换</li>
+<li>傅里叶级数(FS)：连续时间,离散频率的傅里叶变换</li>
+<li>序列的傅里叶变换(DTFT):离散时间,连续频率的傅里叶变换</li>
+<li>离散傅里叶变换(DFT):离散时间,离散频率的傅里叶变换</li>
+</ol>
+<p><strong>前三种变换总有一个域不是离散的，计算机不能直接计算；希望的变换：不仅在时间域上离散，在频率域上也离散(DFT)</strong></p>
+<span id="more"></span>
+<h2 id="离散时间信号级数及其性质dfs">离散时间信号级数及其性质(DFS)</h2>
+<h3 id="离散傅里叶级数dfs">离散傅里叶级数(DFS)</h3>
+<p>周期序列表示<span class="math display">\[1.\widetilde{x}(n)=\widetilde{x}(n+kN)\\\widetilde{x}(n)=x((n))_N\\\widetilde{x}(n)=\sum_{r=-\infty}^\infty x(n-rN)\]</span> 其中k,r为任意整数，N-周期，其ZT不收敛</p>
+<p>在《信号与线性系统》中，用傅里叶级数表示连续时间周期信号。对应地，可用离散傅里叶级数表示离散周期序列，即用周期为N的复指数序列来表示</p>
+<p><span class="math display">\[\widetilde{x}(n)=\frac{1}{N}\sum_{k=0}^{N-1}\widetilde{X}(k)e^{j\frac{2\pi}{N}kn}\]</span> 两边<span class="math inline">\(\times e^{-j\frac{2\pi}{N}nr}\)</span>并从0-N-1求和并交换左右求和次序得： <span class="math display">\[\sum_{k=0}^{N-1}\widetilde{x}(n)e^{-j\frac{2\pi}{N}nr}=\widetilde{X}(r)\]</span></p>
+<p>用k置换r 得到 <span class="math display">\[\sum_{k=0}^{N-1}\widetilde{x}(n)e^{-j\frac{2\pi}{N}nk}=\widetilde{X}(k)\]</span> 设<span class="math inline">\(W_N=e^{-j\frac{2\pi}{N}}\)</span>(旋转因子)，可得周期序列的傅里叶级数变换对 <span class="math display">\[\widetilde{x}(n)=IDFS[\widetilde{X}(k)]=\frac{1}{N}\sum_{k=0}^{N-1}\widetilde{X}(k)W_N^{-kn},-\infty&lt;n&lt;\infty\\\widetilde{X}(k)=DFS[\widetilde{x}(n)]=\sum_{k=0}^{N-1}\widetilde{x}(n)W_N^{kn},-\infty&lt;k&lt;\infty\]</span></p>
+<p>注：<span class="math inline">\(\widetilde{x}(n),\widetilde{X}(K)\)</span>都是离散和周期性的,且周期为N,DFS只取k次谐波分量中N个谐波分量；n为离散时间变量，理解为nT；k是离散频率变量，理解为<span class="math inline">\(\Delta wk\)</span>,DFS和IDFS具有唯一性</p>
+<h3 id="离散傅里叶级数的性质">离散傅里叶级数的性质</h3>
+<ol type="1">
+<li>线性性</li>
+<li>周期序列的移位：<span class="math display">\[设DFS[\widetilde{x}(n)]=\widetilde{X}(k),则：DFS[\widetilde{x}(n-m)]=W_N^{nk}\widetilde{X}(k)\\IDFS[\widetilde{X}(k-l)]=W_N^{k-l}\widetilde{x}(n)\]</span></li>
+<li>周期卷积：设<span class="math inline">\(\widetilde{x_1}(n),\widetilde{x_2}(n)\)</span>都为周期为N的周期序列，且<span class="math display">\[\widetilde{X_1}(k)=\sum_{m=0}^{N-1}\widetilde{x_1}(m)W_N^{km},\\\widetilde{X_2}(k)=\sum_{r=0}^{N-1}\widetilde{x_1}(m)W_N^{kr},\\\widetilde{Y}(k)=\widetilde{X_1}(k)\widetilde{X_2}(k),\\则\widetilde{y}(n)=IDFS[\widetilde{X_1}(k)\widetilde{X_2}(k)]=\sum_{m=0}^{N-1}\widetilde{x_1}(m)\widetilde{x_2}(n-m)\]</span> <strong>结论：周期卷积的操作步骤与非周期序列的线性卷积相同，不同的是周期卷积仅在一个周期内求和。周期卷积中<span class="math inline">\(\widetilde{x_1}(m),\widetilde{x_2}(n-m)\)</span>对m是周期性的，周期为N,<span class="math inline">\(\widetilde{y}(n)\)</span>为周期N,且周期卷积满足交换律</strong></li>
+</ol>
+<h2 id="离散傅里叶变换及其性质">离散傅里叶变换及其性质</h2>
+<p>有限长序列的Fourier变换称为离散Fourier变换(DFT)，定义方法：由DFS导出DFT。</p>
+<ol type="1">
+<li>将有限长序列<span class="math inline">\(x(n)\)</span>延拓成周期序列<span class="math inline">\(\widetilde{x}(n)\)</span></li>
+<li>求周期序列<span class="math inline">\(\widetilde{x}(n)\)</span>的DFS得<span class="math inline">\(\widetilde{X}(k)\)</span></li>
+<li>取出<span class="math inline">\(\widetilde{X}(k)\)</span>的一个周期作为<span class="math inline">\(x(n)\)</span>的DFT <span class="math display">\[X(k)=\widetilde{X}(k)R_N(k)\]</span></li>
+</ol>
+<p>经由上诉步骤可由DFS得出有限长序列的DFT为 <span class="math display">\[x(n)=IDFT[X(k)]=\frac{1}{N}\sum_{k=0}^{N-1}X(k)e^{j\frac{2\pi}{N}kn}=\begin{cases}
+   \frac{1}{N}\sum_{k=0}^{N-1}X(k)W_N^{-kn},0\le n\le N-1\\
+   0,others
+\end{cases}\\
+X(k)=DFT[x(n)]=\sum_{k=0}^{N-1}x(n)e^{-j\frac{2\pi}{N}kn}=\begin{cases}
+   \frac{1}{N}\sum_{k=0}^{N-1}X(k)W_N^{kn},0\le k\le N-1\\
+   0,others
+\end{cases}\]</span></p>
+<p>注：<span class="math inline">\(x(n),X(K)\)</span>都是有限长的，取值范围为0-N-1,n为离散时间变量，理解为nT,k是离散频率变量，理解为<span class="math inline">\(\Delta wk\)</span>,DFT与DFS无本质区别，DFT是DFS的主值，且隐含周期性，具有唯一性。</p>
+<p><strong>旋转因子的性质</strong></p>
+<ol type="1">
+<li>对称性：<span class="math inline">\((W_N^k)^*=W_N^{N-k}\)</span></li>
+<li>周期性：<span class="math inline">\(W_N^{k+mN}=W_N^k\)</span></li>
+<li>换底：<span class="math inline">\(W_N^k=W_{mN}^{mk}\)</span></li>
+</ol>
+<p><strong><span class="math inline">\(\frac{N}{2}，\frac{N}{4}\)</span>点DFT为</strong></p>
+<p><span class="math display">\[X(k)=\sum_{n=0}^{N/2-1}x(n)W_{N/2}^{kn},k=0,1,...,N/2-1\\X(k)=\sum_{n=0}^{N/4-1}x(n)W_{N/4}^{kn},k=0,1,...,N/4-1\]</span></p>
+<p><strong>DFT与ZT/FT的关系：有限长序列<span class="math inline">\(x(n)\)</span>的DFT系数<span class="math inline">\(X(k)\)</span>可看作其ZT在单位圆上等角距取样的样本值:<span class="math inline">\(X(k)=X(z)|_{z=W_N^{-k}}\)</span>,有限长序列<span class="math inline">\(x(n)\)</span>的DFT系数<span class="math inline">\(X(k)\)</span>可看作其FT在一个周期<span class="math inline">\(2\pi\)</span>中等间距取样的样本值，取样间隔<span class="math inline">\(\Delta w=\frac{2\pi}{N}:X(k)=X(e^{jw})|_{w=\frac{2\pi}{N}k}=X(e^{j\frac{2\pi}{N}k})\)</span></strong></p>
+<p>离散傅立叶变换的性质:</p>
+<ol type="1">
+<li><p>线性</p></li>
+<li><p>复共轭序列的DFT <span class="math inline">\(DFT[x^*(n)]=X^*(N-k),0\le k \le N-1\)</span></p></li>
+<li><p>对称性</p>
+<ul>
+<li>有限长共轭对称序列<span class="math inline">\(x_{ep}(n)=x_{ep}^*(N-n)\)</span>,也可称为圆周共轭对称序列。</li>
+<li>有限长共轭反对称序列<span class="math inline">\(x_{op}(n)=-x_{op}^*(N-n)\)</span></li>
+<li>变换区间：<span class="math inline">\(0\le n \le N-1\)</span>，以n=N/2为对称点</li>
+<li>频域定义：共轭对称序列：<span class="math inline">\(X_{ep}(k)=X_{ep}^*(N-k)\)</span>，共轭反对称序列：<span class="math inline">\(X_{op}(k)=-X_{op}^*(N-k)\)</span></li>
+<li>序列分解：
+<ul>
+<li><span class="math inline">\(x_{ep}(n)=\frac{1}{2}[x(n)+x^*(N-n)],x_{op}(n)=\frac{1}{2}[x(n)-x^*(N-n)]\)</span></li>
+<li><span class="math inline">\(DFT[jx_i(n)]=X_{op}(k) \quad DFT[x_r(n)]=X_{ep}(k)\\DFT[x_{ep}(n)]=X_R(k) \quad DFT[x_{op}(n)]=jX_I(k)\)</span> <img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-14-50-38.png"></li>
+</ul></li>
+</ul></li>
+<li><p>序列的循环移位:一个序列的循环移位定义为:<span class="math inline">\(y(n)=x((n+m)_N)\cdot R_N(n)\)</span>,序列循环移位后DFT为:<span class="math inline">\(Y(k)=DFT[x((n+m)_N)R_N(n)]=W_N^{-km}X(k)\)</span><br>
+<img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-14-54-56.png"></p></li>
+<li><p>循环卷积:对于两个长度均为N的序列<span class="math inline">\(x_1(n),x_2(n)\)</span>,其循环卷积定义为<span class="math inline">\(y(n)=\sum_{n=0}^{N-1}x_1(m)x_2((n+m))_NR_N(n)=\)</span><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-15-01-41.png"> <strong>特点</strong>：</p>
+<ul>
+<li>循环卷积的过程与周期卷积一样，只取周期卷积的主值</li>
+<li>循环卷积隐含周期性</li>
+<li>循环卷积在主值区间内进行，参与卷积的两个序列的长度和结果序列的长度均相等</li>
+<li>线性卷积与循环卷积计算步骤比较：
+<ul>
+<li>线性卷积：反折、平移、相乘、积分(或相加)</li>
+<li>循环卷积：反折、周期化、平移、相乘、相加</li>
+</ul></li>
+</ul></li>
+</ol>
+<h2 id="利用循环卷积计算线性卷积">利用循环卷积计算线性卷积</h2>
+<p>循环卷积与线性卷积的对比图 <img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-15-05-34.png"></p>
+<p>由循环卷积求线性卷积 1. 当<span class="math inline">\(L&lt;N+M-1\)</span>其循环卷积的结果与线性卷积不相等，但满足一定关系 2. 当<span class="math inline">\(L\ge N+M-1\)</span>两个长度为M，N的序列的线性卷积可用长度均为L的循环卷积来代替</p>
+<h2 id="频率取样">频率取样</h2>
+<h3 id="序列的几种变换之间的关系">序列的几种变换之间的关系</h3>
+<ol type="1">
+<li>ZT与FT：<span class="math inline">\(X(z)|_{z=e^{jw}}=X(e^{jw})\)</span> 单位圆上的ZT等于序列的FT</li>
+<li>LT与ZT：<span class="math inline">\(X(z)|_{z=e^{sT}}=\hat{X}_a(s)\)</span> S平面-&gt;Z平面：S平面上的宽度为<span class="math inline">\(\frac{2\pi}{T}\)</span>的水平带映射为整个平面，左半带映射到单位圆内，右半带映射成单位圆外，虚轴映射为单位圆</li>
+<li>DFT与ZT：<span class="math inline">\(X(k)=X(z)|_{z=W_N^{-k}}\)</span> DFT是ZT在单位圆上等角距<span class="math inline">\(\frac{2\pi}{N}\)</span> 取样的样本值</li>
+<li>DFT与FT：<span class="math inline">\(X(k)=X(e^{jw})|_{w=\frac{2\pi}{N}k}=X(e^{j\frac{2\pi}{N}k})\)</span>,DFT是FT在一个周期等间距取样值，取样间隔<span class="math inline">\(\Delta w=\frac{2\pi}{N}\)</span></li>
+</ol>
+<h3 id="从n个取样值恢复xn">从N个取样值恢复<span class="math inline">\(x(n)\)</span></h3>
+<p><strong>频域取样是指对时域已是离散，频域仍是连续信号。现在频域上进行抽样处理，使其频域也离散化。</strong></p>
+<p>在Z平面的单位圆上对序列的ZT进行等角距取样，将导致时间序列的周期延拓 取样后序列主值序列为<span class="math inline">\(x_N(n)=x_p(n)R_N(n)=[\sum_{r=-\infty}^{\infty}x(n+rM)]R_N(n)\)</span></p>
+<p><strong>对于长度为N的有限长序列，ZT取样即频率取样不失真的条件是取样点数M应等于或大于原序列的长度N</strong></p>
+<h3 id="从n个取样值恢复xzxejw">从N个取样值恢复<span class="math inline">\(X(z),X(e^{jw})\)</span></h3>
+<p>长度为N的序列<span class="math inline">\(x(n)\)</span>的FT<span class="math inline">\(x(e^{jw})\)</span>可通过Z平面单位圆上的N个取样值<span class="math inline">\(x(k)\)</span>，即N个频域取样值来恢复,其中用到了和第二章类似的思路通过内插函数<span class="math inline">\(\phi(z)\)</span>与<span class="math inline">\(x(k)\)</span>相乘恢复</p>
+<h2 id="快速傅里叶变换">快速傅里叶变换</h2>
+<p>直接计算DFT对于计算机来说运算时间和资源占用非常大，因此本节将介绍两种常用的快速傅里叶变换算法(FFT)来用于DFT计算</p>
+<h3 id="时间抽取fft算法">时间抽取FFT算法</h3>
+<p>基本出发点：利用<span class="math inline">\(W_N^k\)</span>的周期性和对称性，将DFT的计算分解成一些逐次减小的DFT计算；</p>
+<p>分解规则：：（1）对时间进行偶奇分（2）对频率进行前后分。</p>
+<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-16-36-54.png"></p>
+<p>上面时间抽选FFT流图具有三个特点： ① 基本计算单元为一碟形； ② 输入为“混序”排列；输出为正序排列； ③ 具有“同址计算”特性。</p>
+<h3 id="频率抽取fft算法">频率抽取FFT算法</h3>
+<p>分解原则：(1)对时间前后分；(2)对频率偶奇分</p>
+<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-16-37-26.png"></p>
+<h3 id="n为合数的fft算法">N为合数的FFT算法</h3>
+<p>在前面两小节的讨论中，我们只涉及序列长度<span class="math inline">\(N=2^M\)</span>的FFT算法，本节则将着重讨论如果序列长度<span class="math inline">\(N\neq2^M\)</span>时的处理办法。通常有以下两种处理方法 1. 用补零的办法将<span class="math inline">\(x(n)\)</span>延长为<span class="math inline">\(2^M\)</span>，再使用基2FFT算法。由于有限长序列补零以后，只是频谱的取样点有所增加。 2. 采用以任意数为基数的FFT算法。设N等于两个整数p和q的乘积，即<span class="math inline">\(N=p\cdot q\)</span>，则可将N点DFT分解成p个q点DFT或q个p点DFT来计算。</p>
+<h2 id="fft应用">FFT应用</h2>
+<h3 id="利用fft对信号进行谱分析">利用FFT对信号进行谱分析</h3>
+<p>所谓谱分析就是计算信号的频谱，包括振幅谱、相位谱和功率谱。设离散时间信号<span class="math inline">\(x(n)\)</span>是从连续时间信号<span class="math inline">\(x_a(t)\)</span>取样得到的，定义参数如下: 1. T-取样周期(s) 2. <span class="math inline">\(f_s\)</span>-取样频率(Hz),<span class="math inline">\(f_s=\frac{1}{T}\)</span> 3. <span class="math inline">\(f_0\)</span>-连续时间信号的最高频率(Hz) 4. F-频率分辨率：指频域取样中两相邻点间的频率间隔(Hz) 5. <span class="math inline">\(t_p\)</span>-信号的最小记录长度(s),<span class="math inline">\(t_p=\frac{1}{F}\)</span> 6. N-一个记录长度中的取样数,<span class="math inline">\(t_p=NT\)</span></p>
+<p>根据取样定理，为了避免混叠失真，要求<span class="math display">\[f_s\ge2f_0\quad or \quad T\le \frac{1}{2f_0} \]</span>最小记录长度为：<span class="math inline">\(t_p=NT=\frac{1}{F}\)</span>，则取样点数N须满足条件<span class="math inline">\(N\ge\frac{2f_0}{F}\)</span></p>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>数字信号处理</tag>
+      </tags>
+  </entry>
 </search>
