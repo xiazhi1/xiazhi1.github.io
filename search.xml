@@ -505,6 +505,118 @@
       </tags>
   </entry>
   <entry>
+    <title>数字信号处理第二章知识小结</title>
+    <url>/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="引言">引言</h2>
+<p><strong>本章与信号与系统知识有较多重复，仅记录部分重要的概念</strong></p>
+<ol type="1">
+<li><p>信号分类</p>
+<table>
+<thead>
+<tr class="header">
+<th>时间-幅度</th>
+<th>连续</th>
+<th>离散</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>连续</td>
+<td>模拟</td>
+<td>抽样</td>
+</tr>
+<tr class="even">
+<td>离散</td>
+<td>量化</td>
+<td>数字</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<span id="more"></span>
+<h2 id="离散时间信号-序列">离散时间信号-序列</h2>
+<h3 id="常见序列">常见序列</h3>
+<ol type="1">
+<li><p>单位取样序列<span class="math display">\[\delta(n)=\begin{cases}
+ 1,n=0\\
+ 0,n\ne0
+\end{cases},\delta(n-n_0)=\begin{cases}
+ 1,n=n_0\\
+ 0,n\ne n_0
+\end{cases}\\
+x(n)\delta(n)=x(0),x(n)\delta(n-n_0)=x(n_0),x(t)\delta(t)=x(0)\delta(t)\]</span></p></li>
+<li><p>单位阶跃序列<span class="math display">\[u(n)=\begin{cases}
+ 1,n\ge0\\
+ 0,n&lt;0
+\end{cases},\delta(n)=u(n)-u(n-1)\\
+u(n)=\sum_{k=\infty}^n\delta(k)\quad u(n)=\sum_{k=0}^\infty\delta(n-k)\]</span></p></li>
+<li><p>矩形序列<span class="math display">\[R_N(n)=\begin{cases}
+ 1,0\le n \le N-1\\
+ 0,others
+\end{cases},R_N(n)=u(n)-u(n-N)\]</span></p></li>
+<li><p>复指数序列和正弦序列<span class="math display">\[x(n)=e^{(\sigma+jw)n}=e^{\sigma n}cos(wn)+je^{\sigma n}sin(wn),w-数字域频率\\
+比较：x_a(t)=Asin(\Omega t+\phi)=Asin(2\pi ft+\phi)\]</span>其中:<span class="math inline">\(\Omega=2\pi f\)</span>模拟域频率，<strong><span class="math inline">\(w=\Omega T(采样周期)\)</span></strong></p></li>
+</ol>
+<p>当<span class="math inline">\(w=0\)</span>时，<span class="math inline">\(cos(wn)\)</span>变化最慢，当<span class="math inline">\(w=\pi\)</span>时，<span class="math inline">\(cos(wn)\)</span>变化最快，在主值空间<span class="math inline">\([-\pi,\pi]or[0,2\pi]\)</span>上，把<span class="math inline">\(w=0\)</span>附近称为数字低频，<span class="math inline">\(w=\pi\)</span>称为数字高频。<strong>这一特点与模拟正弦信号完全不同，后者<span class="math inline">\(\Omega\)</span>越大，变化越快，因为其连续取值</strong></p>
+<h2 id="离散时间系统">离散时间系统</h2>
+<h3 id="fir系统和iir系统">FIR系统和IIR系统</h3>
+<p>FIR：有限冲激响应，IIR：无限冲激响应 <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-14-21-13-31.png"></p>
+<h2 id="离散时间信号和系统的频域表示">离散时间信号和系统的频域表示</h2>
+<h3 id="连续信号的ft">连续信号的FT</h3>
+<p>重要性质1：当<span class="math inline">\(x(n)\)</span>为实序列时，<span class="math inline">\(X(e^{jw})\)</span>的幅值<span class="math inline">\(|X(e^{jw})|\)</span>在区间<span class="math inline">\(0\le w\le2\pi\)</span>内是偶对称函数，相位 <span class="math inline">\(arg[X(e^{jw})]\)</span> 是奇对称函数</p>
+<h3 id="离散时间信号的ft的性质">离散时间信号的FT的性质</h3>
+<ol type="1">
+<li><p>序列的FT的对称性</p>
+<p><span class="math inline">\(x_e(n)=x_e^*(-n)\)</span> 共轭对称序列</p>
+<p><span class="math inline">\(x_o(n)=-x_o^*(-n)\)</span> 共轭反对称序列</p>
+<p><span class="math inline">\(x_e(e^{jw})=x_e^*(e^{-jw})\)</span> 共轭对称函数</p>
+<p><span class="math inline">\(x_o(e^{jw})=-x_o^*(e^{-jw})\)</span> 共轭反对称函数</p>
+<p>这表明<span class="math inline">\(x_o(n)\)</span>的实部和<span class="math inline">\(x_e(n)\)</span>的虚部为偶序列，<span class="math inline">\(x_o(n)\)</span>的虚部和<span class="math inline">\(x_e(n)\)</span>的实部为奇序列，进一步推导可以得到以下序列分解公式<span class="math display">\[x_e(n)=\frac{1}{2}[x(n)+x^*(-n)] \qquad x_o(n)=\frac{1}{2}[x(n)-x^*(-n)]\\x_e(e^{jw})=\frac{1}{2}[x(e^{jw})+x^*(e^{-jw})] \qquad x_o(e^{jw})=\frac{1}{2}[x(e^{jw})-x^*(e^{-jw})]\]</span></p>
+<p>以及FT的共轭对称性<span class="math display">\[FT[x_r(n)]=X_e(e^{jw}),FT[jx_i(n)]=X_o(e^{jw})\\FT[x_e(n)]=X_R(e^{jw}),FT[x_o(n)]=jX_I(e^{jw})\]</span></p>
+<p>当<span class="math inline">\(x(n)\)</span>为实序列时<span class="math display">\[若x(n)为实偶序列，则X(e^{jw})为实偶函数\\若x(n)为实奇序列，则X(e^{jw})为纯虚奇函数\]</span></p></li>
+</ol>
+<h2 id="连续时间信号的取样">连续时间信号的取样</h2>
+<h3 id="取样信号的时域频域表示">取样信号的时域频域表示</h3>
+<p>取样信号为<span class="math inline">\(\hat{x_a}(t)=x_a(t)p(t)=\sum_{n=-\infty}^\infty x_a(t)\delta(t-nT),p(t)=\sum_{n=-\infty}^\infty \delta(t-nT)\)</span>,其频谱则为<span class="math inline">\(\\\hat{X_a}(j\Omega)=FT[x_a(t)p(t)]=\frac{1}{2\pi}X_a(j\Omega)*P(j\Omega)=\frac{1}{T}\sum_{r=-\infty}^\infty X_a(j\Omega-jr\Omega_s)\\P(j\Omega)=\frac{2\pi}{T}\sum_{n=-\infty}^\infty\delta(j\Omega-jr\Omega_s)\)</span></p>
+<p><strong>这表明取样信号的频谱就是模拟信号频谱的周期延拓，延拓周期的取样角频率为<span class="math inline">\(\Omega_s\)</span></strong></p>
+<p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-14-21-56-22.png"></p>
+<p><strong>若要不产生混叠，则要求<span class="math inline">\(\Omega_s\ge2\Omega_0,\Omega_s：奈奎斯特频率,\Omega_s/2\)</span>：折叠频率</strong></p>
+<h3 id="频率归一化">频率归一化</h3>
+<p>频率归一化讨论的是离散时间信号<span class="math inline">\(x(n)\)</span>的频谱<span class="math inline">\(X(e^{jw})\)</span>和取样信号<span class="math inline">\(\hat{x_a}(t)\)</span>的频谱<span class="math inline">\(\hat{X_a}(j\Omega)\)</span>之间的关系</p>
+<p>取样信号的频谱为：<span class="math display">\[\hat{X_a}(j\Omega)=FT[\hat{x_a}(t)]=FT[x_a(t)p(t)]=FT[\sum_{n=-\infty}^\infty x_a(t)\delta(t-nT)]\\=\sum_{n=-\infty}^\infty x_a(nT)\cdot FT[\delta(t-nT)]=\sum_{n=-\infty}^\infty x_a(nT)e^{-j\Omega nT}\]</span></p>
+<p>而离散时间信号的FT变换为： <span class="math display">\[X(e^{jw})|_{w=\Omega T}=\hat{X_a}(j\Omega)\]</span></p>
+<p>比较可得出<span class="math display">\[X(e^{jw})|_{w=\Omega T}=\hat{X_a}(j\Omega)=\frac{1}{T}\sum_{r=-\infty}^\infty X_a(j\Omega-jr\Omega_s)\\=\frac{1}{T}\sum_{r=-\infty}^\infty X_a(j\frac{w}{T}-jr\frac{2\pi}{T})\]</span></p>
+<p><strong>即在<span class="math inline">\(w=\Omega T\)</span>的条件下，离散时间信号的频谱与取样信号的相等，由于<span class="math inline">\(w=\Omega T=\frac{2\pi f}{f_s}(f_s为取样频率)\)</span>是<span class="math inline">\(f\)</span>对<span class="math inline">\(f_s\)</span>归一化的结果，因此可认为离散时间信号频谱是模拟信号频谱的周期延拓且在频率轴上进行归一化的结果</strong></p>
+<h3 id="信号重建">信号重建</h3>
+<p>如果取样信号频谱不存在混叠，让取样信号通过一理性低通滤波器，其特性为<span class="math inline">\(H(j\Omega)=\begin{cases}  T,|\Omega|\le\Omega_s/2\\  0,|\Omega|&gt;\Omega_s/2 \end{cases}\)</span>,其频谱特性为<span class="math inline">\(H(j\Omega)\hat{X_a}(j\Omega)=X_a(j\Omega),|\Omega\le\Omega_s/2|\)</span>,输出信号则为<span class="math display">\[x_a(t)=\frac{1}{2\pi}\int_{-\frac{\Omega_s}{2}}^{\frac{\Omega_s}{2}} X_a(j\Omega)e^{j\Omega t}\, {\rm d}\Omega=\sum_{n=-\infty}^\infty x(nT)\cdot S_a(t-nT)\\Sa(t-nT)=\frac{sin[\frac{\pi}{T}(t-NT)]}{\frac{\pi}{T}(t-nT)}为内插函数\]</span><strong>此处积分的详细步骤略过，结论：取样信号经过理想LPF后，完全可以把信号还原，而不损失任何信息，由于插值的唯一性，还原的信号也是唯一的</strong></p>
+<h3 id="离散时间信号的取样">离散时间信号的取样</h3>
+<p>其思路与连续时间信号取样类似</p>
+<p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-12-53.png"></p>
+<p>其可以看为一个信号调制的过程：<span class="math inline">\(x_p(n)=\sum_{n=-\infty}^\infty x(Nk)\delta(n-kN)\)</span>,频域表示为<span class="math inline">\(X_p(w)=\frac{1}{N}\sum_{n=0}^{N-1}X(w-kw_s),w_s\)</span>为取样频率，且<span class="math inline">\(w_s=\frac{2\pi}{N}\)</span> <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-16-29.png"></p>
+<p><strong>为了不发生混叠，取样频率同样需满足<span class="math inline">\(w_s\ge2w_M\)</span></strong></p>
+<p>若要恢复序列<span class="math inline">\(x(n)\)</span>，同样可以采用低通滤波器滤波恢复，其频率特性为<span class="math inline">\(H(w)=\begin{cases}  N,|w|\le w_s/2\\  0,|w|&gt; w_s/2 \end{cases}\)</span>,恢复的序列<span class="math inline">\(x_r(n)=\sum_{k=-\infty}^\infty x(kN)\frac{N}{\pi(n-kN)}sin[\frac{w_s}{2}(n-kN)]\)</span></p>
+<h3 id="离散时间信号的取样和内插">离散时间信号的取样和内插</h3>
+<p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-25-46.png"> <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-26-29.png"></p>
+<p>离散时间信号的抽取/减取样：</p>
+<p><span class="math inline">\(x_d(n)=x(nN)=x_p(nN)\\FT(x_d(n))=X_d(w)=\sum_{n=-\infty}^\infty x_p(n)e^{-jwn/N}\\=X_p(w/N)=\sum_{n=-\infty}^\infty x_p(nN)e^{-jwn}\)</span></p>
+<p><strong>取样序列和抽取序列的频谱只是频率尺度不同，注意，只有进行"过采样"，才允许进一步降低采样率，即进行“减采样”</strong></p>
+<p>离散时间信号的内插/增采样：是抽取的逆过程，现在每相邻两个序列之间插入N-1个零值，再用低通滤波器得到内插后序列 <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-28-20.png"></p>
+<h2 id="全通系统和最小相位系统">全通系统和最小相位系统</h2>
+<ol type="1">
+<li>全通系统：全通系统是幅度响应<span class="math inline">\(|H(e^{jw})|\equiv C\)</span>（C为常数）的系统，系统函数:<span class="math inline">\(H_{ap}(z)=\frac{z^{-1}-a^*}{1-az^{-1}}\)</span>（一阶系统）,对于单位取样为实数的多阶系统，有<span class="math inline">\(H_{ap}(z)=A\prod^M_c\frac{z^{-1}-d_k}{1-d_kz^{-1}}\prod^M_r\frac{(z^{-1}-e_k^*)(z^{-1}-e_k)}{(1-e_kz^{-1})(1-e_k^*z^{-1})},|d_k|,|e_k|&lt;1\)</span>,<strong>全通系统的特点是每个极点<span class="math inline">\(z_p\)</span>都有一个与之配对的共轭倒数零点<span class="math inline">\(z_o=\frac{1}{z_p^*}\)</span>,且一阶全通滤波器的相位响应单调递减</strong></li>
+<li>最小/大相位系统：系统函数<span class="math inline">\(H_{min}(z)\)</span>所有零极点都在单位圆内/外的系统，对于最小相位系统，存在一个稳定的因果逆系统<span class="math inline">\(H_{min}^{-1}(z)\)</span>,使得<span class="math inline">\(H_{min}(z)H_{min}^{-1}(z)=1\)</span></li>
+<li>全通系统与最小相位系统级联：任何系统可表述为一个最小相位系统和一个全通系统级联,<span class="math inline">\(H(z)=H_min(z)H_{ap}(z)\)</span></li>
+<li>相位延迟与群延迟：数字滤波器的相位延迟：<span class="math inline">\(T_p(w)=-\frac{\phi(w)}{w}\)</span>表示输入是频率为<span class="math inline">\(w\)</span>的单一正弦波的延迟时间，群延迟则定义为<span class="math inline">\(T_g(w)=-\frac{d\phi(w)}{dw}\)</span>表示某一频率<span class="math inline">\(w\)</span>邻域内的延迟性质</li>
+</ol>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>数字信号处理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数学建模笔记</title>
     <url>/2022/12/27/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="数学建模笔记姜启源">数学建模笔记（姜启源）</h1>
@@ -1149,5 +1261,11 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
       <tags>
         <tag>数据结构与算法</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>数字信号处理第四章知识小结</title>
+    <url>/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[
+]]></content>
   </entry>
 </search>
