@@ -1155,8 +1155,7 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
     <url>/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
     <content><![CDATA[<h2 id="引言">引言</h2>
 <h3 id="滤波器的分类">滤波器的分类</h3>
-<p>经典滤波器从功能上可分为：低通(LP),高通(HP),带通(BP),带阻(BS),且均有AF和DF之分,AF和DF的四种滤波器的理想幅频响应如下图所示： <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-14-50-28.png"> <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-14-50-45.png"></p>
-<h3 id="数字滤波器的技术要求">数字滤波器的技术要求</h3>
+<p>经典滤波器从功能上可分为：低通(LP),高通(HP),带通(BP),带阻(BS),且均有AF和DF之分,AF和DF的四种滤波器的理想幅频响应如下图所示： <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-14-50-28.png"> <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-14-50-45.png"> <span id="more"></span> ### 数字滤波器的技术要求</p>
 <p>数字滤波器的传输函数:<span class="math inline">\(H(e^{jw})=|H(e^{jw})|e^{j\phi(w)}\)</span> <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-14-51-38.png"></p>
 <p><span class="math inline">\(w_p\)</span>:通带截止频率, <span class="math inline">\(\alpha_p\)</span>:通带允许的最大衰减</p>
 <p><span class="math inline">\(w_s\)</span>:阻带截止频率, <span class="math inline">\(\alpha_s\)</span>:阻带允许的最小衰减</p>
