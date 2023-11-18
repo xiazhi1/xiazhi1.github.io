@@ -505,118 +505,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数字信号处理第二章知识小结</title>
-    <url>/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="引言">引言</h2>
-<p><strong>本章与信号与系统知识有较多重复，仅记录部分重要的概念</strong></p>
-<ol type="1">
-<li><p>信号分类</p>
-<table>
-<thead>
-<tr class="header">
-<th>时间-幅度</th>
-<th>连续</th>
-<th>离散</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>连续</td>
-<td>模拟</td>
-<td>抽样</td>
-</tr>
-<tr class="even">
-<td>离散</td>
-<td>量化</td>
-<td>数字</td>
-</tr>
-</tbody>
-</table></li>
-</ol>
-<span id="more"></span>
-<h2 id="离散时间信号-序列">离散时间信号-序列</h2>
-<h3 id="常见序列">常见序列</h3>
-<ol type="1">
-<li><p>单位取样序列<span class="math display">\[\delta(n)=\begin{cases}
- 1,n=0\\
- 0,n\ne0
-\end{cases},\delta(n-n_0)=\begin{cases}
- 1,n=n_0\\
- 0,n\ne n_0
-\end{cases}\\
-x(n)\delta(n)=x(0),x(n)\delta(n-n_0)=x(n_0),x(t)\delta(t)=x(0)\delta(t)\]</span></p></li>
-<li><p>单位阶跃序列<span class="math display">\[u(n)=\begin{cases}
- 1,n\ge0\\
- 0,n&lt;0
-\end{cases},\delta(n)=u(n)-u(n-1)\\
-u(n)=\sum_{k=\infty}^n\delta(k)\quad u(n)=\sum_{k=0}^\infty\delta(n-k)\]</span></p></li>
-<li><p>矩形序列<span class="math display">\[R_N(n)=\begin{cases}
- 1,0\le n \le N-1\\
- 0,others
-\end{cases},R_N(n)=u(n)-u(n-N)\]</span></p></li>
-<li><p>复指数序列和正弦序列<span class="math display">\[x(n)=e^{(\sigma+jw)n}=e^{\sigma n}cos(wn)+je^{\sigma n}sin(wn),w-数字域频率\\
-比较：x_a(t)=Asin(\Omega t+\phi)=Asin(2\pi ft+\phi)\]</span>其中:<span class="math inline">\(\Omega=2\pi f\)</span>模拟域频率，<strong><span class="math inline">\(w=\Omega T(采样周期)\)</span></strong></p></li>
-</ol>
-<p>当<span class="math inline">\(w=0\)</span>时，<span class="math inline">\(cos(wn)\)</span>变化最慢，当<span class="math inline">\(w=\pi\)</span>时，<span class="math inline">\(cos(wn)\)</span>变化最快，在主值空间<span class="math inline">\([-\pi,\pi]or[0,2\pi]\)</span>上，把<span class="math inline">\(w=0\)</span>附近称为数字低频，<span class="math inline">\(w=\pi\)</span>称为数字高频。<strong>这一特点与模拟正弦信号完全不同，后者<span class="math inline">\(\Omega\)</span>越大，变化越快，因为其连续取值</strong></p>
-<h2 id="离散时间系统">离散时间系统</h2>
-<h3 id="fir系统和iir系统">FIR系统和IIR系统</h3>
-<p>FIR：有限冲激响应，IIR：无限冲激响应 <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-14-21-13-31.png"></p>
-<h2 id="离散时间信号和系统的频域表示">离散时间信号和系统的频域表示</h2>
-<h3 id="连续信号的ft">连续信号的FT</h3>
-<p>重要性质1：当<span class="math inline">\(x(n)\)</span>为实序列时，<span class="math inline">\(X(e^{jw})\)</span>的幅值<span class="math inline">\(|X(e^{jw})|\)</span>在区间<span class="math inline">\(0\le w\le2\pi\)</span>内是偶对称函数，相位 <span class="math inline">\(arg[X(e^{jw})]\)</span> 是奇对称函数</p>
-<h3 id="离散时间信号的ft的性质">离散时间信号的FT的性质</h3>
-<ol type="1">
-<li><p>序列的FT的对称性</p>
-<p><span class="math inline">\(x_e(n)=x_e^*(-n)\)</span> 共轭对称序列</p>
-<p><span class="math inline">\(x_o(n)=-x_o^*(-n)\)</span> 共轭反对称序列</p>
-<p><span class="math inline">\(x_e(e^{jw})=x_e^*(e^{-jw})\)</span> 共轭对称函数</p>
-<p><span class="math inline">\(x_o(e^{jw})=-x_o^*(e^{-jw})\)</span> 共轭反对称函数</p>
-<p>这表明<span class="math inline">\(x_o(n)\)</span>的实部和<span class="math inline">\(x_e(n)\)</span>的虚部为偶序列，<span class="math inline">\(x_o(n)\)</span>的虚部和<span class="math inline">\(x_e(n)\)</span>的实部为奇序列，进一步推导可以得到以下序列分解公式<span class="math display">\[x_e(n)=\frac{1}{2}[x(n)+x^*(-n)] \qquad x_o(n)=\frac{1}{2}[x(n)-x^*(-n)]\\x_e(e^{jw})=\frac{1}{2}[x(e^{jw})+x^*(e^{-jw})] \qquad x_o(e^{jw})=\frac{1}{2}[x(e^{jw})-x^*(e^{-jw})]\]</span></p>
-<p>以及FT的共轭对称性<span class="math display">\[FT[x_r(n)]=X_e(e^{jw}),FT[jx_i(n)]=X_o(e^{jw})\\FT[x_e(n)]=X_R(e^{jw}),FT[x_o(n)]=jX_I(e^{jw})\]</span></p>
-<p>当<span class="math inline">\(x(n)\)</span>为实序列时<span class="math display">\[若x(n)为实偶序列，则X(e^{jw})为实偶函数\\若x(n)为实奇序列，则X(e^{jw})为纯虚奇函数\]</span></p></li>
-</ol>
-<h2 id="连续时间信号的取样">连续时间信号的取样</h2>
-<h3 id="取样信号的时域频域表示">取样信号的时域频域表示</h3>
-<p>取样信号为<span class="math inline">\(\hat{x_a}(t)=x_a(t)p(t)=\sum_{n=-\infty}^\infty x_a(t)\delta(t-nT),p(t)=\sum_{n=-\infty}^\infty \delta(t-nT)\)</span>,其频谱则为<span class="math inline">\(\\\hat{X_a}(j\Omega)=FT[x_a(t)p(t)]=\frac{1}{2\pi}X_a(j\Omega)*P(j\Omega)=\frac{1}{T}\sum_{r=-\infty}^\infty X_a(j\Omega-jr\Omega_s)\\P(j\Omega)=\frac{2\pi}{T}\sum_{n=-\infty}^\infty\delta(j\Omega-jr\Omega_s)\)</span></p>
-<p><strong>这表明取样信号的频谱就是模拟信号频谱的周期延拓，延拓周期的取样角频率为<span class="math inline">\(\Omega_s\)</span></strong></p>
-<p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-14-21-56-22.png"></p>
-<p><strong>若要不产生混叠，则要求<span class="math inline">\(\Omega_s\ge2\Omega_0,\Omega_s：奈奎斯特频率,\Omega_s/2\)</span>：折叠频率</strong></p>
-<h3 id="频率归一化">频率归一化</h3>
-<p>频率归一化讨论的是离散时间信号<span class="math inline">\(x(n)\)</span>的频谱<span class="math inline">\(X(e^{jw})\)</span>和取样信号<span class="math inline">\(\hat{x_a}(t)\)</span>的频谱<span class="math inline">\(\hat{X_a}(j\Omega)\)</span>之间的关系</p>
-<p>取样信号的频谱为：<span class="math display">\[\hat{X_a}(j\Omega)=FT[\hat{x_a}(t)]=FT[x_a(t)p(t)]=FT[\sum_{n=-\infty}^\infty x_a(t)\delta(t-nT)]\\=\sum_{n=-\infty}^\infty x_a(nT)\cdot FT[\delta(t-nT)]=\sum_{n=-\infty}^\infty x_a(nT)e^{-j\Omega nT}\]</span></p>
-<p>而离散时间信号的FT变换为： <span class="math display">\[X(e^{jw})|_{w=\Omega T}=\hat{X_a}(j\Omega)\]</span></p>
-<p>比较可得出<span class="math display">\[X(e^{jw})|_{w=\Omega T}=\hat{X_a}(j\Omega)=\frac{1}{T}\sum_{r=-\infty}^\infty X_a(j\Omega-jr\Omega_s)\\=\frac{1}{T}\sum_{r=-\infty}^\infty X_a(j\frac{w}{T}-jr\frac{2\pi}{T})\]</span></p>
-<p><strong>即在<span class="math inline">\(w=\Omega T\)</span>的条件下，离散时间信号的频谱与取样信号的相等，由于<span class="math inline">\(w=\Omega T=\frac{2\pi f}{f_s}(f_s为取样频率)\)</span>是<span class="math inline">\(f\)</span>对<span class="math inline">\(f_s\)</span>归一化的结果，因此可认为离散时间信号频谱是模拟信号频谱的周期延拓且在频率轴上进行归一化的结果</strong></p>
-<h3 id="信号重建">信号重建</h3>
-<p>如果取样信号频谱不存在混叠，让取样信号通过一理性低通滤波器，其特性为<span class="math inline">\(H(j\Omega)=\begin{cases}  T,|\Omega|\le\Omega_s/2\\  0,|\Omega|&gt;\Omega_s/2 \end{cases}\)</span>,其频谱特性为<span class="math inline">\(H(j\Omega)\hat{X_a}(j\Omega)=X_a(j\Omega),|\Omega\le\Omega_s/2|\)</span>,输出信号则为<span class="math display">\[x_a(t)=\frac{1}{2\pi}\int_{-\frac{\Omega_s}{2}}^{\frac{\Omega_s}{2}} X_a(j\Omega)e^{j\Omega t}\, {\rm d}\Omega=\sum_{n=-\infty}^\infty x(nT)\cdot S_a(t-nT)\\Sa(t-nT)=\frac{sin[\frac{\pi}{T}(t-NT)]}{\frac{\pi}{T}(t-nT)}为内插函数\]</span><strong>此处积分的详细步骤略过，结论：取样信号经过理想LPF后，完全可以把信号还原，而不损失任何信息，由于插值的唯一性，还原的信号也是唯一的</strong></p>
-<h3 id="离散时间信号的取样">离散时间信号的取样</h3>
-<p>其思路与连续时间信号取样类似</p>
-<p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-12-53.png"></p>
-<p>其可以看为一个信号调制的过程：<span class="math inline">\(x_p(n)=\sum_{n=-\infty}^\infty x(Nk)\delta(n-kN)\)</span>,频域表示为<span class="math inline">\(X_p(w)=\frac{1}{N}\sum_{n=0}^{N-1}X(w-kw_s),w_s\)</span>为取样频率，且<span class="math inline">\(w_s=\frac{2\pi}{N}\)</span> <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-16-29.png"></p>
-<p><strong>为了不发生混叠，取样频率同样需满足<span class="math inline">\(w_s\ge2w_M\)</span></strong></p>
-<p>若要恢复序列<span class="math inline">\(x(n)\)</span>，同样可以采用低通滤波器滤波恢复，其频率特性为<span class="math inline">\(H(w)=\begin{cases}  N,|w|\le w_s/2\\  0,|w|&gt; w_s/2 \end{cases}\)</span>,恢复的序列<span class="math inline">\(x_r(n)=\sum_{k=-\infty}^\infty x(kN)\frac{N}{\pi(n-kN)}sin[\frac{w_s}{2}(n-kN)]\)</span></p>
-<h3 id="离散时间信号的取样和内插">离散时间信号的取样和内插</h3>
-<p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-25-46.png"> <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-26-29.png"></p>
-<p>离散时间信号的抽取/减取样：</p>
-<p><span class="math inline">\(x_d(n)=x(nN)=x_p(nN)\\FT(x_d(n))=X_d(w)=\sum_{n=-\infty}^\infty x_p(n)e^{-jwn/N}\\=X_p(w/N)=\sum_{n=-\infty}^\infty x_p(nN)e^{-jwn}\)</span></p>
-<p><strong>取样序列和抽取序列的频谱只是频率尺度不同，注意，只有进行"过采样"，才允许进一步降低采样率，即进行“减采样”</strong></p>
-<p>离散时间信号的内插/增采样：是抽取的逆过程，现在每相邻两个序列之间插入N-1个零值，再用低通滤波器得到内插后序列 <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-09-28-20.png"></p>
-<h2 id="全通系统和最小相位系统">全通系统和最小相位系统</h2>
-<ol type="1">
-<li>全通系统：全通系统是幅度响应<span class="math inline">\(|H(e^{jw})|\equiv C\)</span>（C为常数）的系统，系统函数:<span class="math inline">\(H_{ap}(z)=\frac{z^{-1}-a^*}{1-az^{-1}}\)</span>（一阶系统）,对于单位取样为实数的多阶系统，有<span class="math inline">\(H_{ap}(z)=A\prod^M_c\frac{z^{-1}-d_k}{1-d_kz^{-1}}\prod^M_r\frac{(z^{-1}-e_k^*)(z^{-1}-e_k)}{(1-e_kz^{-1})(1-e_k^*z^{-1})},|d_k|,|e_k|&lt;1\)</span>,<strong>全通系统的特点是每个极点<span class="math inline">\(z_p\)</span>都有一个与之配对的共轭倒数零点<span class="math inline">\(z_o=\frac{1}{z_p^*}\)</span>,且一阶全通滤波器的相位响应单调递减</strong></li>
-<li>最小/大相位系统：系统函数<span class="math inline">\(H_{min}(z)\)</span>所有零极点都在单位圆内/外的系统，对于最小相位系统，存在一个稳定的因果逆系统<span class="math inline">\(H_{min}^{-1}(z)\)</span>,使得<span class="math inline">\(H_{min}(z)H_{min}^{-1}(z)=1\)</span></li>
-<li>全通系统与最小相位系统级联：任何系统可表述为一个最小相位系统和一个全通系统级联,<span class="math inline">\(H(z)=H_min(z)H_{ap}(z)\)</span></li>
-<li>相位延迟与群延迟：数字滤波器的相位延迟：<span class="math inline">\(T_p(w)=-\frac{\phi(w)}{w}\)</span>表示输入是频率为<span class="math inline">\(w\)</span>的单一正弦波的延迟时间，群延迟则定义为<span class="math inline">\(T_g(w)=-\frac{d\phi(w)}{dw}\)</span>表示某一频率<span class="math inline">\(w\)</span>邻域内的延迟性质</li>
-</ol>
-]]></content>
-      <categories>
-        <category>大学功课</category>
-      </categories>
-      <tags>
-        <tag>数字信号处理</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数学建模笔记</title>
     <url>/2022/12/27/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="数学建模笔记姜启源">数学建模笔记（姜启源）</h1>
@@ -1265,7 +1153,173 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
   <entry>
     <title>数字信号处理第四章知识小结</title>
     <url>/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
-    <content><![CDATA[
+    <content><![CDATA[<h2 id="引言">引言</h2>
+<h3 id="滤波器的分类">滤波器的分类</h3>
+<p>经典滤波器从功能上可分为：低通(LP),高通(HP),带通(BP),带阻(BS),且均有AF和DF之分,AF和DF的四种滤波器的理想幅频响应如下图所示： <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-14-50-28.png"> <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-14-50-45.png"></p>
+<h3 id="数字滤波器的技术要求">数字滤波器的技术要求</h3>
+<p>数字滤波器的传输函数:<span class="math inline">\(H(e^{jw})=|H(e^{jw})|e^{j\phi(w)}\)</span> <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-14-51-38.png"></p>
+<p><span class="math inline">\(w_p\)</span>:通带截止频率, <span class="math inline">\(\alpha_p\)</span>:通带允许的最大衰减</p>
+<p><span class="math inline">\(w_s\)</span>:阻带截止频率, <span class="math inline">\(\alpha_s\)</span>:阻带允许的最小衰减</p>
+<p><span class="math inline">\(w_c\)</span>:3dB通带截止频率，<span class="math inline">\(\delta_1,\delta_2\)</span>：通带、阻带的容限(允许误差)</p>
+<p><span class="math inline">\(\alpha_p,\alpha_s\)</span>分别定义为：</p>
+<p><span class="math display">\[
+\alpha_p=20lg\frac{|H(e^{j0})|}{|H(e^{jw_p})|}\\\alpha_s=20lg\frac{|H(e^{j0})|}{|H(e^{jw_s})|}
+\]</span></p>
+<h3 id="模拟滤波器的技术要求">模拟滤波器的技术要求</h3>
+<p><img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-14-59-33.png"></p>
+<p><span class="math inline">\(\Omega_p\)</span>:通带截止频率, <span class="math inline">\(\alpha_p\)</span>:通带中的最大衰减系数</p>
+<p><span class="math inline">\(w_s\)</span>:阻带截止频率, <span class="math inline">\(\alpha_s\)</span>:阻带的最小衰减系数</p>
+<p><span class="math inline">\(w_c\)</span>:3dB通带截止频率</p>
+<p><span class="math inline">\(\alpha_p,\alpha_s\)</span>分别定义为：</p>
+<p><span class="math display">\[
+\alpha_p=20lg\frac{|H_a(j0)|}{|H_a(j\Omega_p)|}\\\alpha_s=20lg\frac{|H_a(j0)|}{|H_a(j\Omega_s)|}
+\]</span></p>
+<p>数字滤波器的三种基本运算的框图表示和流程图表示 <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-15-03-39.png"></p>
+<h2 id="iir数字滤波器的基本网络结构">IIR数字滤波器的基本网络结构</h2>
+<h3 id="直接i型">直接I型</h3>
+<p>系统函数：<span class="math inline">\(H(z)=\frac{Y(z)}{X(z)}=\frac{\sum_{k=0}^M b_k\cdot z^{-k}}{1-\sum_{k=1}^N a_k\cdot z^{-k}}=H_1(z)\cdot H_2(z)\)</span> <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-15-08-50.png"> 其中<span class="math inline">\(H_1(z)=\sum_{k=0}^M b_k\cdot z^{-k},H_2(z)=1/[1-\sum_{k=1}^N a_k\cdot z^{-k}]\)</span></p>
+<p><strong>直接I型,先实现<span class="math inline">\(H_1(z)\)</span>,再实现<span class="math inline">\(H_2(z)\)</span>,特点：先实现系统函数的零点，再实现极点，需要2N个延迟器和2N个乘法器。</strong></p>
+<h3 id="直接ii型">直接II型</h3>
+<p><strong>直接II型,先实现<span class="math inline">\(H_2(z)\)</span>,再实现<span class="math inline">\(H_1(z)\)</span>,特点：先实现系统函数的极点，再实现零点，需要N个延迟器和2N个乘法器。</strong> <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-15-12-23.png"></p>
+<h3 id="级联型">级联型</h3>
+<p>系统函数：<span class="math inline">\(H(z)=A\prod_{k=1}^L \frac{\beta_{0k}+\beta_{1k}\cdot z^{-1}+\beta_{2k}\cdot z^{-2}}{1-\alpha_{1k}\cdot z^{-1}-\alpha_{2k}\cdot z^{-2}}=A\prod_{k=1}^L H_k(z)\)</span>,<span class="math inline">\(H_k(z)\)</span>称为滤波器的二阶基本节。 <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-15-22-55.png"> <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-15-22-36.png"></p>
+<p><strong>基本结构：二阶基本节，“田字型”结构。特点：1、二阶基本节搭配灵活，可调换次序；2、可直接控制零极点；3、存储器最少；4、误差较大。</strong></p>
+<h3 id="并联型">并联型</h3>
+<p>系统函数:<span class="math inline">\(H(z)=c_0+\sum_{k=1}^P \frac{A_k}{1-c_k\cdot z^{-1}}+\sum_{k=1}^Q \frac{\gamma_{0k}+\gamma_{1k}\cdot z^{-1}}{1-\alpha_{1k}\cdot z^{-1}-\alpha_{2k}\cdot z^{-2}}\)</span> <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-15-27-07.png"> <strong>基本结构：一阶基本节和二阶基本节。特点：1、可单独调整极点，不能直接控制零点；2、误差小，各基本节的误差不相互影响；3、速度快。</strong></p>
+<h2 id="fir数字滤波器的基本网络结构">FIR数字滤波器的基本网络结构</h2>
+<p>FIR数字滤波器是一种非递归结构，其冲激响应<span class="math inline">\(h(n)\)</span>是有限长序列</p>
+<p><span class="math display">\[
+H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
+\]</span></p>
+<p>FIR系统仅在<span class="math inline">\(z=0\)</span>处有N-1阶极点，在其它地方没有极点，有(N-1)个零点分布在有限Z平面内的任何位置上。</p>
+<h3 id="直接型">直接型</h3>
+<p>系统函数:<span class="math inline">\(H(z)=\sum_{n=0}^{N-1}h(n)z^{-n}=h(0)+h(1)z^{-1}+\dots+h(N-1)z^{-(N-1)}\)</span></p>
+<p><img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-20-15-13.png"></p>
+<p><strong>特点：只含前向通路</strong></p>
+<h3 id="级联型-1">级联型</h3>
+<p>系统函数:<span class="math inline">\(H(z)=\sum_{k=0}^{N-1}h(n)z^{-k}=\prod_{k=1}^M(\beta_{0k}+\beta_{1k}\cdot z^{-1}+\beta_{2k}\cdot z^{-2}),h(n)\)</span>为实系数 <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-20-20-09.png"></p>
+<p>特点：1、每一个基本节控制一对零点；2、乘法器较多；3、遇到高阶时<span class="math inline">\(H(z)\)</span>难分解。</p>
+<h3 id="快速卷积型">快速卷积型</h3>
+<p>已知两个长度为N的序列的线性卷积，可用2N-1点的循环卷积来代替。 <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-17-20-22-02.png"> 特点：能对信号进行高速处理。需要实时处理时采用此结构。</p>
+<h3 id="线性相位型">线性相位型</h3>
+<ol type="1">
+<li>线性相位FIR DF的条件： 单位取样响应<span class="math inline">\(h(n)=\pm h(N-1-n),\)</span>,当N为偶数时，系统的幅度响应和相位响应为<span class="math inline">\(\begin{cases} H(w)=\sum_{n=1}^{N/2}a(n)cos[w(n-\frac{1}{2})]\\ \phi(w)=-w(N-1)/2 \end{cases}\)</span>。<strong>幅度函数<span class="math inline">\(H(w)\)</span>是一个标量函数，可以包括正值和负值;<span class="math inline">\(H(w)\)</span>对<span class="math inline">\(\pi\)</span>呈奇对称。相位特性是严格线性的</strong>。当N为偶数时，系统的幅度响应和相位响应<span class="math inline">\(\begin{cases} H(w)=\sum_{n=1}^{(N-1)/2}b(n)cos[w(n)]\\ \phi(w)=-w(N-1)/2 \end{cases}\)</span>。<strong><span class="math inline">\(H(w)\)</span>对<span class="math inline">\(0,\pi,2\pi\)</span>呈偶对称,相位特性是严格线性的。</strong></li>
+<li>线性相位FIR DF系统函数的零点分布 零点分布：两组共轭对<span class="math inline">\(z,\frac{1}{z},z^*,\frac{1}{z^*}\)</span></li>
+<li>线性相位FIR DF系统函授的系数特点 系统函数多项式的系数是镜像对称的,如一个四阶系统<span class="math inline">\(H(z)\)</span>的的形式<span class="math inline">\(a+bz^{-1}+cz^{-2}+bz^{-3}+az^{-4}\)</span></li>
+<li>线性相位FIR DF的网络结构 <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/当$h(n)=h(N-1-n)$且N为偶数时.png"></li>
+</ol>
+<h2 id="iir数字滤波器的设计方法">IIR数字滤波器的设计方法</h2>
+<p>设计步骤：</p>
+<ol type="1">
+<li>根据实际需要给定滤波器的技术指标。</li>
+<li>由技术指标计算滤波器的系统函数<span class="math inline">\(H(z)\)</span>或单位取样响应<span class="math inline">\(h(n)\)</span>，即用一个稳定的因果系统逼近这些指标；</li>
+<li>用有限精度的运算实现<span class="math inline">\(H(z)\)</span>或<span class="math inline">\(h(n)\)</span>，包括选择运算结构、进行误差分析和选择存储单元的字长。</li>
+</ol>
+<p>IIR常用的设计方法：</p>
+<ol type="1">
+<li>将IIR模拟滤波器映射成数字滤波器 <span class="math inline">\(H(z)=H_a(s)|_{s=m(z)}\)</span>映射函数<span class="math inline">\(s=m(z)\)</span>应具有下列性质：
+<ul>
+<li>将<span class="math inline">\(s\)</span>平面的虚轴<span class="math inline">\(j\Omega\)</span>映射成z平面上的单位圆周<span class="math inline">\(|z|=1\)</span>,以保持模拟滤波器的幅度响应在映射后不发生失真。</li>
+<li>将s平面左半平面映射成z平面单位圆内的内部，以保证稳定的模拟滤波器能够映射成稳定的数字滤波器</li>
+<li><span class="math inline">\(m(z)\)</span>是有理函数，将有理函数<span class="math inline">\(H_a(s)\)</span>映射成有理函数<span class="math inline">\(H(z)\)</span></li>
+</ul></li>
+<li>计算机辅助设计方法</li>
+</ol>
+<h3 id="冲激响应不变法">冲激响应不变法</h3>
+<ol type="1">
+<li>使用冲激响应不变法设计数字滤波器的准则 使数字滤波器的单位取样响应与所参照的模拟滤波器的冲激响应的取样值一样，即<span class="math inline">\(h(n)=h_a(nT)\)</span>，复频域:<span class="math inline">\(H(z)|_{z=e^{sT}}=\frac{1}{T}\sum_{r=-\infty}^{\infty}H_a(s-j\frac{2\pi}{T}r)\)</span>。DF与AF的频率特性<span class="math inline">\(H(e^{jw})|_{w=t\Omega}=\frac{1}{T}\sum_{r=-\infty}^{\infty} H_a(j\frac{w}{T}-j\frac{2\pi}{T}r)\)</span> 数字滤波器的频率响应是模拟滤波器频率响应的周期延拓。在冲激响应不变法中，数字滤波器的频率响应产生混迭失真；数字域频率和模拟域频率之间是线性关系,即<span class="math inline">\(w=T\Omega\)</span>频率之间不产生失真</li>
+<li>冲激响应不变法设计数字滤波器的设计步骤 <span class="math inline">\(H_a(s)-&gt;h_a(t)-&gt;h(n)=h_a(nT)-&gt;H(z)\)</span>
+<ol type="1">
+<li>假设模拟滤波器的传递函数<span class="math inline">\(H_a(s)\)</span>具有单阶极点，且分母的阶数高于分子的阶数,将<span class="math inline">\(H_a(s)\)</span>展开为部分分式得<span class="math inline">\(H_a(s)=\sum_{k=1}^N \frac{A_k}{s-s_k}\)</span>,<span class="math inline">\(s_k\)</span>为极点，对<span class="math inline">\(H_a(s)\)</span>求laplace变换得：<span class="math inline">\(h_a(t)=\sum_{k=1}^N A_ke^{s_kt}\cdot u(t)\)</span></li>
+<li>使用冲激不变法求数字滤波器的冲激响应<span class="math inline">\(h(n)\)</span> 令<span class="math inline">\(t=nT\)</span>,代入上式得<span class="math inline">\(h(n)=h_a(nT)=h_a(t)=\sum_{k=1}^N A_ke^{s_knT}\cdot u(nT)\)</span></li>
+<li>求<span class="math inline">\(h(n)\)</span>的z变换得<span class="math inline">\(H(z)=Z[h(n)]=\sum_{n=0}^\infty[\sum_{k=1}^N A_ke^{s_knT}\cdot ]z^{-n}=\sum_{k=1}^N \frac{A_k}{1-e^{s_kT}z^{-1}}\)</span></li>
+</ol></li>
+<li>冲激响应不变法的应用范围:能够设计的滤波器：LP、BP；</li>
+</ol>
+<h3 id="双线性变换法">双线性变换法</h3>
+<ol type="1">
+<li>双线性变换法设计数字滤波器 双线性变换法是一种s平面到z平面的映射过程，定义为<span class="math inline">\(s=\frac{2}{T}\cdot\frac{1-z^{-1}}{1+z^{-1}}\)</span>,故有<span class="math inline">\(H(z)=H_a(s)|_{s=\frac{2}{T}\cdot\frac{1-z^{-1}}{1+z^{-1}}}=H_a(\frac{2}{T}\frac{1-z^{-1}}{1+z^{-1}})\)</span> 将<span class="math inline">\(z=e^{jw}\)</span>和<span class="math inline">\(s=j\Omega\)</span>带入得<span class="math inline">\(s=\frac{2}{T}\cdot \frac{1-z^{-1}}{1+z^{-1}}:j\Omega=\frac{2}{T}\cdot\frac{1-e^{-jw}}{1+e^{jw}}=\frac{2}{T}\cdot jtan(w/2)\)</span>,即<span class="math inline">\(w=2arctan(\frac{T\Omega}{2})\)</span>
+<ol type="1">
+<li>数字域频率和模拟域频率之间是非线性关系,当<span class="math inline">\(\Omega\)</span>从<span class="math inline">\(0-&gt;+\infty,w:0-&gt;\pi\)</span>。即：AF的全部频率特性，被压缩成等效于DF在频率<span class="math inline">\(0&lt;w&lt;\pi\)</span>之间的特性。</li>
+<li>幅度上无混迭失真。双线性变换的频率标度的非线性失真可以通过预畸变的方法来补偿。设所求的数字滤波器的通带和阻带的截止频率分别为<span class="math inline">\(w_p\)</span>和<span class="math inline">\(w_s\)</span>,则</li>
+</ol>
+<span class="math display">\[
+\begin{cases}
+   \Omega_p=\frac{2}{T}tg(\frac{w_p}{2})\\
+   \Omega_s=\frac{2}{T}tg(\frac{w_s}{2})
+\end{cases}\]</span>模拟滤波器就按这两个预畸变了的频率<span class="math inline">\(\Omega_s\)</span>和<span class="math inline">\(\Omega_s\)</span>来设计。双线性变换是一种稳定的变换。令<span class="math inline">\(s=\sigma+j\Omega\)</span>,得<span class="math inline">\(|z|=\sqrt{\frac{(1+\frac{\sigma T}{2})^2+(\frac{\Omega T}{2})^2}{(1-\frac{\sigma T}{2})^2+(\frac{\Omega T}{2})^2}}\)</span>
+<ol type="1">
+<li>双线性变换是简单映射；</li>
+<li>双线性变换是稳定的变换；即模拟滤波器在s平面左半平面的所有极点经映射后均在z平面的单位圆内。 $$</li>
+</ol></li>
+<li>双线性变换法设计数字滤波器的设计步骤 模拟低通滤波器-&gt;双线性变换映射成数字低通滤波器-&gt;数字低通滤波器的频率响应。</li>
+<li>双线性变换法的应用范围：能够设计的滤波器－LP、HP、BP、BS。</li>
+<li>冲激响应不变法和双线性变换法比较：
+<ul>
+<li>相同点：首先设计AF，再将AF转换为DF。</li>
+<li>不同点：冲激响应不变法幅频响应有失真 频率之间呈线性 双线性变换法幅频响应无混迭 频率之间非线性</li>
+</ul></li>
+</ol>
+<h3 id="数字butterworth滤波器">数字Butterworth滤波器</h3>
+<ol type="1">
+<li><p>模拟Butterworth滤波器的幅度平方函数 模拟Butterworth滤波器的幅度平方函数:<span class="math inline">\(|H_a(j\Omega)|^2=\frac{1}{1+(\Omega/\Omega_c)^{2N}}\)</span> <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-18-10-08-54.png"> 特点：通带内幅度响应最平坦；通带和阻带内幅度特性单调下降；N增大，通带和阻带的近似性越好，过渡带越窄；存在极点，零点在<span class="math inline">\(\infty\)</span> 。</p>
+<p>Butterworth滤波器极点分布特点:</p>
+<p>令<span class="math inline">\(s=j\Omega\)</span>,则幅度平方函数为<span class="math inline">\(H_a(s)H_a(-s)=\frac{1}{1+(s/{j\Omega_c})^{2N}}\)</span>,令分母为0，则<span class="math inline">\(s_k=\Omega_ce^{j(\frac{\pi}{2N}+\frac{\pi}{2}+\frac{k\pi}{N})},k=0,1,\dots,(2N-1)\)</span></p>
+<p>在s平面上共有2N个极点等角距地分布在半径为<span class="math inline">\(\Omega_c\)</span>的圆上；极点对称于虚轴，虚轴上无极点；N为奇数，实轴上两个极点；N为偶数，实轴上无极点；各极点间的角度为<span class="math inline">\(\frac{\pi}{N}\)</span></p></li>
+<li><p>根据滤波器的指标求模拟滤波器的系统函数</p>
+<p>N为偶数时：模拟Butterworth滤波器的传递函数为 <span class="math display">\[H_a(s)=\frac{\Omega_c^N}{\prod_{k=1}^{N/2}(s-s_k)(s-s_k^*)}\]</span> <span class="math inline">\(s_k\)</span>为左半平面极点，<span class="math inline">\(s_k^*\)</span>为<span class="math inline">\(s_k\)</span>的共轭极点 N为奇数时：<span class="math display">\[H_a(s)=\frac{\Omega_c^N}{(s-s_p)\prod_{k=1}^{N/2-1}(s-s_k)(s-s_k^*)}\]</span>,<span class="math inline">\(s_p\)</span>为实轴上的极点</p></li>
+<li><p>设计数字Butterworth滤波器的步骤</p>
+<ol type="1">
+<li>根据实际需要规定滤波器在数字临界频率<span class="math inline">\(w_p\)</span>和<span class="math inline">\(w_T\)</span>处的衰减 (单位为分贝)</li>
+<li>确定模拟Butterworth滤波器的阶数N和截止频率<span class="math inline">\(\Omega_c\)</span></li>
+<li>求模拟Butterworth滤波器的极点，并由s平面左半平面的极点构成传递函数<span class="math inline">\(H_a(s)\)</span></li>
+<li>使用冲激不变法或双线性变换法将<span class="math inline">\(H_a(s)\)</span>转换成数字滤波器的系统函数<span class="math inline">\(H(z)\)</span></li>
+</ol></li>
+</ol>
+<h2 id="iir数字滤波器的频率变换">IIR数字滤波器的频率变换</h2>
+<ol type="1">
+<li>设<span class="math inline">\(H(v)\)</span>是数字原型低通滤波器的系统函数，<span class="math inline">\(H_d(z)\)</span>是所要求的滤波器（LP、HP、BP、BS）的系统函数。为了将稳定、因果的<span class="math inline">\(H(v)\)</span>变换成稳定、因果的<span class="math inline">\(H_d(z)\)</span>，要求：
+<ol type="1">
+<li>v平面到z平面的映射<span class="math inline">\(v^{-1}=F(z^{-1})\)</span>是<span class="math inline">\(z^{-1}\)</span>的有理函数；</li>
+<li>v平面的单位圆内部映射成z平面的单位圆内部。</li>
+</ol></li>
+<li>频率变换的设计公式
+<ul>
+<li>LP-&gt;LP:<span class="math inline">\(w_p\)</span>要求的截止频率 <span class="math display">\[v^{-1}=\frac{z^{-1}-\alpha}{1-\alpha z^{-1}}\qquad\alpha=\frac{sin(\frac{\theta_p-w_p}{2})}{sin(\frac{\theta_p+w_p}{2})}\]</span></li>
+<li>LP-&gt;HP:<span class="math inline">\(w_p\)</span>要求的截止频率 <span class="math display">\[v^{-1}=-\frac{z^{-1}+\alpha}{1+\alpha z^{-1}}\qquad\alpha=\frac{cos(\frac{\theta_p+w_p}{2})}{cos(\frac{\theta_p-w_p}{2})}\]</span></li>
+<li>LP-&gt;BP：<span class="math inline">\(w_1,w_2\)</span>要求的上、下截止频率 <span class="math display">\[v^{-1}=-\frac{z^{-2}-\frac{2\alpha k}{k+1}z^{-1}+\frac{k-1}{k+1}}{\frac{k-1}{k+1}z^{-2}-\frac{2\alpha k}{k+1}z^{-1}+1}\qquad\alpha=\frac{cos(\frac{w_1+w_2}{2})}{cos(\frac{w_1-w_2}{2})}\qquad k=ctg(\frac{w_2-w_1}{2})tg(\frac{\theta_p}{2})\]</span></li>
+<li>LP-&gt;BS：<span class="math inline">\(w_1,w_2\)</span>要求的上、下截止频率 <span class="math display">\[v^{-1}=\frac{z^{-2}-\frac{2\alpha}{k+1}z^{-1}+\frac{1-k}{k+1}}{\frac{1-k}{k+1}z^{-2}-\frac{2\alpha}{k+1}z^{-1}+1}\qquad\alpha=\frac{cos(\frac{w_1+w_2}{2})}{cos(\frac{w_1-w_2}{2})}\qquad k=tg(\frac{w_2-w_1}{2})tg(\frac{\theta_p}{2})\]</span></li>
+</ul></li>
+</ol>
+<h2 id="fir数字滤波器的设计方法">FIR数字滤波器的设计方法</h2>
+<p>基本特性: 1. FIR滤波器永远是稳定的（极点均位于原点）； 2. FIR滤波器的冲激响应<span class="math inline">\(h(n)\)</span>是有限长序列； 3. FIR滤波器的系统函数<span class="math inline">\(H(z)\)</span>为多项式； 4. FIR滤波器具有线性相位。 设计的基本方法： 窗函数法，频率抽样法和等波纹逼近法等。</p>
+<h3 id="窗函数法">窗函数法</h3>
+<ol type="1">
+<li><p>窗函数法原理 将理想低通滤波器（LPF）无限长单位取样响应序列<span class="math inline">\(h_d(n)\)</span>截断。（等效于加矩形窗），用得到的有限长序列逼近理想低通滤波器。 特点：理想低通滤波器的冲激响应序列<span class="math inline">\(h_d(n)\)</span>无限长，非因果，不绝对可和。理想LPF是不稳定的，也是不可实现的。可以对理想LPF进行逼近：截断无限长时间冲激响应序列得到一个有限长序列。即：用有限长的冲激响应序列<span class="math inline">\(h(n)\)</span>来逼近无限长的冲激响应序列<span class="math inline">\(h_d(n)\)</span>,<span class="math inline">\(h(n)\)</span>应满足FIR滤波器的基本条件。应为偶对称或奇对称以满足线性相位的条件。应为因果序列。 <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-18-11-14-17.png"> 其中<span class="math inline">\(w_R(n)=\begin{cases}  1,0\le n\le N-1\\  0,else \end{cases}\)</span>--窗函数（矩形窗），其频谱为<span class="math inline">\(H(e^{jw})=\frac{1}{2\pi}H_d(e^{jw})*W(e^{jw})\)</span> 结论：</p>
+<ol type="1">
+<li>FIR数字滤波器的频谱是理想LPF的频谱与窗函数频谱的卷积；</li>
+<li>采用不同的窗函数， <span class="math inline">\(H(e^{jw})\)</span>就有不同的形状 <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-18-11-18-21.png"> 由理想LPF的时间函数加窗后得到的FIR滤波器的幅度函数是理想LPF的幅度函数与窗函数幅度函数的周期卷积,其具体过程如下： <img src="/2023/11/16/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-18-11-19-15.png"></li>
+</ol></li>
+<li><p>加窗的影响 理想LPF加窗后：使滤波器的频率响应在不连续点出现了过渡带，它主要是由窗函数频谱的主瓣引起的，其宽度取决于主瓣的宽度。而主瓣的宽度<span class="math inline">\(\Delta w=\frac{4\pi}{N}\)</span>。与滤波器的阶数N成反比。使滤波器在通带和阻带产生了一些起伏振荡的波纹—吉布斯现象，主要由旁瓣造成。 在一般情况下，对窗函数的要求是：(1)尽量减少窗函数频谱的旁瓣高度，使能量集中在主瓣，减少通带/阻带中的波纹。(2)主瓣的宽度尽量窄，获得较陡的过渡带。以上两条标准相矛盾，为了达到上述要求，采取的措施为：采用不同的窗函数。采用窗函数法设计出来的FIR数字低通滤波器的频率响应，它对理想低通滤波器的频率响应的逼近程度，取决于窗函数的频谱的主瓣宽度和旁瓣衰减的大小。</p></li>
+<li><p>几种常用的窗函数 Bartlett窗。Hanning窗。Blackman窗。Hamming窗。Kaiser窗</p></li>
+<li><p>窗函数的一般性质 窗函数的宽度N越大，窗函数的频谱的主瓣越窄，因而过渡带也越窄。窗函数的频谱的最大旁瓣高度和阻带最小衰减只取决于窗函数的种类，与窗函数的宽度N无关。</p></li>
+<li><p>对窗函数的要求 为减小通带和阻带中的波纹幅度，应选择最大旁瓣高度尽可能小的窗函数，这将使更多的能量集中于主瓣内。为获得尽可能窄的过渡带，应选择主瓣宽度尽量窄的窗函数。</p></li>
+<li><p>用窗函数法设计FIR数字滤波器的步骤</p>
+<ol type="1">
+<li>给出希望设计的滤波器的频率响应函数<span class="math inline">\(H_d(e^{jw})\)</span></li>
+<li>根据允许的过渡带宽度和阻带衰减，选择窗函数和它的宽度N</li>
+<li>计算希望设计的滤波器的单位取样响应<span class="math inline">\(h_d(n)\)</span></li>
+<li>计算FIR数字滤波器的单位取样响应<span class="math inline">\(h(n)=h_d(n)w(n)\)</span></li>
+<li>计算FIR数字滤波器的频率响应，验证是否达到所要求的指标</li>
+<li>计算幅度响应和相位响应</li>
+</ol></li>
+</ol>
 ]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>数字信号处理</tag>
+      </tags>
   </entry>
 </search>
