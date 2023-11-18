@@ -1250,7 +1250,7 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
 \end{cases}\]</span>模拟滤波器就按这两个预畸变了的频率<span class="math inline">\(\Omega_s\)</span>和<span class="math inline">\(\Omega_s\)</span>来设计。双线性变换是一种稳定的变换。令<span class="math inline">\(s=\sigma+j\Omega\)</span>,得<span class="math inline">\(|z|=\sqrt{\frac{(1+\frac{\sigma T}{2})^2+(\frac{\Omega T}{2})^2}{(1-\frac{\sigma T}{2})^2+(\frac{\Omega T}{2})^2}}\)</span>
 <ol type="1">
 <li>双线性变换是简单映射；</li>
-<li>双线性变换是稳定的变换；即模拟滤波器在s平面左半平面的所有极点经映射后均在z平面的单位圆内。 $$</li>
+<li>双线性变换是稳定的变换；即模拟滤波器在s平面左半平面的所有极点经映射后均在z平面的单位圆内。</li>
 </ol></li>
 <li>双线性变换法设计数字滤波器的设计步骤 模拟低通滤波器-&gt;双线性变换映射成数字低通滤波器-&gt;数字低通滤波器的频率响应。</li>
 <li>双线性变换法的应用范围：能够设计的滤波器－LP、HP、BP、BS。</li>
