@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/18/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%94-%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-18-16-07-13.png">
 <meta property="article:published_time" content="2023-11-18T03:41:04.000Z">
-<meta property="article:modified_time" content="2023-11-22T03:06:32.927Z">
+<meta property="article:modified_time" content="2023-11-22T10:25:37.061Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="数字信号处理">
 <meta name="twitter:card" content="summary">
@@ -217,7 +217,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-22 11:06:32" itemprop="dateModified" datetime="2023-11-22T11:06:32+08:00">2023-11-22</time>
+                <time title="修改时间：2023-11-22 18:25:37" itemprop="dateModified" datetime="2023-11-22T18:25:37+08:00">2023-11-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,7 +242,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.6k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -269,7 +269,7 @@
 <p>性质1：</p>
 <p><span class="math inline">\(C_{xx}(m)=R_{xx}(m)-m_x^2\qquad C_{xy}(m)=R_{xy}(m)-m_xm_y\\when \quad m_x=0\quad m_y=0:C_{xx}(m)=R_{xx}(m)\quad C_{xy}(m)=R_{xy}(m)\)</span></p>
 <p>性质2：</p>
-<p><span class="math inline">\(C_{xx}(0)=\sigma_x^2\qquad R_xx(0)=E[x_n^2]\)</span></p>
+<p><span class="math inline">\(C_{xx}(0)=\sigma_x^2\qquad R_{xx}(0)=E[x_n^2]\)</span></p>
 <p>性质3：</p>
 <p><span class="math inline">\(R_{xx}(m)=R_{xx}(-m)\qquad C_{xx}(m)=C_{xx}(-m)\\R_{xy}(m)=R_{yx}(-m)\qquad C_{xy}(m)=C_{yx}(m)\)</span></p>
 <p>性质4：</p>
@@ -278,7 +278,7 @@
 <p>性质6：在随机过程中，两随机过程中时间间隔越大，它们的相关性越小<span class="math display">\[\lim_{m \to \infty}C_{xx}(m)=0 \qquad \lim_{m \to \infty}C_{xy}(m)=0 \\ \lim_{m \to \infty}R_{xx}(m)=m_x^2 \qquad \lim_{m \to \infty}R_{xy}(m)=m_xm_y\]</span> <img src="/2023/11/18/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%94-%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-18-16-07-13.png"></p>
 <h2 id="功率谱">5.6 功率谱</h2>
 <h3 id="平稳随机过程的功率谱">平稳随机过程的功率谱</h3>
-<p>协方差序列的Z变换称为平稳随机过程的功率谱<span class="math inline">\(S_{xx}(z)\overset{\underset{\mathrm{\Delta}}{}}{=}\sum_{m=-\infty}^\infty C_{xx}(m)z^{-m}\)</span>。在本课程的讨论中，功率谱总是针对于零均值随机信号，则有：<span class="math inline">\(S_{xx}(z)=\sum_{m=-\infty}^\infty R_{xx}(m)z^{-m}\)</span>，功率谱也可以表述为<span class="math inline">\(S_{xx}(e^{jw})=\sum_{m=-\infty}^\infty R_{xx}(m)e^{-jwm}\)</span>。<strong>这两种表述都是等价的</strong>。对于一个实平稳随机过程，<span class="math inline">\(R_{xx}(m)\)</span>的Fourier变换总是存在的,推导可得<span class="math inline">\(E[x_n^2]=\frac{1}{2\pi}\int_{-\pi}^{\pi} S_{xx}(e^{jw})\, {\rm d}w\)</span>。<strong>功率谱在一个周期内的平均值就是随机过程的平均功率</strong></p>
+<p>协方差序列的Z变换称为平稳随机过程的功率谱<span class="math inline">\(S_{xx}(z)\overset{\underset{\mathrm{\Delta}}{}}{=}\sum_{m=-\infty}^\infty C_{xx}(m)z^{-m}\)</span>。在本课程的讨论中，功率谱总是针对于零均值随机信号，则有：<span class="math inline">\(S_{xx}(z)=\sum_{m=-\infty}^\infty R_{xx}(m)z^{-m}\)</span>，功率谱也可以表述为<span class="math inline">\(S_{xx}(e^{jw})=\sum_{m=-\infty}^\infty R_{xx}(m)e^{-jwm}\)</span>。<strong>这两种表述都是等价的</strong>。对于一个实平稳随机过程，<span class="math inline">\(R_{xx}(m)\)</span>的Fourier变换总是存在的,推导可得<span class="math inline">\(E[x_n^2]=\frac{1}{2\pi}\int_{-\pi}^{\pi} S_{xx}(e^{jw})\, {\rm d}w\)</span>。<strong>功率谱在一个周期内的平均值就是随机过程的平均功率</strong>,功率谱的反变换可表述为<span class="math inline">\(R_{xx}(m)=\frac{1}{2\pi j}\oint_{C} S_{xx}(z)z^{m-1}\, \mathrm{d}z=\frac{1}{2\pi}\int_{-\pi}^{\pi} S_{xx}(e^{jw})e^{jmw}\, {\rm d}w\)</span></p>
 <h3 id="功率谱的性质">功率谱的性质</h3>
 <ol type="1">
 <li>实平稳随机过程的功率谱是非负的</li>
@@ -286,7 +286,7 @@
 <li>实平稳随机过程的功率谱是<span class="math inline">\(w\)</span>的偶函数</li>
 </ol>
 <h3 id="平稳随机过程的互功率谱">平稳随机过程的互功率谱</h3>
-<p>两个平稳随机过程<span class="math inline">\({x_n}\)</span>和<span class="math inline">\({y_n}\)</span>的互功率谱定义为<span class="math display">\[S_{xy}(z)=\sum_{m=-\infty}^\infty R_{xy}(m)z^m\quad S_{xy}(e^{jw})=\sum_{m=-\infty}^\infty R_{xy}(m)e^{-jwm} \]</span>,由上式可得<span class="math inline">\(S_{xy}(e^{jw})=S_{yx}^*(e^{-jw})\)</span></p>
+<p>两个平稳随机过程<span class="math inline">\({x_n}\)</span>和<span class="math inline">\({y_n}\)</span>的互功率谱定义为<span class="math display">\[S_{xy}(z)=\sum_{m=-\infty}^\infty R_{xy}(m)z^{-m}\quad S_{xy}(e^{jw})=\sum_{m=-\infty}^\infty R_{xy}(m)e^{-jwm} \]</span>,由上式可得<span class="math inline">\(S_{xy}(e^{jw})=S_{yx}^*(e^{-jw})\)</span></p>
 <h2 id="离散随机信号通过线性非移变系统">5.7 离散随机信号通过线性非移变系统</h2>
 <p>整个过程可表述为： <span class="math inline">\(y(n)=\sum_{k=-\infty}^\infty h(k)x(n-k)=\sum_{k=-\infty}^\infty h(n-k)x(k)\)</span></p>
 <p>其输出的均值可表述为<span class="math inline">\(m_y=m_x \sum_{k=-\infty}^\infty h(k)=m_x H(e^{j0})\)</span></p>
