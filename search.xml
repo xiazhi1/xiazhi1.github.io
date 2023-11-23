@@ -563,7 +563,7 @@ u(n)=\sum_{k=\infty}^n\delta(k)\quad u(n)=\sum_{k=0}^\infty\delta(n-k)\]</span><
 <p>FIR：有限冲激响应，IIR：无限冲激响应 <img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-14-21-13-31.png"></p>
 <h3 id="离散时间系统的性质">离散时间系统的性质</h3>
 <p>在判断离散时间系统性质时，一般用到的都是和信号与系统中已经学到的性质，如线性性，稳定性，因果性这些，主要用到的是因果性，稳定性。因果性和稳定性的判断一般可借助系统函数进行判断，系统函数收敛域包含单位圆即稳定，收敛域到无穷即为因果，在一般判断中，用二者即可，在有些习题中可能不给出时域信号是否是右边信号，只给出<span class="math inline">\(H(z)\)</span>，其判断思路可以参考下面这道例题</p>
-<p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-22-09-48-20.png"></p>
+<p><img src="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-22-09-48-20.png" style="width:70.0%;height:70.0%"></p>
 <p>在这道例题中，没给出时域信号是否为右边信号，但根据其在无穷远处仍存在，且极点在单位圆外，可判断其为因果不稳定</p>
 <h2 id="离散时间信号和系统的频域表示">离散时间信号和系统的频域表示</h2>
 <h3 id="连续信号的ft">连续信号的FT</h3>
@@ -1341,8 +1341,8 @@ X(k)=DFT[x(n)]=\sum_{n=0}^{N-1}x(n)e^{-j\frac{2\pi}{N}kn}=\begin{cases}
 \]</span></p>
 <p>注：<span class="math inline">\(x(n),X(K)\)</span>都是有限长的，取值范围为<span class="math inline">\(0\sim N-1\)</span>,n为离散时间变量，理解为nT,k是离散频率变量，理解为<span class="math inline">\(\Delta wk\)</span>,DFT与DFS无本质区别，DFT是DFS的主值，且隐含周期性，具有唯一性。</p>
 <h3 id="用矩阵计算n点dft">用矩阵计算N点DFT</h3>
-<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-21-22-17-24.png"></p>
-<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-21-22-17-54.png"></p>
+<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-21-22-17-24.png" style="width:50.0%;height:50.0%"></p>
+<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-21-22-17-54.png" style="width:50.0%;height:50.0%"></p>
 <h3 id="dft的性质">DFT的性质</h3>
 <p><strong>旋转因子的性质</strong></p>
 <ol type="1">
@@ -1371,11 +1371,11 @@ X(k)=\sum_{n=0}^{N/2-1}x(n)W_{N/2}^{kn},k=0,1,...,N/2-1\\X(k)=\sum_{n=0}^{N/4-1}
 <li>序列分解：
 <ul>
 <li><span class="math inline">\(x_{ep}(n)=\frac{1}{2}[x(n)+x^*(N-n)],x_{op}(n)=\frac{1}{2}[x(n)-x^*(N-n)]\)</span></li>
-<li><span class="math inline">\(DFT[jx_i(n)]=X_{op}(k) \quad DFT[x_r(n)]=X_{ep}(k)\\DFT[x_{ep}(n)]=X_R(k) \quad DFT[x_{op}(n)]=jX_I(k)\)</span> <img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-14-50-38.png"></li>
+<li><span class="math inline">\(DFT[jx_i(n)]=X_{op}(k) \quad DFT[x_r(n)]=X_{ep}(k)\\DFT[x_{ep}(n)]=X_R(k) \quad DFT[x_{op}(n)]=jX_I(k)\)</span> <img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-14-50-38.png" style="width:50.0%;height:50.0%"></li>
 </ul></li>
 </ul></li>
-<li><p>序列的循环移位:一个序列的循环移位定义为:<span class="math inline">\(y(n)=x((n+m)_N)\cdot R_N(n)\)</span>,序列循环移位后DFT为:<span class="math inline">\(Y(k)=DFT[x((n+m)_N)R_N(n)]=W_N^{-km}X(k)\)</span>,由时域频域的对偶关系，<span class="math inline">\(X(k)\)</span>循环移位时，设<span class="math inline">\(Y(k)=X((k+l))_N\cdot R_N(k)\)</span>,则<span class="math inline">\(y(n)=IDFT[X((k+l))_NR_N(k)]=W_N^{nl}x(n)\)</span> <img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-14-54-56.png"></p></li>
-<li><p>循环卷积:对于两个长度均为N的序列<span class="math inline">\(x_1(n),x_2(n)\)</span>,其循环卷积定义为<span class="math inline">\(y(n)=\sum_{m=0}^{N-1}x_1(m)x_2((n-m))_NR_N(n)=\)</span><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-15-01-41.png"> <strong>特点</strong>：</p>
+<li><p>序列的循环移位:一个序列的循环移位定义为:<span class="math inline">\(y(n)=x((n+m)_N)\cdot R_N(n)\)</span>,序列循环移位后DFT为:<span class="math inline">\(Y(k)=DFT[x((n+m)_N)R_N(n)]=W_N^{-km}X(k)\)</span>,由时域频域的对偶关系，<span class="math inline">\(X(k)\)</span>循环移位时，设<span class="math inline">\(Y(k)=X((k+l))_N\cdot R_N(k)\)</span>,则<span class="math inline">\(y(n)=IDFT[X((k+l))_NR_N(k)]=W_N^{nl}x(n)\)</span> <img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-14-54-56.png" style="width:40.0%;height:40.0%"></p></li>
+<li><p>循环卷积:对于两个长度均为N的序列<span class="math inline">\(x_1(n),x_2(n)\)</span>,其循环卷积定义为<span class="math inline">\(y(n)=\sum_{m=0}^{N-1}x_1(m)x_2((n-m))_NR_N(n)=\)</span><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-15-01-41.png" style="width:20.0%;height:10.0%"> <strong>特点</strong>：</p>
 <ul>
 <li>循环卷积的过程与周期卷积一样，只取周期卷积的主值</li>
 <li>循环卷积隐含周期性</li>
@@ -1413,10 +1413,10 @@ X(k)=\sum_{n=0}^{N/2-1}x(n)W_{N/2}^{kn},k=0,1,...,N/2-1\\X(k)=\sum_{n=0}^{N/4-1}
 <h3 id="时间抽取fft算法">时间抽取FFT算法</h3>
 <p>基本出发点：利用<span class="math inline">\(W_N^k\)</span>的周期性和对称性，将DFT的计算分解成一些逐次减小的DFT计算；</p>
 <p>分解规则：：（1）对时间进行偶奇分（2）对频率进行前后分。</p>
-<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-16-36-54.png"></p>
+<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-16-36-54.png" style="width:60.0%;height:60.0%"></p>
 <p>上面时间抽选FFT流图具有三个特点： ① 基本计算单元为一碟形； ② 输入为“混序”排列；输出为正序排列； ③ 具有“同址计算”特性。</p>
 <ol type="1">
-<li>蝶形计算： 对于任意<span class="math inline">\(N=2^M\)</span>，总可以通过M级分解成2点DFT计算，每次由<span class="math inline">\(\frac{N}{2}\)</span>蝶形计算组成，如下图所示 <img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-23-17-09-25.png"> 计算方程为 <span class="math display">\[\begin{cases}
+<li>蝶形计算： 对于任意<span class="math inline">\(N=2^M\)</span>，总可以通过M级分解成2点DFT计算，每次由<span class="math inline">\(\frac{N}{2}\)</span>蝶形计算组成，如下图所示 <img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-23-17-09-25.png" style="width:50.0%;height:50.0%"> 计算方程为 <span class="math display">\[\begin{cases}
    X_{m+1}(p)=X_m(p)+W_N^kX_m(q)\\
    X_{m+1}(q)=X_m(p)-W_N^kX_m(q)
 \end{cases}\]</span> 完成一次蝶形运算需要2次复加法和1次复乘法，因为完成<span class="math inline">\(N=2^M\)</span>点的DFT计算需要<span class="math inline">\(log_2N\)</span>级迭代计算，每级<span class="math inline">\(\frac{N}{2}\)</span>个蝶形，蝶形数<span class="math inline">\(\frac{N}{2}log_2N\)</span>，完成N点的时间抽选FFT总计算量为:复乘法次数<span class="math inline">\(\alpha_F=\frac{N}{2}log_2N\)</span>,复加法次数<span class="math inline">\(\beta_F=Nlog_2N\)</span>，直接计算DFT需复乘法次数<span class="math inline">\(\alpha_D=N^2\)</span>,则<span class="math inline">\(\frac{\alpha_F}{\alpha_D}=\frac{log_2N}{2N}\)</span></li>
@@ -1425,7 +1425,7 @@ X(k)=\sum_{n=0}^{N/2-1}x(n)W_{N/2}^{kn},k=0,1,...,N/2-1\\X(k)=\sum_{n=0}^{N/4-1}
 </ol>
 <h3 id="频率抽取fft算法">频率抽取FFT算法</h3>
 <p>分解原则：(1)对时间前后分；(2)对频率偶奇分</p>
-<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-16-37-26.png"></p>
+<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-16-16-37-26.png" style="width:60.0%;height:60.0%"></p>
 <h3 id="n为合数的fft算法">N为合数的FFT算法</h3>
 <p>在前面两小节的讨论中，我们只涉及序列长度<span class="math inline">\(N=2^M\)</span>的FFT算法，本节则将着重讨论如果序列长度<span class="math inline">\(N\neq2^M\)</span>时的处理办法。通常有以下两种处理方法</p>
 <ol type="1">
