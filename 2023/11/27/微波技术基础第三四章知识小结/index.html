@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avarar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言 因为第四章内容较少，且和第二章关系紧密，故将两章合并 导波系统的一般分析方法 导波系统的基本概念 导波（导行波）：在微波传输线中按指定方向传播的电磁波 导波系统（波导）：用来导行电磁波的装置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微波技术基础第三四章知识小结">
+<meta property="og:url" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:site_name" content="夏至的个人博客">
+<meta property="og:description" content="前言 因为第四章内容较少，且和第二章关系紧密，故将两章合并 导波系统的一般分析方法 导波系统的基本概念 导波（导行波）：在微波传输线中按指定方向传播的电磁波 导波系统（波导）：用来导行电磁波的装置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-18-53-24.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-19-02-54.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-21-20-50.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-21-22-26.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-21-22-11.png">
+<meta property="article:published_time" content="2023-11-27T06:59:38.000Z">
+<meta property="article:modified_time" content="2023-11-27T13:47:09.681Z">
+<meta property="article:author" content="夏至">
+<meta property="article:tag" content="微波技术基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-18-53-24.png">
+
+<link rel="canonical" href="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>微波技术基础第三四章知识小结 | 夏至的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夏至的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          微波技术基础第三四章知识小结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-11-27 14:59:38 / 修改时间：21:47:09" itemprop="dateCreated datePublished" datetime="2023-11-27T14:59:38+08:00">2023-11-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E5%AD%A6%E5%8A%9F%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">大学功课</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言">前言</h2>
+<p>因为第四章内容较少，且和第二章关系紧密，故将两章合并</p>
+<h2 id="导波系统的一般分析方法">导波系统的一般分析方法</h2>
+<h3 id="导波系统的基本概念">导波系统的基本概念</h3>
+<p><strong>导波（导行波）</strong>：在微波传输线中按指定方向传播的电磁波</p>
+<p><strong>导波系统（波导）</strong>：用来导行电磁波的装置</p>
+<span id="more"></span>
+<p><strong>规则波导</strong>：沿轴线方向，横截面的形状、尺寸，以及填充介质的分布状态和电参数均不变的无限长的直波导</p>
+<p><strong>狭义的波导</strong>：只限于空心的金属矩形和圆形波导等。</p>
+<h3 id="不同类型的场">不同类型的场</h3>
+<p>波形可划分为三类(根据纵向分量区分):</p>
+<ol type="1">
+<li><span class="math inline">\(\dot{E_z}=0,\dot{H_z}=0\)</span>:横电磁波：TEM波,<span class="math inline">\(\dot{\overrightarrow{E_t}}=\eta\dot{\overrightarrow{H_t}}\times\dot{\overrightarrow{a_z}}\\\dot{\overrightarrow{H_t}}=\frac{1}{\eta}\dot{\overrightarrow{a_z}}\times\dot{\overrightarrow{E_t}}\)</span></li>
+<li><span class="math inline">\(\dot{E_z}=0,\dot{H_z}\neq 0\)</span>:横电波：TE波 H波 电场只有横向分量，纵向分量为零，所以有<span class="math inline">\(\dot{\overrightarrow{E_t}}=\frac{w\mu}{\beta}\dot{\overrightarrow{H_t}}\times\dot{\overrightarrow{a_z}}\)</span></li>
+<li><span class="math inline">\(\dot{E_z}\neq 0,\dot{H_z}=0\)</span>:横磁波：TM波 E波 磁场只有横向分量，纵向分量为零，所以有<span class="math inline">\(\dot{\overrightarrow{H_t}}=\frac{w\epsilon}{\beta}\dot{\overrightarrow{a_z}}\times \dot{\overrightarrow{E_t}}\)</span> TE、TM波在横截面内<span class="math inline">\(E_t\)</span>和<span class="math inline">\(H_t\)</span>相互正交，而且与单位矢量z构成一个右手螺旋系</li>
+</ol>
+<h2 id="波沿导波装置的传输特性">波沿导波装置的传输特性</h2>
+<h3 id="传输条件">传输条件</h3>
+<p>TE波和TM波在金属波导内传输需满足一定的条件：</p>
+<ol type="1">
+<li><span class="math inline">\(Z(z)=A^+e^{-j\beta z}\)</span>：无耗波导沿z轴正方向</li>
+<li><span class="math inline">\(\beta=\sqrt{K^2-K_c^2}\)</span>：相移常数</li>
+<li><span class="math inline">\(K_c=\frac{2\pi}{\lambda_c}=2\pi\sqrt{\mu\epsilon}f_c\)</span>:由横截面尺寸、性质和波型决定</li>
+<li><span class="math inline">\(K=w\sqrt{\mu\epsilon}\)</span>:当波导介质一定，就由该波的频率决定</li>
+<li><span class="math inline">\(\beta\rightarrow f,\lambda\)</span>,当f变化时，出现以下三种情况：
+<ol type="1">
+<li><span class="math inline">\(K&gt;K_c,\beta\rightarrow\)</span>实数，波导-传输状态(波向正方向和负方向传播)，此时<span class="math inline">\(\lambda&lt;\lambda_c,f&gt;f_c\)</span>(<span class="math inline">\(\lambda=2\pi/(w\sqrt{\mu\epsilon})\)</span>)-工作波长，f-工作频率，与波导无关</li>
+<li><span class="math inline">\(K&lt;K_c,\beta\rightarrow\)</span>虚数，波导-截止状态(波沿指数规律衰减)，此时<span class="math inline">\(\lambda&gt;\lambda_c,f&lt;f_c\)</span></li>
+<li><span class="math inline">\(K=K_c,\beta=0\)</span>,波导-临界状态,此时<span class="math inline">\(\lambda=\lambda_c,f=f_c,f_c=\frac{K_c}{2\pi\sqrt{\mu\epsilon}},\lambda_c=\frac{2\pi}{K_c}=\frac{1}{\sqrt{\mu\epsilon}f_c}=\frac{v}{f_c},v:\)</span>波在无界介质中传播速度，可见波导具有高通滤波器特性。(TEM波截止频率为零)</li>
+</ol></li>
+</ol>
+<h3 id="传播常数">传播常数</h3>
+<p>传播常数<span class="math inline">\(\gamma=\alpha+j\beta\)</span>,衰减常数<span class="math inline">\(\alpha\)</span>:波导单位长度上波幅值的衰减量 (dB/m),相移常数<span class="math inline">\(\beta\)</span>:波沿波导轴向传播时单位距离内相位的变化量(rad/m),无耗传输线:<span class="math inline">\(\alpha=0\quad\gamma=j\beta\)</span></p>
+<h3 id="相速">相速</h3>
+<p>相速<span class="math inline">\(v_p\)</span>: 波的等相位面沿波导轴向（z）传播的速度,<span class="math inline">\(v_p=\frac{dz}{dt}=\frac{w}{\beta}=\frac{2\pi f}{\sqrt{(\frac{2\pi}{\lambda})^2-(\frac{2\pi}{\lambda_c})^2}}=\frac{v}{\sqrt{1-(\lambda-\lambda_c)^2}}\)</span>,<strong>TEM波型的相速:<span class="math inline">\(\because \lambda_c\rightarrow\infty\quad v_p=v=\frac{1}{\sqrt{\mu\epsilon}}\)</span></strong>,TE和TM波型相速：<span class="math inline">\(\lambda&lt;\lambda_c,v_p&gt;v\)</span>,可知TEM波的相速与频率无关。具有这种特性的波型称为<strong>无色散波型</strong>，对于传输某一波型的电磁波而言，其相速随频率而变化的(例如TE和TM波型)，具有这种特性的波型称为<strong>色散波型</strong>。</p>
+<h3 id="波导波长">波导波长</h3>
+<p>波导波长<span class="math inline">\(\lambda_g\)</span>：波导内沿轴向传播的电磁波相邻的两个同相位点之间的距离, 也就是相位相差2π的两点间的距离。<span class="math inline">\(\lambda=\frac{v_p}{f}=\frac{\lambda}{\sqrt{1-(\lambda/\lambda_c)^2}},\beta=\frac{2\pi}{\lambda_g}\)</span>,TEM波:<span class="math inline">\(\lambda_g=\lambda\)</span>,TE/TM波：<span class="math inline">\(\lambda&lt;\lambda_c\quad\lambda_g&gt;\lambda\)</span></p>
+<h3 id="群速">群速</h3>
+<p>群速<span class="math inline">\(v_g\)</span>：多频率成分构成的“波群”的速度（波群－－一群具有相近的ω与相近的β的波），代表能量的传播速度。<span class="math inline">\(v_g=\frac{dw}{d\beta}=v\sqrt{1-(\frac{\lambda}{\lambda_c})^2}(\lambda&lt;\lambda_c&gt;),v_g\cdot v_p=v^2\)</span></p>
+<h3 id="波型阻抗">波型阻抗</h3>
+<p>波型阻抗<span class="math inline">\(Z_w\)</span>：电场的横向分量<span class="math inline">\(E_t\)</span>与磁场的横向分量<span class="math inline">\(H_t\)</span>的幅值之比（行波状态下）,TE波:<span class="math inline">\(Z_{TE}=\frac{w\mu}{\beta}=\sqrt{\frac{\mu}{\epsilon}}\frac{\lambda_g}{\lambda}=\eta\frac{\lambda_g}{\lambda}&gt;\eta\)</span>,TM波:<span class="math inline">\(Z_{TM}=\frac{\beta}{w\mu}=\sqrt{\frac{\mu}{\epsilon}}\frac{\lambda}{\lambda_g}=\eta\frac{\lambda}{\lambda_g}&lt;\eta\)</span>,TEM波：<span class="math inline">\(Z_{TEM}=\sqrt{\frac{\mu}{\epsilon}}=\eta\)</span>(波在无界媒质中的波阻抗)</p>
+<h2 id="矩形波导">矩形波导</h2>
+<p>矩形波导：通常将由金属材料制成的（一般为铜或铝，内表面镀银或金）、矩形截面的、内充空气的规则金属波导称为矩形波导。它是微波技术中最常用的传输系统之一，其优点在于<strong>微波高频段（厘米波或毫米波）损耗小、功率容量大、频带宽</strong></p>
+<h3 id="场解及波型">场解及波型</h3>
+<h4 id="te波h波">TE波(H波)</h4>
+<ol type="1">
+<li><p>场分量表达式：TE波型：<span class="math inline">\(E_Z=0,H_z\neq 0\)</span>,由矩形波导的边界条件:理想导体表面磁场的垂直分量<span class="math inline">\((H_x,H_y)=0\)</span>,得到如下表达式 <span class="math display">\[x=0\quad H_x=0\Rightarrow sin(\psi_x)=0\quad \psi_x=0\\x=a\quad H_x=0\Rightarrow sin(K_xa)=0\quad K_x=\frac{m\pi}{a}(m=0,1,2...)\\y=0\quad H_y=0\Rightarrow sin(\psi_y)=0\quad \psi_y=0\\y=b\quad H_y=0\Rightarrow sin(K_yb)=0\quad K_y=\frac{n\pi}{b}(n=0,1,2...)\]</span>, 将上述边界条件得到磁场纵向分量<span class="math inline">\(H_z=H_0cos(\frac{m\pi}{a}x)cos(\frac{n\pi}{b}y)e^{-j\beta z}\)</span>，再进一步推导得到矩形波导其他场分量表达式，其中，最重要的是<span class="math inline">\(K_c=\sqrt{(\frac{m\pi}{a})^2+(\frac{n\pi}{b})^2}\)</span>,其与波导尺寸和传输波型有关</p>
+<ol type="1">
+<li>上式的m,n分别代表TE波沿x方向和y方向分布的半波个数,且每一对(m,n)对应一种波型，记为<span class="math inline">\(TE_{mn}(H_{mn})\)</span></li>
+<li>对于TE波而言，m、n中任意一个可以为0，但是不能同时为0，故存在<span class="math inline">\(TE_{m0},TE_{0n},TE_{mn}\)</span>,矩形波导中TE波的最低次波型(截止波长最长或截止频率最低)为<span class="math inline">\(TE_{10}(a&gt;b)\)</span>，其余称为高次模</li>
+<li>场沿z轴为行波，x,y轴为纯驻波分布，<strong>这意味着在行波状态下，沿矩形波导的纵向（z轴）传输的是有功功率，而在矩形波导的横向（x和y轴）只存在无功功率，即没有功率的传输。</strong></li>
+</ol></li>
+<li><p>场结构：为了能形象和直观的了解场的分布（场结构），可以利用电力线和磁力线来描绘它。电力线和磁力线遵循的规律：力线上某点的切线方向<span class="math inline">\(\rightarrow\)</span>该点处场的方向,力线的疏密程度<span class="math inline">\(\rightarrow\)</span>场的强弱,当给定了m和n时，根据场分量表达式，就可以绘出电力线和磁力线的图形----场结构图,下面举例<span class="math inline">\(TE_{10}模\)</span></p>
+<p><span class="math inline">\(TE_{10}\)</span>波:各个场分量沿x方向有一个半驻波分布，y方向不变为均匀分布。 <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-18-53-24.png" style="width:40.0%;height:40.0%"></p></li>
+</ol>
+<h4 id="tm波e波">TM波（E波）</h4>
+<ol type="1">
+<li>场分量表达式：TM波型：<span class="math inline">\(H_Z=0,E_z\neq 0\)</span>,由矩形波导的边界条件:理想导体表面切向电场为零,得到如下表达式 <span class="math display">\[x=0\quad E_z=0\Rightarrow cos(\psi_x)=0\quad \psi_x=\frac{\pi}{2}\\x=a\quad E_z=0\Rightarrow cos(K_xa+\frac{\pi}{2})=0\quad K_x=\frac{m\pi}{a}(m=0,1,2...)\\y=0\quad E_z=0\Rightarrow cos(\psi_y)=0\quad \psi_y=\frac{\pi}{2}\\y=b\quad E_z=0\Rightarrow cos(K_yb+\frac{\pi}{2})=0\quad K_y=\frac{n\pi}{b}(n=0,1,2...)\]</span>,将上述边界条件得到磁场纵向分量<span class="math inline">\(E_z=E_0sin(\frac{m\pi}{a}x)sin(\frac{n\pi}{b}y)e^{-j\beta z}\)</span>
+<ol type="1">
+<li>存在无穷多个波型与m、n对应，其线性组合（叠加）也是场解。每一对（m、n）对应一种波型，记为<span class="math inline">\(TM_{mn}\)</span>。同样<span class="math inline">\(K_c=\sqrt{(\frac{m\pi}{a})^2+(\frac{n\pi}{b})^2}\)</span></li>
+<li>对于TM波，m、n中任意一个不能为0，否则场全为0。(<span class="math inline">\(m,n=0\rightarrow E_z=0\)</span>)所以<span class="math inline">\(TM_{00}、TM_{0n}、TM_{m0}\)</span>不存在。最低波型为<span class="math inline">\(TM_{11}\)</span>。</li>
+<li>TM波型的场沿z轴为行波，沿x、y轴为纯驻波分布（正弦、余弦的分布规律）所以行波状态下，沿波导纵向（z轴）传输有功功率、横向（x、y轴）无功功率</li>
+</ol></li>
+<li>场结构 <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-19-02-54.png"></li>
+</ol>
+<h3 id="矩形波导中电磁波的传播特性">矩形波导中电磁波的传播特性</h3>
+<ol type="1">
+<li>截止波长和截止频率 <span class="math inline">\(\lambda_c=\frac{2\pi}{K_c}=\frac{2}{\sqrt{(\frac{m}{a})^2+(\frac{n}{b})^2}},f_c=\frac{v}{\lambda_c}=\frac{1}{2\sqrt{\mu\epsilon}}\sqrt{(\frac{m}{a})^2+(\frac{n}{b})^2}\)</span>,可见<span class="math inline">\(TE_{mn},TM_{mn}\)</span>在m、n相同时具有相同的截止波长与截止频率，但场分布不同</li>
+<li>波型简并 由于矩形波导中，对于m及n均不为0的<span class="math inline">\(TE_{mn},TM_{mn}\)</span>模，具有相同的截止波长<span class="math inline">\(\lambda_c\)</span>，故这种场结构（波型）不同的模式截止波长相同的现象。<span class="math inline">\(TE_{0n},TM_{m0}\)</span>是非简并模,存在简并现象的模式称为简并模，简并模在工作频率相同时，其相速、群速、波导波长都是相同的。在工作中要想办法抑制工作模的简并模。</li>
+<li>截止波长分布图 因为截止波长与m,n成反比，所以当a,b一定时，m,n越小，截止波长<span class="math inline">\(\lambda_c\)</span>越大,对应的<span class="math inline">\(\beta=\frac{2\pi}{\lambda}\sqrt{1-(\frac{\lambda}{\lambda_c})^2}\)</span>,<strong>所以当工作波长<span class="math inline">\(\lambda&lt;\)</span>某种模式的<span class="math inline">\(\lambda_c\)</span>时，<span class="math inline">\(\beta&gt;0\rightarrow\)</span>传导模，反之则为截止模</strong></li>
+<li>主模，高次模,单模波导 截止波长最长的模式称为矩形波导中的主模其余为高次模。矩形波导中的主模为<span class="math inline">\(TE_{10}\)</span>，其<span class="math inline">\(\lambda_c=2a\)</span>，只能传输主模的波导为单模波导</li>
+</ol>
+<h3 id="矩形波导主模te_10模场分布及工作特性">矩形波导主模<span class="math inline">\(TE_{10}\)</span>模场分布及工作特性</h3>
+<p>为何要单模传输？:不同模式的相速不同，他们之间将有模式色散，从而使信号发生畸变。所以微波传输系统无一例外采用单模传输，即只传输主模</p>
+<p><span class="math inline">\(TE_{10}\)</span>模可以在相当宽的频带内单模工作，而在此频带内其它模式都截止。这是TE10模得到广泛应用的主要原因</p>
+<ol type="1">
+<li><span class="math inline">\(TE_{10}\)</span>模的特点:
+<ol type="1">
+<li>只有<span class="math inline">\(E_y、H_x、H_z\)</span>三个分量</li>
+<li>各分量与y无关，即沿y轴均匀分布</li>
+<li>横向场量<span class="math inline">\(E_y,H_x\)</span>与纵向场量<span class="math inline">\(H_z\)</span>在x方向上和z方向上相位相差π/2</li>
+</ol></li>
+<li>传输特性
+<ol type="1">
+<li><span class="math inline">\(K_c=\frac{\pi}{a}\quad\lambda_c=\frac{2\pi}{K_c}=2a\)</span></li>
+<li><span class="math inline">\(\beta=\frac{2\pi}{\lambda}\sqrt{1-(\lambda/\lambda_c)^2}=\frac{2\pi}{\lambda}\sqrt{1-(\lambda/2a)^2}{}\\\lambda_g=\frac{2\pi}{\beta}=\frac{\lambda}{\sqrt{1-(\lambda/2a)^2}}\)</span></li>
+<li><span class="math inline">\(v_p=\frac{w}{\beta}=\frac{v}{\sqrt{1-(\lambda/2a)^2}}\\v_g=\frac{dw}{d\beta}=v\sqrt{1-(\lambda/2a)^2}\)</span></li>
+<li><span class="math inline">\(Z_{TE_{10}}=\frac{120\pi}{\sqrt{1-(\lambda/2a)^2}}\)</span></li>
+<li>传输功率：<span class="math inline">\(P=\frac{abE_0^2}{480\pi}\sqrt{1-(\lambda/2a)^2}\)</span></li>
+<li>功率容量：<span class="math inline">\(P_{br}=6\times10^5\sqrt{1-(\lambda/2a)^2}(W),a,b,\lambda\)</span>单位均为cm</li>
+</ol></li>
+<li>波导横截面尺寸选择原则
+<ol type="1">
+<li>主要依据是单模传输：<span class="math inline">\(\lambda_{cTE_{20}}&lt;\lambda&lt;\lambda_cTE_{10},\lambda_{cTE_{01}}&lt;\lambda&lt;\lambda_cTE_{10}\\\therefore \frac{\lambda}{2}&lt;a&lt;\lambda,0&lt;b&lt;\frac{\lambda}{2}\)</span></li>
+<li>综合考虑传输功率及损耗的要求一般对于工作于<span class="math inline">\(TE_{10}\)</span>模的矩形波导，取<span class="math inline">\(a\approx0.7\lambda,b\approx(0.3-0.35)\lambda\)</span></li>
+</ol></li>
+<li>管壁电流 管壁电流,波在波导内传播，会在波导壁的内表面上（微米数量级）感应出的高频电流，称为管壁电流,其特点为<strong>两个侧壁的表面电流大小相等，方向相同,上下壁上的电流大小相等，方向相反</strong></li>
+</ol>
+<h2 id="圆波导">圆波导</h2>
+<p>圆波导－横截面为圆形的空心金属波导管圆波导。圆波导具有加工方便、双极化、 低损耗等优点，也是常用的波导管之一，可用于天线馈线、多路通信和卫星电视，可构成微波谐振腔、旋转式移相器、衰减器、旋转关节、天线辐射器等微波器件</p>
+<h3 id="场解及波型-1">场解及波型</h3>
+<p>圆波导的求解过程与矩形波导的求解类似，区别在于圆波导中，场量沿r方向按贝塞尔函数规律变化，沿圆周按三角函数变化。</p>
+<h4 id="tm波型">TM波型</h4>
+<p>对于TM波型，<span class="math inline">\(H_z=0\)</span>,经过运算和贝塞尔函数性质可知，其通过边界条件可导出<span class="math inline">\(K_c=\frac{v_{mn}}{R},v_{mn}\)</span>为m阶贝塞尔函数的第n个根的值，则可得其截止波长为<span class="math inline">\(\lambda_c=\frac{2\pi R}{v_{mn}}\)</span>，其特点如下</p>
+<ol type="1">
+<li>沿圆周和半径方向均呈纯驻波分布</li>
+<li><span class="math inline">\(TM_{m0}\)</span>不存在，所以最低的波型为<span class="math inline">\(TM_{01}\)</span>，它的<span class="math inline">\(λ_c\)</span>最长</li>
+<li>m：角向波数，表示场量沿圆周分布的整驻波的个数。n：径向波数，表示场量沿半径分布的半驻波分布个数、或最大值个数</li>
+</ol>
+<h4 id="te波型">TE波型</h4>
+<p>对于TE波型，<span class="math inline">\(E_z=0\)</span>,经过运算和贝塞尔函数性质可知，其通过边界条件可导出<span class="math inline">\(K_c=\frac{\mu_{mn}}{R},\mu_{mn}\)</span>为m阶贝塞尔函数导函数的第n个根的值，则可得其截止波长为<span class="math inline">\(\lambda_c=\frac{2\pi R}{\mu_{mn}}\)</span>，其特点如下</p>
+<ol type="1">
+<li>沿圆周和半径方向均呈纯驻波分布</li>
+<li><span class="math inline">\(TE_{m0}\)</span>不存在，所以最低的波型为<span class="math inline">\(TM_{11}\)</span>，它的<span class="math inline">\(λ_c\)</span>最长</li>
+<li>m：角向波数，表示场量沿圆周分布的整驻波的个数。n：径向波数，表示场量沿半径分布的半驻波分布个数、或最大值个数</li>
+</ol>
+<h3 id="截止波长">截止波长</h3>
+<p><span class="math inline">\(\lambda_c=\frac{2\pi}{K_c}=\begin{cases}  \frac{2\pi R}{v_{mn}}(TM)\\  \frac{2\pi R}{\mu_{mn}}(TE) \end{cases}\)</span></p>
+<ol type="1">
+<li>主模及高次模:圆波导中的主模为<span class="math inline">\(TE_{11},λ_c=3.41R\)</span>,其它的模均为高次模</li>
+<li>简并现象</li>
+<li>模式简并：<span class="math inline">\(\because J_0&#39;(x)=-J_1(x),\therefore \mu_{0n}=v_{1n},TE_{0n},TM_{1n}\)</span>模的<span class="math inline">\(\lambda_c\)</span>相同</li>
+<li>因为当<span class="math inline">\(m\neq 0\)</span>时，TM波和TE波每一个模的场有两种分布可能（cos/sin），这种同一模式但具有两种极化的场分布，且<span class="math inline">\(λ_c\)</span>相同，称为极化简并现象。</li>
+</ol>
+<h3 id="圆波导中常用的三个模式">圆波导中常用的三个模式</h3>
+<ol type="1">
+<li><span class="math inline">\(TE_{11}\)</span>:
+<ol type="1">
+<li>是圆波导中的主模，其<span class="math inline">\(λ_c=3.41R\)</span></li>
+<li>在横截面上，其场结构与矩形波导的<span class="math inline">\(TE_{10}\)</span>很相似，故常用矩形波导中TE10通过方-圆接头过渡为圆波导中的<span class="math inline">\(TE_{11}\)</span></li>
+<li>有极化简并现象，即在<span class="math inline">\(\psi\)</span>方向场分布有<span class="math inline">\(cosm\psi\)</span>及<span class="math inline">\(sinm\psi\)</span>两种分布的可能,故圆波导长距离传输信号一般不用这种波型，而在旋转式移相器、衰减器、谐振腔等，常采用这种波型</li>
+</ol></li>
+<li><span class="math inline">\(TE_{01}\)</span>：
+<ol type="1">
+<li><span class="math inline">\(TE_{01}\)</span>也是圆波导中常用的波型之一，它的场分量只有<span class="math inline">\(E_φ,H_r,H_z,E_r＝E_z＝H_φ＝0\)</span></li>
+<li>为圆波导中的高次模， <span class="math inline">\(λ_c=1.64R\)</span></li>
+<li>m=0，场结构在横截面上是轴对称的（与<span class="math inline">\(\psi\)</span>无关），所以无极化简并。但是与<span class="math inline">\(TM_{11}\)</span>存在模式简并，又称为E－H简并。故在使用时必须设法抑制低次模及简并模。</li>
+<li>该波型在波导内壁的切向磁场只有<span class="math inline">\(H_z\)</span>分量，故内壁上只有圆周方向的(<span class="math inline">\(\psi\)</span>方向)的表面电流，导体损耗小</li>
+<li>当传输功率一定时，频率越高，则损耗越小。所以该模式适合作为高Q谐振腔的工作模式，以及用来长距离传输功率信号</li>
+</ol></li>
+<li><span class="math inline">\(TM_{01}\)</span>：
+<ol type="1">
+<li><span class="math inline">\(TM_{01}\)</span>场分量只有<span class="math inline">\(H_φ,E_r,E_z,H_r＝H_z＝E_φ＝0\)</span></li>
+<li>是横磁模中的最低模式,<span class="math inline">\(λ_c=2.61R\)</span></li>
+<li>横截面上的场结构具有轴对称性，即沿<span class="math inline">\(\psi\)</span>向无变化,故无极化简并，也无模式简并，因此常作为雷达天线与馈线的旋转关节中的工作模式。</li>
+<li>该波型在内壁表面的切向磁场只有<span class="math inline">\(H_\psi\)</span>分量，只有z方向的管壁电流，因此它可以有效地和轴向流动的电子流交换能量，由此将其应用于微波电子管中的谐振腔及直线电子加速器中的工作模式</li>
+</ol></li>
+</ol>
+<h2 id="同轴线">同轴线</h2>
+<p>同轴线的优点：主波型（主模）是TEM波，是无色散波，无频率下限、频带宽，场结构稳定，比双绞线损耗小。</p>
+<p>同轴线的缺点：随着频率升高，功率容量下降，导体与介质损耗增加。所以一般只能用于分米波和厘米波的低频段</p>
+<h3 id="tem波的传输特性">TEM波的传输特性</h3>
+<ol type="1">
+<li><span class="math inline">\(K_c=0\Rightarrow\lambda_c=\infty,\beta=K=w\sqrt{\mu\epsilon},\lambda_g=\lambda\\v_p=v_g=v=\frac{1}{\sqrt{\mu\epsilon}},Z_{TEM}=\eta=\sqrt{\frac{\mu}{\epsilon}}\)</span></li>
+<li>特性阻抗:<span class="math inline">\(Z_0=\frac{\eta}{2\pi}ln\frac{b}{a}=\frac{60}{\sqrt{\epsilon_r}ln\frac{b}{a}}\)</span></li>
+<li>传输功率:<span class="math inline">\(P_{br}=\sqrt{\epsilon_r}\frac{a^2E_0^2}{120}ln\frac{b}{a}(w)\)</span></li>
+</ol>
+<h3 id="高次模及横向尺寸的选择">高次模及横向尺寸的选择</h3>
+<p>当工作波长减少到与同轴线的横向尺寸可以相比拟时，同轴线中会出现高次模,一般不用高次波型传输功率，而采用主模TEM来传输功率。为了做到单模传输，就需要抑制高次模。</p>
+<p><span class="math inline">\(TM:\lambda_c=\frac{2}{n}(b-a),最低波型TM_{01}:\lambda_c\approx2(b-a)\\TE:(m\neq0,n=1)\quad\lambda_c=\frac{\pi}{m}(b+a),最低波型TE_{11}:\lambda_c\approx\pi(b+a)\\TE(m=0):\lambda_c=\frac{2}{n}(b-a),最低波型TE_{01}:\lambda_c\approx2(b-a)\)</span></p>
+<p>同轴线中最低的高次模为<span class="math inline">\(TE_{11}\)</span>，截止波长<span class="math inline">\(λc\approx\pi(b+a)\)</span>所以得到横向尺寸选择的依据</p>
+<ol type="1">
+<li>保证主模单模工作:<span class="math inline">\(\lambda_{min}&gt;\lambda_cTE_{11}=\pi(b+a),\therefore a+b&lt;\frac{\lambda_{min}}{\pi}\)</span></li>
+<li>使传输功率容量最大</li>
+</ol>
+<h2 id="微带传输线">微带传输线</h2>
+<p>上一章介绍了规则金属波导传输系统的传输原理及特性, 这类传输系统具有损耗小、结构牢固、功率容量高及电磁波限定在导管内等优点, 其缺点是比较笨重、高频下批量成本高、 频带较窄等。随着航空、航天以及通信发展的需要, 对微波设备提出了体积要小、重量要轻、 可靠性要高、性能要优越、一致性要好、 成本要低等要求, 这就促成了微波技术与半导体器件及集成电路的结合, 产生了微波集成电路。对微波集成传输元件的基本要求之一就是它必须具有平面型结构, 这样可以通过调整单一平面尺寸来控制其传输特性, 从而实现微波电路的集成化。微带线就是一种微波集成电路中应用最广泛的平面传输线。</p>
+<h3 id="微带线">微带线</h3>
+<p>微带传输线的基本结构有两种形式: 带状线和微带线 <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-21-20-50.png"> 带状线由同轴线演化而来，其流程如下，主要传输的还是TEM波 <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-21-22-26.png"> 微带线是由沉积在介质基片上的金属导体带和接地板构成的一个特殊传输系统, 它可以看成由双导体传输线演化而来 <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-21-22-11.png"> 由于这种开放式不对称结构导致微带线是一种不均匀介质填充的传输线，可以证明微带中的电磁场必有纵向分量，即在微带线中不能导行TEM波，但是在工作频率较低时，由于微带线基片厚度h远小于微带波长，其纵向分量很小，可以忽略，此时的场结构与TEM模相似，<strong>此时的传输波型为准TEM模。它是微带线的主模。</strong></p>
+<h4 id="微带线的特性阻抗">微带线的特性阻抗</h4>
+<p>如果微带线是由<span class="math inline">\(\epsilon_r\)</span>的均匀介质包围，则<span class="math inline">\(Z_0^0=\sqrt{\frac{L}{C}}=\frac{1}{v_pC},v_p=\frac{1}{\sqrt{LC}}=\frac{v_0}{\sqrt{\epsilon_r}},\lambda=\frac{v_p}{f}=\frac{\lambda_0}{\sqrt{\epsilon_r}}\)</span></p>
+<p>但是微带线实际上是介质与空气的混合介质系统,所以引入等效相对介电常数的概念: <span class="math inline">\(C_0\)</span>--单一空气介质包围的微带线的分布电容,<span class="math inline">\(C_1\)</span>--实际空气+介质填充微带线的分布电容，等效相对介电常数<span class="math inline">\(\epsilon_{re}=\frac{C_1}{C_0}\)</span></p>
+<p>即把实际混合介质系统想象成单一的、均匀的相对介电常数<span class="math inline">\(ε_{re}\)</span>的介质构成的系统,所以<span class="math inline">\(Z_0=\frac{Z_0^0}{\sqrt{\epsilon_{re}}}\quad Z_0^0=\frac{1}{v_pC_0},Z_0^0\)</span>为同样形状尺寸下填充介质全部是空气的微带线的特性阻抗</p>
+<p>两组实用的工程计算公式</p>
+<ol type="1">
+<li>假设导体带厚度为零：<span class="math inline">\(\epsilon\approx\frac{\epsilon_r+1}{2}+frac{\epsilon_r-1}{2}(1+\frac{10h}{W})^{-1/2}=1+q(\epsilon_r-1),q=\frac{1}{2}[1+(1+\frac{10h}{W})^{-1/2}]:\)</span>填充系数，表示<span class="math inline">\(\epsilon_r&gt;1\)</span>的介质填充程度</li>
+<li>导体带厚度不为零时，这时的解法一般是把边缘电容增加的影响等效为导体带的宽度增加了△ω，即此时的导带宽度为<span class="math inline">\(W_e=w+\Delta w,\Delta w\)</span>的工程近似计算公式为 <span class="math display">\[\frac{w}{h}\le\frac{1}{2\pi}:\Delta w=\frac{t}{\pi}(ln\frac{4\pi w}{t}+1)\\\frac{w}{h}\ge\frac{1}{2\pi}:\Delta w=\frac{t}{\pi}(ln\frac{2h}{t}+1)\]</span></li>
+</ol>
+<p>其他参量：相速度<span class="math inline">\(v_p=\frac{v_0}{\sqrt{\epsilon_{re}}}\quad\lambda_g=\frac{\lambda_0}{\sqrt{\epsilon_{re}}}\leftrightarrow\beta=k_0\sqrt{\epsilon_{re}}\)</span></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/" rel="tag"># 微波技术基础</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/11/21/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" rel="prev" title="微波技术基础第一二章知识小结">
+      <i class="fa fa-chevron-left"></i> 微波技术基础第一二章知识小结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" rel="next" title="微波技术基础第五六章知识小结">
+      微波技术基础第五六章知识小结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E6%B3%A2%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E8%88%AC%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">导波系统的一般分析方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E6%B3%A2%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">导波系统的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%9C%BA"><span class="nav-number">2.2.</span> <span class="nav-text">不同类型的场</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A2%E6%B2%BF%E5%AF%BC%E6%B3%A2%E8%A3%85%E7%BD%AE%E7%9A%84%E4%BC%A0%E8%BE%93%E7%89%B9%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">波沿导波装置的传输特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">传输条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E6%92%AD%E5%B8%B8%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">传播常数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E9%80%9F"><span class="nav-number">3.3.</span> <span class="nav-text">相速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A2%E5%AF%BC%E6%B3%A2%E9%95%BF"><span class="nav-number">3.4.</span> <span class="nav-text">波导波长</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%A4%E9%80%9F"><span class="nav-number">3.5.</span> <span class="nav-text">群速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A2%E5%9E%8B%E9%98%BB%E6%8A%97"><span class="nav-number">3.6.</span> <span class="nav-text">波型阻抗</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E5%BD%A2%E6%B3%A2%E5%AF%BC"><span class="nav-number">4.</span> <span class="nav-text">矩形波导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E8%A7%A3%E5%8F%8A%E6%B3%A2%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">场解及波型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#te%E6%B3%A2h%E6%B3%A2"><span class="nav-number">4.1.1.</span> <span class="nav-text">TE波(H波)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tm%E6%B3%A2e%E6%B3%A2"><span class="nav-number">4.1.2.</span> <span class="nav-text">TM波（E波）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E5%BD%A2%E6%B3%A2%E5%AF%BC%E4%B8%AD%E7%94%B5%E7%A3%81%E6%B3%A2%E7%9A%84%E4%BC%A0%E6%92%AD%E7%89%B9%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">矩形波导中电磁波的传播特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E5%BD%A2%E6%B3%A2%E5%AF%BC%E4%B8%BB%E6%A8%A1te_10%E6%A8%A1%E5%9C%BA%E5%88%86%E5%B8%83%E5%8F%8A%E5%B7%A5%E4%BD%9C%E7%89%B9%E6%80%A7"><span class="nav-number">4.3.</span> <span class="nav-text">矩形波导主模\(TE_{10}\)模场分布及工作特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%86%E6%B3%A2%E5%AF%BC"><span class="nav-number">5.</span> <span class="nav-text">圆波导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E8%A7%A3%E5%8F%8A%E6%B3%A2%E5%9E%8B-1"><span class="nav-number">5.1.</span> <span class="nav-text">场解及波型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tm%E6%B3%A2%E5%9E%8B"><span class="nav-number">5.1.1.</span> <span class="nav-text">TM波型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#te%E6%B3%A2%E5%9E%8B"><span class="nav-number">5.1.2.</span> <span class="nav-text">TE波型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%AA%E6%AD%A2%E6%B3%A2%E9%95%BF"><span class="nav-number">5.2.</span> <span class="nav-text">截止波长</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%86%E6%B3%A2%E5%AF%BC%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E4%B8%89%E4%B8%AA%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.3.</span> <span class="nav-text">圆波导中常用的三个模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E8%BD%B4%E7%BA%BF"><span class="nav-number">6.</span> <span class="nav-text">同轴线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tem%E6%B3%A2%E7%9A%84%E4%BC%A0%E8%BE%93%E7%89%B9%E6%80%A7"><span class="nav-number">6.1.</span> <span class="nav-text">TEM波的传输特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E6%AC%A1%E6%A8%A1%E5%8F%8A%E6%A8%AA%E5%90%91%E5%B0%BA%E5%AF%B8%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">6.2.</span> <span class="nav-text">高次模及横向尺寸的选择</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E5%B8%A6%E4%BC%A0%E8%BE%93%E7%BA%BF"><span class="nav-number">7.</span> <span class="nav-text">微带传输线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%B8%A6%E7%BA%BF"><span class="nav-number">7.1.</span> <span class="nav-text">微带线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E5%B8%A6%E7%BA%BF%E7%9A%84%E7%89%B9%E6%80%A7%E9%98%BB%E6%8A%97"><span class="nav-number">7.1.1.</span> <span class="nav-text">微带线的特性阻抗</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="夏至"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">夏至</p>
+  <div class="site-description" itemprop="description">人生不是短程跑，而是马拉松。在自己的时区里，一切都准时</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiazhi1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiazhi1" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2194625680@qq.com" title="E-Mail → mailto:2194625680@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏至</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">103k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:34</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

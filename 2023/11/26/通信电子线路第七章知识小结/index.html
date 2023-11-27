@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avarar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本章知识小结 概述 角度调制是用调制信号去控制载波信号角度(频率或相位)变化的一种信号变换方式。如果受控的是载波信号的频率，则称频率调制，简称调频，以FM表示；若受控的是载波信号的相位，则称为相位调制，简称调相，以PM表示。无论是FM还是PM，载频信号的幅度都不受调制信号的影响。调频波的解调称为鉴频或频率检波，调相波的解调称鉴相或相位检波。与调幅波的检波一样，鉴频和鉴相也是从已调信号中还原出原">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通信电子线路第七章知识小结">
+<meta property="og:url" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:site_name" content="夏至的个人博客">
+<meta property="og:description" content="本章知识小结 概述 角度调制是用调制信号去控制载波信号角度(频率或相位)变化的一种信号变换方式。如果受控的是载波信号的频率，则称频率调制，简称调频，以FM表示；若受控的是载波信号的相位，则称为相位调制，简称调相，以PM表示。无论是FM还是PM，载频信号的幅度都不受调制信号的影响。调频波的解调称为鉴频或频率检波，调相波的解调称鉴相或相位检波。与调幅波的检波一样，鉴频和鉴相也是从已调信号中还原出原">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-13-43-54.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-13-52-23.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-14-49-00.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-14-57-47.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-04-41.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-33-38.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-36-11.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-54-57.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-56-16.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-58-19.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-03-22.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-12-05.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-21-31.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-22-51.png">
+<meta property="article:published_time" content="2023-11-26T02:58:32.000Z">
+<meta property="article:modified_time" content="2023-11-26T08:30:28.938Z">
+<meta property="article:author" content="夏至">
+<meta property="article:tag" content="通信电子线路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-13-43-54.png">
+
+<link rel="canonical" href="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>通信电子线路第七章知识小结 | 夏至的个人博客</title><meta name="robots" content="noindex">
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夏至的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          通信电子线路第七章知识小结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-11-26 10:58:32 / 修改时间：16:30:28" itemprop="dateCreated datePublished" datetime="2023-11-26T10:58:32+08:00">2023-11-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E5%AD%A6%E5%8A%9F%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">大学功课</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="本章知识小结">本章知识小结</h2>
+<h3 id="概述">概述</h3>
+<p>角度调制是用调制信号去控制载波信号角度(频率或相位)变化的一种信号变换方式。如果受控的是载波信号的频率，则称频率调制，简称调频，以FM表示；若受控的是载波信号的相位，则称为相位调制，简称调相，以PM表示。无论是FM还是PM，载频信号的幅度都不受调制信号的影响。调频波的解调称为鉴频或频率检波，调相波的解调称鉴相或相位检波。与调幅波的检波一样，鉴频和鉴相也是从已调信号中还原出原调制信号 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-13-43-54.png" style="width:50.0%;height:50.0%"> <strong>角度调制与解调和振幅调制与解调最大的区别在频率变换前后频谱结构的变化不同。</strong></p>
+<ol type="1">
+<li>角度调制:频率变换前后频谱结构发生了变化，属于非线性频率变换。</li>
+<li>角度调制的主要优点: 抗干扰性强.FM广泛应用于广播、电视、通信以及遥测方面，PM主要应用于数字通信。</li>
+<li>角度调制的主要缺点: 占据频带宽，频带利用不经济。</li>
+</ol>
+<h3 id="调角波的性质">调角波的性质</h3>
+<h4 id="调频波和调相波的波形和数学表达式">调频波和调相波的波形和数学表达式</h4>
+<p>FM波和PM波的相关性质在这里省略推导，不加证明的附上二者的对比图 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-13-52-23.png"> 由上表知，此时调频波的调制指数为<span class="math inline">\(m_f=\frac{K_fV_\Omega}{\Omega}\)</span>,调相波的调制指数为<span class="math inline">\(m_p=K_pV_\Omega\)</span>,进而得到调频波最大频移为<span class="math inline">\(\Delta w_f=K_fV_\Omega\)</span>，调相波最大频移为<span class="math inline">\(\Delta w_p=K_pV_\Omega\Omega\)</span>,下面分析当调制信号<span class="math inline">\(V_\Omega(t)=V_\Omega cos\Omega t\)</span>时，调频波的数学表达式为<span class="math inline">\(a_f(t)=V_mcos(w_0t+m_fsin\Omega t)\)</span>,调相波的数学表达式为<span class="math inline">\(a_p(t)=V_mcos(w_0t+m_pcos\Omega t)\)</span></p>
+<p>从上面的表达式和对比表格可以看出的是，调频波的频偏与调制频率<span class="math inline">\(\Omega\)</span>无关，调频指数<span class="math inline">\(m_f\)</span>则与<span class="math inline">\(\Omega\)</span>成反比，调相波的频偏<span class="math inline">\(\Delta w_p\)</span>与<span class="math inline">\(\Omega\)</span>成正比，调相指数则与<span class="math inline">\(\Omega\)</span>无关 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-14-49-00.png"> 对比上图中的表达式可以看出，无论调频还是调相，最大频移(频偏)与调制指数之间的关系都是相同的，若频偏都用<span class="math inline">\(\Delta w_m\)</span>表示，调制指数都用m表示，则<span class="math inline">\(\Delta w_m\)</span>与m之间满足以下关系 <span class="math display">\[\Delta w_m=m\Omega\qquad \Delta f_m=mF\\\Delta f =\frac{\Delta w}{2\pi}\qquad F=\frac{\Omega}{2\pi}\]</span> <strong>在幅度调制中，调幅度<span class="math inline">\(m_a\le1\)</span>,否则会产生过调制失真，在角度调制中，无论调频还是调相，调制指数均可大于1</strong></p>
+<h4 id="调角信号的频谱与有效频带宽度">调角信号的频谱与有效频带宽度</h4>
+<p>由于调频波和调相波的方程式相似,因此要分析其中一种频谱,则另一种也完全适用</p>
+<p>调频波的表达式<span class="math inline">\(a_f(t)=V_mcos(w_0t+m_fsin\Omega t)\)</span>利用三角函数关系改写并求解，发现其解只能用贝塞尔函数求解，展开后发现，在单频调制情况下，调频波和调相波可分解为载频和无穷多对上下边频分量之和，各频率分量之间的距离均等于调制频率，且奇数次的上下边频相位相反，包括载频分量在内的各频率分量的振幅均由贝塞尔函数值决定。 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-14-57-47.png"> 由图可知，无论<span class="math inline">\(m_f\)</span>为何值，随着阶数n的增大，边频分量的增幅总的趋势是减小的，<span class="math inline">\(m_f\)</span>越大，具有较大振幅的边频分量就越多</p>
+<p>调频波和调相波的平均功率与调幅波一样，也为载频功率和各边频功率之和。单频调制时，调频波和调相波的平均功率利用第一类贝塞尔函数性质求和得到<span class="math inline">\(P_{av}=\frac{1}{2}\frac{V_o^2}{R_L}\)</span>,这表明调频波和调相波的平均功率与调制前的等幅载波功率相等。<strong>说明，调制的作用仅是将原来的载频功率重新分配到各个边频上，而总的功率不变。这一点与调幅波完全不同。</strong></p>
+<p>通常将振幅小于载波振幅10%的边频分量忽略不计，有效的上下边频分量总数则为2(m+1)个，即调频波和调相波的有效频带宽度定为<span class="math inline">\(BW=2(m+1)F=2(\Delta f+F)\)</span></p>
+<p>根据FM与PM的表达式，我们发现调频波可以看出调制信号为<span class="math inline">\(\int_{0}^{t} v_\Omega(t)\, {\rm d}t\)</span>,而调相波可以看出调制信号为<span class="math inline">\(\frac{dv_\Omega(t)}{dt}\)</span>,<strong>这为间接调频方法奠定了理论基础</strong></p>
+<p>当调制信号频率F发生变化时，调频波的调制指数mf与F成反比变化，其频宽宽度基本不变，故称恒带调制</p>
+<p>当调制信号频率F变化时，调相波的调制指数<span class="math inline">\(m_p\)</span>与F无关，其频带宽度随调制频率F变化 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-04-41.png"></p>
+<h3 id="调频方法和电路">调频方法和电路</h3>
+<h4 id="实现调频的方法和基本原理">实现调频的方法和基本原理</h4>
+<p>频率调制是对调制信号频谱进行非线性频率变换，而不是线性搬移，因而不能简单地用乘法器和滤波器来实现。<strong>实现调频的方法分为两大类：直接调频法和间接调频法</strong>。</p>
+<ol type="1">
+<li>直接调频法
+<ol type="1">
+<li>用调制信号直接控制振荡器的瞬时频率变化的方法称为直接调频法</li>
+<li>优点：原理简单，频偏较大</li>
+<li>缺点：中心频率不易稳定</li>
+</ol></li>
+<li>间接调频法
+<ol type="1">
+<li>先将调制信号进行积分处理，然后用它控制载波的瞬时相位变化，从而实现间接控制载波的瞬时频率变化的方法，称为间接调频法</li>
+<li>优点：实现调相的电路独立于高频载波振荡器以外，所以这种调频波突出的优点是载波中心频率的稳定性可以做得较高。</li>
+<li>缺点：可能得到的最大频偏较小</li>
+</ol></li>
+<li>无论是直接调频还是间接调频，主要技术要求是：
+<ol type="1">
+<li>频偏尽量大，并且与调制信号保持良好的线性关系(频偏增大与调制线性度之间是矛盾的)</li>
+<li>中心频率的稳定性尽量高</li>
+<li>寄生调幅尽量小</li>
+<li>调制灵敏度尽量高</li>
+</ol></li>
+</ol>
+<h4 id="直接调频电路">直接调频电路</h4>
+<ol type="1">
+<li>变容二极管：优点：电路简单，工作频率较高，容易获得较大的频偏，在频偏不需很大的情况下，非线性失真可以做得很小。缺点：变容管的一致性较差，大量生产时会给调试带来某些麻烦；另外偏置电压的漂移、温度的变化会引起中心频率漂移，因此调频波的载波频率稳定度不高</li>
+<li>晶体管直接调频：用于稳定调频波的中心频率</li>
+</ol>
+<h4 id="间接调频方法">间接调频方法</h4>
+<p>间接调频法的频稳度高，广泛用于广播发射机和电视伴音发射机，关键在于如何实现调相，常用的调相方法有移相法，可变时延调相，矢量合成调相</p>
+<ol type="1">
+<li>移相法调相 将载频信号<span class="math inline">\(Vcosw_0t\)</span>通过一个相移受调制信号<span class="math inline">\(V_\Omega\)</span>线性控制的移相网络，即可实现调相 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-33-38.png" style="width:60.0%;height:60.0%"> 常用移相网络：如RC移相网络、LC调谐回路移相网络 但是单极LC回路线性相位变化范围小，一般在<span class="math inline">\(30\degree\)</span>以下，为了增大调相系数，可以用多级单调谐回路构成的变容管调相电路</li>
+<li>可变时延法调相 周期信号在经过一个网络后，如果在时间轴上有所移动，则此信号的相角必然发生变化，时延法调相就是利用调制信号控制时延大小而实现调相的一种方法 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-36-11.png" style="width:60.0%;height:60.0%"> 最大优点：调制线性好，相位偏移大</li>
+<li>矢量合成调相法</li>
+</ol>
+<h3 id="调角信号解调">调角信号解调</h3>
+<p>调频波的解调简称鉴频；调相波的解调简称鉴相。本节讨论的重点在鉴频。对调频波而言，调制信息包含在已调信号瞬时频率的变化中，所以<strong>解调的任务就是把已调信号瞬时频率的变化不失真地转变成电压变化，即实现“频率—电压”转换。</strong></p>
+<h4 id="鉴频方法">鉴频方法</h4>
+<ol type="1">
+<li><p>实现鉴频的方法 实现鉴频的方法很多，但常用的方法有以下几种：</p>
+<ol type="1">
+<li>利用波形变换进行鉴频</li>
+<li>相移乘法鉴频</li>
+<li>脉冲计数式鉴频</li>
+<li>利用锁相环路鉴频</li>
+</ol></li>
+<li><p>利用波形变换进行鉴频 将调频信号先通过一个线性变换网络，<strong>使调频波变换成调频调幅波</strong>，其幅度正比于瞬时频率的变化，经变换网络输出的调频调幅信号再作振幅检波即可恢复出原调制信号</p></li>
+<li><p>相移乘法鉴频 将<strong>调频波经过移相电路变成调频调相波</strong>，其相位的变化正好与调频波瞬时频率的变化成线性关系；将此调频调相波与未相移调频波(为参考信号)进行相位比较，即可得到鉴频电路的解调输出。由于相位比较器一般都选用乘法电路，故此类鉴频电路称为相移乘法电路。 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-54-57.png" style="width:60.0%;height:60.0%"></p></li>
+<li><p>脉冲计数式鉴频器 <strong>利用调频波单位时间内过零信息的不同来实现解调,优点是线性良好</strong> <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-56-16.png" style="width:60.0%;height:60.0%"></p></li>
+<li><p>鉴频器的主要技术指标 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-58-19.png" style="width:30.0%;height:30.0%"> 鉴频特性：鉴频器输出电压和输入调频波频率之间的关系</p>
+<ol type="1">
+<li>鉴频跨导S：中心频率附近，单位频偏引起的输出电压的变化量S，<span class="math inline">\(S=\frac{\Delta v_o}{\Delta f}|_{f-f_o}\)</span>,S越大，意味着鉴频特性曲线越陡峭，鉴频能力越强</li>
+<li>线性范围：指鉴频特性曲线近似于直线段的频率范围，用<span class="math inline">\(2\Delta f_{max}\)</span>表示，表明鉴频器不失真解调时所允许的频率变化范围<span class="math inline">\(\rightarrow\)</span>要求<span class="math inline">\(2\Delta f_{max}\)</span>应大于调频波最大频偏的两倍，又被称为鉴频器的带宽</li>
+<li>鉴频灵敏度：主要是指为使鉴频器正常工作所需的输入调频波的幅度，其值越小，鉴频器灵敏度越高。</li>
+</ol></li>
+</ol>
+<h4 id="相位鉴频">相位鉴频</h4>
+<p>相位鉴频器:利用波形变换来鉴频。原理：利用回路的相位频率特性，将调频波变为调幅—调频波，然后用振幅检波恢复调制信号，常有两种，电感/电容耦合相位鉴频器,本届主要介绍电感耦合相位鉴频器 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-03-22.png" style="width:60.0%;height:60.0%"></p>
+<ol type="1">
+<li>电路说明：输入电路的初级回路C1、L1和次级回路C2、L2均调谐于调频波的中心频率<span class="math inline">\(f_0\)</span>,z负责完成波形变换，等幅调频波<span class="math inline">\(\rightarrow\)</span>调幅-调频波</li>
+<li>工作原理：初级回路电流经过互感耦合，在次级回路两端感应产生次级回路电压。加在两个振幅检波器的输入信号分别为 <span class="math display">\[\dot{V_{D1}}=\dot{V_{ac}}+\dot{V_{12}}=\frac{1}{2}\dot{V_{ab}}+\dot{V_{12}}\\\dot{V_{D2}}=\dot{V_{bc}}+\dot{V_{12}}=-\frac{1}{2}\dot{V_{ab}}+\dot{V_{12}}\]</span> 只要加在二极管上的电压为FM-AM波，后面就是振幅检波。这里关键是弄清<span class="math inline">\(\dot{V_{12}}\)</span>与<span class="math inline">\(\dot{V_{ab}}\)</span>间的相位关系，二者的相位关系需要利用到耦合电路化简，这里略过，最后可以得到的结论是 <span class="math display">\[\dot{V_{ab}}=j\frac{M}{L_1}\frac{X_{C2}}{R_2+jX_2}\dot{V_{12}}\]</span> <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-12-05.png" style="width:60.0%;height:60.0%"> 由上图可以看出：
+<ol type="1">
+<li>当信号频率等于中心频率时，<span class="math inline">\(X_2=0\)</span>,次级电路电压<span class="math inline">\(\dot{V_{ab}}\)</span>比初级电路电压<span class="math inline">\(\dot{V_{12}}\)</span>超前<span class="math inline">\(\frac{\pi}{2}\)</span></li>
+<li>当信号频率高于中心频率时，<span class="math inline">\(X_2&gt;0\)</span>,次级电路电压<span class="math inline">\(\dot{V_{ab}}\)</span>比初级电路电压<span class="math inline">\(\dot{V_{12}}\)</span>超前<span class="math inline">\(\frac{\pi}{2}-\theta\)</span></li>
+<li>当信号频率高于中心频率时，<span class="math inline">\(X_2&gt;0\)</span>,次级电路电压<span class="math inline">\(\dot{V_{ab}}\)</span>比初级电路电压<span class="math inline">\(\dot{V_{12}}\)</span>超前<span class="math inline">\(\frac{\pi}{2}+\theta\)</span></li>
+</ol></li>
+<li>由于鉴频器的输出电压等于两个检波器输出电压之差，而每个检波器的输出电压(峰值或平均值)正比于其输入电压的振幅,所以鉴频器输出电压为<span class="math inline">\(V_o=k_d(V_{D1}-V_{D2}),k_d\)</span>为检波器的电压传输系数，结合上面矢量图，有如下结论 <span class="math display">\[f_{in}=f_0,V_{a&#39;b&#39;}=0\\f_{in}&gt;f_0,V_{a&#39;b&#39;}&gt;0\\f_{in}&lt;f_0,V_{a&#39;b&#39;}&lt;0\]</span> 因此，输出电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>反映了输入信号瞬时频率的偏移<span class="math inline">\(\Delta f\)</span>。而<span class="math inline">\(\Delta f\)</span>与原调制信号<span class="math inline">\(V_\Omega(t)\)</span>成正比，即<span class="math inline">\(V_{a&#39;b&#39;}\)</span>与<span class="math inline">\(V_\Omega(t)\)</span>成正比。亦即实现了调频波的解调,若将二者关系画成曲线，则得到下图 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-21-31.png" style="width:60.0%;height:60.0%"></li>
+</ol>
+<h4 id="比例鉴频器">比例鉴频器</h4>
+<p>前面介绍的相位鉴频器，当输入调频信号的振幅发生变化时，输出电压也会发生变化，因此由各种噪声和干扰引起的输入信号寄生调幅，都将在其输出端反映出来。为了抑制噪声及干扰，在鉴频器前必须增设限幅器，比例鉴频器具有自限幅功能，因而可省去外加限幅器 1. 原理电路 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-22-51.png" style="width:60.0%;height:60.0%"> 其波形变换部分与相位鉴频器基本相同，电路上差别主要有以下几点： 1. R1，R2连接点N接地，负载RL接在MN之间，输出电压由M，N引出 2. R1和R2两端并接大电容C6，使得在检波过程中<span class="math inline">\(a&#39;b&#39;\)</span>间的端电压基本保持不变 3. D1和D2按环路顺接，以保持直流通路，因此C3和C4上的电压极性一致,<span class="math inline">\(V_{a&#39;b&#39;}=V_{c3}+V_{c4}\)</span>,输出电压为<span class="math inline">\(v_o=\frac{1}{2}(V_{a&#39;b&#39;}-\frac{2V_{a&#39;b&#39;}}{1+\frac{V_{D1}}{V_{D2}}})\)</span> 2. 自限幅特性分析 比例鉴频器不需要前置限幅器，它本身就具有抑制寄生调幅所产生的干扰的能力，在比例鉴频器中，由于C6的电容量很大，因此电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>基本稳定不变，它只决定于调频波的载波振幅，而与其频偏及寄生调幅都无关. 当输入信号振幅由于干扰突然变大时，由于电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>基本恒定，就使得检波管的电流明显加大，加重了对输入回路的负载，即回路Q值下降,可迫使信号振幅减小。反之亦然。因而很好地起到了稳幅的作用</p>
+<h2 id="自问自答">自问自答</h2>
+<ol type="1">
+<li><p>采用角度调制与解调和振幅调制与解调的区别在哪里？ 角度调制与解调和振幅调制与解调最大的区别在频率变换前后频谱结构的变化不同。角度调制是频率变换前后频谱结构发生了变化，属于非线性频率变换。角度调制的主要优点是抗干扰性强，FM广泛应用于广播、电视、通信以及遥测方面，PM主要应用于数字通信。但是角度调制的主要缺点是占据频带宽，频带利用不经济。</p></li>
+<li><p>实现鉴频电路的方法主要有哪些？</p>
+<ol type="1">
+<li>利用波形变换进行鉴频</li>
+<li>相移乘法鉴频</li>
+<li>脉冲计数式鉴频器</li>
+<li>利用锁相环路实现鉴频</li>
+</ol></li>
+<li><p>从表面看，增加带宽将使更多的噪声信号进入接收机，但是，为什么宽带的调频信号反而可以提高信噪比呢？ 这是因为调频信号的频谱是有规律地扩展的，各旁频分量是相关的，经解调后宽带信号可以凝聚为窄带的原始调制信号频谱。噪声各频率是彼此独立的，不能凝聚，解调后仍分布在宽带内，大部分 将被滤波器滤除，这就使输出信噪比得以提高。</p></li>
+</ol>
+<h2 id="未解答的疑惑">未解答的疑惑</h2>
+<ol type="1">
+<li>在调相电路尤其是阿姆斯特朗法（矢量合成调相法）中如何将电路分析与矢量建立联系？</li>
+<li>如何能够进一步不把FM和PM弄混？</li>
+</ol>
+<!-- flag of hidden posts -->
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF/" rel="tag"># 通信电子线路</a>
+          </div>
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">本章知识小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E8%A7%92%E6%B3%A2%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.2.</span> <span class="nav-text">调角波的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E9%A2%91%E6%B3%A2%E5%92%8C%E8%B0%83%E7%9B%B8%E6%B3%A2%E7%9A%84%E6%B3%A2%E5%BD%A2%E5%92%8C%E6%95%B0%E5%AD%A6%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">调频波和调相波的波形和数学表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E8%A7%92%E4%BF%A1%E5%8F%B7%E7%9A%84%E9%A2%91%E8%B0%B1%E4%B8%8E%E6%9C%89%E6%95%88%E9%A2%91%E5%B8%A6%E5%AE%BD%E5%BA%A6"><span class="nav-number">1.2.2.</span> <span class="nav-text">调角信号的频谱与有效频带宽度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E9%A2%91%E6%96%B9%E6%B3%95%E5%92%8C%E7%94%B5%E8%B7%AF"><span class="nav-number">1.3.</span> <span class="nav-text">调频方法和电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%B0%83%E9%A2%91%E7%9A%84%E6%96%B9%E6%B3%95%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">1.3.1.</span> <span class="nav-text">实现调频的方法和基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E8%B0%83%E9%A2%91%E7%94%B5%E8%B7%AF"><span class="nav-number">1.3.2.</span> <span class="nav-text">直接调频电路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%B4%E6%8E%A5%E8%B0%83%E9%A2%91%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.3.</span> <span class="nav-text">间接调频方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E8%A7%92%E4%BF%A1%E5%8F%B7%E8%A7%A3%E8%B0%83"><span class="nav-number">1.4.</span> <span class="nav-text">调角信号解调</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%89%B4%E9%A2%91%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.1.</span> <span class="nav-text">鉴频方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E4%BD%8D%E9%89%B4%E9%A2%91"><span class="nav-number">1.4.2.</span> <span class="nav-text">相位鉴频</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%94%E4%BE%8B%E9%89%B4%E9%A2%91%E5%99%A8"><span class="nav-number">1.4.3.</span> <span class="nav-text">比例鉴频器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E9%97%AE%E8%87%AA%E7%AD%94"><span class="nav-number">2.</span> <span class="nav-text">自问自答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E8%A7%A3%E7%AD%94%E7%9A%84%E7%96%91%E6%83%91"><span class="nav-number">3.</span> <span class="nav-text">未解答的疑惑</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="夏至"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">夏至</p>
+  <div class="site-description" itemprop="description">人生不是短程跑，而是马拉松。在自己的时区里，一切都准时</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiazhi1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiazhi1" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2194625680@qq.com" title="E-Mail → mailto:2194625680@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏至</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">103k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:34</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

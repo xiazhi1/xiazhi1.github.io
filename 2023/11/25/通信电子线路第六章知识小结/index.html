@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avarar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本章知识小结 频谱搬移电路的特性 非线性电路具有频率变换的功能（乘法器） 线性频率变换：频率变换前后，信号的频谱结构不变. 频谱搬移电路: 信号频谱无失真的在频率轴上搬移   它们的实现框图几乎是相同的，都是利用非线性器件对输入信号频谱实行变换以产生新的有用频率成分后，滤除无用频率分量。 从频谱结构看，上述频率变换电路都只是对输入信号频谱实行横向搬移而不改变原来的谱结构，因而都属于所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通信电子线路第六章知识小结">
+<meta property="og:url" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:site_name" content="夏至的个人博客">
+<meta property="og:description" content="本章知识小结 频谱搬移电路的特性 非线性电路具有频率变换的功能（乘法器） 线性频率变换：频率变换前后，信号的频谱结构不变. 频谱搬移电路: 信号频谱无失真的在频率轴上搬移   它们的实现框图几乎是相同的，都是利用非线性器件对输入信号频谱实行变换以产生新的有用频率成分后，滤除无用频率分量。 从频谱结构看，上述频率变换电路都只是对输入信号频谱实行横向搬移而不改变原来的谱结构，因而都属于所">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-37-29.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-56-11.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-57-02.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-58-10.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-06-02.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-14-07.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-23-38.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-25-06.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-08-35-28.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-40-46.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-46-16.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-44-44.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-05-16.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-08-59.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-09-28.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-25-48.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-26-42.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-29-39.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-33-16.png">
+<meta property="article:published_time" content="2023-11-25T12:03:21.000Z">
+<meta property="article:modified_time" content="2023-11-26T02:58:09.738Z">
+<meta property="article:author" content="夏至">
+<meta property="article:tag" content="通信电子线路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-37-29.png">
+
+<link rel="canonical" href="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>通信电子线路第六章知识小结 | 夏至的个人博客</title><meta name="robots" content="noindex">
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夏至的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          通信电子线路第六章知识小结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-25 20:03:21" itemprop="dateCreated datePublished" datetime="2023-11-25T20:03:21+08:00">2023-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-26 10:58:09" itemprop="dateModified" datetime="2023-11-26T10:58:09+08:00">2023-11-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E5%AD%A6%E5%8A%9F%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">大学功课</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="本章知识小结">本章知识小结</h2>
+<h3 id="频谱搬移电路的特性">频谱搬移电路的特性</h3>
+<p>非线性电路具有频率变换的功能（乘法器）<br>
+线性频率变换：频率变换前后，信号的频谱结构不变. 频谱搬移电路: 信号频谱无失真的在频率轴上搬移</p>
+<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-37-29.png" style="width:60.0%;height:60.0%"></p>
+<ol type="1">
+<li>它们的实现框图几乎是相同的，都是利用非线性器件对输入信号频谱实行变换以产生新的有用频率成分后，滤除无用频率分量。</li>
+<li>从频谱结构看，上述频率变换电路都只是对输入信号频谱实行横向搬移而不改变原来的谱结构，因而都属于所谓的线性频率变换。</li>
+<li>频谱的横向平移从时域角度看相当于输入信号与一个参考正弦信号相乘，而平移的距离由此参考信号的频率决定，它们可以用乘法电路实现。</li>
+</ol>
+<h3 id="振幅调制原理">振幅调制原理</h3>
+<p>调制:将要传送的信息装载到某一高频载频信号上去的过程 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-56-11.png" style="width:60.0%;height:60.0%"></p>
+<p>调制可分为连续波调制和脉冲波调制 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-57-02.png" style="width:60.0%;height:60.0%"> 本章主要介绍的是调幅，调频与调相将在第七章中讲述。 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-58-10.png" style="width:60.0%;height:60.0%"></p>
+<h4 id="调幅波的性质">调幅波的性质</h4>
+<p>普通调幅波的数学表达式(一般考虑单音调制) <span class="math display">\[\begin{cases}
+    载波信号：v_0=V_0cosw_0t\\
+    调制信号：v_\Omega=V_\Omega cos\Omega t\\
+    调幅信号(已调波)：v_{AM}=V_m(t)cosw_0t
+\end{cases}\]</span> 因为调幅信号的振幅与调制信号成线性关系，所以<span class="math inline">\(V_m(t)=V_0+k_aV_\Omega cos\Omega t,k为比例常数\\\rightarrow V_m(t)=V_0(1+\frac{k_aV_\Omega}{V_0}cos\Omega t)=V_0(1+m_acos\Omega t),m_a=\frac{k_aV_\Omega}{V_0}:调幅度\in (0,1]\)</span> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-06-02.png" style="width:60.0%;height:60.0%"> 波形特点： 1. 调幅波的振幅（包络）变化规律与调制信号波形一致 2. 调幅度<span class="math inline">\(m_a\)</span>反映了调幅的强弱度 <span class="math display">\[\begin{cases}
+    m_a=0,未调幅\\
+    m_a=1,最大调幅\\
+    m_a&gt;1,过调幅，包络失真
+   \end{cases}\]</span></p>
+<p>将调幅波的数学表达式展开，可得<span class="math inline">\(v(t)=V_0cosw_0t+\frac{1}{2}m_aV_0cos(w_0+\Omega)t+\frac{1}{2}m_aV_0cos(w_0-\Omega)t\)</span> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-14-07.png" style="width:60.0%;height:60.0%"> 调幅波包含三个频率分量，载波分量<span class="math inline">\(w_0\)</span>不含传输信息，上边频分量<span class="math inline">\(w_0+\Omega\)</span>,下边频分量<span class="math inline">\(w_0-\Omega\)</span>均含传输信息</p>
+<p><strong>调幅过程实际上是 频谱搬移过程，即将调制信号的频谱搬移到载波附近，成为对称排列在载波频率两侧的上、下边频，幅度均等于<span class="math inline">\(\frac{1}{2}m_aV_0\)</span></strong></p>
+<p>将普通调幅波输送功率至电阻R上时,载波与边频的功率有： 1. 载波频率<span class="math inline">\(P_{oT}=\frac{1}{2}\frac{V_o^2}{R}\)</span> 2. 上(小)边频<span class="math inline">\(P_{SB1}=P_{SB2}=\frac{1}{4}m_a^2P_{oT}\)</span> 3. 一周期平均输出功率<span class="math inline">\(P_AM=(1+\frac{1}{2}m_a^2P_{oT})\)</span></p>
+<p><strong>载波不含信号，但功率却占整个调幅波功率的绝大部分,效率很低</strong></p>
+<h4 id="抑制载波的双边带调幅波与单边带调幅波">抑制载波的双边带调幅波与单边带调幅波</h4>
+<p>为了克服普通调幅波效率低的缺点，提高设备的功率利用率，可以不发送载波，而只发送边带信号<span class="math inline">\(\rightarrow\)</span>抑制载波的双边带调幅波(DSB AM)</p>
+<p>上边频与下边频的频谱分量对称含有相同的信息。 可仅发送单个边带信号<span class="math inline">\(\rightarrow\)</span>单边带通信(SSB) <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-23-38.png" style="width:60.0%;height:60.0%"> 残留边带调幅(记为VSB AM)它在发射端发送一个完整的边带信号、载波信号和另一个部分被抑制的边带信号.既保留了单边带调幅节省频带的优点，且具有滤波器易于实现、解调电路简单的特点</p>
+<h3 id="振幅调整方法和电路">振幅调整方法和电路</h3>
+<h4 id="概述">概述</h4>
+<p>调幅波的共同之处都是在调幅前后产生了新的频率分量，均需用非线性器件来完成频率变换 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-25-06.png" style="width:60.0%;height:60.0%"> 按调制电路输出功率的高低分类： 1. 高电平调幅电路 　　一般置于发射机的最后一级，是在功率电平较高的情况下进行调制。 2. 低电平调幅电路 　　一般置于发射机的前级，再由线性功率放大器放大已调幅信号，得到所要求功率的调幅波。 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-08-35-28.png" style="width:60.0%;height:60.0%"></p>
+<h4 id="低电平调幅电路">低电平调幅电路</h4>
+<ol type="1">
+<li>简单二极管调幅电路：
+<ul>
+<li>平方律调幅--二极管小信号时的工作状态</li>
+<li>开关调幅--二极管小信号时的工作状态</li>
+</ul></li>
+<li>平衡调幅器 平衡调制是由两个简单的二极管调幅电路对称连接组成。载波成分由于对称而被抵消，在输出中不再出现。
+<ol type="1">
+<li>用处：产生DSB和SSB信号的基本电路<br>
+</li>
+<li>优点：可抑制单管调幅器频谱中所含的直流分量、载波分量以及载波的各次谐波分量</li>
+<li>缺点：它虽然是调幅波，但因失去了载波，因而包络不能完全反映调制信号变化的规律，这就给以后的解调工作带来困难；普通调幅波的高频振荡是连续的，可是双边带调幅波在调制信号极性变化时，它的高频振荡的相位要发生<span class="math inline">\(180\degree\)</span>的突变</li>
+</ol></li>
+<li>环形调制器 平衡调幅器加上两个二极管，并将四个二极管首尾相接构成环形，<strong>优点：振幅比平衡调制器提高了一倍，并抑制了低频<span class="math inline">\(\Omega\)</span>分量</strong></li>
+<li>模拟相乘器 输出电压与输入电压关系：<span class="math inline">\(v_o(t)=kv_1(t)v_2(t)\)</span>，如果<span class="math inline">\(v_1(t)\)</span>为高频载波，<span class="math inline">\(v_2(t)\)</span>为低频调制信号，则输出为抑制载波的双边带调幅信号，若在调制信号上<span class="math inline">\(v_2(t)\)</span>叠加一直流电压，则可以得普通调幅信号的输出</li>
+<li>单边带通信
+<ol type="1">
+<li>优点：
+<ol type="1">
+<li>节约频带</li>
+<li>节省功率</li>
+<li>受传播条件影响小,抗选择性衰落能力强</li>
+<li>提高了信噪比</li>
+</ol></li>
+<li>缺点：
+<ol type="1">
+<li>单边带通信设备复杂、价格昂贵</li>
+<li>收发信机需要很高的频率稳定度及其它技术措施 参数单边带方法</li>
+</ol></li>
+<li>产生单边带方法
+<ol type="1">
+<li>滤波法：DSB信号经过带通滤波器后，滤除下边带，就得到了SSB信号</li>
+<li>移项法：利用移相的方法，消去不需要的边带</li>
+<li>修正的移相滤波法</li>
+</ol></li>
+</ol></li>
+</ol>
+<h4 id="高电平调幅电路">高电平调幅电路</h4>
+<ol type="1">
+<li>集电极调幅 工作在过压区，调制信号经低频变压器加载集电极与直流电源串馈，高频载波经高频变压器加到基极回路</li>
+<li>基极调幅 工作在欠压区，将基极供电电压与调制信号相加</li>
+</ol>
+<h3 id="振幅解调检波原理与电路">振幅解调（检波）原理与电路</h3>
+<h4 id="概述-1">概述</h4>
+<p>振幅解调(又称检波)：振幅调制的逆过程 作用：从已调制的高频振荡中恢复出原来的调制信号 检波器也属于频谱搬移 从频谱看，检波是将幅度调制波中的边带信号不失真地从载波频率附近搬移到零频率附近 　 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-40-46.png"> 检波器分类： 1. 包络检波：平方率检波，峰值包络检波，平均包络检波 2. 同步检波：乘积型，叠加型</p>
+<h4 id="二极管峰值包络检波器">二极管峰值包络检波器</h4>
+<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-46-16.png" style="width:60.0%;height:60.0%"> 1. 大信号检波原理： - 二极管单向导电特性 - 检波负载RC的充放电过程(充电时间常数小，放电时间常数大) <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-44-44.png"> 通过调节电路中的R,C,可改变充电时间常数，最后让<span class="math inline">\(v_C\)</span>接近<span class="math inline">\(v_i\)</span> 2. 包络检波器的质量指标 1. 电压传输系数(检波效率)<span class="math inline">\(K_d=\frac{输出电压V_\Omega}{输入包络振幅m_aV_i}\)</span>,<span class="math inline">\(K_d=cos\theta,\theta\approx\sqrt[3]{\frac{3\pi R_d}{R}}\\\theta:电流通角，R：检波器负载电阻，R_d：检波器二极管内阻\)</span> 2. 等效输入电阻<span class="math inline">\(R_{id}\approx R/2\)</span>,即大信号二极管的输入电阻约等于负载电阻的一半 3. 失真 1. 惰性失真(对角线切割失真) - 原因：时间常数RC太大，当调幅波包络朝较低值变化时，电容上的电荷来不及释放以跟踪其变化，所造成的失真 - 不产生失真的条件：<span class="math inline">\(RC\Omega_{max}&lt;\frac{\sqrt{1-m_a^2}}{m_a}\)</span>,工程上按<span class="math inline">\(RC\Omega_{max}\le1.5\)</span>计算 2. 负峰切割失真(底部切割失真) - 原因：由于<span class="math inline">\(C_c\)</span>的存在使得检波器的交直流电阻不一样,产生了<span class="math inline">\(V_R\)</span>反偏压，它有可能阻止二极管导通，从而产生失真 - 不产生失真的条件:<span class="math inline">\(m_a&lt;\frac{R_g}{R+R_g}\)</span> 3. 非线性失真 由检波二极管伏安特性曲线的非线性所引起 4. 频率失真 - 原因：滤波电容<span class="math inline">\(C\)</span>影响检波上限频率<span class="math inline">\(\Omega_{max}\)</span>和耦合电容<span class="math inline">\(C_c\)</span>影响检波下限频率<span class="math inline">\(\Omega_{min}\)</span> - 不产生失真条件：<span class="math inline">\(C_c&gt;&gt;\frac{1}{\Omega_{min}R_g},C&lt;&lt;\frac{1}{\Omega_{max}R}\)</span></p>
+<h4 id="同步检波电路">同步检波电路</h4>
+<p>同步检波：不含载频分量，解调时必须在检波器输入端另加一个与发射载波同频同相并保持同步变化的参考信号，此参考信号与调幅信号共同作用于非线性器件电路，经过频率变换，恢复出调制信号 同步检波也可应用于普通调幅信号的解调<span class="math inline">\(\rightarrow\)</span>为了改善性能 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-05-16.png" style="width:60.0%;height:60.0%"> 产生本地振荡信号的方法: 1. 由发送端发出导频信号，控制本地振荡器，使本地振荡器的频率和相位与发送端一致。 2. 对于双边带调制来说，可以从双边带调制信号中提取所需的同频同相的载波信号作本地振荡信号。对于单边带调制信号来说，无法直接从单边带信号中提取载波信号，因此在发射单边带信号的同时，还发射受到一定程度抑制的载波信号（称为导频信号）。在接收端，用导频信号控制本机振荡信号使其同步。 3. 采用锁相方法从抑制载波的信号中提取载波 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-08-59.png"> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-09-28.png" style="width:60.0%;height:60.0%"></p>
+<h3 id="混频器原理与电路">混频器原理与电路</h3>
+<h4 id="概述-2">概述</h4>
+<p>混频器作用：混频即对信号进行频率变换，将其载频变换到某一固定的频率上(常称为中频)，而保持原信号的特征(如调幅规律)不变。<strong>变频的优点</strong>：变频可提高接收机的灵敏度，提高接收机的选择性，工作稳定性好，波段工作时其质量指标一致性好。<strong>变频的缺点</strong>：容易产生镜像干扰、中频干扰等干扰 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-25-48.png" style="width:60.0%;height:60.0%"> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-26-42.png"> 1. 叠加型混频器: 根据所用非线性器件的不同，叠加型混频器有下列几种： - 晶体三极管混频器：具有一定混频增益 - 场效应管混频器：交调、互调干扰少 - 二极管平衡混频器和环形混频器 ：动态范围大，组合频率干扰少 2. 乘积型混频器：模拟乘法器＋带通滤波器</p>
+<h4 id="晶体三极管管混频器">晶体三极管管混频器</h4>
+<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-29-39.png"> 主要采用变跨导分析法：在混频时，混频管可看着一个参数(跨导)在改变的线性元件，即变跨导线件元件。其变频跨导被定义为<span class="math inline">\(g_c=\frac{输出中频电流振幅I_i}{输入高频电压振幅V_{Sm}}=\frac{1}{2}g_1\)</span></p>
+<h4 id="晶体管二极管混频器">晶体管二极管混频器</h4>
+<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-33-16.png" style="width:60.0%;height:60.0%"> 1. 平衡混频器<br>
+2. 环形混频器</p>
+<h4 id="混频器的干扰">混频器的干扰</h4>
+<ol type="1">
+<li><p>有用信号谐波和本振信号谐波产生的干扰--组合频率干扰(干扰哨声) 混频器输出信号中所包含的各种频率分量为<span class="math inline">\(f_k=|\pm pf_o\pm qf_s|\)</span>,p,q为任意正整数，分别代表本振频率和信号频率的谐波次数，只有p=q=1时对应的频率<span class="math inline">\(f_o-f_s\)</span>为所需要的中频信号</p>
+<p>如果某些组合频率落在谐振回路的通频带内，这些组合频率分量就和有用的中频分量一样，通过中放进入检波器，并在检波电路中与有用信号产生差拍，这时在接收机的输出端将产生哨叫声，形成有害的干扰。这种干扰又称为干扰哨叫，产生条件<span class="math inline">\(f_s=\frac{p\pm1}{q-p}f_i\)</span></p></li>
+<li><p>外来干扰信号和本振产生的干扰</p>
+<ol type="1">
+<li>组合副波道干扰 如果混频器之前的输入回路和高频放大器的选择性不够好，除了要接收的有用信号外，干扰信号也会进入混频器。当干扰频率<span class="math inline">\(f_n\)</span>与本振频率<span class="math inline">\(f_o\)</span>满足 <span class="math display">\[\begin{cases}
+  -pf_o+qf_n\approx f_i\\
+  pf_o-qf_n\approx f_i
+ \end{cases}\]</span> 会产生组合复波道干扰</li>
+<li>复波道干扰 在组合副波道干扰中，某些特定频率形成的干扰称为副波道干扰。这种干扰主要有中频干扰和镜像干扰。
+<ol type="1">
+<li>中频干扰：当干扰信号的频率等于或接近<span class="math inline">\(f_i\)</span>时的干扰。</li>
+<li>镜像频率干扰:当外来干扰信号的频率<span class="math inline">\(f_n=f_o+f_i=f_s^’\)</span>时的干扰，<span class="math inline">\(f_n=f_o+f_i=f_s+2f_i\)</span></li>
+</ol></li>
+</ol></li>
+<li><p>其他类型的干扰</p>
+<ol type="1">
+<li>交叉调制(交调)干扰 当所接收电台的信号和干扰电台同时进入接收机输入端时，如果接收机调谐于信号频率，可以清楚地收到干扰信号电台的声音，若接收机对接收信号频率失谐，干扰台的声音也消失,<strong>原因：由混频器3次方以上的非线性传输特性产生的。</strong></li>
+<li>互相调制(互调)干扰 当两个或两个以上的干扰进入到混频器的输入端时，它们与本振电压<span class="math inline">\(v_0\)</span>一起加到混频管的发射结。由于器件的非线性作用，它们将产生一系列组合频率分量。如果某些分量的频率等于或接近于中频时，就会形成干扰，称为互调干扰。假设有两个干扰信号进入到混频器，若两干扰信号形成的新的组合频率<span class="math inline">\(|\pm mf_1\pm nf_2|\)</span>与信号频率<span class="math inline">\(f_s\)</span>相近，即组合频率与本振频率<span class="math inline">\(f_0\)</span>之差落在中频范围<span class="math inline">\(f_0-|\pm mf_1\pm nf_2|=f_i\)</span>,就会造成强烈干扰</li>
+<li>阻塞干扰 当一个强干扰信号进入接收机输入端后，由于输入电路抑制不良，会使前端电路内放大器或混频器的晶体管处于严重的非线性区域，使输出信噪比大大下降。这种现象称为阻塞干扰。</li>
+<li>相互混频 由于本振源内存在杂散边带功率，强干扰与杂散边带噪声混频产生的频率分量落在中频通带内形成中频噪声</li>
+</ol></li>
+</ol>
+<p>综上所述，减小各种干扰的措施可归纳为： 1. 提高混频级前端电路(天线回路和高放)的选择性 2. 合理地选择中频，能有效地减小组合频率干扰 3. 采用各种平衡电路 4. 合理地选择混频管的静态工作点 5. 采用倍频程滤波器抑制二阶互调</p>
+<h2 id="自问自答">自问自答</h2>
+<ol type="1">
+<li><p>为什么在信号传播过程中需要对信号进行调制？</p>
+<p>在信号传输过程中，不妨从切实可行的天线选择出发思考。为使天线能有效地发送和接收电磁波，天线的几何尺寸必须和信号波长相比拟，一般不宜短于1／4波长。对于音频信号，一般频率在20Hz～20kHz，其波长为15～15000km，如果使用天线传输天线长度应在3.75～3750km，不容易实现。因此需要将信号调制到高频，使用小尺寸天线处理。</p></li>
+<li><p>在同步检波电路中，产生本地信号的方法往往有哪些呢？</p>
+<ol type="1">
+<li>由发送端发出导频信号，控制本地振荡器，使本地振荡器的频率和相位与发送端一致。</li>
+<li>对于双边带调制来说，可以从双边带调制信号中提取所需的同频同相的载波信号作本地振荡信号。</li>
+<li>对于单边带调制信号来说，无法直接从单边带信号中提取载波信号，因此在发射单边带信号的同时，还发射受到一定程度抑制的载波信号（称为导频信号）。在接收端，用导频信号控制本机振荡信号使其同步</li>
+</ol></li>
+<li><p>为什么要对电路进行变频处理？</p>
+<ol type="1">
+<li>变频可提高接收机的灵敏度</li>
+<li>提高接收机的选择性</li>
+<li>工作稳定性好</li>
+<li>波段工作时其质量指标一致性好</li>
+</ol></li>
+</ol>
+<h2 id="未解答的疑惑">未解答的疑惑</h2>
+<ol type="1">
+<li>如何理解混频器和变频器的区别</li>
+<li>如何区分不同干扰的类型</li>
+<li>如何判断不同混频器的优缺点</li>
+</ol>
+<!-- flag of hidden posts -->
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF/" rel="tag"># 通信电子线路</a>
+          </div>
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">本章知识小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%91%E8%B0%B1%E6%90%AC%E7%A7%BB%E7%94%B5%E8%B7%AF%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">频谱搬移电路的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E5%B9%85%E8%B0%83%E5%88%B6%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">振幅调制原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E5%B9%85%E6%B3%A2%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">调幅波的性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%91%E5%88%B6%E8%BD%BD%E6%B3%A2%E7%9A%84%E5%8F%8C%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%B9%85%E6%B3%A2%E4%B8%8E%E5%8D%95%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%B9%85%E6%B3%A2"><span class="nav-number">1.2.2.</span> <span class="nav-text">抑制载波的双边带调幅波与单边带调幅波</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E5%B9%85%E8%B0%83%E6%95%B4%E6%96%B9%E6%B3%95%E5%92%8C%E7%94%B5%E8%B7%AF"><span class="nav-number">1.3.</span> <span class="nav-text">振幅调整方法和电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8E%E7%94%B5%E5%B9%B3%E8%B0%83%E5%B9%85%E7%94%B5%E8%B7%AF"><span class="nav-number">1.3.2.</span> <span class="nav-text">低电平调幅电路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E7%94%B5%E5%B9%B3%E8%B0%83%E5%B9%85%E7%94%B5%E8%B7%AF"><span class="nav-number">1.3.3.</span> <span class="nav-text">高电平调幅电路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E5%B9%85%E8%A7%A3%E8%B0%83%E6%A3%80%E6%B3%A2%E5%8E%9F%E7%90%86%E4%B8%8E%E7%94%B5%E8%B7%AF"><span class="nav-number">1.4.</span> <span class="nav-text">振幅解调（检波）原理与电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E6%9E%81%E7%AE%A1%E5%B3%B0%E5%80%BC%E5%8C%85%E7%BB%9C%E6%A3%80%E6%B3%A2%E5%99%A8"><span class="nav-number">1.4.2.</span> <span class="nav-text">二极管峰值包络检波器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%A3%80%E6%B3%A2%E7%94%B5%E8%B7%AF"><span class="nav-number">1.4.3.</span> <span class="nav-text">同步检波电路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E9%A2%91%E5%99%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E7%94%B5%E8%B7%AF"><span class="nav-number">1.5.</span> <span class="nav-text">混频器原理与电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-2"><span class="nav-number">1.5.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%B6%E4%BD%93%E4%B8%89%E6%9E%81%E7%AE%A1%E7%AE%A1%E6%B7%B7%E9%A2%91%E5%99%A8"><span class="nav-number">1.5.2.</span> <span class="nav-text">晶体三极管管混频器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%B6%E4%BD%93%E7%AE%A1%E4%BA%8C%E6%9E%81%E7%AE%A1%E6%B7%B7%E9%A2%91%E5%99%A8"><span class="nav-number">1.5.3.</span> <span class="nav-text">晶体管二极管混频器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B7%E9%A2%91%E5%99%A8%E7%9A%84%E5%B9%B2%E6%89%B0"><span class="nav-number">1.5.4.</span> <span class="nav-text">混频器的干扰</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E9%97%AE%E8%87%AA%E7%AD%94"><span class="nav-number">2.</span> <span class="nav-text">自问自答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E8%A7%A3%E7%AD%94%E7%9A%84%E7%96%91%E6%83%91"><span class="nav-number">3.</span> <span class="nav-text">未解答的疑惑</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="夏至"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">夏至</p>
+  <div class="site-description" itemprop="description">人生不是短程跑，而是马拉松。在自己的时区里，一切都准时</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiazhi1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiazhi1" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2194625680@qq.com" title="E-Mail → mailto:2194625680@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏至</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">103k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:34</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
