@@ -20,20 +20,21 @@
     var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言 因为第四章内容较少，且和第二章关系紧密，故将两章合并 导波系统的一般分析方法 导波系统的基本概念 导波（导行波）：在微波传输线中按指定方向传播的电磁波 导波系统（波导）：用来导行电磁波的装置">
+  <meta name="description" content="前言 因为第四章内容较少，且和第三章关系紧密，故将两章合并 导波系统的一般分析方法 导波系统的基本概念 导波（导行波）：在微波传输线中按指定方向传播的电磁波 导波系统（波导）：用来导行电磁波的装置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微波技术基础第三四章知识小结">
 <meta property="og:url" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="前言 因为第四章内容较少，且和第二章关系紧密，故将两章合并 导波系统的一般分析方法 导波系统的基本概念 导波（导行波）：在微波传输线中按指定方向传播的电磁波 导波系统（波导）：用来导行电磁波的装置">
+<meta property="og:description" content="前言 因为第四章内容较少，且和第三章关系紧密，故将两章合并 导波系统的一般分析方法 导波系统的基本概念 导波（导行波）：在微波传输线中按指定方向传播的电磁波 导波系统（波导）：用来导行电磁波的装置">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-18-53-24.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-19-02-54.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-30-09-45-14.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-21-20-50.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-21-22-26.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-21-22-11.png">
 <meta property="article:published_time" content="2023-11-27T06:59:38.000Z">
-<meta property="article:modified_time" content="2023-11-28T07:27:35.463Z">
+<meta property="article:modified_time" content="2023-11-30T01:54:41.633Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="微波技术基础">
 <meta name="twitter:card" content="summary">
@@ -221,7 +222,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-28 15:27:35" itemprop="dateModified" datetime="2023-11-28T15:27:35+08:00">2023-11-28</time>
+                <time title="修改时间：2023-11-30 09:54:41" itemprop="dateModified" datetime="2023-11-30T09:54:41+08:00">2023-11-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,7 +267,7 @@
 
       
         <h2 id="前言">前言</h2>
-<p>因为第四章内容较少，且和第二章关系紧密，故将两章合并</p>
+<p>因为第四章内容较少，且和第三章关系紧密，故将两章合并</p>
 <h2 id="导波系统的一般分析方法">导波系统的一般分析方法</h2>
 <h3 id="导波系统的基本概念">导波系统的基本概念</h3>
 <p><strong>导波（导行波）</strong>：在微波传输线中按指定方向传播的电磁波</p>
@@ -299,13 +300,13 @@
 <h3 id="传播常数">传播常数</h3>
 <p>传播常数<span class="math inline">\(\gamma=\alpha+j\beta\)</span>,衰减常数<span class="math inline">\(\alpha\)</span>:波导单位长度上波幅值的衰减量 (dB/m),相移常数<span class="math inline">\(\beta\)</span>:波沿波导轴向传播时单位距离内相位的变化量(rad/m),无耗传输线:<span class="math inline">\(\alpha=0\quad\gamma=j\beta\)</span></p>
 <h3 id="相速">相速</h3>
-<p>相速<span class="math inline">\(v_p\)</span>: 波的等相位面沿波导轴向（z）传播的速度,<span class="math inline">\(v_p=\frac{dz}{dt}=\frac{w}{\beta}=\frac{2\pi f}{\sqrt{(\frac{2\pi}{\lambda})^2-(\frac{2\pi}{\lambda_c})^2}}=\frac{v}{\sqrt{1-(\lambda-\lambda_c)^2}}\)</span>,<strong>TEM波型的相速:<span class="math inline">\(\because \lambda_c\rightarrow\infty\quad v_p=v=\frac{1}{\sqrt{\mu\epsilon}}\)</span></strong>,TE和TM波型相速：<span class="math inline">\(\lambda&lt;\lambda_c,v_p&gt;v\)</span>,可知TEM波的相速与频率无关。具有这种特性的波型称为<strong>无色散波型</strong>，对于传输某一波型的电磁波而言，其相速随频率而变化的(例如TE和TM波型)，具有这种特性的波型称为<strong>色散波型</strong>。</p>
+<p>相速<span class="math inline">\(v_p\)</span>: 波的等相位面沿波导轴向（z）传播的速度,<span class="math inline">\(v_p=\frac{dz}{dt}=\frac{w}{\beta}=\frac{2\pi f}{\sqrt{(\frac{2\pi}{\lambda})^2-(\frac{2\pi}{\lambda_c})^2}}=\frac{v}{\sqrt{1-(\lambda/\lambda_c)^2}}\)</span>,<strong>TEM波型的相速:<span class="math inline">\(\because \lambda_c\rightarrow\infty\quad v_p=v=\frac{1}{\sqrt{\mu\epsilon}}\)</span></strong>,TE和TM波型相速：<span class="math inline">\(\lambda&lt;\lambda_c,v_p&gt;v\)</span>,可知TEM波的相速与频率无关。具有这种特性的波型称为<strong>无色散波型</strong>，对于传输某一波型的电磁波而言，其相速随频率而变化的(例如TE和TM波型)，具有这种特性的波型称为<strong>色散波型</strong>。</p>
 <h3 id="波导波长">波导波长</h3>
 <p>波导波长<span class="math inline">\(\lambda_g\)</span>：波导内沿轴向传播的电磁波相邻的两个同相位点之间的距离, 也就是相位相差2π的两点间的距离。<span class="math inline">\(\lambda_g=\frac{v_p}{f}=\frac{\lambda}{\sqrt{1-(\lambda/\lambda_c)^2}},\beta=\frac{2\pi}{\lambda_g}\)</span>,TEM波:<span class="math inline">\(\lambda_g=\lambda\)</span>,TE/TM波：<span class="math inline">\(\lambda&lt;\lambda_c\quad\lambda_g&gt;\lambda\)</span></p>
 <h3 id="群速">群速</h3>
 <p>群速<span class="math inline">\(v_g\)</span>：多频率成分构成的“波群”的速度（波群－－一群具有相近的ω与相近的β的波），代表能量的传播速度。<span class="math inline">\(v_g=\frac{dw}{d\beta}=v\sqrt{1-(\frac{\lambda}{\lambda_c})^2}(\lambda&lt;\lambda_c),v_g\cdot v_p=v^2\)</span></p>
 <h3 id="波型阻抗">波型阻抗</h3>
-<p>波型阻抗<span class="math inline">\(Z_w\)</span>：电场的横向分量<span class="math inline">\(E_t\)</span>与磁场的横向分量<span class="math inline">\(H_t\)</span>的幅值之比（行波状态下）,TE波:<span class="math inline">\(Z_{TE}=\frac{w\mu}{\beta}=\sqrt{\frac{\mu}{\epsilon}}\frac{\lambda_g}{\lambda}=\eta\frac{\lambda_g}{\lambda}&gt;\eta\)</span>,TM波:<span class="math inline">\(Z_{TM}=\frac{\beta}{w\mu}=\sqrt{\frac{\mu}{\epsilon}}\frac{\lambda}{\lambda_g}=\eta\frac{\lambda}{\lambda_g}&lt;\eta\)</span>,TEM波：<span class="math inline">\(Z_{TEM}=\sqrt{\frac{\mu}{\epsilon}}=\eta\)</span>(波在无界媒质中的波阻抗)</p>
+<p>波型阻抗<span class="math inline">\(Z_w\)</span>：电场的横向分量<span class="math inline">\(E_t\)</span>与磁场的横向分量<span class="math inline">\(H_t\)</span>的幅值之比（行波状态下）,TE波:<span class="math inline">\(Z_{TE}=\frac{w\mu}{\beta}=\sqrt{\frac{\mu}{\epsilon}}\frac{\lambda_g}{\lambda}=\eta\frac{\lambda_g}{\lambda}&gt;\eta\)</span>,TM波:<span class="math inline">\(Z_{TM}=\frac{\beta}{w\mu}=\sqrt{\frac{\mu}{\epsilon}}\frac{\lambda}{\lambda_g}=\eta\frac{\lambda}{\lambda_g}&lt;\eta\)</span>,TEM波：<span class="math inline">\(Z_{TEM}=\sqrt{\frac{\mu}{\epsilon}}=\eta\)</span>(波在无界媒质中的波阻抗)<span class="math inline">\(\approx120\pi\)</span></p>
 <h2 id="矩形波导">矩形波导</h2>
 <p>矩形波导：通常将由金属材料制成的（一般为铜或铝，内表面镀银或金）、矩形截面的、内充空气的规则金属波导称为矩形波导。它是微波技术中最常用的传输系统之一，其优点在于<strong>微波高频段（厘米波或毫米波）损耗小、功率容量大、频带宽</strong></p>
 <h3 id="场解及波型">场解及波型</h3>
@@ -333,7 +334,7 @@
 <h3 id="矩形波导中电磁波的传播特性">矩形波导中电磁波的传播特性</h3>
 <ol type="1">
 <li>截止波长和截止频率 <span class="math inline">\(\lambda_c=\frac{2\pi}{K_c}=\frac{2}{\sqrt{(\frac{m}{a})^2+(\frac{n}{b})^2}},f_c=\frac{v}{\lambda_c}=\frac{1}{2\sqrt{\mu\epsilon}}\sqrt{(\frac{m}{a})^2+(\frac{n}{b})^2}\)</span>,可见<span class="math inline">\(TE_{mn},TM_{mn}\)</span>在m、n相同时具有相同的截止波长与截止频率，但场分布不同</li>
-<li>波型简并 由于矩形波导中，对于m及n均不为0的<span class="math inline">\(TE_{mn},TM_{mn}\)</span>模，具有相同的截止波长<span class="math inline">\(\lambda_c\)</span>，故这种场结构（波型）不同的模式截止波长相同的现象。<span class="math inline">\(TE_{0n},TM_{m0}\)</span>是非简并模,存在简并现象的模式称为简并模，简并模在工作频率相同时，其相速、群速、波导波长都是相同的。在工作中要想办法抑制工作模的简并模。</li>
+<li>波型简并 由于矩形波导中，对于m及n均不为0的<span class="math inline">\(TE_{mn},TM_{mn}\)</span>模，具有相同的截止波长<span class="math inline">\(\lambda_c\)</span>，故这种场结构（波型）不同的模式截止波长相同的现象。<span class="math inline">\(TE_{0n},TE_{m0}\)</span>是非简并模,存在简并现象的模式称为简并模，简并模在工作频率相同时，其相速、群速、波导波长都是相同的。在工作中要想办法抑制工作模的简并模。</li>
 <li>截止波长分布图 因为截止波长与m,n成反比，所以当a,b一定时，m,n越小，截止波长<span class="math inline">\(\lambda_c\)</span>越大,对应的<span class="math inline">\(\beta=\frac{2\pi}{\lambda}\sqrt{1-(\frac{\lambda}{\lambda_c})^2}\)</span>,<strong>所以当工作波长<span class="math inline">\(\lambda&lt;\)</span>某种模式的<span class="math inline">\(\lambda_c\)</span>时，<span class="math inline">\(\beta&gt;0\rightarrow\)</span>传导模，反之则为截止模</strong></li>
 <li>主模，高次模,单模波导 截止波长最长的模式称为矩形波导中的主模其余为高次模。矩形波导中的主模为<span class="math inline">\(TE_{10}\)</span>，其<span class="math inline">\(\lambda_c=2a\)</span>，只能传输主模的波导为单模波导</li>
 </ol>
@@ -361,7 +362,7 @@
 <li>主要依据是单模传输：<span class="math inline">\(\lambda_{cTE_{20}}&lt;\lambda&lt;\lambda_cTE_{10},\lambda_{cTE_{01}}&lt;\lambda&lt;\lambda_cTE_{10}\\\therefore \frac{\lambda}{2}&lt;a&lt;\lambda,0&lt;b&lt;\frac{\lambda}{2}\)</span></li>
 <li>综合考虑传输功率及损耗的要求一般对于工作于<span class="math inline">\(TE_{10}\)</span>模的矩形波导，取<span class="math inline">\(a\approx0.7\lambda,b\approx(0.3-0.35)\lambda\)</span></li>
 </ol></li>
-<li>管壁电流 管壁电流,波在波导内传播，会在波导壁的内表面上（微米数量级）感应出的高频电流，称为管壁电流,其特点为<strong>两个侧壁的表面电流大小相等，方向相同,上下壁上的电流大小相等，方向相反</strong></li>
+<li>管壁电流 管壁电流波在波导内传播，会在波导壁的内表面上（微米数量级）感应出的高频电流，称为管壁电流,其特点为<strong>两个侧壁的表面电流大小相等，方向相同,上下壁上的电流大小相等，方向相反</strong> <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-30-09-45-14.png"> 该图可用于判断外部器件是否切割表面电流</li>
 </ol>
 <h2 id="圆波导">圆波导</h2>
 <p>圆波导－横截面为圆形的空心金属波导管圆波导。圆波导具有加工方便、双极化、低损耗等优点，也是常用的波导管之一，可用于天线馈线、多路通信和卫星电视，可构成微波谐振腔、旋转式移相器、衰减器、旋转关节、天线辐射器等微波器件</p>
@@ -426,7 +427,6 @@
 </ol>
 <h3 id="高次模及横向尺寸的选择">高次模及横向尺寸的选择</h3>
 <p>当工作波长减少到与同轴线的横向尺寸可以相比拟时，同轴线中会出现高次模,一般不用高次波型传输功率，而采用主模TEM来传输功率。为了做到单模传输，就需要抑制高次模。</p>
-<p><span class="math inline">\(TM:\lambda_c=\frac{2}{n}(b-a),最低波型TM_{01}:\lambda_c\approx2(b-a)\\TE:(m\neq0,n=1)\quad\lambda_c=\frac{\pi}{m}(b+a),最低波型TE_{11}:\lambda_c\approx\pi(b+a)\\TE(m=0):\lambda_c=\frac{2}{n}(b-a),最低波型TE_{01}:\lambda_c\approx2(b-a)\)</span></p>
 <p>同轴线中最低的高次模为<span class="math inline">\(TE_{11}\)</span>，截止波长<span class="math inline">\(λc\approx\pi(b+a)\)</span>所以得到横向尺寸选择的依据</p>
 <ol type="1">
 <li>保证主模单模工作:<span class="math inline">\(\lambda_{min}&gt;\lambda_cTE_{11}=\pi(b+a),\therefore a+b&lt;\frac{\lambda_{min}}{\pi}\)</span></li>
