@@ -1271,6 +1271,80 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
       </tags>
   </entry>
   <entry>
+    <title>通信电子线路第五章知识小结</title>
+    <url>/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="本章知识小结">本章知识小结</h2>
+<h3 id="概述">概述</h3>
+<p>本章主要讨论自激式振荡器，它是在无须加激励信号的情况下，能将直流电能转换为具有一定波形、频率、幅度的交变能量电路。振荡器又可根据波形不同分为正弦波振荡器和非正弦波振荡器。正弦波振荡器根据工作方式不同又可分为反馈型振荡器和负阻型振荡器。<strong>反馈型振荡器主要由决定振荡频率的选频网络和维持振荡的正反馈放大器组成</strong>，本章主要讨论反馈型正弦波振荡器 <span id="more"></span></p>
+<h3 id="反馈式振荡器的基本工作原理">反馈式振荡器的基本工作原理</h3>
+<p>反馈式振荡器由反馈放大器演变而来，根据下图可以分析器起振的物理过程和基本组成，简单来说，当开关拨向1，电路未调谐放大器，若在电路稳定后，迅速将开关拨向2点。这是调谐放大器就变为自激振荡器 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-10-41-34.png"></p>
+<p>由自激振荡建立的过程可知，反馈型自激振荡器的电路构成必须由以下三部分组成：</p>
+<ol type="1">
+<li>包含两个(或以上)储能元件的振荡回路，这两个元件中，一个释放能量时，另一个就接收能量。释放和接收能量可以往返进行，其频率取决于元件数值。</li>
+<li>可以补充由振荡回路电阻产生损耗的能量来源，在晶体管振荡器中，能源就是直流电源<span class="math inline">\(V_{CC}\)</span></li>
+<li>使能量在正确的时间内补充道电路中的控制设备，由有源器件和正反馈电路完成。</li>
+</ol>
+<p>在上述分析中，反馈式振荡器至少包含一个基本放大器和把能量一部分反馈到放大器输入端的反馈网络F。由模电知识可知，反馈环闭环增益表示为:<span class="math display">\[\dot{A_f}=\frac{\dot{A_o}}{1-\dot{A_o}\cdot \dot{F}}\]</span> <span class="math inline">\(\dot{A_o}=\frac{\dot{V_o}}{\dot{V_i}}|_{\dot{V_f}=0}\)</span>为基本放大器小信号开环增益，<span class="math inline">\(\dot{F}=\frac{\dot{V_f}}{\dot{V_i}}\)</span>为反馈网络小信号电压反馈系数 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-10-51-49.png"> 反馈型正弦波的起振条件为<span class="math display">\[\dot{A_o}\dot{F}&gt;1({A_o}F&gt;1.\phi_A+\phi_F=2n\pi,n=0,\pm1,\dots)\]</span>上式为振幅起振条件和相位起振条件，放大器增益A和输出电压幅度<span class="math inline">\(V_o\)</span>的关系称为振荡特性,<span class="math inline">\(\frac{1}{F}\)</span>与<span class="math inline">\(V_o\)</span>之间的关系称为反馈特性，起振的幅度条件如下图所示 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-11-04-47.png"> 但在实际设计中，由于静态工作点太低，振荡器电路无法自行起振，必须给一个较大幅度的初始激励，使动态点越过不稳定平衡点B才能起振，这称为硬激励起振，设计电路时要尽量避免 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-11-06-34.png"> 起振后，为了确保维持自激振荡，必须满足平衡条件，平衡条件可表述为：<span class="math display">\[A\cdot F=1,\phi_A+\phi_F=2n\pi,n=0,1,2\dots\]</span></p>
+<p>若用电路参数表示振幅平衡条件和相位平衡条件则有 <span class="math display">\[|\overline{y_{fe}}|\cdot|Z_{pl}|\cdot F=1\\\phi_Y+\phi_Z+\phi_F=2n\pi,n=0,1,2...\]</span></p>
+<p>振荡器平衡状态的稳定条件是指在外因作用下平衡条件被破坏后，振荡器能自动恢复到原来平衡状态的能力，稳定条件也分为振幅稳定和相位稳定两种： 1. 振幅稳定:<strong>在平衡点附近，放大倍数随振幅的变化特性具有负的斜率</strong><span class="math display">\[\frac{\partial A}{\partial V_{om}}|_{V_{om}=V_{omQ}}&lt;0\]</span> 2. 相位稳定：<strong>振荡器相位稳定条件要求谐振回路的相频特性曲线<span class="math inline">\(\phi_z=f(w)\)</span>在工作频率附近具有负的斜率</strong><span class="math display">\[\frac{\partial \phi}{\partial w}\approx\frac{\partial \phi_Z}{\partial w}&lt;0\]</span></p>
+<h3 id="反馈型lc振荡器线路">反馈型LC振荡器线路</h3>
+<p>采用LC谐振回路作为选频网络的反馈振荡器统称为LC振荡器。LC振荡器按其反馈网络的不同，可分为互感耦合振荡器、电感反馈式振荡器和电容反 馈式振荡器三种类型，其中后两种通常统称为三端式振荡器</p>
+<h3 id="互感耦合振荡器">互感耦合振荡器</h3>
+<p>互感耦合振荡器是依靠线圈之间的互感耦合实现正反馈的，因此，耦合线圈同名端的正确位置至关重要。同时,耦合量M要选择合适,使其满足振幅起振条件。</p>
+<p>互感耦合振荡器有三种形式:调集电路、调基电路和调发电路，具体根据振荡回路是在集电极电路、基极电路和发射极电路来区分的 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-11-29-41.png"></p>
+<p>由于基极和发射极之间的输入阻抗比较低，为了避免过多地影响回路的Q 值，故在调基和调发这两个电路中，晶体管与振荡回路进行部分耦合。调集电路在高频输出方面比其他两种电路稳定,而且幅度较大,谐波成分较小。调基电路振荡频率在较宽的范围改变时，振幅比较平稳。</p>
+<p><strong>互感耦合振荡器在调整反馈（改变M）时，基本上不影响振荡频率。但由于分布电容的存在,在频率较高时，难于做出稳定性高的变压器。因此，它们的工 频率不宜过高，一般应用于中、短波波段</strong></p>
+<p>根据h 参数等效电路分析可知互感耦合振荡器的振荡频率 <span class="math display">\[f_o\approx\frac{1}{2\pi}\sqrt{\frac{1}{LC}}\]</span></p>
+<h3 id="三端式振荡器">三端式振荡器</h3>
+<p>1 .电感反馈三端式振荡器（哈特莱电路） <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-11-44-13.png"></p>
+<ul>
+<li>线路特点：它的反馈电压<span class="math inline">\(\dot{v_f}\)</span>是由电感<span class="math inline">\(L_2\)</span>上获得的，晶体管的三个电极分别与回路电感的三个端点相连接，<strong>故称为电感反馈三端式振荡器</strong>。电路中集电极馈电采取串联馈电方式，基极则采取并联馈电方式, <span class="math inline">\(C_b\)</span>为隔直流电容，防止<span class="math inline">\(V_{CC}\)</span>通过电感， 加到基极，以免高压击穿管子。</li>
+<li>振荡频率：<span class="math display">\[f_o\approx\frac{1}{2\pi}\sqrt{\frac{1}{LC}}\\L=L_1+L_2+2M\]</span></li>
+<li>电路的优缺点：<strong>优点</strong>：<span class="math inline">\(L_1,L_2\)</span>之间有互感，反馈较强，容易起振;振荡频率调节方便,只要调整电容C的大小即可，而且C的改变基本上不影响电路的反馈系数。<strong>缺点</strong>:振荡波形不好，因为反馈电压是在电感上获得的，而电感对高次谐波呈高阻抗，因此对高次谐波的反馈较强，使波形失真大;另外，电感反馈三端电路的振荡频率不能做得太高，这是因为频率太高, L太小,不宜制造且分布参数的影响太大。电感三端式振荡器的工作频率一般在几十兆赫兹以下。</li>
+</ul>
+<ol start="2" type="1">
+<li>电容反馈三端式振荡器(考比次电路) <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-14-40-21.png"></li>
+</ol>
+<ul>
+<li>线路特点：它的反馈电压<span class="math inline">\(\dot{v_f}\)</span>是由电容<span class="math inline">\(C_2\)</span>上获得的，晶体管的三个电极分别与回路电容的三个端点相连接，故称为电容反馈三端式振荡器。电路中集电极和基极均采取并联馈电方式。<span class="math inline">\(C_b,C_c\)</span>均为隔直电容。</li>
+<li>振荡频率：<span class="math display">\[f_o\approx\frac{1}{2\pi}\sqrt{\frac{1}{LC}}\\C=\frac{C_1C_2}{C_1+C_2}\]</span></li>
+<li>电路的优缺点：<strong>优点</strong>：振荡波形好，因为它的反馈电压<span class="math inline">\(\dot{v_f}\)</span>是靠电容获得的，而电容元件对信号的高次谐波呈低阻抗，因此，对高次谐波反馈较弱,使振荡波形更接近正弦波;另外,这种电路的频率稳定度较高，由于电路中的不稳定电容均与回路电容<span class="math inline">\(C_1,C_2\)</span>相并联,因此，适当加大回路的电容量，就可以减小不稳定因素对振荡频率的影响。电容三端电路的工作频率可以做得较高，因为它可直接利用振荡管的输出、输入电容作为回路的振荡电容。它的工作频率可做到几十兆赫兹到几百兆赫兹的甚高频波段范围。<strong>缺点</strong>:调<span class="math inline">\(C_1\)</span> 或<span class="math inline">\(C_2\)</span> 来改变振荡频率时,反馈系数也将改变。但只要在L两端并上一个可变电容器，并令<span class="math inline">\(C_1\)</span>与<span class="math inline">\(C_2\)</span>为固定电容，则在调整频率时,基本上不会影响反馈系数。</li>
+</ul>
+<ol start="3" type="1">
+<li><p>三端式LC振荡器组成法则（相位平衡条件的判断准则） <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-14-47-42.png"> 电路要振荡必须满足条件：<span class="math display">\[x_{be}+x_{ce}+x_{cb}=0\]</span></p>
+<p>且由电路分析可以得到，为了满足正反馈条件，<span class="math inline">\(x_{eb},x_{ce}\)</span>必须性质相同，为同名电抗，<span class="math inline">\(x_{cb}\)</span>则为异名电抗，<strong>以此准则可以迅速判断振荡电路组成是否合理，能否起振</strong></p></li>
+<li><p>串联型改进电容三端式振荡器(克拉泼电路) <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-14-52-39.png"> 与电容三端式电路比较，克拉泼电路的特点是在回路中增加了一个与L串联的电容<span class="math inline">\(C_3\)</span>。各电容取值必须满足：<span class="math inline">\(C_3&lt;&lt;C_1,C_3&lt;&lt;C_2,C_3\)</span>为可变电容。这样可使电路的振荡频率近似只与<span class="math inline">\(C_3,L\)</span>有关。该电路的振荡频率为<span class="math display">\[f_o\approx\frac{1}{2\pi}\sqrt{\frac{1}{LC_3}}\]</span>可见，该电路的振荡频率几乎与<span class="math inline">\(C_1,C_2\)</span>无关，<strong>所以克拉泼电路的频率稳定性比电容三端式要好</strong>，其缺点为<strong>不适于用作波段振荡器</strong>。所以克拉泼电路只适于用作固定频率振荡器或波段覆盖系数较小的可变频率振荡器</p></li>
+<li><p>并联型改进电容三端式振荡器(西勒电路) <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-14-58-59.png"> 西勒电路是在克拉泼电路基础上,在电感L两端并联了一个小电容<span class="math inline">\(C_4\)</span>,且满足<span class="math inline">\(C_1,C_2\)</span>远大于<span class="math inline">\(C_3\)</span> ，所以其回路等效电容<span class="math display">\[C=\frac{C_1C_2C_3}{C_1C_2+C_2C_3+C_1C_3}+C_4\approx C_3+C_4\]</span> 振荡频率为:<span class="math display">\[f_o\approx\frac{1}{2\pi}\sqrt{\frac{1}{LC}}\\C=C_3+C_4\]</span></p>
+<p>在西勒电路中，由于<span class="math inline">\(C_4\)</span>与L并联，所以<span class="math inline">\(C_4\)</span>大小不影响回路接入系数，在振荡频率变化时基本保持不变，从而使输出振幅稳定，因此其可用作波段振荡器</p></li>
+</ol>
+<h3 id="振荡器的频率稳定问题">振荡器的频率稳定问题</h3>
+<p>振荡器的频率稳定度是振荡器的一个关键指标。频率稳定，就是在各种外界条件发生变化的情况下，要求振荡器的实际工作频率与标称频率间的偏差及偏差的变化最小。<strong>评价振荡器频率的主要指标有两个,即准确度与稳定度。</strong></p>
+<p><strong>振荡器的实际工作频率f与标称频率<span class="math inline">\(f_0\)</span>之间的偏差，称为振荡频率的准确度</strong>。它通常分为绝对频率准确度与相对频率准确度两种，其表达式如下。 <span class="math display">\[绝对准确度：\Delta f=|f-f_0|\\相对准确度：\frac{\Delta f}{f_0}=\frac{|f-f_0|}{f_0}\]</span></p>
+<p><strong>振荡器的频率稳定度则是指在一定时间间隔内，由于各种因素变化，引起的振荡频率相对于标称频率变化的程度</strong><span class="math display">\[频率稳定度：\delta=\frac{\Delta f_{max}}{f_0}|_{t=\Delta t}\]</span></p>
+<h3 id="石英振荡器">石英振荡器</h3>
+<p><img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-15-15-03.png"> 上图是石英晶振的符号和等效电路，石英晶振的Q值和特性阻抗<span class="math inline">\(\rho\)</span>都非常高。这是因为其<span class="math inline">\(L_q\)</span>较大，<span class="math inline">\(C_q\)</span>与<span class="math inline">\(r_q\)</span>很小的缘故。</p>
+<p>由上图(b)可知，石英晶振可等效为一个串联谐振回路和一个并联谐振回路，若忽略<span class="math inline">\(r_q\)</span>,则晶振两端呈现纯电抗，其电抗频率特性曲线如下图实线所示 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-15-15-22.png"> 其串联谐振频率为<span class="math inline">\(f_q=\frac{1}{2\pi\sqrt{L_qC_q}}\)</span>,并联谐振频率为<span class="math inline">\(f_p=\frac{1}{2\pi\sqrt{L_q\frac{C_0C_q}{C_0+C_q}}}\\=\frac{f_0}{\sqrt{\frac{C_0}{C_0+C_q}}}=f_q\sqrt{1+\frac{C_q}{C_0}}\)</span></p>
+<p>由于<span class="math inline">\(C_q/C_0\)</span>很小，所以<span class="math inline">\(f_p,f_q\)</span>间隔很小，因而在<span class="math inline">\(f_p-f_q\)</span>感性区间, 石英晶振具有陡峭的电抗频率特性，曲线斜率大，利于稳频。若外部因素使谐振频率增大，则根据晶振电抗特性,必然使等效电感L增大，但由于振荡频率与L的平方根成反比,所以又促使谐振频率下降,趋近于原来的值。</p>
+<h2 id="自问自答">自问自答</h2>
+<ol type="1">
+<li><p>如何化简正弦波振荡器电路？ 在正弦波振荡电路中我们考虑的往往是正反馈产生振荡的电路，因此在简化电路的过程中只需要聚焦正反馈部分即可。不妨对振荡电路中的R、L、C分别讨论。 对于R，在电路化简过程中我们认为其开路，因为R在电路中起到的作用与正反馈无关。 对于L，在高频电路中L的阻抗<span class="math inline">\(jwL\)</span>很高，尤其是L充当高频扼流圈时往往认为L开路。 对于C，在高频电路中C的阻抗<span class="math inline">\(\frac{1}{jwL}\)</span>很低，尤其是C充当旁路电容、耦合电容、电源滤波电容时往往认为C短路。</p></li>
+<li><p>为什么要对电容反馈三端式振荡电路进行改进呢？ 当我们利用电容反馈三端式电路，调<span class="math inline">\(C_1\)</span>或<span class="math inline">\(C_2\)</span>来改变振荡频率时，由于反馈系数为<span class="math inline">\(\frac{C_1}{C_2}\)</span>，易知反馈系数将改变。但是如果给电路串联一个小电容<span class="math inline">\(C_3\)</span>，因为C3远远小于C1和C2，所以三电容串联后的等效电容可以约等于<span class="math inline">\(C_3\)</span>。此时振荡角频率和反馈系数独立，可以有效调整并控制电路。<span class="math display">\[w_0\approx\frac{1}{LC_3},F=\frac{C_1}{C_2}\]</span></p></li>
+<li><p>电感反馈三端式振荡器与电容反馈三端式振荡器各有何优缺点？ <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-15-37-52.png"></p></li>
+</ol>
+<h2 id="未解答的疑惑">未解答的疑惑</h2>
+<ol type="1">
+<li>对泛音晶体振荡电路的原理不太理解。</li>
+<li>石英振荡器的作用和设计思路不理解</li>
+</ol>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>通信电子线路</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数字信号处理第三章知识小结</title>
     <url>/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
     <content><![CDATA[<h2 id="引言">引言</h2>
@@ -1680,6 +1754,314 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
       </categories>
       <tags>
         <tag>数字信号处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通信电子线路第六章知识小结</title>
+    <url>/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="本章知识小结">本章知识小结</h2>
+<h3 id="频谱搬移电路的特性">频谱搬移电路的特性</h3>
+<p>非线性电路具有频率变换的功能（乘法器）<br>
+线性频率变换：频率变换前后，信号的频谱结构不变. 频谱搬移电路: 信号频谱无失真的在频率轴上搬移 <span id="more"></span> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-37-29.png" style="width:60.0%;height:60.0%"></p>
+<ol type="1">
+<li>它们的实现框图几乎是相同的，都是利用非线性器件对输入信号频谱实行变换以产生新的有用频率成分后，滤除无用频率分量。</li>
+<li>从频谱结构看，上述频率变换电路都只是对输入信号频谱实行横向搬移而不改变原来的谱结构，因而都属于所谓的线性频率变换。</li>
+<li>频谱的横向平移从时域角度看相当于输入信号与一个参考正弦信号相乘，而平移的距离由此参考信号的频率决定，它们可以用乘法电路实现。</li>
+</ol>
+<h3 id="振幅调制原理">振幅调制原理</h3>
+<p>调制:将要传送的信息装载到某一高频载频信号上去的过程 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-56-11.png" style="width:60.0%;height:60.0%"></p>
+<p>调制可分为连续波调制和脉冲波调制 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-57-02.png" style="width:60.0%;height:60.0%"> 本章主要介绍的是调幅，调频与调相将在第七章中讲述。 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-58-10.png" style="width:60.0%;height:60.0%"></p>
+<h4 id="调幅波的性质">调幅波的性质</h4>
+<p>普通调幅波的数学表达式(一般考虑单音调制) <span class="math display">\[\begin{cases}
+    载波信号：v_0=V_0cosw_0t\\
+    调制信号：v_\Omega=V_\Omega cos\Omega t\\
+    调幅信号(已调波)：v_{AM}=V_m(t)cosw_0t
+\end{cases}\]</span> 因为调幅信号的振幅与调制信号成线性关系，所以<span class="math inline">\(V_m(t)=V_0+k_aV_\Omega cos\Omega t,k为比例常数\\\rightarrow V_m(t)=V_0(1+\frac{k_aV_\Omega}{V_0}cos\Omega t)=V_0(1+m_acos\Omega t),m_a=\frac{k_aV_\Omega}{V_0}:调幅度\in (0,1]\)</span> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-06-02.png" style="width:60.0%;height:60.0%"> 波形特点： 1. 调幅波的振幅（包络）变化规律与调制信号波形一致 2. 调幅度<span class="math inline">\(m_a\)</span>反映了调幅的强弱度 <span class="math display">\[\begin{cases}
+    m_a=0,未调幅\\
+    m_a=1,最大调幅\\
+    m_a&gt;1,过调幅，包络失真
+   \end{cases}\]</span></p>
+<p>将调幅波的数学表达式展开，可得<span class="math inline">\(v(t)=V_0cosw_0t+\frac{1}{2}m_aV_0cos(w_0+\Omega)t+\frac{1}{2}m_aV_0cos(w_0-\Omega)t\)</span> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-14-07.png" style="width:60.0%;height:60.0%"> 调幅波包含三个频率分量，载波分量<span class="math inline">\(w_0\)</span>不含传输信息，上边频分量<span class="math inline">\(w_0+\Omega\)</span>,下边频分量<span class="math inline">\(w_0-\Omega\)</span>均含传输信息</p>
+<p><strong>调幅过程实际上是 频谱搬移过程，即将调制信号的频谱搬移到载波附近，成为对称排列在载波频率两侧的上、下边频，幅度均等于<span class="math inline">\(\frac{1}{2}m_aV_0\)</span></strong></p>
+<p>将普通调幅波输送功率至电阻R上时,载波与边频的功率有： 1. 载波频率<span class="math inline">\(P_{oT}=\frac{1}{2}\frac{V_o^2}{R}\)</span> 2. 上(小)边频<span class="math inline">\(P_{SB1}=P_{SB2}=\frac{1}{4}m_a^2P_{oT}\)</span> 3. 一周期平均输出功率<span class="math inline">\(P_AM=(1+\frac{1}{2}m_a^2P_{oT})\)</span></p>
+<p><strong>载波不含信号，但功率却占整个调幅波功率的绝大部分,效率很低</strong></p>
+<h4 id="抑制载波的双边带调幅波与单边带调幅波">抑制载波的双边带调幅波与单边带调幅波</h4>
+<p>为了克服普通调幅波效率低的缺点，提高设备的功率利用率，可以不发送载波，而只发送边带信号<span class="math inline">\(\rightarrow\)</span>抑制载波的双边带调幅波(DSB AM)</p>
+<p>上边频与下边频的频谱分量对称含有相同的信息。 可仅发送单个边带信号<span class="math inline">\(\rightarrow\)</span>单边带通信(SSB) <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-23-38.png" style="width:60.0%;height:60.0%"> 残留边带调幅(记为VSB AM)它在发射端发送一个完整的边带信号、载波信号和另一个部分被抑制的边带信号.既保留了单边带调幅节省频带的优点，且具有滤波器易于实现、解调电路简单的特点</p>
+<h3 id="振幅调整方法和电路">振幅调整方法和电路</h3>
+<h4 id="概述">概述</h4>
+<p>调幅波的共同之处都是在调幅前后产生了新的频率分量，均需用非线性器件来完成频率变换 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-25-06.png" style="width:60.0%;height:60.0%"> 按调制电路输出功率的高低分类： 1. 高电平调幅电路 　　一般置于发射机的最后一级，是在功率电平较高的情况下进行调制。 2. 低电平调幅电路 　　一般置于发射机的前级，再由线性功率放大器放大已调幅信号，得到所要求功率的调幅波。 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-08-35-28.png" style="width:60.0%;height:60.0%"></p>
+<h4 id="低电平调幅电路">低电平调幅电路</h4>
+<ol type="1">
+<li>简单二极管调幅电路：
+<ul>
+<li>平方律调幅--二极管小信号时的工作状态</li>
+<li>开关调幅--二极管小信号时的工作状态</li>
+</ul></li>
+<li>平衡调幅器 平衡调制是由两个简单的二极管调幅电路对称连接组成。载波成分由于对称而被抵消，在输出中不再出现。
+<ol type="1">
+<li>用处：产生DSB和SSB信号的基本电路<br>
+</li>
+<li>优点：可抑制单管调幅器频谱中所含的直流分量、载波分量以及载波的各次谐波分量</li>
+<li>缺点：它虽然是调幅波，但因失去了载波，因而包络不能完全反映调制信号变化的规律，这就给以后的解调工作带来困难；普通调幅波的高频振荡是连续的，可是双边带调幅波在调制信号极性变化时，它的高频振荡的相位要发生<span class="math inline">\(180\degree\)</span>的突变</li>
+</ol></li>
+<li>环形调制器 平衡调幅器加上两个二极管，并将四个二极管首尾相接构成环形，<strong>优点：振幅比平衡调制器提高了一倍，并抑制了低频<span class="math inline">\(\Omega\)</span>分量</strong></li>
+<li>模拟相乘器 输出电压与输入电压关系：<span class="math inline">\(v_o(t)=kv_1(t)v_2(t)\)</span>，如果<span class="math inline">\(v_1(t)\)</span>为高频载波，<span class="math inline">\(v_2(t)\)</span>为低频调制信号，则输出为抑制载波的双边带调幅信号，若在调制信号上<span class="math inline">\(v_2(t)\)</span>叠加一直流电压，则可以得普通调幅信号的输出</li>
+<li>单边带通信
+<ol type="1">
+<li>优点：
+<ol type="1">
+<li>节约频带</li>
+<li>节省功率</li>
+<li>受传播条件影响小,抗选择性衰落能力强</li>
+<li>提高了信噪比</li>
+</ol></li>
+<li>缺点：
+<ol type="1">
+<li>单边带通信设备复杂、价格昂贵</li>
+<li>收发信机需要很高的频率稳定度及其它技术措施 参数单边带方法</li>
+</ol></li>
+<li>产生单边带方法
+<ol type="1">
+<li>滤波法：DSB信号经过带通滤波器后，滤除下边带，就得到了SSB信号</li>
+<li>移项法：利用移相的方法，消去不需要的边带</li>
+<li>修正的移相滤波法</li>
+</ol></li>
+</ol></li>
+</ol>
+<h4 id="高电平调幅电路">高电平调幅电路</h4>
+<ol type="1">
+<li>集电极调幅 工作在过压区，调制信号经低频变压器加载集电极与直流电源串馈，高频载波经高频变压器加到基极回路</li>
+<li>基极调幅 工作在欠压区，将基极供电电压与调制信号相加</li>
+</ol>
+<h3 id="振幅解调检波原理与电路">振幅解调（检波）原理与电路</h3>
+<h4 id="概述-1">概述</h4>
+<p>振幅解调(又称检波)：振幅调制的逆过程 作用：从已调制的高频振荡中恢复出原来的调制信号 检波器也属于频谱搬移 从频谱看，检波是将幅度调制波中的边带信号不失真地从载波频率附近搬移到零频率附近 　 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-40-46.png"> 检波器分类： 1. 包络检波：平方率检波，峰值包络检波，平均包络检波 2. 同步检波：乘积型，叠加型</p>
+<h4 id="二极管峰值包络检波器">二极管峰值包络检波器</h4>
+<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-46-16.png" style="width:60.0%;height:60.0%"> 1. 大信号检波原理： - 二极管单向导电特性 - 检波负载RC的充放电过程(充电时间常数小，放电时间常数大) <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-44-44.png"> 通过调节电路中的R,C,可改变充电时间常数，最后让<span class="math inline">\(v_C\)</span>接近<span class="math inline">\(v_i\)</span> 2. 包络检波器的质量指标 1. 电压传输系数(检波效率)<span class="math inline">\(K_d=\frac{输出电压V_\Omega}{输入包络振幅m_aV_i}\)</span>,<span class="math inline">\(K_d=cos\theta,\theta\approx\sqrt[3]{\frac{3\pi R_d}{R}}\\\theta:电流通角，R：检波器负载电阻，R_d：检波器二极管内阻\)</span> 2. 等效输入电阻<span class="math inline">\(R_{id}\approx R/2\)</span>,即大信号二极管的输入电阻约等于负载电阻的一半 3. 失真 1. 惰性失真(对角线切割失真) - 原因：时间常数RC太大，当调幅波包络朝较低值变化时，电容上的电荷来不及释放以跟踪其变化，所造成的失真 - 不产生失真的条件：<span class="math inline">\(RC\Omega_{max}&lt;\frac{\sqrt{1-m_a^2}}{m_a}\)</span>,工程上按<span class="math inline">\(RC\Omega_{max}\le1.5\)</span>计算 2. 负峰切割失真(底部切割失真) - 原因：由于<span class="math inline">\(C_c\)</span>的存在使得检波器的交直流电阻不一样,产生了<span class="math inline">\(V_R\)</span>反偏压，它有可能阻止二极管导通，从而产生失真 - 不产生失真的条件:<span class="math inline">\(m_a&lt;\frac{R_g}{R+R_g}\)</span> 3. 非线性失真 由检波二极管伏安特性曲线的非线性所引起 4. 频率失真 - 原因：滤波电容<span class="math inline">\(C\)</span>影响检波上限频率<span class="math inline">\(\Omega_{max}\)</span>和耦合电容<span class="math inline">\(C_c\)</span>影响检波下限频率<span class="math inline">\(\Omega_{min}\)</span> - 不产生失真条件：<span class="math inline">\(C_c&gt;&gt;\frac{1}{\Omega_{min}R_g},C&lt;&lt;\frac{1}{\Omega_{max}R}\)</span></p>
+<h4 id="同步检波电路">同步检波电路</h4>
+<p>同步检波：不含载频分量，解调时必须在检波器输入端另加一个与发射载波同频同相并保持同步变化的参考信号，此参考信号与调幅信号共同作用于非线性器件电路，经过频率变换，恢复出调制信号 同步检波也可应用于普通调幅信号的解调<span class="math inline">\(\rightarrow\)</span>为了改善性能 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-05-16.png" style="width:60.0%;height:60.0%"> 产生本地振荡信号的方法: 1. 由发送端发出导频信号，控制本地振荡器，使本地振荡器的频率和相位与发送端一致。 2. 对于双边带调制来说，可以从双边带调制信号中提取所需的同频同相的载波信号作本地振荡信号。对于单边带调制信号来说，无法直接从单边带信号中提取载波信号，因此在发射单边带信号的同时，还发射受到一定程度抑制的载波信号（称为导频信号）。在接收端，用导频信号控制本机振荡信号使其同步。 3. 采用锁相方法从抑制载波的信号中提取载波 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-08-59.png"> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-09-28.png" style="width:60.0%;height:60.0%"></p>
+<h3 id="混频器原理与电路">混频器原理与电路</h3>
+<h4 id="概述-2">概述</h4>
+<p>混频器作用：混频即对信号进行频率变换，将其载频变换到某一固定的频率上(常称为中频)，而保持原信号的特征(如调幅规律)不变。<strong>变频的优点</strong>：变频可提高接收机的灵敏度，提高接收机的选择性，工作稳定性好，波段工作时其质量指标一致性好。<strong>变频的缺点</strong>：容易产生镜像干扰、中频干扰等干扰 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-25-48.png" style="width:60.0%;height:60.0%"> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-26-42.png"> 1. 叠加型混频器: 根据所用非线性器件的不同，叠加型混频器有下列几种： - 晶体三极管混频器：具有一定混频增益 - 场效应管混频器：交调、互调干扰少 - 二极管平衡混频器和环形混频器 ：动态范围大，组合频率干扰少 2. 乘积型混频器：模拟乘法器＋带通滤波器</p>
+<h4 id="晶体三极管管混频器">晶体三极管管混频器</h4>
+<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-29-39.png"> 主要采用变跨导分析法：在混频时，混频管可看着一个参数(跨导)在改变的线性元件，即变跨导线件元件。其变频跨导被定义为<span class="math inline">\(g_c=\frac{输出中频电流振幅I_i}{输入高频电压振幅V_{Sm}}=\frac{1}{2}g_1\)</span></p>
+<h4 id="晶体管二极管混频器">晶体管二极管混频器</h4>
+<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-33-16.png" style="width:60.0%;height:60.0%"> 1. 平衡混频器<br>
+2. 环形混频器</p>
+<h4 id="混频器的干扰">混频器的干扰</h4>
+<ol type="1">
+<li><p>有用信号谐波和本振信号谐波产生的干扰--组合频率干扰(干扰哨声) 混频器输出信号中所包含的各种频率分量为<span class="math inline">\(f_k=|\pm pf_o\pm qf_s|\)</span>,p,q为任意正整数，分别代表本振频率和信号频率的谐波次数，只有p=q=1时对应的频率<span class="math inline">\(f_o-f_s\)</span>为所需要的中频信号</p>
+<p>如果某些组合频率落在谐振回路的通频带内，这些组合频率分量就和有用的中频分量一样，通过中放进入检波器，并在检波电路中与有用信号产生差拍，这时在接收机的输出端将产生哨叫声，形成有害的干扰。这种干扰又称为干扰哨叫，产生条件<span class="math inline">\(f_s=\frac{p\pm1}{q-p}f_i\)</span></p></li>
+<li><p>外来干扰信号和本振产生的干扰</p>
+<ol type="1">
+<li>组合副波道干扰 如果混频器之前的输入回路和高频放大器的选择性不够好，除了要接收的有用信号外，干扰信号也会进入混频器。当干扰频率<span class="math inline">\(f_n\)</span>与本振频率<span class="math inline">\(f_o\)</span>满足 <span class="math display">\[\begin{cases}
+  -pf_o+qf_n\approx f_i\\
+  pf_o-qf_n\approx f_i
+ \end{cases}\]</span> 会产生组合复波道干扰</li>
+<li>复波道干扰 在组合副波道干扰中，某些特定频率形成的干扰称为副波道干扰。这种干扰主要有中频干扰和镜像干扰。
+<ol type="1">
+<li>中频干扰：当干扰信号的频率等于或接近<span class="math inline">\(f_i\)</span>时的干扰。</li>
+<li>镜像频率干扰:当外来干扰信号的频率<span class="math inline">\(f_n=f_o+f_i=f_s^’\)</span>时的干扰，<span class="math inline">\(f_n=f_o+f_i=f_s+2f_i\)</span></li>
+</ol></li>
+</ol></li>
+<li><p>其他类型的干扰</p>
+<ol type="1">
+<li>交叉调制(交调)干扰 当所接收电台的信号和干扰电台同时进入接收机输入端时，如果接收机调谐于信号频率，可以清楚地收到干扰信号电台的声音，若接收机对接收信号频率失谐，干扰台的声音也消失,<strong>原因：由混频器3次方以上的非线性传输特性产生的。</strong></li>
+<li>互相调制(互调)干扰 当两个或两个以上的干扰进入到混频器的输入端时，它们与本振电压<span class="math inline">\(v_0\)</span>一起加到混频管的发射结。由于器件的非线性作用，它们将产生一系列组合频率分量。如果某些分量的频率等于或接近于中频时，就会形成干扰，称为互调干扰。假设有两个干扰信号进入到混频器，若两干扰信号形成的新的组合频率<span class="math inline">\(|\pm mf_1\pm nf_2|\)</span>与信号频率<span class="math inline">\(f_s\)</span>相近，即组合频率与本振频率<span class="math inline">\(f_0\)</span>之差落在中频范围<span class="math inline">\(f_0-|\pm mf_1\pm nf_2|=f_i\)</span>,就会造成强烈干扰</li>
+<li>阻塞干扰 当一个强干扰信号进入接收机输入端后，由于输入电路抑制不良，会使前端电路内放大器或混频器的晶体管处于严重的非线性区域，使输出信噪比大大下降。这种现象称为阻塞干扰。</li>
+<li>相互混频 由于本振源内存在杂散边带功率，强干扰与杂散边带噪声混频产生的频率分量落在中频通带内形成中频噪声</li>
+</ol></li>
+</ol>
+<p>综上所述，减小各种干扰的措施可归纳为： 1. 提高混频级前端电路(天线回路和高放)的选择性 2. 合理地选择中频，能有效地减小组合频率干扰 3. 采用各种平衡电路 4. 合理地选择混频管的静态工作点 5. 采用倍频程滤波器抑制二阶互调</p>
+<h2 id="自问自答">自问自答</h2>
+<ol type="1">
+<li><p>为什么在信号传播过程中需要对信号进行调制？</p>
+<p>在信号传输过程中，不妨从切实可行的天线选择出发思考。为使天线能有效地发送和接收电磁波，天线的几何尺寸必须和信号波长相比拟，一般不宜短于1／4波长。对于音频信号，一般频率在20Hz～20kHz，其波长为15～15000km，如果使用天线传输天线长度应在3.75～3750km，不容易实现。因此需要将信号调制到高频，使用小尺寸天线处理。</p></li>
+<li><p>在同步检波电路中，产生本地信号的方法往往有哪些呢？</p>
+<ol type="1">
+<li>由发送端发出导频信号，控制本地振荡器，使本地振荡器的频率和相位与发送端一致。</li>
+<li>对于双边带调制来说，可以从双边带调制信号中提取所需的同频同相的载波信号作本地振荡信号。</li>
+<li>对于单边带调制信号来说，无法直接从单边带信号中提取载波信号，因此在发射单边带信号的同时，还发射受到一定程度抑制的载波信号（称为导频信号）。在接收端，用导频信号控制本机振荡信号使其同步</li>
+</ol></li>
+<li><p>为什么要对电路进行变频处理？</p>
+<ol type="1">
+<li>变频可提高接收机的灵敏度</li>
+<li>提高接收机的选择性</li>
+<li>工作稳定性好</li>
+<li>波段工作时其质量指标一致性好</li>
+</ol></li>
+</ol>
+<h2 id="未解答的疑惑">未解答的疑惑</h2>
+<ol type="1">
+<li>如何理解混频器和变频器的区别</li>
+<li>如何区分不同干扰的类型</li>
+<li>如何判断不同混频器的优缺点</li>
+</ol>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>通信电子线路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通信电子线路第七章知识小结</title>
+    <url>/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="本章知识小结">本章知识小结</h2>
+<h3 id="概述">概述</h3>
+<p>角度调制是用调制信号去控制载波信号角度(频率或相位)变化的一种信号变换方式。如果受控的是载波信号的频率，则称频率调制，简称调频，以FM表示；若受控的是载波信号的相位，则称为相位调制，简称调相，以PM表示。无论是FM还是PM，载频信号的幅度都不受调制信号的影响。调频波的解调称为鉴频或频率检波，调相波的解调称鉴相或相位检波。与调幅波的检波一样，鉴频和鉴相也是从已调信号中还原出原调制信号 <span id="more"></span> <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-13-43-54.png" style="width:50.0%;height:50.0%"> <strong>角度调制与解调和振幅调制与解调最大的区别在频率变换前后频谱结构的变化不同。</strong></p>
+<ol type="1">
+<li>角度调制:频率变换前后频谱结构发生了变化，属于非线性频率变换。</li>
+<li>角度调制的主要优点: 抗干扰性强.FM广泛应用于广播、电视、通信以及遥测方面，PM主要应用于数字通信。</li>
+<li>角度调制的主要缺点: 占据频带宽，频带利用不经济。</li>
+</ol>
+<h3 id="调角波的性质">调角波的性质</h3>
+<h4 id="调频波和调相波的波形和数学表达式">调频波和调相波的波形和数学表达式</h4>
+<p>FM波和PM波的相关性质在这里省略推导，不加证明的附上二者的对比图 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-13-52-23.png"> 由上表知，此时调频波的调制指数为<span class="math inline">\(m_f=\frac{K_fV_\Omega}{\Omega}\)</span>,调相波的调制指数为<span class="math inline">\(m_p=K_pV_\Omega\)</span>,进而得到调频波最大频移为<span class="math inline">\(\Delta w_f=K_fV_\Omega\)</span>，调相波最大频移为<span class="math inline">\(\Delta w_p=K_pV_\Omega\Omega\)</span>,下面分析当调制信号<span class="math inline">\(V_\Omega(t)=V_\Omega cos\Omega t\)</span>时，调频波的数学表达式为<span class="math inline">\(a_f(t)=V_mcos(w_0t+m_fsin\Omega t)\)</span>,调相波的数学表达式为<span class="math inline">\(a_p(t)=V_mcos(w_0t+m_pcos\Omega t)\)</span></p>
+<p>从上面的表达式和对比表格可以看出的是，调频波的频偏与调制频率<span class="math inline">\(\Omega\)</span>无关，调频指数<span class="math inline">\(m_f\)</span>则与<span class="math inline">\(\Omega\)</span>成反比，调相波的频偏<span class="math inline">\(\Delta w_p\)</span>与<span class="math inline">\(\Omega\)</span>成正比，调相指数则与<span class="math inline">\(\Omega\)</span>无关 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-14-49-00.png"> 对比上图中的表达式可以看出，无论调频还是调相，最大频移(频偏)与调制指数之间的关系都是相同的，若频偏都用<span class="math inline">\(\Delta w_m\)</span>表示，调制指数都用m表示，则<span class="math inline">\(\Delta w_m\)</span>与m之间满足以下关系 <span class="math display">\[\Delta w_m=m\Omega\qquad \Delta f_m=mF\\\Delta f =\frac{\Delta w}{2\pi}\qquad F=\frac{\Omega}{2\pi}\]</span> <strong>在幅度调制中，调幅度<span class="math inline">\(m_a\le1\)</span>,否则会产生过调制失真，在角度调制中，无论调频还是调相，调制指数均可大于1</strong></p>
+<h4 id="调角信号的频谱与有效频带宽度">调角信号的频谱与有效频带宽度</h4>
+<p>由于调频波和调相波的方程式相似,因此要分析其中一种频谱,则另一种也完全适用</p>
+<p>调频波的表达式<span class="math inline">\(a_f(t)=V_mcos(w_0t+m_fsin\Omega t)\)</span>利用三角函数关系改写并求解，发现其解只能用贝塞尔函数求解，展开后发现，在单频调制情况下，调频波和调相波可分解为载频和无穷多对上下边频分量之和，各频率分量之间的距离均等于调制频率，且奇数次的上下边频相位相反，包括载频分量在内的各频率分量的振幅均由贝塞尔函数值决定。 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-14-57-47.png"> 由图可知，无论<span class="math inline">\(m_f\)</span>为何值，随着阶数n的增大，边频分量的增幅总的趋势是减小的，<span class="math inline">\(m_f\)</span>越大，具有较大振幅的边频分量就越多</p>
+<p>调频波和调相波的平均功率与调幅波一样，也为载频功率和各边频功率之和。单频调制时，调频波和调相波的平均功率利用第一类贝塞尔函数性质求和得到<span class="math inline">\(P_{av}=\frac{1}{2}\frac{V_o^2}{R_L}\)</span>,这表明调频波和调相波的平均功率与调制前的等幅载波功率相等。<strong>说明，调制的作用仅是将原来的载频功率重新分配到各个边频上，而总的功率不变。这一点与调幅波完全不同。</strong></p>
+<p>通常将振幅小于载波振幅10%的边频分量忽略不计，有效的上下边频分量总数则为2(m+1)个，即调频波和调相波的有效频带宽度定为<span class="math inline">\(BW=2(m+1)F=2(\Delta f+F)\)</span></p>
+<p>根据FM与PM的表达式，我们发现调频波可以看出调制信号为<span class="math inline">\(\int_{0}^{t} v_\Omega(t)\, {\rm d}t\)</span>,而调相波可以看出调制信号为<span class="math inline">\(\frac{dv_\Omega(t)}{dt}\)</span>,<strong>这为间接调频方法奠定了理论基础</strong></p>
+<p>当调制信号频率F发生变化时，调频波的调制指数mf与F成反比变化，其频宽宽度基本不变，故称恒带调制</p>
+<p>当调制信号频率F变化时，调相波的调制指数<span class="math inline">\(m_p\)</span>与F无关，其频带宽度随调制频率F变化 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-04-41.png"></p>
+<h3 id="调频方法和电路">调频方法和电路</h3>
+<h4 id="实现调频的方法和基本原理">实现调频的方法和基本原理</h4>
+<p>频率调制是对调制信号频谱进行非线性频率变换，而不是线性搬移，因而不能简单地用乘法器和滤波器来实现。<strong>实现调频的方法分为两大类：直接调频法和间接调频法</strong>。</p>
+<ol type="1">
+<li>直接调频法
+<ol type="1">
+<li>用调制信号直接控制振荡器的瞬时频率变化的方法称为直接调频法</li>
+<li>优点：原理简单，频偏较大</li>
+<li>缺点：中心频率不易稳定</li>
+</ol></li>
+<li>间接调频法
+<ol type="1">
+<li>先将调制信号进行积分处理，然后用它控制载波的瞬时相位变化，从而实现间接控制载波的瞬时频率变化的方法，称为间接调频法</li>
+<li>优点：实现调相的电路独立于高频载波振荡器以外，所以这种调频波突出的优点是载波中心频率的稳定性可以做得较高。</li>
+<li>缺点：可能得到的最大频偏较小</li>
+</ol></li>
+<li>无论是直接调频还是间接调频，主要技术要求是：
+<ol type="1">
+<li>频偏尽量大，并且与调制信号保持良好的线性关系(频偏增大与调制线性度之间是矛盾的)</li>
+<li>中心频率的稳定性尽量高</li>
+<li>寄生调幅尽量小</li>
+<li>调制灵敏度尽量高</li>
+</ol></li>
+</ol>
+<h4 id="直接调频电路">直接调频电路</h4>
+<ol type="1">
+<li>变容二极管：优点：电路简单，工作频率较高，容易获得较大的频偏，在频偏不需很大的情况下，非线性失真可以做得很小。缺点：变容管的一致性较差，大量生产时会给调试带来某些麻烦；另外偏置电压的漂移、温度的变化会引起中心频率漂移，因此调频波的载波频率稳定度不高</li>
+<li>晶体管直接调频：用于稳定调频波的中心频率</li>
+</ol>
+<h4 id="间接调频方法">间接调频方法</h4>
+<p>间接调频法的频稳度高，广泛用于广播发射机和电视伴音发射机，关键在于如何实现调相，常用的调相方法有移相法，可变时延调相，矢量合成调相</p>
+<ol type="1">
+<li>移相法调相 将载频信号<span class="math inline">\(Vcosw_0t\)</span>通过一个相移受调制信号<span class="math inline">\(V_\Omega\)</span>线性控制的移相网络，即可实现调相 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-33-38.png" style="width:60.0%;height:60.0%"> 常用移相网络：如RC移相网络、LC调谐回路移相网络 但是单极LC回路线性相位变化范围小，一般在<span class="math inline">\(30\degree\)</span>以下，为了增大调相系数，可以用多级单调谐回路构成的变容管调相电路</li>
+<li>可变时延法调相 周期信号在经过一个网络后，如果在时间轴上有所移动，则此信号的相角必然发生变化，时延法调相就是利用调制信号控制时延大小而实现调相的一种方法 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-36-11.png" style="width:60.0%;height:60.0%"> 最大优点：调制线性好，相位偏移大</li>
+<li>矢量合成调相法</li>
+</ol>
+<h3 id="调角信号解调">调角信号解调</h3>
+<p>调频波的解调简称鉴频；调相波的解调简称鉴相。本节讨论的重点在鉴频。对调频波而言，调制信息包含在已调信号瞬时频率的变化中，所以<strong>解调的任务就是把已调信号瞬时频率的变化不失真地转变成电压变化，即实现“频率—电压”转换。</strong></p>
+<h4 id="鉴频方法">鉴频方法</h4>
+<ol type="1">
+<li><p>实现鉴频的方法 实现鉴频的方法很多，但常用的方法有以下几种：</p>
+<ol type="1">
+<li>利用波形变换进行鉴频</li>
+<li>相移乘法鉴频</li>
+<li>脉冲计数式鉴频</li>
+<li>利用锁相环路鉴频</li>
+</ol></li>
+<li><p>利用波形变换进行鉴频 将调频信号先通过一个线性变换网络，<strong>使调频波变换成调频调幅波</strong>，其幅度正比于瞬时频率的变化，经变换网络输出的调频调幅信号再作振幅检波即可恢复出原调制信号</p></li>
+<li><p>相移乘法鉴频 将<strong>调频波经过移相电路变成调频调相波</strong>，其相位的变化正好与调频波瞬时频率的变化成线性关系；将此调频调相波与未相移调频波(为参考信号)进行相位比较，即可得到鉴频电路的解调输出。由于相位比较器一般都选用乘法电路，故此类鉴频电路称为相移乘法电路。 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-54-57.png" style="width:60.0%;height:60.0%"></p></li>
+<li><p>脉冲计数式鉴频器 <strong>利用调频波单位时间内过零信息的不同来实现解调,优点是线性良好</strong> <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-56-16.png" style="width:60.0%;height:60.0%"></p></li>
+<li><p>鉴频器的主要技术指标 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-58-19.png" style="width:30.0%;height:30.0%"> 鉴频特性：鉴频器输出电压和输入调频波频率之间的关系</p>
+<ol type="1">
+<li>鉴频跨导S：中心频率附近，单位频偏引起的输出电压的变化量S，<span class="math inline">\(S=\frac{\Delta v_o}{\Delta f}|_{f-f_o}\)</span>,S越大，意味着鉴频特性曲线越陡峭，鉴频能力越强</li>
+<li>线性范围：指鉴频特性曲线近似于直线段的频率范围，用<span class="math inline">\(2\Delta f_{max}\)</span>表示，表明鉴频器不失真解调时所允许的频率变化范围<span class="math inline">\(\rightarrow\)</span>要求<span class="math inline">\(2\Delta f_{max}\)</span>应大于调频波最大频偏的两倍，又被称为鉴频器的带宽</li>
+<li>鉴频灵敏度：主要是指为使鉴频器正常工作所需的输入调频波的幅度，其值越小，鉴频器灵敏度越高。</li>
+</ol></li>
+</ol>
+<h4 id="相位鉴频">相位鉴频</h4>
+<p>相位鉴频器:利用波形变换来鉴频。原理：利用回路的相位频率特性，将调频波变为调幅—调频波，然后用振幅检波恢复调制信号，常有两种，电感/电容耦合相位鉴频器,本届主要介绍电感耦合相位鉴频器 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-03-22.png" style="width:60.0%;height:60.0%"></p>
+<ol type="1">
+<li>电路说明：输入电路的初级回路C1、L1和次级回路C2、L2均调谐于调频波的中心频率<span class="math inline">\(f_0\)</span>,z负责完成波形变换，等幅调频波<span class="math inline">\(\rightarrow\)</span>调幅-调频波</li>
+<li>工作原理：初级回路电流经过互感耦合，在次级回路两端感应产生次级回路电压。加在两个振幅检波器的输入信号分别为 <span class="math display">\[\dot{V_{D1}}=\dot{V_{ac}}+\dot{V_{12}}=\frac{1}{2}\dot{V_{ab}}+\dot{V_{12}}\\\dot{V_{D2}}=\dot{V_{bc}}+\dot{V_{12}}=-\frac{1}{2}\dot{V_{ab}}+\dot{V_{12}}\]</span> 只要加在二极管上的电压为FM-AM波，后面就是振幅检波。这里关键是弄清<span class="math inline">\(\dot{V_{12}}\)</span>与<span class="math inline">\(\dot{V_{ab}}\)</span>间的相位关系，二者的相位关系需要利用到耦合电路化简，这里略过，最后可以得到的结论是 <span class="math display">\[\dot{V_{ab}}=j\frac{M}{L_1}\frac{X_{C2}}{R_2+jX_2}\dot{V_{12}}\]</span> <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-12-05.png" style="width:60.0%;height:60.0%"> 由上图可以看出：
+<ol type="1">
+<li>当信号频率等于中心频率时，<span class="math inline">\(X_2=0\)</span>,次级电路电压<span class="math inline">\(\dot{V_{ab}}\)</span>比初级电路电压<span class="math inline">\(\dot{V_{12}}\)</span>超前<span class="math inline">\(\frac{\pi}{2}\)</span></li>
+<li>当信号频率高于中心频率时，<span class="math inline">\(X_2&gt;0\)</span>,次级电路电压<span class="math inline">\(\dot{V_{ab}}\)</span>比初级电路电压<span class="math inline">\(\dot{V_{12}}\)</span>超前<span class="math inline">\(\frac{\pi}{2}-\theta\)</span></li>
+<li>当信号频率高于中心频率时，<span class="math inline">\(X_2&gt;0\)</span>,次级电路电压<span class="math inline">\(\dot{V_{ab}}\)</span>比初级电路电压<span class="math inline">\(\dot{V_{12}}\)</span>超前<span class="math inline">\(\frac{\pi}{2}+\theta\)</span></li>
+</ol></li>
+<li>由于鉴频器的输出电压等于两个检波器输出电压之差，而每个检波器的输出电压(峰值或平均值)正比于其输入电压的振幅,所以鉴频器输出电压为<span class="math inline">\(V_o=k_d(V_{D1}-V_{D2}),k_d\)</span>为检波器的电压传输系数，结合上面矢量图，有如下结论 <span class="math display">\[f_{in}=f_0,V_{a&#39;b&#39;}=0\\f_{in}&gt;f_0,V_{a&#39;b&#39;}&gt;0\\f_{in}&lt;f_0,V_{a&#39;b&#39;}&lt;0\]</span> 因此，输出电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>反映了输入信号瞬时频率的偏移<span class="math inline">\(\Delta f\)</span>。而<span class="math inline">\(\Delta f\)</span>与原调制信号<span class="math inline">\(V_\Omega(t)\)</span>成正比，即<span class="math inline">\(V_{a&#39;b&#39;}\)</span>与<span class="math inline">\(V_\Omega(t)\)</span>成正比。亦即实现了调频波的解调,若将二者关系画成曲线，则得到下图 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-21-31.png" style="width:60.0%;height:60.0%"></li>
+</ol>
+<h4 id="比例鉴频器">比例鉴频器</h4>
+<p>前面介绍的相位鉴频器，当输入调频信号的振幅发生变化时，输出电压也会发生变化，因此由各种噪声和干扰引起的输入信号寄生调幅，都将在其输出端反映出来。为了抑制噪声及干扰，在鉴频器前必须增设限幅器，比例鉴频器具有自限幅功能，因而可省去外加限幅器 1. 原理电路 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-22-51.png" style="width:60.0%;height:60.0%"> 其波形变换部分与相位鉴频器基本相同，电路上差别主要有以下几点： 1. R1，R2连接点N接地，负载RL接在MN之间，输出电压由M，N引出 2. R1和R2两端并接大电容C6，使得在检波过程中<span class="math inline">\(a&#39;b&#39;\)</span>间的端电压基本保持不变 3. D1和D2按环路顺接，以保持直流通路，因此C3和C4上的电压极性一致,<span class="math inline">\(V_{a&#39;b&#39;}=V_{c3}+V_{c4}\)</span>,输出电压为<span class="math inline">\(v_o=\frac{1}{2}(V_{a&#39;b&#39;}-\frac{2V_{a&#39;b&#39;}}{1+\frac{V_{D1}}{V_{D2}}})\)</span> 2. 自限幅特性分析 比例鉴频器不需要前置限幅器，它本身就具有抑制寄生调幅所产生的干扰的能力，在比例鉴频器中，由于C6的电容量很大，因此电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>基本稳定不变，它只决定于调频波的载波振幅，而与其频偏及寄生调幅都无关. 当输入信号振幅由于干扰突然变大时，由于电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>基本恒定，就使得检波管的电流明显加大，加重了对输入回路的负载，即回路Q值下降,可迫使信号振幅减小。反之亦然。因而很好地起到了稳幅的作用</p>
+<h2 id="自问自答">自问自答</h2>
+<ol type="1">
+<li><p>采用角度调制与解调和振幅调制与解调的区别在哪里？ 角度调制与解调和振幅调制与解调最大的区别在频率变换前后频谱结构的变化不同。角度调制是频率变换前后频谱结构发生了变化，属于非线性频率变换。角度调制的主要优点是抗干扰性强，FM广泛应用于广播、电视、通信以及遥测方面，PM主要应用于数字通信。但是角度调制的主要缺点是占据频带宽，频带利用不经济。</p></li>
+<li><p>实现鉴频电路的方法主要有哪些？</p>
+<ol type="1">
+<li>利用波形变换进行鉴频</li>
+<li>相移乘法鉴频</li>
+<li>脉冲计数式鉴频器</li>
+<li>利用锁相环路实现鉴频</li>
+</ol></li>
+<li><p>从表面看，增加带宽将使更多的噪声信号进入接收机，但是，为什么宽带的调频信号反而可以提高信噪比呢？ 这是因为调频信号的频谱是有规律地扩展的，各旁频分量是相关的，经解调后宽带信号可以凝聚为窄带的原始调制信号频谱。噪声各频率是彼此独立的，不能凝聚，解调后仍分布在宽带内，大部分 将被滤波器滤除，这就使输出信噪比得以提高。</p></li>
+</ol>
+<h2 id="未解答的疑惑">未解答的疑惑</h2>
+<ol type="1">
+<li>在调相电路尤其是阿姆斯特朗法（矢量合成调相法）中如何将电路分析与矢量建立联系？</li>
+<li>如何能够进一步不把FM和PM弄混？</li>
+</ol>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>通信电子线路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通信电子线路第一二章知识小结</title>
+    <url>/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="前言">前言</h2>
+<p>更新中 <span id="more"></span></p>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>通信电子线路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通信电子线路第三章知识小结</title>
+    <url>/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="前言">前言</h2>
+<p>更新中 <span id="more"></span></p>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>通信电子线路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通信电子线路第四章知识小结</title>
+    <url>/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="前言">前言</h2>
+<p>更新中 <span id="more"></span></p>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>通信电子线路</tag>
       </tags>
   </entry>
 </search>
