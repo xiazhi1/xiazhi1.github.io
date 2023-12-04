@@ -20,18 +20,35 @@
     var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前言 更新中">
+  <meta name="description" content="前言 第一章内容较少，故将一二章合并。本知识小结只针对华中科技大学电子信息与通信学院课程《通信电子线路》进行总结，不保证满足所有读者需求">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通信电子线路第一二章知识小结">
 <meta property="og:url" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="前言 更新中">
+<meta property="og:description" content="前言 第一章内容较少，故将一二章合并。本知识小结只针对华中科技大学电子信息与通信学院课程《通信电子线路》进行总结，不保证满足所有读者需求">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-10-34-42.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-10-36-08.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-10-42-33.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-10-47-38.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-03-37.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-10-59.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-14-03.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-18-28.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-25-22.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-29-05.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-31-23.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-36-21.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-39-25.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-43-37.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-14-37-04.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-14-39-26.png">
 <meta property="article:published_time" content="2023-12-03T06:33:56.000Z">
-<meta property="article:modified_time" content="2023-12-03T06:44:48.696Z">
+<meta property="article:modified_time" content="2023-12-04T06:50:24.925Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="通信电子线路">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-10-34-42.png">
 
 <link rel="canonical" href="http://xiazhi1.github.io/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
 
@@ -207,10 +224,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-12-03 14:33:56 / 修改时间：14:44:48" itemprop="dateCreated datePublished" datetime="2023-12-03T14:33:56+08:00">2023-12-03</time>
+              <time title="创建时间：2023-12-03 14:33:56" itemprop="dateCreated datePublished" datetime="2023-12-03T14:33:56+08:00">2023-12-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-04 14:50:24" itemprop="dateModified" datetime="2023-12-04T14:50:24+08:00">2023-12-04</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -234,14 +257,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5</span>
+              <span>4.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -254,7 +277,67 @@
 
       
         <h2 id="前言">前言</h2>
-<p>更新中 <span id="more"></span></p>
+<p>第一章内容较少，故将一二章合并。本知识小结只针对华中科技大学电子信息与通信学院课程《通信电子线路》进行总结，不保证满足所有读者需求 <span id="more"></span></p>
+<h2 id="通信系统导论">通信系统导论</h2>
+<p>通信系统组成框图如下 <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-10-34-42.png"> <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-10-36-08.png"></p>
+<h2 id="通信电子线路分析基础">通信电子线路分析基础</h2>
+<h3 id="选频网络">选频网络</h3>
+<p><strong>选频网络的作用是选出我们需要的频率分量并滤除不需要的频率分量。选频网络可分 为谐振回路和滤波器两大类</strong></p>
+<p>谐振回路 由电感和电容元件组成的振荡回路，振荡回路包含单振荡回路和耦合振荡回路，而单振荡回路又包含串联谐振回路和并联谐振回路。 滤波器滤波器包含LC集中滤波器 、石英晶体滤波器 、陶瓷滤波器和声表面波滤波器 等 。 滤波器的优点是稳定性好，电性能好，品质因数高，利于微型化，便于大量生产</p>
+<h4 id="串联谐振回路">串联谐振回路</h4>
+<p>电感电容信号源三者串联称为串联回路，其在谐振频率或谐振频率附近工作时，称为串联谐振回路，下面将归纳串联谐振回路的参量进行分析 <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-10-42-33.png"></p>
+<ol type="1">
+<li><p>回路阻抗 设z为回路阻抗，则回路阻抗可表述为<span class="math inline">\(z=R+j(wL-\frac{1}{wC})\)</span>,进一步化简即可的其阻抗模与阻抗幅角为<span class="math inline">\(|z|=\sqrt{R^2+(wL-\frac{1}{wC})^2},\psi_z=arctan\frac{wL-\frac{1}{wC}}{R}\)</span> <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-10-47-38.png"> 又上图可知，当<span class="math inline">\(w&gt;w_0\)</span>时，回路成感性，电流滞后电压，反之则成容性，电流超前电压，<span class="math inline">\(w=w_0，|z|=R\)</span>，回路串联谐振，当回路谐振时的感抗或容抗,称为特性阻抗，用<span class="math inline">\(\rho\)</span>表示，<span class="math inline">\(\rho=w_0L=\frac{1}{w_0C}=\sqrt{\frac{L}{C}}\)</span></p></li>
+<li><p>谐振频率<span class="math inline">\(f_0\)</span> 由上一小节的推导知，串联谐振回路的谐振频率就是当<span class="math inline">\(wL-\frac{1}{wC}=0\)</span>的信号频率<span class="math inline">\(w_0=\frac{1}{\sqrt{LC}},f_0=\frac{1}{2\pi\sqrt{LC}}\)</span></p></li>
+<li><p>品质因数Q 谐振时回路感抗值(或容抗值)与回路电阻R 的比值称为回路的品质因数，以Q表示,表示回路损耗大小 <span class="math display">\[Q=\frac{w_0L}{R}=\frac{1}{w_0CR}=\frac{\rho}{R}=\frac{1}{R}\cdot\sqrt{\frac{L}{C}}\]</span> 且在串联谐振时，电感L和电容C上的电压达到最大值且为输入信号电压的Q倍,故串联谐振也称为电压谐振。因此，必须预先注意回路元件的耐压问题</p></li>
+<li><p>广义失谐系数<span class="math inline">\(\xi\)</span> 广义失谐是表示回路失谐大小的量，谐振时为0 <span class="math display">\[\xi=\frac{失谐时电抗}{谐振时电阻}=\frac{X}{R}=Q_0(\frac{w}{w_0}-\frac{w_0}{w}),when\quad w\approx w_0,\xi\approx Q_0\cdot\frac{2\Delta f}{f_0}\]</span></p></li>
+<li><p>谐振曲线 串联谐振回路中电流幅值与外加电动势频率之间的关系曲线称为谐振曲线,可用<span class="math inline">\(N(f)\)</span>表示谐振曲线函数, <span class="math display">\[N(f)=\frac{失谐处电流}{谐振点电流}=\frac{1}{1+j\xi}\]</span> Q 值不同即损耗R 不同时，对曲线有很大的影响,Q值大，曲线尖锐，选择性好 ;Q小 ，曲线钝,通带宽<img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-03-37.png"></p></li>
+<li><p>通频带 当回路外加电压的幅值不变时，改变频率，回路电流下降到<span class="math inline">\(\frac{1}{\sqrt{2}}\)</span>时所对应的频率范围称为谐振回路的通频带，用B表示 <span class="math display">\[B=2\Delta f_{0.7}=\frac{f_0}{Q}\]</span> 所以B与Q成反比,Q增大,B减小,B的推导用到了广义失谐函数辅助推导，在这里省略</p></li>
+<li><p>相频特性曲线 其用于表示回路电流相角<span class="math inline">\(\psi_i\)</span>随频率w变化的曲线,<span class="math inline">\(\psi_i=-arctan\frac{x}{R}=-arctan\xi\)</span> <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-10-59.png"></p></li>
+<li><p>信号源内阻及负载对串联谐振回路的影响 若考虑信号内阻<span class="math inline">\(R_s\)</span>与负载<span class="math inline">\(R_L\)</span>，则有载Q值可表述为<span class="math inline">\(Q_L=\frac{w_0L}{R+R_s+R_L}\)</span>,可以看出串联谐振回路适合<span class="math inline">\(R_s\)</span>很小和<span class="math inline">\(R_L\)</span>不大的电路，这样<span class="math inline">\(Q_L\)</span>不会太低，有较好的选择性</p></li>
+</ol>
+<h4 id="并联谐振回路">并联谐振回路</h4>
+<p>由电感、电容、信号源三者并联组成的回路称为并联谐振回路 <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-14-03.png"></p>
+<ol type="1">
+<li>回路阻抗 对于并联回路来说，一般采用导纳分析比较方便，其导纳 <span class="math display">\[Y=\frac{1}{z}=\frac{CR}{L}+j(wc-\frac{1}{wL})=G+jB\]</span></li>
+<li>谐振频率 与串联谐振回路一致为：<span class="math inline">\(w_p=\frac{1}{\sqrt{LC}},f_p=\frac{1}{2\pi\sqrt{LC}}\)</span>，其阻抗特性如下，<span class="math inline">\(w&gt;w_p\)</span>,回路呈容性，反之为感性 <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-18-28.png"></li>
+<li>品质因数 与串联谐振回路类似为 <span class="math display">\[Q_p=\frac{w_pL}{R}=\frac{R_p}{w_pL}=\frac{R_p}{\rho}=R_p\cdot\sqrt{\frac{C}{L}}\]</span> 式中,R为串联在电感支路的损耗电阻;<span class="math inline">\(R_P\)</span>为并联谐振回路的谐振电阻,且在并联谐振时，电感L和电容C上的电流达到最大值且为输入信号电流的Q倍,故串联谐振也称为电流谐振。</li>
+<li>广义失谐系数<span class="math inline">\(\xi\)</span> 广义失谐是表示回路失谐大小的量，谐振时为0 <span class="math display">\[\xi=\frac{失谐时电纳}{谐振时电导}=\frac{B}{G}=\frac{w_pC}{G}(\frac{w}{w_p}-\frac{w_p}{w}),when\quad w\approx w_p,\xi\approx Q_p\cdot\frac{2\Delta f}{f_p}\]</span></li>
+<li>谐振曲线 并联谐振回路中电压幅值与外加电动势频率之间的关系曲线称为谐振曲线,可用<span class="math inline">\(N(f)\)</span>表示谐振曲线函数, <span class="math display">\[N(f)=\frac{失谐处电压}{谐振点电压}=\frac{1}{1+j\xi}\]</span> Q 值不同时，对曲线有很大的影响,Q值小，曲线尖锐，选择性好 ;Q值大，曲线钝,通带宽<img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-25-22.png"></li>
+<li>通频带 当回路外加电流的幅值不变时，改变频率，回路电压下降到<span class="math inline">\(\frac{1}{\sqrt{2}}\)</span>时所对应的频率范围称为谐振回路的通频带，用B表示 <span class="math display">\[B=2\Delta f_{0.7}=\frac{f_p}{Q_p}\]</span> 所以B与Q成反比,Q增大,B减小,B的推导用到了广义失谐函数辅助推导，在这里省略</li>
+<li>相频特性曲线 其用于表示回路电压相角<span class="math inline">\(\psi_v\)</span>随频率w变化的曲线,<span class="math inline">\(\psi_v\approx-arctan\xi\)</span> <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-29-05.png"></li>
+<li>信号源内阻及负载对串联谐振回路的影响 若考虑信号内阻<span class="math inline">\(R_s\)</span>与负载<span class="math inline">\(R_L\)</span>，则有载Q值可表述为<span class="math inline">\(Q_L=\frac{Q_p}{1+\frac{R_p}{R_s}+\frac{R_p}{R_L}}\)</span>,可以看出串联谐振回路适合<span class="math inline">\(R_s\)</span>很大和<span class="math inline">\(R_L\)</span>很大的电路，这样<span class="math inline">\(Q_L\)</span>不会太低，有较好的选择性</li>
+</ol>
+<h4 id="串并联阻抗等效互换与回路抽头阻抗互换">串并联阻抗等效互换与回路抽头阻抗互换</h4>
+<h5 id="串并阻抗的等效互换">串并阻抗的等效互换</h5>
+<p><img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-31-23.png"> 在实际电路中有时为了分析电路方便需进行串、并联电路的等效互换，若<span class="math inline">\(Z_{AB}=Z_{A&#39;B&#39;}\)</span>,则经过推导可得 <span class="math display">\[R_2=(1+Q_L^2)(R_1+R_x),x_2=x_1(1+\frac{1}{Q_{L}^2})\\when\quad Q_L&gt;&gt;1,R_2\approx(R_1+R_2)Q_L^2,x_2\approx x_1\]</span></p>
+<h5 id="回路抽头时阻抗的变化折合关系">回路抽头时阻抗的变化（折合）关系</h5>
+<p>从前面分析可知,<span class="math inline">\(R_s,R_L\)</span>对回路Q值有影响，实际应用中为了减小信号源内阻和负载对回路的影响。采用抽头接入方式如下 <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-36-21.png"> 其接入系数P定义为抽头点电压与端电压之比，利用能量等效原则有如下关系 <span class="math display">\[P=\frac{L_1}{L_1+L_2}=\frac{N_1}{N_1+N_2}\]</span> 若为电容抽头，则有 <span class="math display">\[P=\frac{C}{C_2}=\frac{C_1}{C_1+C_2}\]</span> <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-39-25.png"> 根据以上分析得出结论: 1. 抽头改变时，接入系数p改变 2. 由低抽头折合到回路高端，等效导纳降低为原来的<span class="math inline">\(P^2\)</span>,等效电阻提升<span class="math inline">\(\frac{1}{P^2}\)</span>,Q提升很多 3. 对电流源来说与阻抗导纳的区别是低抽头向高抽头转换，电流源减小为原来的P 4. 负载电容的折合则是等于原来的<span class="math inline">\(P^2\)</span>，折合后电容减小，阻抗加大</p>
+<h4 id="耦合回路">耦合回路</h4>
+<p>耦合回路是由相互间有影响的两个回路组成的，其中接入信号源的回路称为初级回路,与它相 互耦合的第二个回路连接负载，称 为次级回路。如果初、次级回路都是谐振回路，则称为耦合振荡回路。耦合振荡回路可以改善谐振曲线,使其选频特性更接近理想的矩形曲线 <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-11-43-37.png"> 为了说明回路间耦合程度的强弱，引入耦合系数的概念并以k表示，对于电感耦合回路有<span class="math inline">\(k=\frac{C_M}{C+C_M}\)</span>,对于电感耦合回路<span class="math inline">\(k=\frac{M}{\sqrt{L_1L_2}}\)</span></p>
+<p>一般来说我们更关心的是反射阻抗与耦合回路的等效阻抗，其中反射阻抗用来说明一个回路对另一回路电流的影响，对初次级回路的相互影响，可以用一个反射阻抗来表示 <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-14-37-04.png"> 根据上图进行推导，可以求出次级回路对初级回路的反射阻抗<span class="math inline">\(Z_{f1}=\frac{(wM)^2}{Z_{22}}\)</span>,初级回路对次级回路的反射阻抗<span class="math inline">\(Z_{f2}=\frac{(wM)^2}{Z_{11}}\)</span>,经过上述分析可得到等效电路如下 <img src="/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-04-14-39-26.png"> 将自阻抗分解为电阻分量和电抗分量后可得 <span class="math display">\[Z_{f1}=\frac{(wM)^2}{R_{22}^2+X_{22}^2}R_{22}+-j\frac{(wM)^2}{R_{22}^2+X_{22}^2}X_{22}\\Z_{f2}=\frac{(wM)^2}{R_{11}^2+X_{11}^2}R_{22}+-j\frac{(wM)^2}{R_{11}^2+X_{11}^2}X_{11}\]</span> 由上式可知：反射电阻永远是正值。这是因为，无论是初级回路反射到次级回路，还是从次级回路反射到初级回路，反射电阻总是代表一定能量的损耗；反射电抗的性质与原回路总电抗的性质总是相反的；反射电阻和反射电抗的值与耦合阻抗的平方值<span class="math inline">\((wM)^2\)</span>成正比</p>
+<h3 id="非线性电路分析基础">非线性电路分析基础</h3>
+<p>非线性元件的参数与通过它的电流或施加于其上的电压有关，非线性元件构成的电路就是非线性电路</p>
+<p>非线性电路中至少包含一个非线性元件，其输出输入关系用非线性函数或微分方程表达，不具备叠加型和均匀性，是其与线性电路的主要区别</p>
+<p>非线性电路的输入输出关系是非线性函数关系，当信号通过非线性电路后，在输出 信号中将会产生输入信号所没有的频率成分,也可能不再出现输入信号中的某些频率成分。 这是非线性电路的重要特性</p>
+<p>非线性电路的分析方法主要有以下三种：</p>
+<ol type="1">
+<li>幂函数分析法</li>
+<li>折线分析法</li>
+<li>线性时变参量电路分析法</li>
+</ol>
+<p>非线性电路主要可以应用在：</p>
+<ol type="1">
+<li>实现信号频谱的线性变换(频谱搬移)</li>
+<li>实现信号频谱的非线性变换</li>
+<li>实现变参量电路</li>
+</ol>
+<h2 id="参考资料">参考资料</h2>
+<ol type="1">
+<li>《通信电子线路》（第三版）：严国平，龙占超</li>
+<li>老师课件</li>
+<li><a target="_blank" rel="noopener" href="https://www.icourse163.org/course/HUST-1003157002">通信电子线路mooc</a></li>
+</ol>
 <!-- flag of hidden posts -->
     </div>
 
@@ -328,7 +411,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text">通信系统导论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80"><span class="nav-number">3.</span> <span class="nav-text">通信电子线路分析基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E9%A2%91%E7%BD%91%E7%BB%9C"><span class="nav-number">3.1.</span> <span class="nav-text">选频网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B2%E8%81%94%E8%B0%90%E6%8C%AF%E5%9B%9E%E8%B7%AF"><span class="nav-number">3.1.1.</span> <span class="nav-text">串联谐振回路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B6%E8%81%94%E8%B0%90%E6%8C%AF%E5%9B%9E%E8%B7%AF"><span class="nav-number">3.1.2.</span> <span class="nav-text">并联谐振回路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B2%E5%B9%B6%E8%81%94%E9%98%BB%E6%8A%97%E7%AD%89%E6%95%88%E4%BA%92%E6%8D%A2%E4%B8%8E%E5%9B%9E%E8%B7%AF%E6%8A%BD%E5%A4%B4%E9%98%BB%E6%8A%97%E4%BA%92%E6%8D%A2"><span class="nav-number">3.1.3.</span> <span class="nav-text">串并联阻抗等效互换与回路抽头阻抗互换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%B2%E5%B9%B6%E9%98%BB%E6%8A%97%E7%9A%84%E7%AD%89%E6%95%88%E4%BA%92%E6%8D%A2"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">串并阻抗的等效互换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%9E%E8%B7%AF%E6%8A%BD%E5%A4%B4%E6%97%B6%E9%98%BB%E6%8A%97%E7%9A%84%E5%8F%98%E5%8C%96%E6%8A%98%E5%90%88%E5%85%B3%E7%B3%BB"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">回路抽头时阻抗的变化（折合）关系</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%80%A6%E5%90%88%E5%9B%9E%E8%B7%AF"><span class="nav-number">3.1.4.</span> <span class="nav-text">耦合回路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80"><span class="nav-number">3.2.</span> <span class="nav-text">非线性电路分析基础</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
