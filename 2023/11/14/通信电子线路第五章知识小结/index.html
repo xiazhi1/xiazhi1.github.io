@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本章知识小结 概述 本章主要讨论自激式振荡器，它是在无须加激励信号的情况下，能将直流电能转换为具有一定波形、频率、幅度的交变能量电路。振荡器又可根据波形不同分为正弦波振荡器和非正弦波振荡器。正弦波振荡器根据工作方式不同又可分为反馈型振荡器和负阻型振荡器。反馈型振荡器主要由决定振荡频率的选频网络和维持振荡的正反馈放大器组成，本章主要讨论反馈型正弦波振荡器">
+  <meta name="description" content="前言 本知识小结只针对华中科技大学电子信息与通信学院课程《通信电子线路》进行总结，不保证满足所有读者需求">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通信电子线路第五章知识小结">
 <meta property="og:url" content="http://xiazhi1.github.io/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="本章知识小结 概述 本章主要讨论自激式振荡器，它是在无须加激励信号的情况下，能将直流电能转换为具有一定波形、频率、幅度的交变能量电路。振荡器又可根据波形不同分为正弦波振荡器和非正弦波振荡器。正弦波振荡器根据工作方式不同又可分为反馈型振荡器和负阻型振荡器。反馈型振荡器主要由决定振荡频率的选频网络和维持振荡的正反馈放大器组成，本章主要讨论反馈型正弦波振荡器">
+<meta property="og:description" content="前言 本知识小结只针对华中科技大学电子信息与通信学院课程《通信电子线路》进行总结，不保证满足所有读者需求">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-10-41-34.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-10-51-49.png">
@@ -39,9 +39,9 @@
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-14-58-59.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-15-15-03.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-15-15-22.png">
-<meta property="og:image" content="http://xiazhi1.github.io/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-15-37-52.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-05-15-00-09.png">
 <meta property="article:published_time" content="2023-11-14T07:50:03.000Z">
-<meta property="article:modified_time" content="2023-12-03T06:45:10.654Z">
+<meta property="article:modified_time" content="2023-12-07T00:57:29.948Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="通信电子线路">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-03 14:45:10" itemprop="dateModified" datetime="2023-12-03T14:45:10+08:00">2023-12-03</time>
+                <time title="修改时间：2023-12-07 08:57:29" itemprop="dateModified" datetime="2023-12-07T08:57:29+08:00">2023-12-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,7 +254,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.1k</span>
+              <span>5.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -273,9 +273,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="本章知识小结">本章知识小结</h2>
+        <h2 id="前言">前言</h2>
+<p>本知识小结只针对华中科技大学电子信息与通信学院课程《通信电子线路》进行总结，不保证满足所有读者需求 <span id="more"></span></p>
+<h2 id="本章知识小结">本章知识小结</h2>
 <h3 id="概述">概述</h3>
-<p>本章主要讨论自激式振荡器，它是在无须加激励信号的情况下，能将直流电能转换为具有一定波形、频率、幅度的交变能量电路。振荡器又可根据波形不同分为正弦波振荡器和非正弦波振荡器。正弦波振荡器根据工作方式不同又可分为反馈型振荡器和负阻型振荡器。<strong>反馈型振荡器主要由决定振荡频率的选频网络和维持振荡的正反馈放大器组成</strong>，本章主要讨论反馈型正弦波振荡器 <span id="more"></span></p>
+<p>本章主要讨论自激式振荡器，它是在无须加激励信号的情况下，能将直流电能转换为具有一定波形、频率、幅度的交变能量电路。振荡器又可根据波形不同分为正弦波振荡器和非正弦波振荡器。正弦波振荡器根据工作方式不同又可分为反馈型振荡器和负阻型振荡器。<strong>反馈型振荡器主要由决定振荡频率的选频网络和维持振荡的正反馈放大器组成</strong>，本章主要讨论反馈型正弦波振荡器</p>
 <h3 id="反馈式振荡器的基本工作原理">反馈式振荡器的基本工作原理</h3>
 <p>反馈式振荡器由反馈放大器演变而来，根据下图可以分析器起振的物理过程和基本组成，简单来说，当开关拨向1，电路未调谐放大器，若在电路稳定后，迅速将开关拨向2点。这是调谐放大器就变为自激振荡器 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-10-41-34.png"></p>
 <p>由自激振荡建立的过程可知，反馈型自激振荡器的电路构成必须由以下三部分组成：</p>
@@ -285,21 +287,21 @@
 <li>使能量在正确的时间内补充道电路中的控制设备，由有源器件和正反馈电路完成。</li>
 </ol>
 <p>在上述分析中，反馈式振荡器至少包含一个基本放大器和把能量一部分反馈到放大器输入端的反馈网络F。由模电知识可知，反馈环闭环增益表示为:<span class="math display">\[\dot{A_f}=\frac{\dot{A_o}}{1-\dot{A_o}\cdot \dot{F}}\]</span> <span class="math inline">\(\dot{A_o}=\frac{\dot{V_o}}{\dot{V_i}}|_{\dot{V_f}=0}\)</span>为基本放大器小信号开环增益，<span class="math inline">\(\dot{F}=\frac{\dot{V_f}}{\dot{V_i}}\)</span>为反馈网络小信号电压反馈系数 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-10-51-49.png"> 反馈型正弦波的起振条件为<span class="math display">\[\dot{A_o}\dot{F}&gt;1({A_o}F&gt;1.\phi_A+\phi_F=2n\pi,n=0,\pm1,\dots)\]</span>上式为振幅起振条件和相位起振条件，放大器增益A和输出电压幅度<span class="math inline">\(V_o\)</span>的关系称为振荡特性,<span class="math inline">\(\frac{1}{F}\)</span>与<span class="math inline">\(V_o\)</span>之间的关系称为反馈特性，起振的幅度条件如下图所示 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-11-04-47.png"> 但在实际设计中，由于静态工作点太低，振荡器电路无法自行起振，必须给一个较大幅度的初始激励，使动态点越过不稳定平衡点B才能起振，这称为硬激励起振，设计电路时要尽量避免 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-11-06-34.png"> 起振后，为了确保维持自激振荡，必须满足平衡条件，平衡条件可表述为：<span class="math display">\[A\cdot F=1,\phi_A+\phi_F=2n\pi,n=0,1,2\dots\]</span></p>
-<p>若用电路参数表示振幅平衡条件和相位平衡条件则有 <span class="math display">\[|\overline{y_{fe}}|\cdot|Z_{pl}|\cdot F=1\\\phi_Y+\phi_Z+\phi_F=2n\pi,n=0,1,2...\]</span></p>
+<p>若用电路参数表示振幅平衡条件和相位平衡条件则有 <span class="math display">\[|\overline{y_{fe}}|\cdot|Z_{p1}|\cdot F=1\\\phi_Y+\phi_Z+\phi_F=2n\pi,n=0,1,2...\]</span></p>
 <p>振荡器平衡状态的稳定条件是指在外因作用下平衡条件被破坏后，振荡器能自动恢复到原来平衡状态的能力，稳定条件也分为振幅稳定和相位稳定两种： 1. 振幅稳定:<strong>在平衡点附近，放大倍数随振幅的变化特性具有负的斜率</strong><span class="math display">\[\frac{\partial A}{\partial V_{om}}|_{V_{om}=V_{omQ}}&lt;0\]</span> 2. 相位稳定：<strong>振荡器相位稳定条件要求谐振回路的相频特性曲线<span class="math inline">\(\phi_z=f(w)\)</span>在工作频率附近具有负的斜率</strong><span class="math display">\[\frac{\partial \phi}{\partial w}\approx\frac{\partial \phi_Z}{\partial w}&lt;0\]</span></p>
 <h3 id="反馈型lc振荡器线路">反馈型LC振荡器线路</h3>
-<p>采用LC谐振回路作为选频网络的反馈振荡器统称为LC振荡器。LC振荡器按其反馈网络的不同，可分为互感耦合振荡器、电感反馈式振荡器和电容反 馈式振荡器三种类型，其中后两种通常统称为三端式振荡器</p>
+<p>采用LC谐振回路作为选频网络的反馈振荡器统称为LC振荡器。LC振荡器按其反馈网络的不同，可分为互感耦合振荡器、电感反馈式振荡器和电容反馈式振荡器三种类型，其中后两种通常统称为三端式振荡器</p>
 <h3 id="互感耦合振荡器">互感耦合振荡器</h3>
 <p>互感耦合振荡器是依靠线圈之间的互感耦合实现正反馈的，因此，耦合线圈同名端的正确位置至关重要。同时,耦合量M要选择合适,使其满足振幅起振条件。</p>
 <p>互感耦合振荡器有三种形式:调集电路、调基电路和调发电路，具体根据振荡回路是在集电极电路、基极电路和发射极电路来区分的 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-11-29-41.png"></p>
 <p>由于基极和发射极之间的输入阻抗比较低，为了避免过多地影响回路的Q 值，故在调基和调发这两个电路中，晶体管与振荡回路进行部分耦合。调集电路在高频输出方面比其他两种电路稳定,而且幅度较大,谐波成分较小。调基电路振荡频率在较宽的范围改变时，振幅比较平稳。</p>
-<p><strong>互感耦合振荡器在调整反馈（改变M）时，基本上不影响振荡频率。但由于分布电容的存在,在频率较高时，难于做出稳定性高的变压器。因此，它们的工 频率不宜过高，一般应用于中、短波波段</strong></p>
+<p><strong>互感耦合振荡器在调整反馈（改变M）时，基本上不影响振荡频率。但由于分布电容的存在,在频率较高时，难于做出稳定性高的变压器。因此，它们的工作频率不宜过高，一般应用于中、短波波段</strong></p>
 <p>根据h 参数等效电路分析可知互感耦合振荡器的振荡频率 <span class="math display">\[f_o\approx\frac{1}{2\pi}\sqrt{\frac{1}{LC}}\]</span></p>
 <h3 id="三端式振荡器">三端式振荡器</h3>
 <p>1 .电感反馈三端式振荡器（哈特莱电路） <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-11-44-13.png"></p>
 <ul>
 <li>线路特点：它的反馈电压<span class="math inline">\(\dot{v_f}\)</span>是由电感<span class="math inline">\(L_2\)</span>上获得的，晶体管的三个电极分别与回路电感的三个端点相连接，<strong>故称为电感反馈三端式振荡器</strong>。电路中集电极馈电采取串联馈电方式，基极则采取并联馈电方式, <span class="math inline">\(C_b\)</span>为隔直流电容，防止<span class="math inline">\(V_{CC}\)</span>通过电感， 加到基极，以免高压击穿管子。</li>
-<li>振荡频率：<span class="math display">\[f_o\approx\frac{1}{2\pi}\sqrt{\frac{1}{LC}}\\L=L_1+L_2+2M\]</span></li>
+<li>振荡频率与反馈系数：<span class="math display">\[f_o\approx\frac{1}{2\pi}\sqrt{\frac{1}{LC}}\\L=L_1+L_2+2M，F=\frac{L_2+M}{L_1+M}\]</span></li>
 <li>电路的优缺点：<strong>优点</strong>：<span class="math inline">\(L_1,L_2\)</span>之间有互感，反馈较强，容易起振;振荡频率调节方便,只要调整电容C的大小即可，而且C的改变基本上不影响电路的反馈系数。<strong>缺点</strong>:振荡波形不好，因为反馈电压是在电感上获得的，而电感对高次谐波呈高阻抗，因此对高次谐波的反馈较强，使波形失真大;另外，电感反馈三端电路的振荡频率不能做得太高，这是因为频率太高, L太小,不宜制造且分布参数的影响太大。电感三端式振荡器的工作频率一般在几十兆赫兹以下。</li>
 </ul>
 <ol start="2" type="1">
@@ -307,7 +309,7 @@
 </ol>
 <ul>
 <li>线路特点：它的反馈电压<span class="math inline">\(\dot{v_f}\)</span>是由电容<span class="math inline">\(C_2\)</span>上获得的，晶体管的三个电极分别与回路电容的三个端点相连接，故称为电容反馈三端式振荡器。电路中集电极和基极均采取并联馈电方式。<span class="math inline">\(C_b,C_c\)</span>均为隔直电容。</li>
-<li>振荡频率：<span class="math display">\[f_o\approx\frac{1}{2\pi}\sqrt{\frac{1}{LC}}\\C=\frac{C_1C_2}{C_1+C_2}\]</span></li>
+<li>振荡频率与反馈系数：<span class="math display">\[f_o\approx\frac{1}{2\pi}\sqrt{\frac{1}{LC}}\\C=\frac{C_1C_2}{C_1+C_2},F=\frac{C_1}{C_2}\]</span></li>
 <li>电路的优缺点：<strong>优点</strong>：振荡波形好，因为它的反馈电压<span class="math inline">\(\dot{v_f}\)</span>是靠电容获得的，而电容元件对信号的高次谐波呈低阻抗，因此，对高次谐波反馈较弱,使振荡波形更接近正弦波;另外,这种电路的频率稳定度较高，由于电路中的不稳定电容均与回路电容<span class="math inline">\(C_1,C_2\)</span>相并联,因此，适当加大回路的电容量，就可以减小不稳定因素对振荡频率的影响。电容三端电路的工作频率可以做得较高，因为它可直接利用振荡管的输出、输入电容作为回路的振荡电容。它的工作频率可做到几十兆赫兹到几百兆赫兹的甚高频波段范围。<strong>缺点</strong>:调<span class="math inline">\(C_1\)</span> 或<span class="math inline">\(C_2\)</span> 来改变振荡频率时,反馈系数也将改变。但只要在L两端并上一个可变电容器，并令<span class="math inline">\(C_1\)</span>与<span class="math inline">\(C_2\)</span>为固定电容，则在调整频率时,基本上不会影响反馈系数。</li>
 </ul>
 <ol start="3" type="1">
@@ -325,16 +327,24 @@
 <p><img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-15-15-03.png"> 上图是石英晶振的符号和等效电路，石英晶振的Q值和特性阻抗<span class="math inline">\(\rho\)</span>都非常高。这是因为其<span class="math inline">\(L_q\)</span>较大，<span class="math inline">\(C_q\)</span>与<span class="math inline">\(r_q\)</span>很小的缘故。</p>
 <p>由上图(b)可知，石英晶振可等效为一个串联谐振回路和一个并联谐振回路，若忽略<span class="math inline">\(r_q\)</span>,则晶振两端呈现纯电抗，其电抗频率特性曲线如下图实线所示 <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-15-15-22.png"> 其串联谐振频率为<span class="math inline">\(f_q=\frac{1}{2\pi\sqrt{L_qC_q}}\)</span>,并联谐振频率为<span class="math inline">\(f_p=\frac{1}{2\pi\sqrt{L_q\frac{C_0C_q}{C_0+C_q}}}\\=\frac{f_0}{\sqrt{\frac{C_0}{C_0+C_q}}}=f_q\sqrt{1+\frac{C_q}{C_0}}\)</span></p>
 <p>由于<span class="math inline">\(C_q/C_0\)</span>很小，所以<span class="math inline">\(f_p,f_q\)</span>间隔很小，因而在<span class="math inline">\(f_p-f_q\)</span>感性区间, 石英晶振具有陡峭的电抗频率特性，曲线斜率大，利于稳频。若外部因素使谐振频率增大，则根据晶振电抗特性,必然使等效电感L增大，但由于振荡频率与L的平方根成反比,所以又促使谐振频率下降,趋近于原来的值。</p>
+<h4 id="晶体谐振器电路">晶体谐振器电路</h4>
+<p>将石英晶振作为高Q 值谐振回路元件接入正反馈电路中，就组成了晶体振荡器。根据石英晶振在振荡器中的作用原理，晶体振荡器可分成两类:<strong>一类是将其作为等效电感元件用在三端式电路中，工作在感性区间，称为并联型晶体振荡器;另一类是将其作为一个短路元件串接于正反馈支路上,工作在它的串联谐振频率上，称为串联型晶体振荡器</strong></p>
 <h2 id="自问自答">自问自答</h2>
 <ol type="1">
 <li><p>如何化简正弦波振荡器电路？ 在正弦波振荡电路中我们考虑的往往是正反馈产生振荡的电路，因此在简化电路的过程中只需要聚焦正反馈部分即可。不妨对振荡电路中的R、L、C分别讨论。 对于R，在电路化简过程中我们认为其开路，因为R在电路中起到的作用与正反馈无关。 对于L，在高频电路中L的阻抗<span class="math inline">\(jwL\)</span>很高，尤其是L充当高频扼流圈时往往认为L开路。 对于C，在高频电路中C的阻抗<span class="math inline">\(\frac{1}{jwL}\)</span>很低，尤其是C充当旁路电容、耦合电容、电源滤波电容时往往认为C短路。</p></li>
 <li><p>为什么要对电容反馈三端式振荡电路进行改进呢？ 当我们利用电容反馈三端式电路，调<span class="math inline">\(C_1\)</span>或<span class="math inline">\(C_2\)</span>来改变振荡频率时，由于反馈系数为<span class="math inline">\(\frac{C_1}{C_2}\)</span>，易知反馈系数将改变。但是如果给电路串联一个小电容<span class="math inline">\(C_3\)</span>，因为C3远远小于C1和C2，所以三电容串联后的等效电容可以约等于<span class="math inline">\(C_3\)</span>。此时振荡角频率和反馈系数独立，可以有效调整并控制电路。<span class="math display">\[w_0\approx\frac{1}{LC_3},F=\frac{C_1}{C_2}\]</span></p></li>
-<li><p>电感反馈三端式振荡器与电容反馈三端式振荡器各有何优缺点？ <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-15-37-52.png"></p></li>
+<li><p>电感反馈三端式振荡器与电容反馈三端式振荡器各有何优缺点？ <img src="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-05-15-00-09.png"></p></li>
 </ol>
 <h2 id="未解答的疑惑">未解答的疑惑</h2>
 <ol type="1">
 <li>对泛音晶体振荡电路的原理不太理解。</li>
 <li>石英振荡器的作用和设计思路不理解</li>
+</ol>
+<h2 id="参考资料">参考资料</h2>
+<ol type="1">
+<li>《通信电子线路》（第三版）：严国平，龙占超</li>
+<li>老师课件</li>
+<li><a target="_blank" rel="noopener" href="https://www.icourse163.org/course/HUST-1003157002">通信电子线路mooc</a></li>
 </ol>
 <!-- flag of hidden posts -->
     </div>
@@ -409,7 +419,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">本章知识小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E9%A6%88%E5%BC%8F%E6%8C%AF%E8%8D%A1%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">反馈式振荡器的基本工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E9%A6%88%E5%9E%8Blc%E6%8C%AF%E8%8D%A1%E5%99%A8%E7%BA%BF%E8%B7%AF"><span class="nav-number">1.3.</span> <span class="nav-text">反馈型LC振荡器线路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%92%E6%84%9F%E8%80%A6%E5%90%88%E6%8C%AF%E8%8D%A1%E5%99%A8"><span class="nav-number">1.4.</span> <span class="nav-text">互感耦合振荡器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%AB%AF%E5%BC%8F%E6%8C%AF%E8%8D%A1%E5%99%A8"><span class="nav-number">1.5.</span> <span class="nav-text">三端式振荡器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E8%8D%A1%E5%99%A8%E7%9A%84%E9%A2%91%E7%8E%87%E7%A8%B3%E5%AE%9A%E9%97%AE%E9%A2%98"><span class="nav-number">1.6.</span> <span class="nav-text">振荡器的频率稳定问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%B3%E8%8B%B1%E6%8C%AF%E8%8D%A1%E5%99%A8"><span class="nav-number">1.7.</span> <span class="nav-text">石英振荡器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E9%97%AE%E8%87%AA%E7%AD%94"><span class="nav-number">2.</span> <span class="nav-text">自问自答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E8%A7%A3%E7%AD%94%E7%9A%84%E7%96%91%E6%83%91"><span class="nav-number">3.</span> <span class="nav-text">未解答的疑惑</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">本章知识小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E9%A6%88%E5%BC%8F%E6%8C%AF%E8%8D%A1%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">反馈式振荡器的基本工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E9%A6%88%E5%9E%8Blc%E6%8C%AF%E8%8D%A1%E5%99%A8%E7%BA%BF%E8%B7%AF"><span class="nav-number">2.3.</span> <span class="nav-text">反馈型LC振荡器线路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%92%E6%84%9F%E8%80%A6%E5%90%88%E6%8C%AF%E8%8D%A1%E5%99%A8"><span class="nav-number">2.4.</span> <span class="nav-text">互感耦合振荡器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%AB%AF%E5%BC%8F%E6%8C%AF%E8%8D%A1%E5%99%A8"><span class="nav-number">2.5.</span> <span class="nav-text">三端式振荡器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E8%8D%A1%E5%99%A8%E7%9A%84%E9%A2%91%E7%8E%87%E7%A8%B3%E5%AE%9A%E9%97%AE%E9%A2%98"><span class="nav-number">2.6.</span> <span class="nav-text">振荡器的频率稳定问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%B3%E8%8B%B1%E6%8C%AF%E8%8D%A1%E5%99%A8"><span class="nav-number">2.7.</span> <span class="nav-text">石英振荡器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%B6%E4%BD%93%E8%B0%90%E6%8C%AF%E5%99%A8%E7%94%B5%E8%B7%AF"><span class="nav-number">2.7.1.</span> <span class="nav-text">晶体谐振器电路</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E9%97%AE%E8%87%AA%E7%AD%94"><span class="nav-number">3.</span> <span class="nav-text">自问自答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E8%A7%A3%E7%AD%94%E7%9A%84%E7%96%91%E6%83%91"><span class="nav-number">4.</span> <span class="nav-text">未解答的疑惑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

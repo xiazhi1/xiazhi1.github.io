@@ -42,7 +42,7 @@
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-21-31.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-22-51.png">
 <meta property="article:published_time" content="2023-11-26T02:58:32.000Z">
-<meta property="article:modified_time" content="2023-12-03T06:45:23.671Z">
+<meta property="article:modified_time" content="2023-12-07T01:11:55.026Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="通信电子线路">
 <meta name="twitter:card" content="summary">
@@ -230,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-03 14:45:23" itemprop="dateModified" datetime="2023-12-03T14:45:23+08:00">2023-12-03</time>
+                <time title="修改时间：2023-12-07 09:11:55" itemprop="dateModified" datetime="2023-12-07T09:11:55+08:00">2023-12-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -292,7 +292,7 @@
 <p>调频波和调相波的平均功率与调幅波一样，也为载频功率和各边频功率之和。单频调制时，调频波和调相波的平均功率利用第一类贝塞尔函数性质求和得到<span class="math inline">\(P_{av}=\frac{1}{2}\frac{V_o^2}{R_L}\)</span>,这表明调频波和调相波的平均功率与调制前的等幅载波功率相等。<strong>说明，调制的作用仅是将原来的载频功率重新分配到各个边频上，而总的功率不变。这一点与调幅波完全不同。</strong></p>
 <p>通常将振幅小于载波振幅10%的边频分量忽略不计，有效的上下边频分量总数则为2(m+1)个，即调频波和调相波的有效频带宽度定为<span class="math inline">\(BW=2(m+1)F=2(\Delta f+F)\)</span></p>
 <p>根据FM与PM的表达式，我们发现调频波可以看出调制信号为<span class="math inline">\(\int_{0}^{t} v_\Omega(t)\, {\rm d}t\)</span>,而调相波可以看出调制信号为<span class="math inline">\(\frac{dv_\Omega(t)}{dt}\)</span>,<strong>这为间接调频方法奠定了理论基础</strong></p>
-<p>当调制信号频率F发生变化时，调频波的调制指数mf与F成反比变化，其频宽宽度基本不变，故称恒带调制</p>
+<p>当调制信号频率F发生变化时，调频波的调制指数<span class="math inline">\(m_f\)</span>与F成反比变化，其频宽宽度基本不变，故称恒带调制</p>
 <p>当调制信号频率F变化时，调相波的调制指数<span class="math inline">\(m_p\)</span>与F无关，其频带宽度随调制频率F变化 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-04-41.png"></p>
 <h3 id="调频方法和电路">调频方法和电路</h3>
 <h4 id="实现调频的方法和基本原理">实现调频的方法和基本原理</h4>
@@ -326,7 +326,7 @@
 <h4 id="间接调频方法">间接调频方法</h4>
 <p>间接调频法的频稳度高，广泛用于广播发射机和电视伴音发射机，关键在于如何实现调相，常用的调相方法有移相法，可变时延调相，矢量合成调相</p>
 <ol type="1">
-<li>移相法调相 将载频信号<span class="math inline">\(Vcosw_0t\)</span>通过一个相移受调制信号<span class="math inline">\(V_\Omega\)</span>线性控制的移相网络，即可实现调相 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-33-38.png" style="width:60.0%;height:60.0%"> 常用移相网络：如RC移相网络、LC调谐回路移相网络 但是单极LC回路线性相位变化范围小，一般在<span class="math inline">\(30\degree\)</span>以下，为了增大调相系数，可以用多级单调谐回路构成的变容管调相电路</li>
+<li>移相法调相 将载频信号<span class="math inline">\(Vcosw_0t\)</span>通过一个相移受调制信号<span class="math inline">\(V_\Omega\)</span>线性控制的移相网络，即可实现调相 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-33-38.png" style="width:60.0%;height:60.0%"> 常用移相网络：如RC移相网络、LC调谐回路移相网络 但是单极LC回路线性相位变化范围小，一般在<span class="math inline">\(30°\)</span>以下，为了增大调相系数，可以用多级单调谐回路构成的变容管调相电路</li>
 <li>可变时延法调相 周期信号在经过一个网络后，如果在时间轴上有所移动，则此信号的相角必然发生变化，时延法调相就是利用调制信号控制时延大小而实现调相的一种方法 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-15-36-11.png" style="width:60.0%;height:60.0%"> 最大优点：调制线性好，相位偏移大</li>
 <li>矢量合成调相法</li>
 </ol>
@@ -364,7 +364,16 @@
 <li>由于鉴频器的输出电压等于两个检波器输出电压之差，而每个检波器的输出电压(峰值或平均值)正比于其输入电压的振幅,所以鉴频器输出电压为<span class="math inline">\(V_o=k_d(V_{D1}-V_{D2}),k_d\)</span>为检波器的电压传输系数，结合上面矢量图，有如下结论 <span class="math display">\[f_{in}=f_0,V_{a&#39;b&#39;}=0\\f_{in}&gt;f_0,V_{a&#39;b&#39;}&gt;0\\f_{in}&lt;f_0,V_{a&#39;b&#39;}&lt;0\]</span> 因此，输出电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>反映了输入信号瞬时频率的偏移<span class="math inline">\(\Delta f\)</span>。而<span class="math inline">\(\Delta f\)</span>与原调制信号<span class="math inline">\(V_\Omega(t)\)</span>成正比，即<span class="math inline">\(V_{a&#39;b&#39;}\)</span>与<span class="math inline">\(V_\Omega(t)\)</span>成正比。亦即实现了调频波的解调,若将二者关系画成曲线，则得到下图 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-21-31.png" style="width:60.0%;height:60.0%"></li>
 </ol>
 <h4 id="比例鉴频器">比例鉴频器</h4>
-<p>前面介绍的相位鉴频器，当输入调频信号的振幅发生变化时，输出电压也会发生变化，因此由各种噪声和干扰引起的输入信号寄生调幅，都将在其输出端反映出来。为了抑制噪声及干扰，在鉴频器前必须增设限幅器，比例鉴频器具有自限幅功能，因而可省去外加限幅器 1. 原理电路 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-22-51.png" style="width:60.0%;height:60.0%"> 其波形变换部分与相位鉴频器基本相同，电路上差别主要有以下几点： 1. R1，R2连接点N接地，负载RL接在MN之间，输出电压由M，N引出 2. R1和R2两端并接大电容C6，使得在检波过程中<span class="math inline">\(a&#39;b&#39;\)</span>间的端电压基本保持不变 3. D1和D2按环路顺接，以保持直流通路，因此C3和C4上的电压极性一致,<span class="math inline">\(V_{a&#39;b&#39;}=V_{c3}+V_{c4}\)</span>,输出电压为<span class="math inline">\(v_o=\frac{1}{2}(V_{a&#39;b&#39;}-\frac{2V_{a&#39;b&#39;}}{1+\frac{V_{D1}}{V_{D2}}})\)</span> 2. 自限幅特性分析 比例鉴频器不需要前置限幅器，它本身就具有抑制寄生调幅所产生的干扰的能力，在比例鉴频器中，由于C6的电容量很大，因此电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>基本稳定不变，它只决定于调频波的载波振幅，而与其频偏及寄生调幅都无关. 当输入信号振幅由于干扰突然变大时，由于电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>基本恒定，就使得检波管的电流明显加大，加重了对输入回路的负载，即回路Q值下降,可迫使信号振幅减小。反之亦然。因而很好地起到了稳幅的作用</p>
+<p>前面介绍的相位鉴频器，当输入调频信号的振幅发生变化时，输出电压也会发生变化，因此由各种噪声和干扰引起的输入信号寄生调幅，都将在其输出端反映出来。为了抑制噪声及干扰，在鉴频器前必须增设限幅器，比例鉴频器具有自限幅功能，因而可省去外加限幅器 <img src="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-16-22-51.png" style="width:60.0%;height:60.0%"></p>
+<ol type="1">
+<li>原理电路 其波形变换部分与相位鉴频器基本相同，电路上差别主要有以下几点：
+<ol type="1">
+<li>R1，R2连接点N接地，负载RL接在MN之间，输出电压由M，N引出</li>
+<li>R1和R2两端并接大电容C6，使得在检波过程中<span class="math inline">\(a&#39;b&#39;\)</span>间的端电压基本保持不变</li>
+<li>D1和D2按环路顺接，以保持直流通路，因此C3和C4上的电压极性一致,<span class="math inline">\(V_{a&#39;b&#39;}=V_{c3}+V_{c4}\)</span>,输出电压为<span class="math inline">\(v_o=\frac{1}{2}(V_{a&#39;b&#39;}-\frac{2V_{a&#39;b&#39;}}{1+\frac{V_{D1}}{V_{D2}}})\)</span></li>
+</ol></li>
+<li>自限幅特性分析 比例鉴频器不需要前置限幅器，它本身就具有抑制寄生调幅所产生的干扰的能力，在比例鉴频器中，由于C6的电容量很大，因此电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>基本稳定不变，它只决定于调频波的载波振幅，而与其频偏及寄生调幅都无关. 当输入信号振幅由于干扰突然变大时，由于电压<span class="math inline">\(V_{a&#39;b&#39;}\)</span>基本恒定，就使得检波管的电流明显加大，加重了对输入回路的负载，即回路Q值下降,可迫使信号振幅减小。反之亦然。因而很好地起到了稳幅的作用</li>
+</ol>
 <h2 id="自问自答">自问自答</h2>
 <ol type="1">
 <li><p>采用角度调制与解调和振幅调制与解调的区别在哪里？ 角度调制与解调和振幅调制与解调最大的区别在频率变换前后频谱结构的变化不同。角度调制是频率变换前后频谱结构发生了变化，属于非线性频率变换。角度调制的主要优点是抗干扰性强，FM广泛应用于广播、电视、通信以及遥测方面，PM主要应用于数字通信。但是角度调制的主要缺点是占据频带宽，频带利用不经济。</p></li>

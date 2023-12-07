@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本章知识小结 频谱搬移电路的特性 非线性电路具有频率变换的功能（乘法器） 线性频率变换：频率变换前后，信号的频谱结构不变. 频谱搬移电路: 信号频谱无失真的在频率轴上搬移">
+  <meta name="description" content="前言 本知识小结只针对华中科技大学电子信息与通信学院课程《通信电子线路》进行总结，不保证满足所有读者需求">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通信电子线路第六章知识小结">
 <meta property="og:url" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/index.html">
 <meta property="og:site_name" content="夏至的个人博客">
-<meta property="og:description" content="本章知识小结 频谱搬移电路的特性 非线性电路具有频率变换的功能（乘法器） 线性频率变换：频率变换前后，信号的频谱结构不变. 频谱搬移电路: 信号频谱无失真的在频率轴上搬移">
+<meta property="og:description" content="前言 本知识小结只针对华中科技大学电子信息与通信学院课程《通信电子线路》进行总结，不保证满足所有读者需求">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-37-29.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-56-11.png">
@@ -47,7 +47,7 @@
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-29-39.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-33-16.png">
 <meta property="article:published_time" content="2023-11-25T12:03:21.000Z">
-<meta property="article:modified_time" content="2023-12-03T06:45:17.785Z">
+<meta property="article:modified_time" content="2023-12-07T01:08:56.325Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="通信电子线路">
 <meta name="twitter:card" content="summary">
@@ -235,7 +235,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-03 14:45:17" itemprop="dateModified" datetime="2023-12-03T14:45:17+08:00">2023-12-03</time>
+                <time title="修改时间：2023-12-07 09:08:56" itemprop="dateModified" datetime="2023-12-07T09:08:56+08:00">2023-12-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,7 +260,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.7k</span>
+              <span>5.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -279,10 +279,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="本章知识小结">本章知识小结</h2>
+        <h2 id="前言">前言</h2>
+<p>本知识小结只针对华中科技大学电子信息与通信学院课程《通信电子线路》进行总结，不保证满足所有读者需求 <span id="more"></span></p>
+<h2 id="本章知识小结">本章知识小结</h2>
 <h3 id="频谱搬移电路的特性">频谱搬移电路的特性</h3>
 <p>非线性电路具有频率变换的功能（乘法器）<br>
-线性频率变换：频率变换前后，信号的频谱结构不变. 频谱搬移电路: 信号频谱无失真的在频率轴上搬移 <span id="more"></span> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-37-29.png" style="width:60.0%;height:60.0%"></p>
+线性频率变换：频率变换前后，信号的频谱结构不变. 频谱搬移电路: 信号频谱无失真的在频率轴上搬移 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-20-37-29.png" style="width:60.0%;height:60.0%"></p>
 <ol type="1">
 <li>它们的实现框图几乎是相同的，都是利用非线性器件对输入信号频谱实行变换以产生新的有用频率成分后，滤除无用频率分量。</li>
 <li>从频谱结构看，上述频率变换电路都只是对输入信号频谱实行横向搬移而不改变原来的谱结构，因而都属于所谓的线性频率变换。</li>
@@ -303,7 +305,7 @@
    \end{cases}\]</span></p>
 <p>将调幅波的数学表达式展开，可得<span class="math inline">\(v(t)=V_0cosw_0t+\frac{1}{2}m_aV_0cos(w_0+\Omega)t+\frac{1}{2}m_aV_0cos(w_0-\Omega)t\)</span> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-25-21-14-07.png" style="width:60.0%;height:60.0%"> 调幅波包含三个频率分量，载波分量<span class="math inline">\(w_0\)</span>不含传输信息，上边频分量<span class="math inline">\(w_0+\Omega\)</span>,下边频分量<span class="math inline">\(w_0-\Omega\)</span>均含传输信息</p>
 <p><strong>调幅过程实际上是 频谱搬移过程，即将调制信号的频谱搬移到载波附近，成为对称排列在载波频率两侧的上、下边频，幅度均等于<span class="math inline">\(\frac{1}{2}m_aV_0\)</span></strong></p>
-<p>将普通调幅波输送功率至电阻R上时,载波与边频的功率有： 1. 载波频率<span class="math inline">\(P_{oT}=\frac{1}{2}\frac{V_o^2}{R}\)</span> 2. 上(小)边频<span class="math inline">\(P_{SB1}=P_{SB2}=\frac{1}{4}m_a^2P_{oT}\)</span> 3. 一周期平均输出功率<span class="math inline">\(P_AM=(1+\frac{1}{2}m_a^2P_{oT})\)</span></p>
+<p>将普通调幅波输送功率至电阻R上时,载波与边频的功率有： 1. 载波频率<span class="math inline">\(P_{oT}=\frac{1}{2}\frac{V_o^2}{R}\)</span> 2. 上(小)边频<span class="math inline">\(P_{SB1}=P_{SB2}=\frac{1}{4}m_a^2P_{oT}\)</span> 3. 一周期平均输出功率<span class="math inline">\(P_AM=(1+\frac{1}{2}m_a^2)P_{oT}\)</span></p>
 <p><strong>载波不含信号，但功率却占整个调幅波功率的绝大部分,效率很低</strong></p>
 <h4 id="抑制载波的双边带调幅波与单边带调幅波">抑制载波的双边带调幅波与单边带调幅波</h4>
 <p>为了克服普通调幅波效率低的缺点，提高设备的功率利用率，可以不发送载波，而只发送边带信号<span class="math inline">\(\rightarrow\)</span>抑制载波的双边带调幅波(DSB AM)</p>
@@ -316,14 +318,14 @@
 <li>简单二极管调幅电路：
 <ul>
 <li>平方律调幅--二极管小信号时的工作状态</li>
-<li>开关调幅--二极管小信号时的工作状态</li>
+<li>开关调幅--二极管大信号时的工作状态</li>
 </ul></li>
 <li>平衡调幅器 平衡调制是由两个简单的二极管调幅电路对称连接组成。载波成分由于对称而被抵消，在输出中不再出现。
 <ol type="1">
 <li>用处：产生DSB和SSB信号的基本电路<br>
 </li>
 <li>优点：可抑制单管调幅器频谱中所含的直流分量、载波分量以及载波的各次谐波分量</li>
-<li>缺点：它虽然是调幅波，但因失去了载波，因而包络不能完全反映调制信号变化的规律，这就给以后的解调工作带来困难；普通调幅波的高频振荡是连续的，可是双边带调幅波在调制信号极性变化时，它的高频振荡的相位要发生<span class="math inline">\(180\degree\)</span>的突变</li>
+<li>缺点：它虽然是调幅波，但因失去了载波，因而包络不能完全反映调制信号变化的规律，这就给以后的解调工作带来困难；普通调幅波的高频振荡是连续的，可是双边带调幅波在调制信号极性变化时，它的高频振荡的相位要发生$180°的突变</li>
 </ol></li>
 <li>环形调制器 平衡调幅器加上两个二极管，并将四个二极管首尾相接构成环形，<strong>优点：振幅比平衡调制器提高了一倍，并抑制了低频<span class="math inline">\(\Omega\)</span>分量</strong></li>
 <li>模拟相乘器 输出电压与输入电压关系：<span class="math inline">\(v_o(t)=kv_1(t)v_2(t)\)</span>，如果<span class="math inline">\(v_1(t)\)</span>为高频载波，<span class="math inline">\(v_2(t)\)</span>为低频调制信号，则输出为抑制载波的双边带调幅信号，若在调制信号上<span class="math inline">\(v_2(t)\)</span>叠加一直流电压，则可以得普通调幅信号的输出</li>
@@ -358,31 +360,67 @@
 <h4 id="概述-1">概述</h4>
 <p>振幅解调(又称检波)：振幅调制的逆过程 作用：从已调制的高频振荡中恢复出原来的调制信号 检波器也属于频谱搬移 从频谱看，检波是将幅度调制波中的边带信号不失真地从载波频率附近搬移到零频率附近 　 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-40-46.png"> 检波器分类： 1. 包络检波：平方率检波，峰值包络检波，平均包络检波 2. 同步检波：乘积型，叠加型</p>
 <h4 id="二极管峰值包络检波器">二极管峰值包络检波器</h4>
-<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-46-16.png" style="width:60.0%;height:60.0%"> 1. 大信号检波原理： - 二极管单向导电特性 - 检波负载RC的充放电过程(充电时间常数小，放电时间常数大) <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-44-44.png"> 通过调节电路中的R,C,可改变充电时间常数，最后让<span class="math inline">\(v_C\)</span>接近<span class="math inline">\(v_i\)</span> 2. 包络检波器的质量指标 1. 电压传输系数(检波效率)<span class="math inline">\(K_d=\frac{输出电压V_\Omega}{输入包络振幅m_aV_i}\)</span>,<span class="math inline">\(K_d=cos\theta,\theta\approx\sqrt[3]{\frac{3\pi R_d}{R}}\\\theta:电流通角，R：检波器负载电阻，R_d：检波器二极管内阻\)</span> 2. 等效输入电阻<span class="math inline">\(R_{id}\approx R/2\)</span>,即大信号二极管的输入电阻约等于负载电阻的一半 3. 失真 1. 惰性失真(对角线切割失真) - 原因：时间常数RC太大，当调幅波包络朝较低值变化时，电容上的电荷来不及释放以跟踪其变化，所造成的失真 - 不产生失真的条件：<span class="math inline">\(RC\Omega_{max}&lt;\frac{\sqrt{1-m_a^2}}{m_a}\)</span>,工程上按<span class="math inline">\(RC\Omega_{max}\le1.5\)</span>计算 2. 负峰切割失真(底部切割失真) - 原因：由于<span class="math inline">\(C_c\)</span>的存在使得检波器的交直流电阻不一样,产生了<span class="math inline">\(V_R\)</span>反偏压，它有可能阻止二极管导通，从而产生失真 - 不产生失真的条件:<span class="math inline">\(m_a&lt;\frac{R_g}{R+R_g}\)</span> 3. 非线性失真 由检波二极管伏安特性曲线的非线性所引起 4. 频率失真 - 原因：滤波电容<span class="math inline">\(C\)</span>影响检波上限频率<span class="math inline">\(\Omega_{max}\)</span>和耦合电容<span class="math inline">\(C_c\)</span>影响检波下限频率<span class="math inline">\(\Omega_{min}\)</span> - 不产生失真条件：<span class="math inline">\(C_c&gt;&gt;\frac{1}{\Omega_{min}R_g},C&lt;&lt;\frac{1}{\Omega_{max}R}\)</span></p>
+<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-46-16.png" style="width:60.0%;height:60.0%"></p>
+<ol type="1">
+<li>大信号检波原理：
+<ul>
+<li>二极管单向导电特性</li>
+<li>检波负载RC的充放电过程(充电时间常数小，放电时间常数大) 通过调节电路中的R,C,可改变充电时间常数，最后让<span class="math inline">\(v_C\)</span>接近<span class="math inline">\(v_i\)</span> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-09-44-44.png"></li>
+</ul></li>
+<li>包络检波器的质量指标
+<ol type="1">
+<li>电压传输系数(检波效率)<span class="math inline">\(K_d=\frac{输出电压V_\Omega}{输入包络振幅m_aV_i}\)</span>,<span class="math inline">\(K_d=cos\theta,\theta\approx\sqrt[3]{\frac{3\pi R_d}{R}}\\\theta:电流通角，R：检波器负载电阻，R_d：检波器二极管内阻\)</span></li>
+<li>等效输入电阻<span class="math inline">\(R_{id}=\frac{R}{2K_d}\approx R/2\)</span>,即大信号二极管的输入电阻约等于负载电阻的一半</li>
+</ol></li>
+<li>失真
+<ol type="1">
+<li>惰性失真(对角线切割失真)
+<ul>
+<li>原因：时间常数RC太大，当调幅波包络朝较低值变化时，电容上的电荷来不及释放以跟踪其变化，所造成的失真</li>
+<li>不产生失真的条件：<span class="math inline">\(RC\Omega_{max}&lt;\frac{\sqrt{1-m_a^2}}{m_a}\)</span>,工程上按<span class="math inline">\(RC\Omega_{max}\le1.5\)</span>计算</li>
+</ul></li>
+<li>负峰切割失真(底部切割失真)
+<ul>
+<li>原因：由于<span class="math inline">\(C_c\)</span>的存在使得检波器的交直流电阻不一样,产生了<span class="math inline">\(V_R\)</span>反偏压，它有可能阻止二极管导通，从而产生失真</li>
+<li>不产生失真的条件:<span class="math inline">\(m_a&lt;\frac{R_g}{R+R_g}=\frac{R_\smile}{R},R_\smile:交流电阻，R:直流电阻\)</span></li>
+</ul></li>
+<li>非线性失真 由检波二极管伏安特性曲线的非线性所引起</li>
+<li>频率失真
+<ul>
+<li>原因：滤波电容<span class="math inline">\(C\)</span>影响检波上限频率<span class="math inline">\(\Omega_{max}\)</span>和耦合电容<span class="math inline">\(C_c\)</span>影响检波下限频率<span class="math inline">\(\Omega_{min}\)</span></li>
+<li>不产生失真条件：<span class="math inline">\(C_c&gt;&gt;\frac{1}{\Omega_{min}R_g},C&lt;&lt;\frac{1}{\Omega_{max}R}\)</span></li>
+</ul></li>
+</ol></li>
+</ol>
 <h4 id="同步检波电路">同步检波电路</h4>
-<p>同步检波：不含载频分量，解调时必须在检波器输入端另加一个与发射载波同频同相并保持同步变化的参考信号，此参考信号与调幅信号共同作用于非线性器件电路，经过频率变换，恢复出调制信号 同步检波也可应用于普通调幅信号的解调<span class="math inline">\(\rightarrow\)</span>为了改善性能 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-05-16.png" style="width:60.0%;height:60.0%"> 产生本地振荡信号的方法: 1. 由发送端发出导频信号，控制本地振荡器，使本地振荡器的频率和相位与发送端一致。 2. 对于双边带调制来说，可以从双边带调制信号中提取所需的同频同相的载波信号作本地振荡信号。对于单边带调制信号来说，无法直接从单边带信号中提取载波信号，因此在发射单边带信号的同时，还发射受到一定程度抑制的载波信号（称为导频信号）。在接收端，用导频信号控制本机振荡信号使其同步。 3. 采用锁相方法从抑制载波的信号中提取载波 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-08-59.png"> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-09-28.png" style="width:60.0%;height:60.0%"></p>
+<p>同步检波：不含载频分量，解调时必须在检波器输入端另加一个与发射载波同频同相并保持同步变化的参考信号，此参考信号与调幅信号共同作用于非线性器件电路，经过频率变换，恢复出调制信号 同步检波也可应用于普通调幅信号的解调<span class="math inline">\(\rightarrow\)</span>为了改善性能 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-05-16.png" style="width:60.0%;height:60.0%"> 产生本地振荡信号的方法:</p>
+<ol type="1">
+<li>由发送端发出导频信号，控制本地振荡器，使本地振荡器的频率和相位与发送端一致。</li>
+<li>对于双边带调制来说，可以从双边带调制信号中提取所需的同频同相的载波信号作本地振荡信号。对于单边带调制信号来说，无法直接从单边带信号中提取载波信号，因此在发射单边带信号的同时，还发射受到一定程度抑制的载波信号（称为导频信号）。在接收端，用导频信号控制本机振荡信号使其同步。</li>
+<li>采用锁相方法从抑制载波的信号中提取载波 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-08-59.png"> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-09-28.png" style="width:60.0%;height:60.0%"></li>
+</ol>
 <h3 id="混频器原理与电路">混频器原理与电路</h3>
 <h4 id="概述-2">概述</h4>
 <p>混频器作用：混频即对信号进行频率变换，将其载频变换到某一固定的频率上(常称为中频)，而保持原信号的特征(如调幅规律)不变。<strong>变频的优点</strong>：变频可提高接收机的灵敏度，提高接收机的选择性，工作稳定性好，波段工作时其质量指标一致性好。<strong>变频的缺点</strong>：容易产生镜像干扰、中频干扰等干扰 <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-25-48.png" style="width:60.0%;height:60.0%"> <img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-26-42.png"> 1. 叠加型混频器: 根据所用非线性器件的不同，叠加型混频器有下列几种： - 晶体三极管混频器：具有一定混频增益 - 场效应管混频器：交调、互调干扰少 - 二极管平衡混频器和环形混频器 ：动态范围大，组合频率干扰少 2. 乘积型混频器：模拟乘法器＋带通滤波器</p>
-<h4 id="晶体三极管管混频器">晶体三极管管混频器</h4>
-<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-29-39.png"> 主要采用变跨导分析法：在混频时，混频管可看着一个参数(跨导)在改变的线性元件，即变跨导线件元件。其变频跨导被定义为<span class="math inline">\(g_c=\frac{输出中频电流振幅I_i}{输入高频电压振幅V_{Sm}}=\frac{1}{2}g_1\)</span></p>
+<h4 id="晶体三极管混频器">晶体三极管混频器</h4>
+<p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-29-39.png"> 主要采用变跨导分析法：在混频时，混频管可看成一个参数(跨导)在改变的线性元件，即变跨导线件元件。其变频跨导被定义为<span class="math inline">\(g_c=\frac{输出中频电流振幅I_i}{输入高频电压振幅V_{Sm}}=\frac{1}{2}g_1\)</span></p>
 <h4 id="晶体管二极管混频器">晶体管二极管混频器</h4>
 <p><img src="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-26-10-33-16.png" style="width:60.0%;height:60.0%"> 1. 平衡混频器<br>
 2. 环形混频器</p>
 <h4 id="混频器的干扰">混频器的干扰</h4>
 <ol type="1">
-<li><p>有用信号谐波和本振信号谐波产生的干扰--组合频率干扰(干扰哨声) 混频器输出信号中所包含的各种频率分量为<span class="math inline">\(f_k=|\pm pf_o\pm qf_s|\)</span>,p,q为任意正整数，分别代表本振频率和信号频率的谐波次数，只有p=q=1时对应的频率<span class="math inline">\(f_o-f_s\)</span>为所需要的中频信号</p>
+<li><p>有用信号谐波和本振信号谐波产生的干扰--组合频率干扰(干扰哨声) 混频器输出信号中所包含的各种频率分量为<span class="math inline">\(f_k=|\pm pf_o\pm qf_s|\)</span>,p,q为任意正整数，分别代表本振频率和信号频率的谐波次数，只有p=q=1时对应的频率<span class="math inline">\(f_o-f_s\)</span>为所需要的中频信号，这意味着<span class="math inline">\(f_o=f_i+f_s\)</span></p>
 <p>如果某些组合频率落在谐振回路的通频带内，这些组合频率分量就和有用的中频分量一样，通过中放进入检波器，并在检波电路中与有用信号产生差拍，这时在接收机的输出端将产生哨叫声，形成有害的干扰。这种干扰又称为干扰哨叫，产生条件<span class="math inline">\(f_s=\frac{p\pm1}{q-p}f_i\)</span></p></li>
 <li><p>外来干扰信号和本振产生的干扰</p>
 <ol type="1">
 <li>组合副波道干扰 如果混频器之前的输入回路和高频放大器的选择性不够好，除了要接收的有用信号外，干扰信号也会进入混频器。当干扰频率<span class="math inline">\(f_n\)</span>与本振频率<span class="math inline">\(f_o\)</span>满足 <span class="math display">\[\begin{cases}
   -pf_o+qf_n\approx f_i\\
   pf_o-qf_n\approx f_i
- \end{cases}\]</span> 会产生组合复波道干扰</li>
-<li>复波道干扰 在组合副波道干扰中，某些特定频率形成的干扰称为副波道干扰。这种干扰主要有中频干扰和镜像干扰。
+ \end{cases}\]</span> 会产生组合副波道干扰</li>
+<li>副波道干扰 在组合副波道干扰中，某些特定频率形成的干扰称为副波道干扰。这种干扰主要有中频干扰和镜像干扰。
 <ol type="1">
 <li>中频干扰：当干扰信号的频率等于或接近<span class="math inline">\(f_i\)</span>时的干扰。</li>
-<li>镜像频率干扰:当外来干扰信号的频率<span class="math inline">\(f_n=f_o+f_i=f_s^’\)</span>时的干扰，<span class="math inline">\(f_n=f_o+f_i=f_s+2f_i\)</span></li>
+<li>镜像频率干扰:当外来干扰信号的频率<span class="math inline">\(f_n=f_o+f_i=f_s&#39;\)</span>时的干扰，<span class="math inline">\(f_n=f_o+f_i=f_s+2f_i\)</span></li>
 </ol></li>
 </ol></li>
 <li><p>其他类型的干扰</p>
@@ -417,6 +455,12 @@
 <li>如何理解混频器和变频器的区别</li>
 <li>如何区分不同干扰的类型</li>
 <li>如何判断不同混频器的优缺点</li>
+</ol>
+<h2 id="参考资料">参考资料</h2>
+<ol type="1">
+<li>《通信电子线路》（第三版）：严国平，龙占超</li>
+<li>老师课件</li>
+<li><a target="_blank" rel="noopener" href="https://www.icourse163.org/course/HUST-1003157002">通信电子线路mooc</a></li>
 </ol>
 <!-- flag of hidden posts -->
     </div>
@@ -491,7 +535,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">本章知识小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%91%E8%B0%B1%E6%90%AC%E7%A7%BB%E7%94%B5%E8%B7%AF%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">频谱搬移电路的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E5%B9%85%E8%B0%83%E5%88%B6%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">振幅调制原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E5%B9%85%E6%B3%A2%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">调幅波的性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%91%E5%88%B6%E8%BD%BD%E6%B3%A2%E7%9A%84%E5%8F%8C%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%B9%85%E6%B3%A2%E4%B8%8E%E5%8D%95%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%B9%85%E6%B3%A2"><span class="nav-number">1.2.2.</span> <span class="nav-text">抑制载波的双边带调幅波与单边带调幅波</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E5%B9%85%E8%B0%83%E6%95%B4%E6%96%B9%E6%B3%95%E5%92%8C%E7%94%B5%E8%B7%AF"><span class="nav-number">1.3.</span> <span class="nav-text">振幅调整方法和电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8E%E7%94%B5%E5%B9%B3%E8%B0%83%E5%B9%85%E7%94%B5%E8%B7%AF"><span class="nav-number">1.3.2.</span> <span class="nav-text">低电平调幅电路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E7%94%B5%E5%B9%B3%E8%B0%83%E5%B9%85%E7%94%B5%E8%B7%AF"><span class="nav-number">1.3.3.</span> <span class="nav-text">高电平调幅电路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E5%B9%85%E8%A7%A3%E8%B0%83%E6%A3%80%E6%B3%A2%E5%8E%9F%E7%90%86%E4%B8%8E%E7%94%B5%E8%B7%AF"><span class="nav-number">1.4.</span> <span class="nav-text">振幅解调（检波）原理与电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E6%9E%81%E7%AE%A1%E5%B3%B0%E5%80%BC%E5%8C%85%E7%BB%9C%E6%A3%80%E6%B3%A2%E5%99%A8"><span class="nav-number">1.4.2.</span> <span class="nav-text">二极管峰值包络检波器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%A3%80%E6%B3%A2%E7%94%B5%E8%B7%AF"><span class="nav-number">1.4.3.</span> <span class="nav-text">同步检波电路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E9%A2%91%E5%99%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E7%94%B5%E8%B7%AF"><span class="nav-number">1.5.</span> <span class="nav-text">混频器原理与电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-2"><span class="nav-number">1.5.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%B6%E4%BD%93%E4%B8%89%E6%9E%81%E7%AE%A1%E7%AE%A1%E6%B7%B7%E9%A2%91%E5%99%A8"><span class="nav-number">1.5.2.</span> <span class="nav-text">晶体三极管管混频器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%B6%E4%BD%93%E7%AE%A1%E4%BA%8C%E6%9E%81%E7%AE%A1%E6%B7%B7%E9%A2%91%E5%99%A8"><span class="nav-number">1.5.3.</span> <span class="nav-text">晶体管二极管混频器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B7%E9%A2%91%E5%99%A8%E7%9A%84%E5%B9%B2%E6%89%B0"><span class="nav-number">1.5.4.</span> <span class="nav-text">混频器的干扰</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E9%97%AE%E8%87%AA%E7%AD%94"><span class="nav-number">2.</span> <span class="nav-text">自问自答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E8%A7%A3%E7%AD%94%E7%9A%84%E7%96%91%E6%83%91"><span class="nav-number">3.</span> <span class="nav-text">未解答的疑惑</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">本章知识小结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%91%E8%B0%B1%E6%90%AC%E7%A7%BB%E7%94%B5%E8%B7%AF%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">频谱搬移电路的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E5%B9%85%E8%B0%83%E5%88%B6%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">振幅调制原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E5%B9%85%E6%B3%A2%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">2.2.1.</span> <span class="nav-text">调幅波的性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%91%E5%88%B6%E8%BD%BD%E6%B3%A2%E7%9A%84%E5%8F%8C%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%B9%85%E6%B3%A2%E4%B8%8E%E5%8D%95%E8%BE%B9%E5%B8%A6%E8%B0%83%E5%B9%85%E6%B3%A2"><span class="nav-number">2.2.2.</span> <span class="nav-text">抑制载波的双边带调幅波与单边带调幅波</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E5%B9%85%E8%B0%83%E6%95%B4%E6%96%B9%E6%B3%95%E5%92%8C%E7%94%B5%E8%B7%AF"><span class="nav-number">2.3.</span> <span class="nav-text">振幅调整方法和电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8E%E7%94%B5%E5%B9%B3%E8%B0%83%E5%B9%85%E7%94%B5%E8%B7%AF"><span class="nav-number">2.3.2.</span> <span class="nav-text">低电平调幅电路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E7%94%B5%E5%B9%B3%E8%B0%83%E5%B9%85%E7%94%B5%E8%B7%AF"><span class="nav-number">2.3.3.</span> <span class="nav-text">高电平调幅电路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%AF%E5%B9%85%E8%A7%A3%E8%B0%83%E6%A3%80%E6%B3%A2%E5%8E%9F%E7%90%86%E4%B8%8E%E7%94%B5%E8%B7%AF"><span class="nav-number">2.4.</span> <span class="nav-text">振幅解调（检波）原理与电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E6%9E%81%E7%AE%A1%E5%B3%B0%E5%80%BC%E5%8C%85%E7%BB%9C%E6%A3%80%E6%B3%A2%E5%99%A8"><span class="nav-number">2.4.2.</span> <span class="nav-text">二极管峰值包络检波器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%A3%80%E6%B3%A2%E7%94%B5%E8%B7%AF"><span class="nav-number">2.4.3.</span> <span class="nav-text">同步检波电路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E9%A2%91%E5%99%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E7%94%B5%E8%B7%AF"><span class="nav-number">2.5.</span> <span class="nav-text">混频器原理与电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0-2"><span class="nav-number">2.5.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%B6%E4%BD%93%E4%B8%89%E6%9E%81%E7%AE%A1%E6%B7%B7%E9%A2%91%E5%99%A8"><span class="nav-number">2.5.2.</span> <span class="nav-text">晶体三极管混频器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%B6%E4%BD%93%E7%AE%A1%E4%BA%8C%E6%9E%81%E7%AE%A1%E6%B7%B7%E9%A2%91%E5%99%A8"><span class="nav-number">2.5.3.</span> <span class="nav-text">晶体管二极管混频器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B7%E9%A2%91%E5%99%A8%E7%9A%84%E5%B9%B2%E6%89%B0"><span class="nav-number">2.5.4.</span> <span class="nav-text">混频器的干扰</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E9%97%AE%E8%87%AA%E7%AD%94"><span class="nav-number">3.</span> <span class="nav-text">自问自答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E8%A7%A3%E7%AD%94%E7%9A%84%E7%96%91%E6%83%91"><span class="nav-number">4.</span> <span class="nav-text">未解答的疑惑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
