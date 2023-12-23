@@ -181,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -195,7 +195,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">数字信号处理第三章知识小结</a>
+            <a href="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">微波技术基础第三四章知识小结</a>
         </h2>
 
         <div class="post-meta">
@@ -205,14 +205,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-11-15 21:22:48" itemprop="dateCreated datePublished" datetime="2023-11-15T21:22:48+08:00">2023-11-15</time>
+              <time title="创建时间：2023-11-27 14:59:38" itemprop="dateCreated datePublished" datetime="2023-11-27T14:59:38+08:00">2023-11-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-23 21:06:37" itemprop="dateModified" datetime="2023-11-23T21:06:37+08:00">2023-11-23</time>
+                <time title="修改时间：2023-12-03 14:45:42" itemprop="dateModified" datetime="2023-12-03T14:45:42+08:00">2023-12-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -230,14 +230,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.6k</span>
+              <span>10k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>9 分钟</span>
             </span>
 
         </div>
@@ -249,18 +249,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="引言">引言</h2>
-<p><img src="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-15-21-27-51.png"></p>
-<ol type="1">
-<li>连续傅里叶变换(FT)：连续时间,连续频率的傅里叶变换</li>
-<li>傅里叶级数(FS)：连续时间,离散频率的傅里叶变换</li>
-<li>序列的傅里叶变换(DTFT):离散时间,连续频率的傅里叶变换</li>
-<li>离散傅里叶变换(DFT):离散时间,离散频率的傅里叶变换</li>
-</ol>
-<p><strong>前三种变换总有一个域不是离散的，计算机不能直接计算；希望的变换：不仅在时间域上离散，在频率域上也离散(DFT)</strong></p>
+          <h2 id="前言">前言</h2>
+<p>因为第四章内容较少，且和第三章关系紧密，故将两章合并</p>
+<h2 id="导波系统的一般分析方法">导波系统的一般分析方法</h2>
+<h3 id="导波系统的基本概念">导波系统的基本概念</h3>
+<p><strong>导波（导行波）</strong>：在微波传输线中按指定方向传播的电磁波</p>
+<p><strong>导波系统（波导）</strong>：用来导行电磁波的装置</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/15/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/#more" rel="contents">
+              <a class="btn" href="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%89%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -284,7 +281,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -298,7 +295,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">通信电子线路第五章知识小结</a>
+            <a href="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">通信电子线路第七章知识小结</a>
         </h2>
 
         <div class="post-meta">
@@ -308,14 +305,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-11-14 15:50:03" itemprop="dateCreated datePublished" datetime="2023-11-14T15:50:03+08:00">2023-11-14</time>
+              <time title="创建时间：2023-11-26 10:58:32" itemprop="dateCreated datePublished" datetime="2023-11-26T10:58:32+08:00">2023-11-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-08 22:28:02" itemprop="dateModified" datetime="2023-12-08T22:28:02+08:00">2023-12-08</time>
+                <time title="修改时间：2023-12-08 22:28:56" itemprop="dateModified" datetime="2023-12-08T22:28:56+08:00">2023-12-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -333,7 +330,104 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.4k</span>
+              <span>5.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="本章知识小结">本章知识小结</h2>
+<h3 id="概述">概述</h3>
+<p>角度调制是用调制信号去控制载波信号角度(频率或相位)变化的一种信号变换方式。如果受控的是载波信号的频率，则称频率调制，简称调频，以FM表示；若受控的是载波信号的相位，则称为相位调制，简称调相，以PM表示。无论是FM还是PM，载频信号的幅度都不受调制信号的影响。调频波的解调称为鉴频或频率检波，调相波的解调称鉴相或相位检波。与调幅波的检波一样，鉴频和鉴相也是从已调信号中还原出原调制信号</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">通信电子线路第六章知识小结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-25 20:03:21" itemprop="dateCreated datePublished" datetime="2023-11-25T20:03:21+08:00">2023-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-08 22:28:31" itemprop="dateModified" datetime="2023-12-08T22:28:31+08:00">2023-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E5%AD%A6%E5%8A%9F%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">大学功课</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -356,7 +450,7 @@
 <p>本知识小结只针对华中科技大学电子信息与通信学院课程《通信电子线路》进行总结，不保证满足所有读者需求</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/14/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/#more" rel="contents">
+              <a class="btn" href="/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -380,7 +474,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/21/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -394,7 +488,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">数字信号处理第二章知识小结</a>
+            <a href="/2023/11/21/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">微波技术基础第一二章知识小结</a>
         </h2>
 
         <div class="post-meta">
@@ -404,14 +498,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-11-11 15:50:03" itemprop="dateCreated datePublished" datetime="2023-11-11T15:50:03+08:00">2023-11-11</time>
+              <time title="创建时间：2023-11-21 16:51:14" itemprop="dateCreated datePublished" datetime="2023-11-21T16:51:14+08:00">2023-11-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-23 21:02:14" itemprop="dateModified" datetime="2023-11-23T21:02:14+08:00">2023-11-23</time>
+                <time title="修改时间：2023-12-03 14:45:36" itemprop="dateModified" datetime="2023-12-03T14:45:36+08:00">2023-12-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -429,14 +523,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.3k</span>
+              <span>15k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>13 分钟</span>
             </span>
 
         </div>
@@ -449,34 +543,13 @@
 
       
           <h2 id="引言">引言</h2>
-<p><strong>本章与信号与系统知识有较多重复，仅记录部分重要的概念</strong></p>
-<ol type="1">
-<li><p>信号分类</p>
-<table>
-<thead>
-<tr class="header">
-<th>时间-幅度</th>
-<th>连续</th>
-<th>离散</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>连续</td>
-<td>模拟</td>
-<td>抽样</td>
-</tr>
-<tr class="even">
-<td>离散</td>
-<td>量化</td>
-<td>数字</td>
-</tr>
-</tbody>
-</table></li>
-</ol>
+<p>因为第一章绪论内容较少，所以将第一章内容与第二章合并</p>
+<h2 id="绪论">绪论</h2>
+<h3 id="微波的概念">微波的概念</h3>
+<p>顾名思义“微波”是波长极短，频率极高的电磁波。在电磁波谱中是介于普通线电波与红外线之间的波段。因此，波长的长与短、频率的高与低都是相对的，在微波波段内部又可划分为分米波、厘米波、毫米波和亚毫米波.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/#more" rel="contents">
+              <a class="btn" href="/2023/11/21/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -500,7 +573,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/11/18/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%94-%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -514,7 +587,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/" class="post-title-link" itemprop="url">计算机网络考前拾遗</a>
+            <a href="/2023/11/18/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%94-%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">数字信号处理第五章知识小结</a>
         </h2>
 
         <div class="post-meta">
@@ -524,14 +597,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-11-09 19:36:21" itemprop="dateCreated datePublished" datetime="2023-11-09T19:36:21+08:00">2023-11-09</time>
+              <time title="创建时间：2023-11-18 11:41:04" itemprop="dateCreated datePublished" datetime="2023-11-18T11:41:04+08:00">2023-11-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-12 11:09:09" itemprop="dateModified" datetime="2023-11-12T11:09:09+08:00">2023-11-12</time>
+                <time title="修改时间：2023-11-23 21:15:57" itemprop="dateModified" datetime="2023-11-23T21:15:57+08:00">2023-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -549,14 +622,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -568,106 +641,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="前言">前言</h2>
-<p>本文只针对华中科技大学电子信息与通信学院计算机网络考试要求进行知识点归纳总结与提炼，内容不保证能满足各位读者的需求。</p>
-<h2 id="第一章绪论">第一章：绪论</h2>
-<h3 id="计算机网络的定义和发展历史了解">计算机网络的定义和发展历史(了解)</h3>
-<p>网络:网络由若干<strong>节点</strong>和连接这些节点的<strong>链路</strong>组成</p>
-<p>互联网：多个网络通过路由器互连起来，构成一个覆盖范围更大的网络，即互联网,互联网是网络的网络</p>
-<p>因特网：因特网是世界上最大的互连网络</p>
-<p>发展历史：计算机网络最早的起源来自美国军方搭建的APANET</p>
+          <h2 id="引言">引言</h2>
+<p>由于课程对第五章和第七章要求不高，讲述的知识点不多，所以将其整理到一起。（第七章基本没讲，故直接略过）<strong>注意：第五章前四节的知识点和随机过程讲述的知识点高度重合，故不在此赘述</strong></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%80%83%E5%89%8D%E6%8B%BE%E9%81%97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/05/15/mips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="夏至">
-      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="夏至的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/15/mips/" class="post-title-link" itemprop="url">mips</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-15 16:27:25" itemprop="dateCreated datePublished" datetime="2023-05-15T16:27:25+08:00">2023-05-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-11 18:40:10" itemprop="dateModified" datetime="2023-11-11T18:40:10+08:00">2023-11-11</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="华中科技大学模拟与电路系统三实验汇总">华中科技大学模拟与电路系统（三）实验汇总</h1>
-<h2 id="并行io接口实验">并行IO接口实验</h2>
-<h3 id="实验任务">实验任务</h3>
-<p>嵌入式计算机系统将独立按键以及独立开关作为输入设备，七段数码管作为输出设备。实现以下功能：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/15/mips/#more" rel="contents">
+              <a class="btn" href="/2023/11/18/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%94-%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -690,7 +668,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -758,7 +736,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -771,7 +749,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -819,12 +797,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">140k</span>
+    <span title="站点总字数">156k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:07</span>
+    <span title="站点阅读时长">2:22</span>
 </div>
 
         

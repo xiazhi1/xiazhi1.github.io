@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avarar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言 第十三章知识点较少，将其与第十章合并，本知识小结只针对华中科技大学电子信息与通信学院课程《通信原理》进行总结，不保证满足所有读者需求">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通信原理第十十三章知识小结">
+<meta property="og:url" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:site_name" content="夏至的个人博客">
+<meta property="og:description" content="前言 第十三章知识点较少，将其与第十章合并，本知识小结只针对华中科技大学电子信息与通信学院课程《通信原理》进行总结，不保证满足所有读者需求">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-22-20-23-43.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-22-20-44-10.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-22-20-45-29.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-10-26-30.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-10-29-02.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-10-45-16.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-10-46-28.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-11-22-53.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-12-55-35.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-12-57-44.png">
+<meta property="article:published_time" content="2023-12-22T06:10:58.000Z">
+<meta property="article:modified_time" content="2023-12-23T05:05:55.268Z">
+<meta property="article:author" content="夏至">
+<meta property="article:tag" content="通信原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-22-20-23-43.png">
+
+<link rel="canonical" href="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>通信原理第十十三章知识小结 | 夏至的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夏至的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          通信原理第十十三章知识小结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-22 14:10:58" itemprop="dateCreated datePublished" datetime="2023-12-22T14:10:58+08:00">2023-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-23 13:05:55" itemprop="dateModified" datetime="2023-12-23T13:05:55+08:00">2023-12-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E5%AD%A6%E5%8A%9F%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">大学功课</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言">前言</h2>
+<p>第十三章知识点较少，将其与第十章合并，本知识小结只针对华中科技大学电子信息与通信学院课程《通信原理》进行总结，不保证满足所有读者需求 <span id="more"></span></p>
+<h2 id="第十章信源编码">第十章：信源编码</h2>
+<h3 id="引言">10.1 引言</h3>
+<p>信源编码的作用十进行压缩编码和模数转换，进行数字化编码的技术主要有波形编码和参量编码，我们主要讨论的是波形编码，波形编码的三个步骤包括：抽样，量化和编码，不常用的方法是PCM,DPCM,<span class="math inline">\(\Delta M\)</span> <img src="/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-22-20-23-43.png"></p>
+<h3 id="模拟信号的抽样">10.2 模拟信号的抽样</h3>
+<h4 id="低通模拟信号的抽样定理">10.2.1 低通模拟信号的抽样定理</h4>
+<p>最高频率小于<span class="math inline">\(f_H\)</span>的模拟信号m(t)可由其等间隔的抽样值唯一确定，抽样间隔<span class="math inline">\(T_S\)</span>或抽样速率<span class="math inline">\(f_S\)</span>应满足:<span class="math inline">\(T_S\le\frac{1}{2f_H},f_s\ge 2f_H\)</span>其中<span class="math inline">\(T_s,f_s\)</span>分别被称为奈奎斯特间隔与奈奎斯特速率</p>
+<h4 id="带通模拟信号的抽样定理">10.2.2 带通模拟信号的抽样定理</h4>
+<p>设带通型模拟信号m(t)的频率范围限制在<span class="math inline">\(f_L\le f\le f_H,且f_L&gt;B\)</span>,则最小抽样速率为<span class="math inline">\(f_s=2B(1+\frac{k}{n})\)</span>,其中<span class="math inline">\(B=f_H-f_L\)</span>,n为商<span class="math inline">\(f_H/B\)</span>的整数部分，k为商<span class="math inline">\(f_H/B\)</span>的小数部分</p>
+<p>当<span class="math inline">\(f_L=0\)</span>时，<span class="math inline">\(f_s=2B=2f_H\)</span>--低通抽样情况，<span class="math inline">\(f_L\)</span>很大时，<span class="math inline">\(f_s\approx 2B\)</span></p>
+<h3 id="模拟脉冲调制">10.3 模拟脉冲调制</h3>
+<p>模拟脉冲调制主要可以分为PAM,PDM,PPM,分别变化脉冲高度，宽度，位置，本章主要讨论的是PAM,PAM可分为两种实际抽样，自然抽样的PAM和平顶抽样的PAM,自然抽样的特点是样值脉冲的幅度随原信号m(t)的幅度而变，平顶抽样的特点是每个样值脉冲的顶部是平坦的</p>
+<h3 id="模拟信号的量化">10.4 模拟信号的量化</h3>
+<h4 id="量化原理">10.4.1 量化原理</h4>
+<p>量化原理可表述为用有限个量化电平表示无限个抽样值 <img src="/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-22-20-44-10.png"></p>
+<h4 id="均匀量化">10.4.2 均匀量化</h4>
+<p>均匀量化意味着等间隔的划分输入信号的取值域 <img src="/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-22-20-45-29.png"></p>
+<p>量化器的性能指标中，信号量噪比<span class="math inline">\(S/N_q\)</span>是重要的一个设计指标</p>
+<p>量化噪声概率<span class="math inline">\(N_q=E[(m_k-m_q)^2]=\int_a^b(x-m_q)^2f(x)dx\)</span></p>
+<p>信号<span class="math inline">\(m_k\)</span>的平均功率<span class="math inline">\(S=E[(m_k)^2]=\int_a^bx^2f(x)dx\)</span></p>
+<p>信号量噪比--信号功率与量化噪声功率之比<span class="math inline">\(\frac{S}{N_q}=\frac{E[m_k^2]}{E[(m_k-m_q)^2]}\)</span></p>
+<p>输入信号均匀分布的最佳量化器是均匀量化器，其特点是<span class="math inline">\(N_q\)</span>与信号统计特性无关，仅取决于<span class="math inline">\(\Delta\)</span>,其缺点体现在当信号小时，信号量噪比也小，往往达不到要求，相当于限制了输入信号的动态范围，在电话传输中需要信号量噪比较高，这意味着需要的编码位数多，导致编码信号的带宽增大，且编码设备复杂，为了解决这些问题，引入了下一节的非均匀量化</p>
+<h4 id="非均匀量化">10.4.3 非均匀量化</h4>
+<p>设计思想：信号样值小，<span class="math inline">\(\Delta V\)</span>也小，信号样值大，<span class="math inline">\(\Delta V\)</span>也大；实现方法是对信号先压缩再进行均匀量化然后进行扩张，压缩的目的是提高小信号的量噪比</p>
+<p>其实现均采用对数量化，实现方法是先压缩原始抽样值(非线性变换)，再均匀量化，国际上用的两种对数压缩特性标准，<span class="math inline">\(\mu\)</span>率和A率，本章主要讨论A率，二者间的区别是A压缩率采用的是13折线近似法，而<span class="math inline">\(\mu\)</span>率采用的是15折线近似法</p>
+<p>A压缩率的表达式为 <span class="math display">\[y=\begin{cases}
+    \frac{Ax}{1+lnA},0\le x\le \frac{1}{A}\\
+    \frac{1+lnAx}{1+lnA},\frac{1}{A}\le x \le 1
+\end{cases}\]</span> A用于决定压缩程度，A=1时无压缩效果，实用中A=87.6，用87.6的原因时使压缩曲线在原点附近斜率凑成16，使13折线逼近时，x的八个段落量化分界点近似于按2的幂次递减分割，有利于数字化 <img src="/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-10-26-30.png"></p>
+<h3 id="脉冲编码调制">10.5 脉冲编码调制</h3>
+<h4 id="pcm的基本原理">10.5.1 PCM的基本原理</h4>
+<p>PCM系统原理框图如下 <img src="/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-10-29-02.png"> 模拟信号数字化过程包括抽样、量化和编码</p>
+<h4 id="常用二进制码">10.5.2 常用二进制码</h4>
+<ol type="1">
+<li>自然二进码：一般的十进制正整数的二进制表示，特点是编码简单，译码可以逐比特独立进行</li>
+<li>格雷二进码：相邻码字的距离恒为1</li>
+<li>折叠二进码：由极性码(最高位)和幅度码组成，幅度码从零电平-大电平按自然码规则编码，当正负绝对值相同时，幅度吗相对于零电平呈现映像关系，或称折叠关系</li>
+</ol>
+<p>码位的选择与安排关乎通信质量和设备复杂度，在A率13折线PCM编码中，共计<span class="math inline">\(2^8=256\)</span>个量化极，需要将每个样值脉冲<span class="math inline">\(I_s\)</span>编成8位二进制码，其编码规则如下，<span class="math inline">\(C_1-极性码，C_2C_3C_4-段落码，C_5C_6C_7C_8-段内码\)</span>,其中极性码表示样值的极性，正编"1",负编"0",段落码表示样值的幅度所处的段落，段内码表示16种可能状态对应代表各段内的16个量化级</p>
+<p>起始电平和量化间隔用于确定样值所在的段落和量化级 <img src="/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-10-45-16.png"> <span class="math inline">\(\Delta = \frac{1}{2048}\)</span> 段内码对应的权值关系如下 <img src="/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-10-46-28.png"></p>
+<h4 id="电话信号的编译码器">10.5.3 电话信号的编译码器</h4>
+<p>非线性码对应非均匀量化，只需要7位非线性编码，称为非线性/对数PCM编码，线性码对应均匀量化，需要11位线性编码，称为线性PCM编码</p>
+<p>PCM信号的比特率和带宽：设模拟信号的最高频率为<span class="math inline">\(f_H\)</span>,抽样速率为<span class="math inline">\(f_S=2f_H\)</span>,二进制编码位数为N，则PCM信号的比特率<span class="math inline">\(R_b=f_s\cdot N=2f_H\cdot N\)</span>，传输带宽：若采用非归零矩形脉冲传输，谱零点带宽<span class="math inline">\(B=R_B=R_b=f_s\cdot N\)</span></p>
+<h4 id="pcm系统中噪声的影响">10.5.4 PCM系统中噪声的影响</h4>
+<p>PCM系统中的噪声来源于两方面，一方面是量化噪声<span class="math inline">\(N_q\)</span>，一方面是加性噪声<span class="math inline">\(N_a\)</span>，两者产生机理不同，所以相互独立，性能指标方面，抗加性噪声性能可表述为 <span class="math display">\[\frac{S_o}{N_a}=\frac{E[m^2(t)]}{E[n_a^2(t)]}=\frac{1}{4P_e}\]</span> 抗量化噪声性能 <span class="math display">\[\frac{S_o}{N_q}=\frac{E[m^2(t)]}{E[n_q^2(t)]}=M^2=2^{2N}=2^{2B/f_H}\]</span> 总输出信噪比 <span class="math display">\[\frac{S_o}{N_o}=\frac{E[m^2(t)]}{E[n_q^2(t)]+E[n_a^2(t)]}=\frac{2^{2N}}{1+4P_e2^{2N}}\\若N_a&lt;&lt;N_q,则\frac{S_o}{N_o}\approx 2^{2N},若N_a&gt;&gt;N_q,则\frac{S_o}{N_o}\approx\frac{1}{4P_e}\]</span></p>
+<h3 id="时分复用tdm">10.8 时分复用(TDM)</h3>
+<p>对于时分复用数字电话通信系统，ITU制定了两种准同步数字题型的建议，E体系和T体系，主要讨论E体系</p>
+<p><img src="/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-11-22-53.png"></p>
+<h2 id="第十三章同步原理">第十三章：同步原理</h2>
+<h3 id="概述">13.1 概述</h3>
+<p>同步是数字通信系统中不可或缺的关键技术，是保证信息可靠、有序传输的前提和必要，同步性能的好坏直接影响着通信系统的质量</p>
+<p>同步的类型可分为载波同步，码元同步，帧/群同步，网同步，其中载波同步负责在相干解调时，提供同频同相的本地载波(相干载波)，码元同步负责在抽样判决，差分/编译码，PCM编译码时，提供时钟同步脉冲序列，帧/群同步负责在发端插入每帧起止标记，并从收信端检测并获取这一标记，以便对接受的数字序列正确分组</p>
+<p>同步获取方法可分为外同步法(插入导频法)与自同步法(直接法)，二者的区别可以直接通过是否发送导频来辨别</p>
+<h3 id="载波同步">13.2 载波同步</h3>
+<p>作用：提供本地载波用于相干解调，要求：本地载波应与接受信号载波同频同相，方法有插入导频法和直接法</p>
+<h4 id="有辅助导频的载波提取">13.2.1 有辅助导频的载波提取</h4>
+<p>一般采用一个锁相环(PLL)来提取载波 <img src="/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-12-55-35.png"></p>
+<h4 id="无辅助导频的载波提取">13.2.2 无辅助导频的载波提取</h4>
+<p>一般解决思路是通过非线性变换，产生载波的谐波分量，然后提取分频得到载波同步信号</p>
+<p>常用的解决方法可分为平方变换法和平方环法，同向正交环(costas环),再调制器 <img src="/2023/12/22/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%8D%81%E5%8D%81%E4%B8%89%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-23-12-57-44.png"></p>
+<h4 id="载波同步的性能">13.2.3 载波同步的性能</h4>
+<p>追求效率高，精度高，同步建立时间快，保持时间长</p>
+<h3 id="码元同步">13.3 码元同步</h3>
+<p>作用是在数字图像的抽样判决，差分编译码，PCM编译码器中，提供所需的同步时钟序列，要求抽样判决时，接收端需提供码元同步(位定时)序列，应满足重复频率与接收码元速率相同，相位与最佳抽判时刻一致，方法也分为外同步法和自同步法</p>
+<h4 id="外同步法">13.3.1 外同步法</h4>
+<p>就是在发送信号的频域进行插入同步信号，优点是设备较简单，缺点是需要占用一定的频带宽度和发送速率</p>
+<h4 id="自同步法">13.3.2 自同步法</h4>
+<ol type="1">
+<li>开环码元同步法：将解调后的基带接受码元先进行某种非线性变换，窄带滤波，从而移除码元速率的频率分量，采用的方案一般为延迟相乘法和微分整流法</li>
+<li>闭环码元同步法：将接受信号与本地产生的码元定时信号相比较，使本地产生的定时信号和接收码元波形的转变点保存同步，方案是超前/滞后门同步器</li>
+</ol>
+<h3 id="群同步">13.4 群同步</h3>
+<p>作用是在码元同步的基础上，识别每个数字信息群的起止时刻</p>
+<p>一般采用的方法有集中插入法与分散插入法</p>
+<h2 id="参考资料">参考资料</h2>
+<ol type="1">
+<li>《通信原理》（第七版）：樊昌信，曹丽娜</li>
+<li>老师课件</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" rel="tag"># 通信原理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/20/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E5%85%AB%E4%B9%9D%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" rel="prev" title="通信原理第八九章知识小结">
+      <i class="fa fa-chevron-left"></i> 通信原理第八九章知识小结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">第十章：信源编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">2.1.</span> <span class="nav-text">10.1 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%8A%BD%E6%A0%B7"><span class="nav-number">2.2.</span> <span class="nav-text">10.2 模拟信号的抽样</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8E%E9%80%9A%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%8A%BD%E6%A0%B7%E5%AE%9A%E7%90%86"><span class="nav-number">2.2.1.</span> <span class="nav-text">10.2.1 低通模拟信号的抽样定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%A6%E9%80%9A%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%8A%BD%E6%A0%B7%E5%AE%9A%E7%90%86"><span class="nav-number">2.2.2.</span> <span class="nav-text">10.2.2 带通模拟信号的抽样定理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E8%84%89%E5%86%B2%E8%B0%83%E5%88%B6"><span class="nav-number">2.3.</span> <span class="nav-text">10.3 模拟脉冲调制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E7%9A%84%E9%87%8F%E5%8C%96"><span class="nav-number">2.4.</span> <span class="nav-text">10.4 模拟信号的量化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8F%E5%8C%96%E5%8E%9F%E7%90%86"><span class="nav-number">2.4.1.</span> <span class="nav-text">10.4.1 量化原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%87%E5%8C%80%E9%87%8F%E5%8C%96"><span class="nav-number">2.4.2.</span> <span class="nav-text">10.4.2 均匀量化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E5%9D%87%E5%8C%80%E9%87%8F%E5%8C%96"><span class="nav-number">2.4.3.</span> <span class="nav-text">10.4.3 非均匀量化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%89%E5%86%B2%E7%BC%96%E7%A0%81%E8%B0%83%E5%88%B6"><span class="nav-number">2.5.</span> <span class="nav-text">10.5 脉冲编码调制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pcm%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">2.5.1.</span> <span class="nav-text">10.5.1 PCM的基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%A0%81"><span class="nav-number">2.5.2.</span> <span class="nav-text">10.5.2 常用二进制码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%AF%9D%E4%BF%A1%E5%8F%B7%E7%9A%84%E7%BC%96%E8%AF%91%E7%A0%81%E5%99%A8"><span class="nav-number">2.5.3.</span> <span class="nav-text">10.5.3 电话信号的编译码器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pcm%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%99%AA%E5%A3%B0%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">2.5.4.</span> <span class="nav-text">10.5.4 PCM系统中噪声的影响</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E5%88%86%E5%A4%8D%E7%94%A8tdm"><span class="nav-number">2.6.</span> <span class="nav-text">10.8 时分复用(TDM)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%E5%90%8C%E6%AD%A5%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">第十三章：同步原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">13.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%BD%E6%B3%A2%E5%90%8C%E6%AD%A5"><span class="nav-number">3.2.</span> <span class="nav-text">13.2 载波同步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E8%BE%85%E5%8A%A9%E5%AF%BC%E9%A2%91%E7%9A%84%E8%BD%BD%E6%B3%A2%E6%8F%90%E5%8F%96"><span class="nav-number">3.2.1.</span> <span class="nav-text">13.2.1 有辅助导频的载波提取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E8%BE%85%E5%8A%A9%E5%AF%BC%E9%A2%91%E7%9A%84%E8%BD%BD%E6%B3%A2%E6%8F%90%E5%8F%96"><span class="nav-number">3.2.2.</span> <span class="nav-text">13.2.2 无辅助导频的载波提取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%BD%E6%B3%A2%E5%90%8C%E6%AD%A5%E7%9A%84%E6%80%A7%E8%83%BD"><span class="nav-number">3.2.3.</span> <span class="nav-text">13.2.3 载波同步的性能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%81%E5%85%83%E5%90%8C%E6%AD%A5"><span class="nav-number">3.3.</span> <span class="nav-text">13.3 码元同步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%96%E5%90%8C%E6%AD%A5%E6%B3%95"><span class="nav-number">3.3.1.</span> <span class="nav-text">13.3.1 外同步法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%90%8C%E6%AD%A5%E6%B3%95"><span class="nav-number">3.3.2.</span> <span class="nav-text">13.3.2 自同步法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%A4%E5%90%8C%E6%AD%A5"><span class="nav-number">3.4.</span> <span class="nav-text">13.4 群同步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="夏至"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">夏至</p>
+  <div class="site-description" itemprop="description">人生不是短程跑，而是马拉松。在自己的时区里，一切都准时</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiazhi1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiazhi1" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2194625680@qq.com" title="E-Mail → mailto:2194625680@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏至</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">156k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:22</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
