@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Gin学习</title>
+    <url>/2022/05/08/Gin%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="gin框架简介">00 Gin框架简介</h2>
+<p>Gin是一个用Go语言编写的web框架，是一个拥有良好性能的API框架，其性能非常好，是GO世界里最流行的web框架，是一个简单易用的轻量级框架</p>
+<span id="more"></span>
+<h2 id="gin框架安装与使用">01 Gin框架安装与使用</h2>
+<h3 id="安装">安装</h3>
+<p>下载并安装Gin：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go get -u github.com/gin-gonic/gin</span><br></pre></td></tr></table></figure>
+<h3 id="第一个gin实例">第一个Gin实例</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import(</span><br><span class="line">    &quot;github.com/gin-gonic/gin&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main()&#123;</span><br><span class="line">    // 创建一个默认的路由引擎</span><br><span class="line">    r := gin.Default()</span><br><span class="line">    // GET: 请求方式；/hello: 请求的路径</span><br><span class="line">    // 当客户端以GET方法请求/hello路径时，会执行后面的匿名函数</span><br><span class="line">    r.GET(&quot;/hello&quot;,func(c *gin.Context)&#123;</span><br><span class="line">        // c.JSON: 返回JSON格式的数据</span><br><span class="line">        c.JSON(200,gin.H&#123;</span><br><span class="line">            &quot;message&quot;:&quot;Hello world!&quot;,</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    // 启动HTTP服务，默认在0.0.0.0：8080启动服务</span><br><span class="line">    r.Run()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将上面的代码保存并编译执行，<strong>注意</strong>：把终端切到文件目录下再执行，然后使用浏览器打开127.0.0.1：8080/hello就能看到一串JSON字符串</p>
+<h2 id="restful-api">02 RESTful API</h2>
+<p>REST代表一种软件架构风格，是Representational State Transfer的简称 简单来说，REST的含义就是客户端与web服务器之间进行交互时，使用HTTP协议中的四个请求方法代表不同的动作。</p>
+<ul>
+<li>GET用来获取资源</li>
+<li>POST用来新建资源</li>
+<li>PUT用来更新资源</li>
+<li>DELETE用来删除资源 只要API程序遵循了REST风格，那就可以将其称为RESTful API。目前在前后端分离的架构中，前后端基本上都是通过RESTful API来进行交互 现在我们举一个编写管理书籍系统的例子，该系统可以进行对一本书进行查询，创建，更新，删除等操作，如果我们按照RESTful API设计，就如下表所示| 请求方法 | URL | 含义 | | -------- | ----- | ------------ | | GET | | 获取书籍信息 | | POST | | 新建书籍信息 | | PUT | | 更新书籍信息 | | DELETE | | 删除书籍信息 |</li>
+</ul>
+<h3 id="实例代码">实例代码</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	r := gin.Default()</span><br><span class="line">	r.GET(&quot;/book&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.JSON(200, gin.H&#123;</span><br><span class="line">			&quot;message&quot;: &quot;GET&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	r.POST(&quot;/book&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.JSON(200, gin.H&#123;</span><br><span class="line">			&quot;message&quot;: &quot;POST&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	r.PUT(&quot;/book&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.JSON(200, gin.H&#123;</span><br><span class="line">			&quot;message&quot;: &quot;PUT&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	r.DELETE(&quot;/book&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.JSON(200, gin.H&#123;</span><br><span class="line">			&quot;message&quot;: &quot;DELETE&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="gin渲染">03 Gin渲染</h2>
+<h3 id="html渲染">HTML渲染</h3>
+<p>我们首先定义一个存放模板文件的templates文件夹，然后在其内部根据业务分别定义一个posts文件夹和一个users文件夹 其中posts/index.html文件内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123;define &quot;posts/index.html&quot;&#125;&#125;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;posts/index&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &#123;&#123;.title&#125;&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&#123;&#123;end&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>users/index.html文件的内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123;define &quot;users/index.html&quot;&#125;&#125;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;users/index&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &#123;&#123;.title&#125;&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&#123;&#123;end&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>Gin框架中使用LoadHTMLGlob()或者LoadHTMLFiles()方法进行HTML模板渲染。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	r := gin.Default()</span><br><span class="line">	r.LoadHTMLGlob(&quot;templates/**/*&quot;)</span><br><span class="line">	//r.LoadHTMLFiles(&quot;templates/posts/index.html&quot;, &quot;templates/users/index.html&quot;)</span><br><span class="line">	r.GET(&quot;/posts/index&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.HTML(http.StatusOK, &quot;posts/index.html&quot;, gin.H&#123;</span><br><span class="line">			&quot;title&quot;: &quot;posts/index&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	r.GET(&quot;users/index&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.HTML(http.StatusOK, &quot;users/index.html&quot;, gin.H&#123;</span><br><span class="line">			&quot;title&quot;: &quot;users/index&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	r.Run(&quot;:8080&quot;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>GO</category>
+      </categories>
+      <tags>
+        <tag>互联网技术</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>pr-learn</title>
     <url>/2022/02/01/PR/</url>
     <content><![CDATA[<h2 id="新手村">新手村</h2>
@@ -82,6 +121,31 @@
       </categories>
       <tags>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo</title>
+    <url>/2022/03/19/hexo-d%20%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="hexo-d-提交spawn-failed-的解决办法">hexo d 提交spawn failed 的解决办法</h1>
+<h2 id="网络问题">网络问题</h2>
+<p>这个问题很多都是因为网络问题引起的 我们可以</p>
+<ul>
+<li>重启电脑(请首先尝试)</li>
+<li>科学上网问题</li>
+</ul>
+<h2 id="本地文件问题">本地文件问题</h2>
+<h3 id="重置git的deploy文件夹">重置git的deploy文件夹</h3>
+<p>删除博客文件夹的.deploy_git文件夹，然后在对这个文件git bash 后输入 git config --global core.autocrlf false</p>
+<h3 id="多系统混合编写">多系统混合编写</h3>
+<p>笔者就亲身经历过，可能是因为当时在同一台电脑上运行Linux和Windows，cd进.deploy_git文件夹，输入git config –-global core.autocrlf false。</p>
+<h3 id="end">end</h3>
+<p>最后直接hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</p>
+]]></content>
+      <categories>
+        <category>互联网技术</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -267,67 +331,39 @@
       </tags>
   </entry>
   <entry>
-    <title>Gin学习</title>
-    <url>/2022/05/08/Gin%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h2 id="gin框架简介">00 Gin框架简介</h2>
-<p>Gin是一个用Go语言编写的web框架，是一个拥有良好性能的API框架，其性能非常好，是GO世界里最流行的web框架，是一个简单易用的轻量级框架</p>
-<span id="more"></span>
-<h2 id="gin框架安装与使用">01 Gin框架安装与使用</h2>
-<h3 id="安装">安装</h3>
-<p>下载并安装Gin：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go get -u github.com/gin-gonic/gin</span><br></pre></td></tr></table></figure>
-<h3 id="第一个gin实例">第一个Gin实例</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import(</span><br><span class="line">    &quot;github.com/gin-gonic/gin&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main()&#123;</span><br><span class="line">    // 创建一个默认的路由引擎</span><br><span class="line">    r := gin.Default()</span><br><span class="line">    // GET: 请求方式；/hello: 请求的路径</span><br><span class="line">    // 当客户端以GET方法请求/hello路径时，会执行后面的匿名函数</span><br><span class="line">    r.GET(&quot;/hello&quot;,func(c *gin.Context)&#123;</span><br><span class="line">        // c.JSON: 返回JSON格式的数据</span><br><span class="line">        c.JSON(200,gin.H&#123;</span><br><span class="line">            &quot;message&quot;:&quot;Hello world!&quot;,</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    // 启动HTTP服务，默认在0.0.0.0：8080启动服务</span><br><span class="line">    r.Run()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>将上面的代码保存并编译执行，<strong>注意</strong>：把终端切到文件目录下再执行，然后使用浏览器打开127.0.0.1：8080/hello就能看到一串JSON字符串</p>
-<h2 id="restful-api">02 RESTful API</h2>
-<p>REST代表一种软件架构风格，是Representational State Transfer的简称 简单来说，REST的含义就是客户端与web服务器之间进行交互时，使用HTTP协议中的四个请求方法代表不同的动作。</p>
-<ul>
-<li>GET用来获取资源</li>
-<li>POST用来新建资源</li>
-<li>PUT用来更新资源</li>
-<li>DELETE用来删除资源 只要API程序遵循了REST风格，那就可以将其称为RESTful API。目前在前后端分离的架构中，前后端基本上都是通过RESTful API来进行交互 现在我们举一个编写管理书籍系统的例子，该系统可以进行对一本书进行查询，创建，更新，删除等操作，如果我们按照RESTful API设计，就如下表所示| 请求方法 | URL | 含义 | | -------- | ----- | ------------ | | GET | | 获取书籍信息 | | POST | | 新建书籍信息 | | PUT | | 更新书籍信息 | | DELETE | | 删除书籍信息 |</li>
-</ul>
-<h3 id="实例代码">实例代码</h3>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	r := gin.Default()</span><br><span class="line">	r.GET(&quot;/book&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.JSON(200, gin.H&#123;</span><br><span class="line">			&quot;message&quot;: &quot;GET&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	r.POST(&quot;/book&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.JSON(200, gin.H&#123;</span><br><span class="line">			&quot;message&quot;: &quot;POST&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	r.PUT(&quot;/book&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.JSON(200, gin.H&#123;</span><br><span class="line">			&quot;message&quot;: &quot;PUT&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	r.DELETE(&quot;/book&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.JSON(200, gin.H&#123;</span><br><span class="line">			&quot;message&quot;: &quot;DELETE&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="gin渲染">03 Gin渲染</h2>
-<h3 id="html渲染">HTML渲染</h3>
-<p>我们首先定义一个存放模板文件的templates文件夹，然后在其内部根据业务分别定义一个posts文件夹和一个users文件夹 其中posts/index.html文件内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123;define &quot;posts/index.html&quot;&#125;&#125;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;posts/index&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &#123;&#123;.title&#125;&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&#123;&#123;end&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>users/index.html文件的内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123;define &quot;users/index.html&quot;&#125;&#125;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;users/index&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &#123;&#123;.title&#125;&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&#123;&#123;end&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>Gin框架中使用LoadHTMLGlob()或者LoadHTMLFiles()方法进行HTML模板渲染。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	r := gin.Default()</span><br><span class="line">	r.LoadHTMLGlob(&quot;templates/**/*&quot;)</span><br><span class="line">	//r.LoadHTMLFiles(&quot;templates/posts/index.html&quot;, &quot;templates/users/index.html&quot;)</span><br><span class="line">	r.GET(&quot;/posts/index&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.HTML(http.StatusOK, &quot;posts/index.html&quot;, gin.H&#123;</span><br><span class="line">			&quot;title&quot;: &quot;posts/index&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	r.GET(&quot;users/index&quot;, func(c *gin.Context) &#123;</span><br><span class="line">		c.HTML(http.StatusOK, &quot;users/index.html&quot;, gin.H&#123;</span><br><span class="line">			&quot;title&quot;: &quot;users/index&quot;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	r.Run(&quot;:8080&quot;)</span><br></pre></td></tr></table></figure>
+    <title>jittor与pytorch的区别一览</title>
+    <url>/2024/01/14/jittor%E4%B8%8Epytorch%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%80%E8%A7%88/</url>
+    <content><![CDATA[<h2 id="前言">前言</h2>
+<p>最近在完成一个利用Jittor复现GaussianSplatting的项目，里面用到了清华大学自主开发的深度学习框架jittor，因为GaussianSplatting官方代码是基于Pytorch和CUDA，所以复现过程中遇到了许许多多的问题，这里记录一下，希望能对读者有所帮助</p>
+<h2 id="jittor安装问题">jittor安装问题</h2>
+<p>经过测试发现，在1.3.7.3往后的jittor版本，在Linxu系统上安装通过不了CUDA测试，里面生成的变量都有问题，无法正确计算data属性，推荐安装版本1.3.6.5, 1.3.7.3,另外jittor安装CUDA版本一般都需要你安装配套的CUDNN</p>
+<h2 id="jittor梯度求法">jittor梯度求法</h2>
+<p>jittor和torch生成的变量var与tensor相比，有个比较重要的区别就是jittor.var没有grad属性,grad只能通过创建优化器，然后对优化器参数求jt.opt_grad，并且jittor无法实现对非叶子节点的梯度保留</p>
+<h2 id="jittor的c和cuda扩展">jittor的C++和CUDA扩展</h2>
+<p>相对于Pytorch来说，jittor主要为python环境设计，没有提供类似于Pytorch的C++和CUDA扩展，这导致无法复用GaussianSplatting的CUDA光栅化器，最后采用的解决方法是利用python和jittor手写一个光栅化器</p>
+<h2 id="jittor.meshgrid">jittor.meshgrid</h2>
+<p>jittor.meshgrid默认的indexing是ij，而torch.meshgrid默认的indexing是xy</p>
+<h2 id="jittor中的no_grad">jittor中的no_grad</h2>
+<p>与pytorch不同的是 jittor中no_grad方法里的梯度无法重新设置梯度，因为jittor不存在设置require_grad的方法，所以一定要注意不要把你需要计算梯度的参量，比如优化器参量放入道no_grad函数里，jittor不支持像pytorch那样的nn.paremeter()函数来将张量设置为可优化的，有梯度的</p>
+<h2 id="jittor优化器的状态参数">jittor优化器的状态参数</h2>
+<p>与pytorch优化器不同的是 pytorch优化器的状态参数都存在优化器.stact属性中。jittor不存在这个属性，但jittor的param_groups属性储存了优化器参数，每个优化器参数里面又存有其对应的状态参数，如果你想修改优化器状态参数，请采用param_groups获取优化器参数，并修改其中的状态参数部分即可</p>
+<h2 id="cuda占用参数空间过多">CUDA占用参数空间过多</h2>
+<p>因为 jittor 通过 jt.flags.use_cuda 设置是否使用 GPU，所有的 jt.Var 根据此开关自动使用 cpu 或者 gpu 计算，不需要关心 var 所在的设备。这导致很多参数全部都是无脑的放在CUDA设备上，对显卡资源丰富的人来说，这显然不是个问题，但如果你的卡的显存有限，且模型较大，这会使你很容易就显存爆炸或参数空间溢出</p>
+<p>如果你的显存空间爆炸，推荐你可以尝试在定义并使用完函数的局部变量后，及时将其del删除，然后利用jt.gc()函数回收参数空间</p>
+<h2 id="jittor调试技巧">jittor调试技巧</h2>
+<p>因为jittor默认是异步执行的，这可以大大加快其运算速度，但这在调试时非常难以准确定位错误发生位置，推荐关闭延迟执行，可以在环境变量中将export lazy_execution=0 或者在python代码中jt.flags.lazy_execution=0</p>
+<h2 id="jittor模型的保存和加载">jittor模型的保存和加载</h2>
+<p>与pytorch不同的是 jittor.save函数只支持dict方式保存参数，而且目前经过测试发现其对pth，pt格式的文件的保存读取会报错，建议使用pkl文件格式</p>
+<h2 id="总结">总结</h2>
+<p>以上是本人在编写jittor项目是遇到的一些比较大的Bug,也有一些比较小的问题没有一一列举，因为jittor和pytorch大部分函数和属性还是比较相似的，一些比较简单的问题，可以直接问chatGPT就可以解决，这里只记录了一些我认为比较重要或比较难发现的区别，如果你在复现jittor时，遇到了一些问题，你可以参考我的GitHub仓库里转换好的模型<a href="https://github.com/xiazhi1/JGaussian">JGaussian</a></p>
 ]]></content>
       <categories>
-        <category>GO</category>
+        <category>深度学习</category>
+        <category>计算机视觉</category>
       </categories>
       <tags>
-        <tag>互联网技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo</title>
-    <url>/2022/03/19/hexo-d%20%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="hexo-d-提交spawn-failed-的解决办法">hexo d 提交spawn failed 的解决办法</h1>
-<h2 id="网络问题">网络问题</h2>
-<p>这个问题很多都是因为网络问题引起的 我们可以</p>
-<ul>
-<li>重启电脑(请首先尝试)</li>
-<li>科学上网问题</li>
-</ul>
-<h2 id="本地文件问题">本地文件问题</h2>
-<h3 id="重置git的deploy文件夹">重置git的deploy文件夹</h3>
-<p>删除博客文件夹的.deploy_git文件夹，然后在对这个文件git bash 后输入 git config --global core.autocrlf false</p>
-<h3 id="多系统混合编写">多系统混合编写</h3>
-<p>笔者就亲身经历过，可能是因为当时在同一台电脑上运行Linux和Windows，cd进.deploy_git文件夹，输入git config –-global core.autocrlf false。</p>
-<h3 id="end">end</h3>
-<p>最后直接hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</p>
-]]></content>
-      <categories>
-        <category>互联网技术</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
+        <tag>深度学习</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -347,21 +383,6 @@
 <h3 id="实验源码">实验源码</h3>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &quot;xil_io.h&quot;</span><br><span class="line">#include &quot;stdio.h&quot;</span><br><span class="line">#include &quot;xgpio.h&quot;</span><br><span class="line">#include &quot;sleep.h&quot;</span><br><span class="line">#include &quot;xtmrctr.h&quot;</span><br><span class="line">#include &quot;xintc_l.h&quot;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char button = 0x0;</span><br><span class="line">    char segtable[16]=&#123;0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x8e&#125;;</span><br><span class="line">    short segcode[8]=&#123;0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff&#125;;</span><br><span class="line">    short pos=0xff7f;</span><br><span class="line">    Xil_Out16(XPAR_GPIO_0_BASEADDR+XGPIO_TRI_OFFSET,0xffff);</span><br><span class="line">    Xil_Out16(XPAR_GPIO_1_BASEADDR+XGPIO_TRI_OFFSET,0X0);</span><br><span class="line">    Xil_Out16(XPAR_GPIO_1_BASEADDR+XGPIO_TRI2_OFFSET,0x0);</span><br><span class="line">    Xil_Out8(XPAR_GPIO_2_BASEADDR+XGPIO_TRI_OFFSET,0x1f);</span><br><span class="line">    while(1)</span><br><span class="line">    &#123;</span><br><span class="line">        while((Xil_In8(XPAR_GPIO_2_BASEADDR+XGPIO_DATA_OFFSET)&amp;0X1f)!=0)</span><br><span class="line">        &#123;</span><br><span class="line">            button = Xil_In8(XPAR_GPIO_2_BASEADDR + XGPIO_DATA_OFFSET)&amp;0x1f;</span><br><span class="line">            short sw = Xil_In16(XPAR_GPIO_0_BASEADDR+XGPIO_DATA_OFFSET);</span><br><span class="line">			while((Xil_In8(XPAR_GPIO_2_BASEADDR + XGPIO_DATA_OFFSET)&amp;0x1f)!=0);</span><br><span class="line">            switch (button)</span><br><span class="line">            &#123;</span><br><span class="line">            case 0x1:</span><br><span class="line">                for(int j=0;j&lt;8;j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        segcode[7-j]=segtable[(sw&gt;&gt;j)&amp;0x1];</span><br><span class="line">                    &#125;</span><br><span class="line">                break;</span><br><span class="line">            case 0x2:</span><br><span class="line">                    for(int j=0;j&lt;4;j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        segcode[7-j]=segtable[(sw&gt;&gt;(4*j))&amp;0xf];</span><br><span class="line">                    &#125;</span><br><span class="line">                    for(int j=4;j&lt;8;j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        segcode[7-j]=0xff;</span><br><span class="line">                    &#125;</span><br><span class="line">                break;</span><br><span class="line">            case 0x10:</span><br><span class="line">                int a=sw;</span><br><span class="line">                for(int j=0;j&lt;5;j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    switch (a%10)</span><br><span class="line">                    &#123;</span><br><span class="line">                        &#123;</span><br><span class="line">                            case(0):segcode[7-j]=segtable[0];break;</span><br><span class="line">                            case(1):segcode[7-j]=segtable[1];break;</span><br><span class="line">                            case(2):segcode[7-j]=segtable[2];break;</span><br><span class="line">                            case(3):segcode[7-j]=segtable[3];break;</span><br><span class="line">                            case(4):segcode[7-j]=segtable[4];break;</span><br><span class="line">                            case(5):segcode[7-j]=segtable[5];break;</span><br><span class="line">                            case(6):segcode[7-j]=segtable[6];break;</span><br><span class="line">                            case(7):segcode[7-j]=segtable[7];break;</span><br><span class="line">                            case(8):segcode[7-j]=segtable[8];break;</span><br><span class="line">                            case(9):segcode[7-j]=segtable[9];break;</span><br><span class="line">                        &#125;    </span><br><span class="line">                    &#125;</span><br><span class="line">                    a/=10;</span><br><span class="line">                &#125;</span><br><span class="line">                    for(int j=5;j&lt;8;j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        segcode[7-j]=0xff;</span><br><span class="line">                    &#125;</span><br><span class="line">                break;                </span><br><span class="line">            default:</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=0;i&lt;8;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Xil_Out8(XPAR_AXI_GPIO_1_BASEADDR+XGPIO_DATA_OFFSET,pos);</span><br><span class="line">        Xil_Out8(XPAR_AXI_GPIO_1_BASEADDR+XGPIO_DATA2_OFFSET,segcode[i]);</span><br><span class="line">        for(int j=0;j&lt;10000;j++);</span><br><span class="line">        pos=pos&gt;&gt;1;</span><br><span class="line">    &#125;</span><br><span class="line">    pos=0xff7f;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
-  </entry>
-  <entry>
-    <title>动态规划</title>
-    <url>/2022/02/01/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
-    <content><![CDATA[<h2 id="动态规划">动态规划</h2>
-<h3 id="简要理解">简要理解</h3>
-<p>动态规划的思想是把问题划分为多个子问题，但子问题常常并不是互相独立的，当前子问题的解可看作是前面多个阶段的完整总结，所以它需要在子问题求解过程中进行多次判断与选择，与前面的问题相比，它现阶段一定要构成一种最优的结构，它满足最优化原理， <strong>最优化原理</strong>：一个最优化策略具有这样的性质，不论过去状态和决策如何，对前面的决策所形成的状态而言，余下的诸决策必须构成最优策略。同时，这样的最优策略是针对有已作出决策的总结，对后来的决策没有直接影响，只能借用目前最优策略的状态数据。这也被称之为无后效性。 <span id="more"></span> ### 求解思路 开始先要将问题按照一定顺序划分为各个阶段，然后确定每个阶段的状态，然后重点是根据决策的方法来确定状态转移方法，也就是说根据当前的状态确定下一阶段的状态，在这个过程中，下一状态的确定往往要参考之前的状态，因此需要在每一次状态转移过程中将当前的状态遍历记录，方便之后的查找。 ### 算法特点 * 需要在给定约束条件下优化某种指标时，动态规划是很有用的 * 问题可以分解为离散子问题是，可以用动态规划来解决 * 没有通用固定的公式，需要具体问题具体分析，这也就是其难点所在</p>
-<h3 id="经典示例">经典示例</h3>
-<p><strong>背包问题</strong>： 如果有一个小偷背有一个容量为4kg的背包去商场偷东西，可盗窃的物品有如下三件： 音响：3000 4kg 笔记本：2000 3kg 吉他：1500 1kg 每个物品只能偷一次，请问，小偷怎么偷收益最高 <strong>解决方法</strong> 我们可以考虑用画网格的方法来解决，我们构造下面的网格，每一行代表新添加的可以拿到物品，每一列代表当前容量，数字代表当前情况下可以拿的最大收益。这个过程就是动态规划的经典应用过程，就是保存上一步的结果，在这层进行决策时，与上一层结果比较，得到最优解 示意图如下： <img src="http://assets.processon.com/chart_image/61f9465b1e08530f015afacd.png" alt="alt"></p>
-<p><strong>最长公共子串问题</strong> 如果用户在字典网站中查找单词时不小心拼错了，你必须猜测她原本要输入什么单词，例如啊彬想查单词fish，但不小心输入了hish，在网站的字典中，根本就没有这样的单词，但有类似的单词，那我们如何做这个判断呢？ 同样的，我们也可以构建一个网格，上方是输入单词的每个字母，左边是待匹配单词的字母，如果匹配就是左上角数字+1，最后比较整个方格中的最大值谁大，最大的就最匹配。 示意图如下： <img src="http://assets.processon.com/chart_image/61f9d53007912906b0b8147e.png" alt="alt"></p>
-<p><strong>总结</strong> 从上面的两个例子可以看出，动态规划的核心是对上一步操作进行记忆，再与现在的操作进行对比，已得到最优解，同时，我们可以发现，不同问题中的动态规划虽然思路大体一致，都是保存上一步解并在确定这一步解时做参考，但具体实现上是完全不同的，所以说动态规划题并没有通用解法</p>
-]]></content>
-      <categories>
-        <category>算法学习笔记</category>
-      </categories>
   </entry>
   <entry>
     <title>分治算法</title>
@@ -392,6 +413,21 @@
 <li><strong>快速排序</strong> 快速排序的本质就是对基准数的两边分别递归进行查找交换，在这里，其满足分治算法中<em>分</em>：递归解决较小的问题：把整个数组的查找交换，分成对每个基准数的左右的查找交换的小问题。<em>治</em>：从子问题的解构建原问题的解：在对每个基准数左右进行排序后，整个大问题就已经排好了，就解决了原问题。</li>
 <li><strong>最近点对</strong> 在二维坐标轴上有若干个点坐标，让你求出最近的两个点的距离，我们通常采用分治的方法来处理这种问题，按照x或者y的维度进行考虑，将数据分成两个区域，先分别计算(按照同方法)左右区域内最短的点对。然后根据这个两个中较短的距离向左和向右覆盖，计算被覆盖的左右点之间的距离，找到最小那个距离与当前最短距离比较即可。然后在每个区域的内部我们在进行像上面一样的操作</li>
 </ol>
+]]></content>
+      <categories>
+        <category>算法学习笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>动态规划</title>
+    <url>/2022/02/01/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
+    <content><![CDATA[<h2 id="动态规划">动态规划</h2>
+<h3 id="简要理解">简要理解</h3>
+<p>动态规划的思想是把问题划分为多个子问题，但子问题常常并不是互相独立的，当前子问题的解可看作是前面多个阶段的完整总结，所以它需要在子问题求解过程中进行多次判断与选择，与前面的问题相比，它现阶段一定要构成一种最优的结构，它满足最优化原理， <strong>最优化原理</strong>：一个最优化策略具有这样的性质，不论过去状态和决策如何，对前面的决策所形成的状态而言，余下的诸决策必须构成最优策略。同时，这样的最优策略是针对有已作出决策的总结，对后来的决策没有直接影响，只能借用目前最优策略的状态数据。这也被称之为无后效性。 <span id="more"></span> ### 求解思路 开始先要将问题按照一定顺序划分为各个阶段，然后确定每个阶段的状态，然后重点是根据决策的方法来确定状态转移方法，也就是说根据当前的状态确定下一阶段的状态，在这个过程中，下一状态的确定往往要参考之前的状态，因此需要在每一次状态转移过程中将当前的状态遍历记录，方便之后的查找。 ### 算法特点 * 需要在给定约束条件下优化某种指标时，动态规划是很有用的 * 问题可以分解为离散子问题是，可以用动态规划来解决 * 没有通用固定的公式，需要具体问题具体分析，这也就是其难点所在</p>
+<h3 id="经典示例">经典示例</h3>
+<p><strong>背包问题</strong>： 如果有一个小偷背有一个容量为4kg的背包去商场偷东西，可盗窃的物品有如下三件： 音响：3000 4kg 笔记本：2000 3kg 吉他：1500 1kg 每个物品只能偷一次，请问，小偷怎么偷收益最高 <strong>解决方法</strong> 我们可以考虑用画网格的方法来解决，我们构造下面的网格，每一行代表新添加的可以拿到物品，每一列代表当前容量，数字代表当前情况下可以拿的最大收益。这个过程就是动态规划的经典应用过程，就是保存上一步的结果，在这层进行决策时，与上一层结果比较，得到最优解 示意图如下： <img src="http://assets.processon.com/chart_image/61f9465b1e08530f015afacd.png" alt="alt"></p>
+<p><strong>最长公共子串问题</strong> 如果用户在字典网站中查找单词时不小心拼错了，你必须猜测她原本要输入什么单词，例如啊彬想查单词fish，但不小心输入了hish，在网站的字典中，根本就没有这样的单词，但有类似的单词，那我们如何做这个判断呢？ 同样的，我们也可以构建一个网格，上方是输入单词的每个字母，左边是待匹配单词的字母，如果匹配就是左上角数字+1，最后比较整个方格中的最大值谁大，最大的就最匹配。 示意图如下： <img src="http://assets.processon.com/chart_image/61f9d53007912906b0b8147e.png" alt="alt"></p>
+<p><strong>总结</strong> 从上面的两个例子可以看出，动态规划的核心是对上一步操作进行记忆，再与现在的操作进行对比，已得到最优解，同时，我们可以发现，不同问题中的动态规划虽然思路大体一致，都是保存上一步解并在确定这一步解时做参考，但具体实现上是完全不同的，所以说动态规划题并没有通用解法</p>
 ]]></content>
       <categories>
         <category>算法学习笔记</category>
@@ -453,32 +489,6 @@
       </tags>
   </entry>
   <entry>
-    <title>贪心算法学习笔记</title>
-    <url>/2022/01/31/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="贪心算法">贪心算法</h2>
-<h3 id="简要理解">简要理解</h3>
-<p>贪心算法是分阶段工作的，在每一个阶段，他都会选择工作它认为眼下所作决定最好的，它是不考虑将来结果的，他只在乎局部最优解，算法终止时，我们希望得到的局部最优的结构就是全局最优，如果是就说明算法是正确的，否则算法得到的是一个次最优解，如果不要求绝对最佳答案，有时可以用简单的贪心算法生成近似答案，它的好处是在处理较大数据，较复杂的问题时，一般时间复杂度与空间复杂度都比产生准确答案的复杂算法要快上很多倍得到一个几乎接近正确的答案。 <span id="more"></span></p>
-<h3 id="经典示例">经典示例</h3>
-<ul>
-<li><strong>找零钱问题</strong>：为了使用货币找零钱，求找出零钱张数最少值，我们可以重复配发最大额货币，于是为了找一百七十五元，我们肯定先选一张一百的，再拿一张五十的，再拿一张二十，五块的，这里就用到了贪心算法每一步选取局部最优解的思想，而且在这个问题中，局部最优就是整体最优.</li>
-<li><strong>求最快抵达路径</strong>：在北京的某个交通高峰期间，有些主要干道可能看起来是空空荡荡的，但你最好还是不要选择这条干道，因为交通可能会在你抵达是=时突然变得车水马龙。这就是贪心算法行不通的例子</li>
-</ul>
-<h3 id="经典应用">经典应用</h3>
-<ol type="1">
-<li><p><strong>作业调度问题</strong> 对于多个作业（假设每个作业需要批改时间不同），我们有多个老师参与批阅，假设每个老师批阅速度一致，我们该如何想办法让整体完成时间最快。 这里就可以用到贪心算法的思想，我们可以给第一个老师挑时间最短的。第二个挑第二短的，在这样依次下去，保证每个老师先拿到的作业都是目前它眼中最好批改的作业。 这样做，虽然不一定能使整体批阅时间达到最低，但是他决定使较为接近最低的答案。而且它的算法执行复杂度会比准确算法要低，如果数据很大，贪心算法的优势为变得越来越明显</p></li>
-<li><p><strong>哈夫曼编码</strong></p>
-<ul>
-<li>哈夫曼编码是从底向顶的构造哈夫曼树，我们每次挑取两个权值最小的元素连接构成某节点的左右子树，然后把两个左右子树的权值相加，赋给连接这两颗子树的节点，再接着这么操作，就可以把一个字符串按权重大小编码且不影响读取，字符根节点往左为0，往右为1，那么出现频率最高的字符的位数一定是最小的，这样一来就可以减小空间成本</li>
-<li>哈夫曼编码使用贪心算法的地方在于，他没有对整体数据进行分析，也是每次运行优先挑取两个权值最小的树，也就是局部最优解，这里就反映出了贪心算法的本质。</li>
-<li>流程示例 <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg-blog.csdnimg.cn%2F2018120514551994.png%3Fx-oss-process%3Dimage%2Fwatermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNTk0NTU0%2Csize_16%2Ccolor_FFFFFF%2Ct_70&amp;refer=http%3A%2F%2Fimg-blog.csdnimg.cn&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1646208341&amp;t=fe7ae4698acc0bcbf76d0734ca3ebdd9" alt="alt 哈夫曼树构建流程"></li>
-</ul></li>
-</ol>
-]]></content>
-      <categories>
-        <category>算法学习笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>字典树</title>
     <url>/2022/03/17/%E5%AD%97%E5%85%B8%E6%A0%91/</url>
     <content><![CDATA[<h1 id="字典树">字典树</h1>
@@ -503,6 +513,32 @@
       <tags>
         <tag>数据结构与算法</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>贪心算法学习笔记</title>
+    <url>/2022/01/31/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="贪心算法">贪心算法</h2>
+<h3 id="简要理解">简要理解</h3>
+<p>贪心算法是分阶段工作的，在每一个阶段，他都会选择工作它认为眼下所作决定最好的，它是不考虑将来结果的，他只在乎局部最优解，算法终止时，我们希望得到的局部最优的结构就是全局最优，如果是就说明算法是正确的，否则算法得到的是一个次最优解，如果不要求绝对最佳答案，有时可以用简单的贪心算法生成近似答案，它的好处是在处理较大数据，较复杂的问题时，一般时间复杂度与空间复杂度都比产生准确答案的复杂算法要快上很多倍得到一个几乎接近正确的答案。 <span id="more"></span></p>
+<h3 id="经典示例">经典示例</h3>
+<ul>
+<li><strong>找零钱问题</strong>：为了使用货币找零钱，求找出零钱张数最少值，我们可以重复配发最大额货币，于是为了找一百七十五元，我们肯定先选一张一百的，再拿一张五十的，再拿一张二十，五块的，这里就用到了贪心算法每一步选取局部最优解的思想，而且在这个问题中，局部最优就是整体最优.</li>
+<li><strong>求最快抵达路径</strong>：在北京的某个交通高峰期间，有些主要干道可能看起来是空空荡荡的，但你最好还是不要选择这条干道，因为交通可能会在你抵达是=时突然变得车水马龙。这就是贪心算法行不通的例子</li>
+</ul>
+<h3 id="经典应用">经典应用</h3>
+<ol type="1">
+<li><p><strong>作业调度问题</strong> 对于多个作业（假设每个作业需要批改时间不同），我们有多个老师参与批阅，假设每个老师批阅速度一致，我们该如何想办法让整体完成时间最快。 这里就可以用到贪心算法的思想，我们可以给第一个老师挑时间最短的。第二个挑第二短的，在这样依次下去，保证每个老师先拿到的作业都是目前它眼中最好批改的作业。 这样做，虽然不一定能使整体批阅时间达到最低，但是他决定使较为接近最低的答案。而且它的算法执行复杂度会比准确算法要低，如果数据很大，贪心算法的优势为变得越来越明显</p></li>
+<li><p><strong>哈夫曼编码</strong></p>
+<ul>
+<li>哈夫曼编码是从底向顶的构造哈夫曼树，我们每次挑取两个权值最小的元素连接构成某节点的左右子树，然后把两个左右子树的权值相加，赋给连接这两颗子树的节点，再接着这么操作，就可以把一个字符串按权重大小编码且不影响读取，字符根节点往左为0，往右为1，那么出现频率最高的字符的位数一定是最小的，这样一来就可以减小空间成本</li>
+<li>哈夫曼编码使用贪心算法的地方在于，他没有对整体数据进行分析，也是每次运行优先挑取两个权值最小的树，也就是局部最优解，这里就反映出了贪心算法的本质。</li>
+<li>流程示例 <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg-blog.csdnimg.cn%2F2018120514551994.png%3Fx-oss-process%3Dimage%2Fwatermark%2Ctype_ZmFuZ3poZW5naGVpdGk%2Cshadow_10%2Ctext_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwNTk0NTU0%2Csize_16%2Ccolor_FFFFFF%2Ct_70&amp;refer=http%3A%2F%2Fimg-blog.csdnimg.cn&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1646208341&amp;t=fe7ae4698acc0bcbf76d0734ca3ebdd9" alt="alt 哈夫曼树构建流程"></li>
+</ul></li>
+</ol>
+]]></content>
+      <categories>
+        <category>算法学习笔记</category>
+      </categories>
   </entry>
   <entry>
     <title>微波技术基础第一二章知识小结</title>
@@ -748,6 +784,120 @@
 <li><p>双株线调配器 距负载两个固定的位置处各并联一个短路线（或开路线）支节，固定<span class="math inline">\(d_1,d_2\)</span>，<span class="math inline">\(d_2\)</span>一般取λ/8,λ/4或3λ/8，但不能选λ/2(否则相当于一个固定位置的单支节),调节<span class="math inline">\(l_1,l_2\)</span> <img src="/2023/11/21/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-14-42-37.png" style="width:60.0%;height:60.0%"> <img src="/2023/11/21/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%B8%80%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-27-14-42-56.png" style="width:60.0%;height:60.0%"> 缺点：窄带，存在死区，某些情况得不到匹配，只适用于匹配由负载产生的驻波比较小的传输线系统</p></li>
 <li><p>三株线调配器 距负载三个固定的位置处，各并联一个短路线（或开路线）支节，主要用于缓解双株线调配器的死区问题</p></li>
 </ol>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>微波技术基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微波技术基础第五六章知识小结</title>
+    <url>/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="前言">前言</h2>
+<p>因为第六章内容较少，故将两章合并</p>
+<span id="more"></span>
+<h2 id="概述">概述</h2>
+<ol type="1">
+<li>为什么在微波波段不能使用集总参数LC谐振回路？
+<ol type="1">
+<li><span class="math inline">\(w_0=1/\sqrt{LC}\)</span>在微波波段，<span class="math inline">\(w_0\)</span>很高，所以L和C很小，元件制造困难</li>
+<li>当电路尺寸与微波波长可以相比拟时，就会产生能量的辐射，波长越短辐射越严重，故辐射损耗大。另外，由于此时趋肤效应严重，故欧姆损耗大，而且介质损耗大。因此，在频率较高的微波波段，集总LC谐振回路储能小，损耗大，导致Q值小到不能用</li>
+</ol></li>
+<li>微波谐振器与LC谐振回路的相同和相异点
+<ol type="1">
+<li>LC回路为集总参数电路，微波谐振器时属于分布参数电路。所以LC回路能量只分布在L、C上，而微波谐振器的能量分布在整个腔体中</li>
+<li>LC回路在L及C一定时，只有一个谐振频率，而微波谐振器有无限多个谐振频率，这称为微波谐振器的多谐性</li>
+<li>微波谐振腔储能多，损耗小。故微波谐振器品质因数很高，比LC回路的Q值高很多。</li>
+</ol></li>
+<li>微波谐振器的分析方法：主要是场解法和场的叠加法，这里主要用的是后者</li>
+</ol>
+<h2 id="微波谐振器的主要参数">微波谐振器的主要参数</h2>
+<ol type="1">
+<li>谐振频率：无色散波<span class="math inline">\(\beta=\frac{2\pi}{\lambda_r}=\frac{2\pi}{v}f\)</span>,色散波<span class="math inline">\(\beta=\frac{2\pi}{\lambda_g}=\frac{2\pi}{v}\sqrt{f_r^2-f_c^2}\)</span></li>
+<li>品质因数
+<ol type="1">
+<li>固有品质因数:表征谐振器的损耗的大小、频率选择性的强弱、工作稳定度 <span class="math display">\[Q_0=2\pi\frac{W(腔体总储能)}{W_T(腔体一个周期损耗能量)=PT(P:一周期谐振器平均损耗功率)}\\\therefore Q_0=\frac{2\pi W}{PT}=w_r\frac{W}{P}\]</span> 进一步化简可知<span class="math inline">\(Q_0\)</span>正比于<span class="math inline">\(V/S\)</span>,其与谐振器尺寸成正比，又因谐振器尺寸与工作波长成正比，所以其与工作波长成正比</li>
+<li>有载品质因数：谐振器带上负载时腔体的品质因数 <span class="math display">\[Q_L=w_r\frac{W}{P_i+P_c}或\frac{1}{Q_L}=\frac{1}{Q_0}+\frac{1}{Q_c}或Q_L=\frac{Q_0}{1+k}\]</span> <span class="math inline">\(W-总储能，P_i-腔本身损耗功率，P_c-外界负载损耗功率，\\Q_c-耦合品质因数，k-耦合系数(腔体与外界负载之间的耦合程度)\)</span></li>
+</ol></li>
+</ol>
+<h2 id="圆柱谐振腔">圆柱谐振腔</h2>
+<p>圆柱谐振腔具有较高的品质因数，调谐方便，结构坚固，易于加工，制作。属于传输线型谐振腔，<strong>可以看作两端短路的一段圆波导</strong></p>
+<h3 id="场分量表达式">场分量表达式</h3>
+<ol type="1">
+<li><span class="math inline">\(TE_{mnp}\)</span>振荡模式：先根据边界条件求出<span class="math inline">\(H_z\)</span>，其形式与圆波导有一定相似性，其在<span class="math inline">\(r,\psi,z\)</span>上均呈驻波状态，相位常数<span class="math inline">\(\beta=\frac{p\pi}{l}\)</span>,再进而利用场分量间的关系可以进一步求出其他分量，其中<span class="math inline">\(K=\sqrt{(\frac{\mu_{mn}}{R})^2+(\frac{p\pi}{l})^2},m=0,1,2,\dots,n=1,2\dots,p=1,2\dots\)</span></li>
+<li><span class="math inline">\(TM_{mnp}\)</span>振荡模式：先根据边界条件求出<span class="math inline">\(E_z\)</span>，其形式与圆波导有一定相似性，其在<span class="math inline">\(r,\psi,z\)</span>上均呈驻波状态，相位常数<span class="math inline">\(\beta=\frac{p\pi}{l}\)</span>,再进而利用场分量间的关系可以进一步求出其他分量，其中<span class="math inline">\(K=\sqrt{(\frac{v_{mn}}{R})^2+(\frac{p\pi}{l})^2},m=0,1,2,\dots,n=1,2\dots,p=0,1,2\dots\)</span></li>
+</ol>
+<h3 id="谐振频率和波型图">谐振频率和波型图</h3>
+<ol type="1">
+<li>谐振频率： <span class="math inline">\(f_r=\frac{Kv}{2\pi}\Rightarrow\lambda_r=\frac{v}{f_r}=\frac{2\pi}{K},\therefore TE_{mnp}:f_r=\frac{1}{2\pi\sqrt{\mu\epsilon}}\sqrt{(\frac{\mu_{mn}}{R})^2+(\frac{p\pi}{l})^2},\lambda_r=\frac{1}{\sqrt{(\frac{\mu_{mn}}{2\pi R})^2+(\frac{p}{2l})^2}},\\\therefore TM_{mnp}:f_r=\frac{1}{2\pi\sqrt{\mu\epsilon}}\sqrt{(\frac{v_{mn}}{R})^2+(\frac{p\pi}{l})^2},\lambda_r=\frac{1}{\sqrt{(\frac{v_{mn}}{2\pi R})^2+(\frac{p}{2l})^2}}\)</span></li>
+<li>波形图：如果用<span class="math inline">\(X_{mn}\)</span>来代替上式中的<span class="math inline">\(\mu_{mn}\)</span>和<span class="math inline">\(v_{mn}\)</span>，则圆柱谐振腔中的 谐振波长<span class="math inline">\(\lambda_r\)</span>可以写成一个公式<span class="math inline">\(\lambda_r=\frac{1}{\sqrt{(\frac{X_{mn}}{2\pi R})^2+(\frac{p}{2l})^2}}=\frac{D}{\sqrt{(\frac{X_{mn}}{\pi})^2+(\frac{Dp}{2l})^2}}\rightarrow(f_rD)^2=(\frac{vX_{mn}}{\pi})^2+(\frac{vp}{2})^2(\frac{D}{l})^2\)</span>,从上面关系式可知，对于给定模式，<span class="math inline">\((f_rD)^2与(\frac{D}{l})^2\)</span>在波形图上是一直线,斜率为<span class="math inline">\((\frac{vp}{2})^2\)</span>,截距为<span class="math inline">\((\frac{vX_{mn}}{\pi})^2\)</span> <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-28-14-42-16.png"> 工作方块：以选定工作波型的调谐曲线为对角线，最小、最大的<span class="math inline">\((f_rD)^2\)</span>值与对应的 <span class="math inline">\((D/l)^2\)</span>确定的矩形区域。利用工作方块保证单模工作，避免干扰波型：
+<ul>
+<li>自干扰型：相同m、n，不同p-相同截距，不同斜率，与工作波型耦合最强，务必不使其落入工作方块内</li>
+<li>一般干扰型：相同p，不同m、n-不同截距，相同斜率，会导致一个以上的谐振频率。</li>
+<li>交叉型：m、n、p完全不同-场结构完全不同。</li>
+<li>简并型：曲线完全重合，fr完全相同，但场结构完全不同，容易抑制。</li>
+</ul></li>
+<li>圆柱谐振腔特点：
+<ol type="1">
+<li>圆柱腔存在多谐性</li>
+<li>R、l一定时，谐振波长<span class="math inline">\(λ_r\)</span>最长的模为主模。当l&gt;2.1R时，<span class="math inline">\(TE_{111}\)</span>为主模,当l&lt;2.1R时，<span class="math inline">\(TM_{010}\)</span>为主模</li>
+<li><span class="math inline">\(TE_{onp}\)</span>与<span class="math inline">\(TM_{1np}\)</span>模式简并，同时都存在极化简并</li>
+</ol></li>
+<li>圆柱腔常用的3个振荡模式
+<ol type="1">
+<li><span class="math inline">\(TE_{011},K_c=\frac{3.832}{R},\lambda_r=1/\sqrt{(\frac{1}{1.64R})^2+(\frac{1}{2l})^2}\)</span>为高次模，磁场分量只有<span class="math inline">\(H_r,H_\psi\)</span>,侧壁和端壁内表面只有<span class="math inline">\(\psi\)</span>方向表面电流，可用不接触式活塞进行调谐，场结构稳定、无极化简并，损耗小，Q值可高达几万以上。故可作成<strong>高精度的频率计</strong></li>
+<li><span class="math inline">\(TE_{111},\lambda_r=1/\sqrt{(\frac{1}{3.41R})^2+(\frac{1}{2l})^2},l&gt;2.1R\)</span>时，为圆柱谐振腔的主模，腔体尺寸较小，Q值不高，存在极化简并</li>
+<li><span class="math inline">\(TM_{010},K_c=\frac{2.405}{R},\lambda_r=2.61R,l&lt;2.1R\)</span>为主模,既无模式简并，又无极化简并.Q值不高，且<span class="math inline">\(λ_r\)</span>与l无关，故无法用短路活塞来进行调谐,常用的调谐方法从端面中心插入一圆柱体，插入深度可调</li>
+</ol></li>
+</ol>
+<h2 id="矩形谐振腔">矩形谐振腔</h2>
+<p>矩形空腔谐振器是由一段长为l、 两端短路的矩形波导组成</p>
+<h3 id="场解及振荡模式">场解及振荡模式</h3>
+<ol type="1">
+<li><span class="math inline">\(TE_{mnp}\)</span>振荡模式：先根据边界条件求出<span class="math inline">\(H_z\)</span>，其形式与矩形波导有一定相似性，相位常数<span class="math inline">\(\beta=\frac{p\pi}{l}\)</span>,再进而利用场分量间的关系可以进一步求出其他分量，其中<span class="math inline">\(K=\sqrt{(\frac{m\pi}{a})^2+(\frac{n\pi}{b})^2+(\frac{p\pi}{l})^2},m,n不同时为0,p=1,2\dots\)</span></li>
+<li><span class="math inline">\(TM_{mnp}\)</span>振荡模式：先根据边界条件求出<span class="math inline">\(E_z\)</span>，其形式与矩形波导有一定相似性，相位常数<span class="math inline">\(\beta=\frac{p\pi}{l}\)</span>,再进而利用场分量间的关系可以进一步求出其他分量，其中<span class="math inline">\(K=\sqrt{(\frac{m\pi}{a})^2+(\frac{n\pi}{b})^2+(\frac{p\pi}{l})^2},m,n\neq0,p=1,2\dots\)</span></li>
+</ol>
+<h3 id="特性参数">特性参数</h3>
+<ol type="1">
+<li>谐振频率、谐振波长 <span class="math inline">\(f_r=\frac{Kv}{2\pi}\Rightarrow\lambda_r=\frac{v}{f_r}=\frac{2\pi}{K},\therefore f_r=\frac{1}{2\sqrt{\mu\epsilon}}\sqrt{(\frac{m}{a})^2+(\frac{n}{b})^2+(\frac{p}{l})^2},\lambda_r=\frac{2}{\sqrt{(\frac{m}{a})^2+(\frac{n}{b})^2+(\frac{p}{l})^2}}\)</span></li>
+<li>固有品质因数(以<span class="math inline">\(TE_{101}\)</span>为例) <span class="math display">\[Q_0=\frac{abl}{\delta}\frac{a^2+l^2}{2b(a^3+l^3)+al(a^2+l^2)}\]</span> <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-28-15-03-51.png"></li>
+</ol>
+<h2 id="同轴线空腔谐振器">同轴线空腔谐振器</h2>
+<p>同轴腔由一段长为l的同轴线构成，其振荡模式为TEM模。优点：场结构简单、稳定，无色散，无频率下限，工作频带宽 ,缺点：固有品质因数Q值比较低，损耗大，故工作频率不能太高,适用：米波、分米波、厘米波（小功率）低精度的波长计,主要可分为<span class="math inline">\(\lambda/2\)</span>同轴腔：<span class="math inline">\(\lambda_r=\frac{2l}{p}\)</span>和<span class="math inline">\(\lambda/4\)</span>同轴腔:<span class="math inline">\(\lambda_r=\frac{4l}{2p+1}\)</span>与电容加载同轴谐振腔<span class="math inline">\(l&lt;(2p+1)\frac{\lambda_r}{4}\)</span></p>
+<h2 id="微波网络基础">微波网络基础</h2>
+<p>微波网络模型由一个通常称之为“黑箱”的N与外部相连接的若干端口构成。 “黑箱”表示不均匀性，端口是它与外界相联系的“窗口”，电信号由端口输入或输出，并可在端口处进行电压、电流、反射系数和衰减等量的测量。<strong>其优点在于不用关心黑盒内部长的具体实现情况，只需要通过测量的方式知道各端口信号量之间的关系，避免了对内部场分布的复杂计算</strong></p>
+<h3 id="微波网络与传输矩阵">微波网络与传输矩阵</h3>
+<p><img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-28-15-12-47.png"> 线性微波网络（Network），输入电压电流<span class="math inline">\(U_1、I_1\)</span>和输出电压电流<span class="math inline">\(U_2、I_2\)</span>可用传输矩阵[A]联系起来 <span class="math display">\[\begin{bmatrix}
+U_1\\
+I_1\\
+\end{bmatrix}=\begin{bmatrix}
+A_{11}&amp;A_{12}\\
+A_{21}&amp;A_{22}\\
+\end{bmatrix}\begin{bmatrix}
+U_2\\
+-I_2\\
+\end{bmatrix}=A\begin{bmatrix}
+U_2\\
+-I_2\\
+\end{bmatrix}\]</span> A称为二端口网络的传输矩阵，其元素<span class="math inline">\(A_{11}、A_{12}、A_{21}和A_{22}\)</span>称为传输参数（A参数）,A参数的定义式可以在端口开路和短路的情况下求得，A参数各参数的物理意义为： <span class="math inline">\(A_{11}\)</span>：端口②开路时，端口①到端口②电压传输系数的倒数； <span class="math inline">\(A_{21}\)</span>：端口②开路时，端口①与端口②之间的转移导纳； <span class="math inline">\(A_{21}\)</span>：端口②短路时，端口①到端口②电流传输系数的倒数； <span class="math inline">\(A_{22}\)</span>：端口②短路时，端口①与端口②之间的转移阻抗。</p>
+<p>由于A参数是在网络端口开路和短路的情况下求出的，因此称为混合A参数，并具有明确的物理意义。互易网络:<span class="math inline">\(A_{11}A_{22}-A_{12}A_{21}=1\)</span>对称网络:<span class="math inline">\(A_{11}=A_{22}\)</span></p>
+<h3 id="微波网络的散射参数">微波网络的散射参数</h3>
+<p><img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-28-15-19-43.png"></p>
+<p><span class="math display">\[\begin{bmatrix}
+b_1\\
+b_2\\
+\end{bmatrix}=\begin{bmatrix}
+S_{11}&amp;S_{12}\\
+S_{21}&amp;S_{22}\\
+\end{bmatrix}\begin{bmatrix}
+a_1\\
+a_2\\
+\end{bmatrix}\]</span> 简记为b=Sa,b和a分别为由端口的归一化反射波和归一化入射波所构成的列矩阵，S是一个正方矩阵,称为二端口网络的归一化散射矩阵，其元素称为归一化的散射参数，也称为S参数</p>
+<p>S参量各参数的物理意义为： <span class="math inline">\(S_{11}\)</span>：端口②接匹配负载时，端口①的反射系数； <span class="math inline">\(S_{21}\)</span>：端口②接匹配负载时，端口①到端口②波的传输系数； <span class="math inline">\(S_{22}\)</span>：端口①接匹配负载时，端口②的反射系数； <span class="math inline">\(S_{12}\)</span>：端口①接匹配负载时，端口②到端口①波的传输系数。 可见, ［S］矩阵的各参数是建立在端口接匹配负载基础上的反射系数或传输系数。 这样利用网络输入输出端口的参考面上接匹配负载即可测得散射矩阵的各个参量。 对于互易网络: <span class="math inline">\(S_{12}=S_{21}\)</span> 对于对称网络: <span class="math inline">\(S_{11}=S_{22}\)</span></p>
+<h3 id="二端口网络的工作特性参量">二端口网络的工作特性参量</h3>
+<p>二端口元件是微波系统中用的最多的元件,将这些二端口元件接入到传输系统后，相当于在均匀传输线中插入一个二端口网络,此时其输入端的反射系数不仅与网络参量有关，而且还与输出端所接的负载有关 <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-28-15-25-42.png"></p>
 ]]></content>
       <categories>
         <category>大学功课</category>
@@ -1134,6 +1284,52 @@ f_s\ge2f_0\quad or \quad T\le \frac{1}{2f_0}
       </tags>
   </entry>
   <entry>
+    <title>数字信号处理第五章知识小结</title>
+    <url>/2023/11/18/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%94-%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="引言">引言</h2>
+<p>由于课程对第五章和第七章要求不高，讲述的知识点不多，所以将其整理到一起。（第七章基本没讲，故直接略过）<strong>注意：第五章前四节的知识点和随机过程讲述的知识点高度重合，故不在此赘述</strong></p>
+<span id="more"></span>
+<h2 id="相关序列和协方差序列的性质">5.5 相关序列和协方差序列的性质</h2>
+<p>设<span class="math inline">\(x_n,y_n\)</span>是两个实平稳随机过程，它们的自相关序列，自协方差序列，互相关序列，互协方差序列为:<span class="math display">\[R_{xx}(m)=E[x_nx_{n+m}]\qquad C_{xx}=E[(x_n-m_x)(x_{n+m}-m_x)]\\R_{xy}(m)=E[x_ny_{n+m}]\qquad C_{xx}=E[(x_n-m_x)(y_{n+m}-m_y)]\]</span></p>
+<p>性质1：</p>
+<p><span class="math inline">\(C_{xx}(m)=R_{xx}(m)-m_x^2\qquad C_{xy}(m)=R_{xy}(m)-m_xm_y\\when \quad m_x=0\quad m_y=0:C_{xx}(m)=R_{xx}(m)\quad C_{xy}(m)=R_{xy}(m)\)</span></p>
+<p>性质2：</p>
+<p><span class="math inline">\(C_{xx}(0)=\sigma_x^2\qquad R_{xx}(0)=E[x_n^2]\)</span></p>
+<p>性质3：</p>
+<p><span class="math inline">\(R_{xx}(m)=R_{xx}(-m)\qquad C_{xx}(m)=C_{xx}(-m)\\R_{xy}(m)=R_{yx}(-m)\qquad C_{xy}(m)=C_{yx}(m)\)</span></p>
+<p>性质4：</p>
+<p><span class="math inline">\(|R_{xy}(m)|\le (R_{xx}(0)R_{yy}(0))^{1/2}\qquad |C_{xy}(m)|\le (C_{xx}(0)C_{yy}(0))^{1/2}\\特例：|R_{xx}(m)|\le R_{xx}(0)\qquad |C_{xx}(m)|\le C_{xx}(0)\)</span></p>
+<p>性质5：若<span class="math inline">\(y_n=x_{n-n_0}\)</span>,则有:<span class="math inline">\(R_{yy}(m)=R_{xx}(m)\qquad C_{yy}(m)=C_{xx}(m)\)</span></p>
+<p>性质6：在随机过程中，两随机过程中时间间隔越大，它们的相关性越小<span class="math display">\[\lim_{m \to \infty}C_{xx}(m)=0 \qquad \lim_{m \to \infty}C_{xy}(m)=0 \\ \lim_{m \to \infty}R_{xx}(m)=m_x^2 \qquad \lim_{m \to \infty}R_{xy}(m)=m_xm_y\]</span> <img src="/2023/11/18/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%94-%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-18-16-07-13.png"></p>
+<h2 id="功率谱">5.6 功率谱</h2>
+<h3 id="平稳随机过程的功率谱">平稳随机过程的功率谱</h3>
+<p>协方差序列的Z变换称为平稳随机过程的功率谱<span class="math inline">\(S_{xx}(z)\overset{\underset{\mathrm{\Delta}}{}}{=}\sum_{m=-\infty}^\infty C_{xx}(m)z^{-m}\)</span>。在本课程的讨论中，功率谱总是针对于零均值随机信号，则有：<span class="math inline">\(S_{xx}(z)=\sum_{m=-\infty}^\infty R_{xx}(m)z^{-m}\)</span>，功率谱也可以表述为<span class="math inline">\(S_{xx}(e^{jw})=\sum_{m=-\infty}^\infty R_{xx}(m)e^{-jwm}\)</span>。<strong>这两种表述都是等价的</strong>。对于一个实平稳随机过程，<span class="math inline">\(R_{xx}(m)\)</span>的Fourier变换总是存在的,推导可得<span class="math inline">\(E[x_n^2]=\frac{1}{2\pi}\int_{-\pi}^{\pi} S_{xx}(e^{jw})\, {\rm d}w\)</span>。<strong>功率谱在一个周期内的平均值就是随机过程的平均功率</strong>,功率谱的反变换可表述为<span class="math inline">\(R_{xx}(m)=\frac{1}{2\pi j}\oint_{C} S_{xx}(z)z^{m-1}\, \mathrm{d}z=\frac{1}{2\pi}\int_{-\pi}^{\pi} S_{xx}(e^{jw})e^{jmw}\, {\rm d}w\)</span></p>
+<h3 id="功率谱的性质">功率谱的性质</h3>
+<ol type="1">
+<li>实平稳随机过程的功率谱是非负的</li>
+<li>实平稳随机过程的功率谱是实函数</li>
+<li>实平稳随机过程的功率谱是<span class="math inline">\(w\)</span>的偶函数</li>
+</ol>
+<h3 id="平稳随机过程的互功率谱">平稳随机过程的互功率谱</h3>
+<p>两个平稳随机过程<span class="math inline">\({x_n}\)</span>和<span class="math inline">\({y_n}\)</span>的互功率谱定义为<span class="math display">\[S_{xy}(z)=\sum_{m=-\infty}^\infty R_{xy}(m)z^{-m}\quad S_{xy}(e^{jw})=\sum_{m=-\infty}^\infty R_{xy}(m)e^{-jwm} \]</span>,由上式可得<span class="math inline">\(S_{xy}(e^{jw})=S_{yx}^*(e^{-jw})\)</span></p>
+<h2 id="离散随机信号通过线性非移变系统">5.7 离散随机信号通过线性非移变系统</h2>
+<p>整个过程可表述为： <span class="math inline">\(y(n)=\sum_{k=-\infty}^\infty h(k)x(n-k)=\sum_{k=-\infty}^\infty h(n-k)x(k)\)</span></p>
+<p>其输出的均值可表述为<span class="math inline">\(m_y=m_x \sum_{k=-\infty}^\infty h(k)=m_x H(e^{j0})\)</span></p>
+<p>其输出的自相关序列<span class="math inline">\(R_{yy}(m)=\sum_{k=-\infty}^\infty h(k)\sum_{r=-\infty}^\infty h(r)R_{xx}(m-r+k)\)</span>，进一步化简得<span class="math inline">\(R_{yy}(m)=R_{xx}(m)*R_{hh}(m)=R_{xx}(m)*h(m)*h(-m)\)</span>,其中：<span class="math inline">\(R_{hh}(l)=\sum_{k=-\infty}^\infty h(k)h(l+k)=h(l)*h(-l)\)</span>为系统单位冲激响应的自相关序列</p>
+<p>其输出的功率谱<span class="math inline">\(S_{yy}(z)=S_{xx}(z)S_{hh}(z)\)</span>,若<span class="math inline">\(h(n)\)</span>为实序列,则<span class="math inline">\(S_{hh}(z)=H(z)H(z^{-1})\)</span>。若<span class="math inline">\(h(n)\)</span>为复序列,则<span class="math inline">\(S_{hh}(z)=H(z)H^*(1/z^*)\)</span></p>
+<p>输入输出随机过程的互相关序列<span class="math inline">\(R_{xy}(m)=R_{xx}(m)*h(m)\)</span>,进而可以得到<span class="math inline">\(R_{yy}(m)=R_{xy}(m)*h(-m)\)</span></p>
+<p><strong>如果输入是一个零均值的平稳白噪声随机过程，其方差为<span class="math inline">\(\sigma_x^2\)</span>,自相关序列为<span class="math inline">\(R_{xx}(m)=\sigma_x^2\delta(m)\)</span>,功率谱为<span class="math inline">\(S_{xx}(z)=\sigma_x^2\)</span>,根据<span class="math inline">\(R_{yy}(m)=R_{xy}(m)*h(-m)\)</span>有<span class="math inline">\(R_{xy}(m)=\sigma_x^2h(m)\)</span>,对其进行z变换得<span class="math inline">\(S_{xy}(z)=\sigma_x^2H(z)\)</span></strong></p>
+<p>输出随机过程的方差:<span class="math inline">\(E[y^2(n)]=R_{yy}(0)=R_{xx}(m)=\\\frac{1}{2\pi j}\oint_{C} S_{yy}(z)z^{-1}\, \mathrm{d}z=\frac{1}{2\pi j}\oint_{C} S_{xx}(z)H(z)H(z^{-1})z^{-1}\, \mathrm{d}z\)</span> 式中的积分围线可选择为单位圆</p>
+<p>白噪声<span class="math inline">\(w(n):m_w=0,R_{ww}=\sigma_w^2\delta(m),S_{ww}(z)=\sigma_w^2\qquad S(e^{jw})=\sigma_w^2\)</span></p>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>数字信号处理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数字信号处理第二章知识小结</title>
     <url>/2023/11/11/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
     <content><![CDATA[<h2 id="引言">引言</h2>
@@ -1245,166 +1441,6 @@ u(n)=\sum_{k=\infty}^n\delta(k)\quad u(n)=\sum_{k=0}^\infty\delta(n-k)\]</span><
 <li>全通系统与最小相位系统级联：任何系统可表述为一个最小相位系统和一个全通系统级联,<span class="math inline">\(H(z)=H_{min}(z)H_{ap}(z)\)</span></li>
 <li>相位延迟与群延迟：数字滤波器的相位延迟：<span class="math inline">\(T_p(w)=-\frac{\phi(w)}{w}\)</span>表示输入是频率为<span class="math inline">\(w\)</span>的单一正弦波的延迟时间，群延迟则定义为<span class="math inline">\(T_g(w)=-\frac{d\phi(w)}{dw}\)</span>表示某一频率<span class="math inline">\(w\)</span>邻域内的延迟性质</li>
 </ol>
-]]></content>
-      <categories>
-        <category>大学功课</category>
-      </categories>
-      <tags>
-        <tag>数字信号处理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>微波技术基础第五六章知识小结</title>
-    <url>/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="前言">前言</h2>
-<p>因为第六章内容较少，故将两章合并</p>
-<span id="more"></span>
-<h2 id="概述">概述</h2>
-<ol type="1">
-<li>为什么在微波波段不能使用集总参数LC谐振回路？
-<ol type="1">
-<li><span class="math inline">\(w_0=1/\sqrt{LC}\)</span>在微波波段，<span class="math inline">\(w_0\)</span>很高，所以L和C很小，元件制造困难</li>
-<li>当电路尺寸与微波波长可以相比拟时，就会产生能量的辐射，波长越短辐射越严重，故辐射损耗大。另外，由于此时趋肤效应严重，故欧姆损耗大，而且介质损耗大。因此，在频率较高的微波波段，集总LC谐振回路储能小，损耗大，导致Q值小到不能用</li>
-</ol></li>
-<li>微波谐振器与LC谐振回路的相同和相异点
-<ol type="1">
-<li>LC回路为集总参数电路，微波谐振器时属于分布参数电路。所以LC回路能量只分布在L、C上，而微波谐振器的能量分布在整个腔体中</li>
-<li>LC回路在L及C一定时，只有一个谐振频率，而微波谐振器有无限多个谐振频率，这称为微波谐振器的多谐性</li>
-<li>微波谐振腔储能多，损耗小。故微波谐振器品质因数很高，比LC回路的Q值高很多。</li>
-</ol></li>
-<li>微波谐振器的分析方法：主要是场解法和场的叠加法，这里主要用的是后者</li>
-</ol>
-<h2 id="微波谐振器的主要参数">微波谐振器的主要参数</h2>
-<ol type="1">
-<li>谐振频率：无色散波<span class="math inline">\(\beta=\frac{2\pi}{\lambda_r}=\frac{2\pi}{v}f\)</span>,色散波<span class="math inline">\(\beta=\frac{2\pi}{\lambda_g}=\frac{2\pi}{v}\sqrt{f_r^2-f_c^2}\)</span></li>
-<li>品质因数
-<ol type="1">
-<li>固有品质因数:表征谐振器的损耗的大小、频率选择性的强弱、工作稳定度 <span class="math display">\[Q_0=2\pi\frac{W(腔体总储能)}{W_T(腔体一个周期损耗能量)=PT(P:一周期谐振器平均损耗功率)}\\\therefore Q_0=\frac{2\pi W}{PT}=w_r\frac{W}{P}\]</span> 进一步化简可知<span class="math inline">\(Q_0\)</span>正比于<span class="math inline">\(V/S\)</span>,其与谐振器尺寸成正比，又因谐振器尺寸与工作波长成正比，所以其与工作波长成正比</li>
-<li>有载品质因数：谐振器带上负载时腔体的品质因数 <span class="math display">\[Q_L=w_r\frac{W}{P_i+P_c}或\frac{1}{Q_L}=\frac{1}{Q_0}+\frac{1}{Q_c}或Q_L=\frac{Q_0}{1+k}\]</span> <span class="math inline">\(W-总储能，P_i-腔本身损耗功率，P_c-外界负载损耗功率，\\Q_c-耦合品质因数，k-耦合系数(腔体与外界负载之间的耦合程度)\)</span></li>
-</ol></li>
-</ol>
-<h2 id="圆柱谐振腔">圆柱谐振腔</h2>
-<p>圆柱谐振腔具有较高的品质因数，调谐方便，结构坚固，易于加工，制作。属于传输线型谐振腔，<strong>可以看作两端短路的一段圆波导</strong></p>
-<h3 id="场分量表达式">场分量表达式</h3>
-<ol type="1">
-<li><span class="math inline">\(TE_{mnp}\)</span>振荡模式：先根据边界条件求出<span class="math inline">\(H_z\)</span>，其形式与圆波导有一定相似性，其在<span class="math inline">\(r,\psi,z\)</span>上均呈驻波状态，相位常数<span class="math inline">\(\beta=\frac{p\pi}{l}\)</span>,再进而利用场分量间的关系可以进一步求出其他分量，其中<span class="math inline">\(K=\sqrt{(\frac{\mu_{mn}}{R})^2+(\frac{p\pi}{l})^2},m=0,1,2,\dots,n=1,2\dots,p=1,2\dots\)</span></li>
-<li><span class="math inline">\(TM_{mnp}\)</span>振荡模式：先根据边界条件求出<span class="math inline">\(E_z\)</span>，其形式与圆波导有一定相似性，其在<span class="math inline">\(r,\psi,z\)</span>上均呈驻波状态，相位常数<span class="math inline">\(\beta=\frac{p\pi}{l}\)</span>,再进而利用场分量间的关系可以进一步求出其他分量，其中<span class="math inline">\(K=\sqrt{(\frac{v_{mn}}{R})^2+(\frac{p\pi}{l})^2},m=0,1,2,\dots,n=1,2\dots,p=0,1,2\dots\)</span></li>
-</ol>
-<h3 id="谐振频率和波型图">谐振频率和波型图</h3>
-<ol type="1">
-<li>谐振频率： <span class="math inline">\(f_r=\frac{Kv}{2\pi}\Rightarrow\lambda_r=\frac{v}{f_r}=\frac{2\pi}{K},\therefore TE_{mnp}:f_r=\frac{1}{2\pi\sqrt{\mu\epsilon}}\sqrt{(\frac{\mu_{mn}}{R})^2+(\frac{p\pi}{l})^2},\lambda_r=\frac{1}{\sqrt{(\frac{\mu_{mn}}{2\pi R})^2+(\frac{p}{2l})^2}},\\\therefore TM_{mnp}:f_r=\frac{1}{2\pi\sqrt{\mu\epsilon}}\sqrt{(\frac{v_{mn}}{R})^2+(\frac{p\pi}{l})^2},\lambda_r=\frac{1}{\sqrt{(\frac{v_{mn}}{2\pi R})^2+(\frac{p}{2l})^2}}\)</span></li>
-<li>波形图：如果用<span class="math inline">\(X_{mn}\)</span>来代替上式中的<span class="math inline">\(\mu_{mn}\)</span>和<span class="math inline">\(v_{mn}\)</span>，则圆柱谐振腔中的 谐振波长<span class="math inline">\(\lambda_r\)</span>可以写成一个公式<span class="math inline">\(\lambda_r=\frac{1}{\sqrt{(\frac{X_{mn}}{2\pi R})^2+(\frac{p}{2l})^2}}=\frac{D}{\sqrt{(\frac{X_{mn}}{\pi})^2+(\frac{Dp}{2l})^2}}\rightarrow(f_rD)^2=(\frac{vX_{mn}}{\pi})^2+(\frac{vp}{2})^2(\frac{D}{l})^2\)</span>,从上面关系式可知，对于给定模式，<span class="math inline">\((f_rD)^2与(\frac{D}{l})^2\)</span>在波形图上是一直线,斜率为<span class="math inline">\((\frac{vp}{2})^2\)</span>,截距为<span class="math inline">\((\frac{vX_{mn}}{\pi})^2\)</span> <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-28-14-42-16.png"> 工作方块：以选定工作波型的调谐曲线为对角线，最小、最大的<span class="math inline">\((f_rD)^2\)</span>值与对应的 <span class="math inline">\((D/l)^2\)</span>确定的矩形区域。利用工作方块保证单模工作，避免干扰波型：
-<ul>
-<li>自干扰型：相同m、n，不同p-相同截距，不同斜率，与工作波型耦合最强，务必不使其落入工作方块内</li>
-<li>一般干扰型：相同p，不同m、n-不同截距，相同斜率，会导致一个以上的谐振频率。</li>
-<li>交叉型：m、n、p完全不同-场结构完全不同。</li>
-<li>简并型：曲线完全重合，fr完全相同，但场结构完全不同，容易抑制。</li>
-</ul></li>
-<li>圆柱谐振腔特点：
-<ol type="1">
-<li>圆柱腔存在多谐性</li>
-<li>R、l一定时，谐振波长<span class="math inline">\(λ_r\)</span>最长的模为主模。当l&gt;2.1R时，<span class="math inline">\(TE_{111}\)</span>为主模,当l&lt;2.1R时，<span class="math inline">\(TM_{010}\)</span>为主模</li>
-<li><span class="math inline">\(TE_{onp}\)</span>与<span class="math inline">\(TM_{1np}\)</span>模式简并，同时都存在极化简并</li>
-</ol></li>
-<li>圆柱腔常用的3个振荡模式
-<ol type="1">
-<li><span class="math inline">\(TE_{011},K_c=\frac{3.832}{R},\lambda_r=1/\sqrt{(\frac{1}{1.64R})^2+(\frac{1}{2l})^2}\)</span>为高次模，磁场分量只有<span class="math inline">\(H_r,H_\psi\)</span>,侧壁和端壁内表面只有<span class="math inline">\(\psi\)</span>方向表面电流，可用不接触式活塞进行调谐，场结构稳定、无极化简并，损耗小，Q值可高达几万以上。故可作成<strong>高精度的频率计</strong></li>
-<li><span class="math inline">\(TE_{111},\lambda_r=1/\sqrt{(\frac{1}{3.41R})^2+(\frac{1}{2l})^2},l&gt;2.1R\)</span>时，为圆柱谐振腔的主模，腔体尺寸较小，Q值不高，存在极化简并</li>
-<li><span class="math inline">\(TM_{010},K_c=\frac{2.405}{R},\lambda_r=2.61R,l&lt;2.1R\)</span>为主模,既无模式简并，又无极化简并.Q值不高，且<span class="math inline">\(λ_r\)</span>与l无关，故无法用短路活塞来进行调谐,常用的调谐方法从端面中心插入一圆柱体，插入深度可调</li>
-</ol></li>
-</ol>
-<h2 id="矩形谐振腔">矩形谐振腔</h2>
-<p>矩形空腔谐振器是由一段长为l、 两端短路的矩形波导组成</p>
-<h3 id="场解及振荡模式">场解及振荡模式</h3>
-<ol type="1">
-<li><span class="math inline">\(TE_{mnp}\)</span>振荡模式：先根据边界条件求出<span class="math inline">\(H_z\)</span>，其形式与矩形波导有一定相似性，相位常数<span class="math inline">\(\beta=\frac{p\pi}{l}\)</span>,再进而利用场分量间的关系可以进一步求出其他分量，其中<span class="math inline">\(K=\sqrt{(\frac{m\pi}{a})^2+(\frac{n\pi}{b})^2+(\frac{p\pi}{l})^2},m,n不同时为0,p=1,2\dots\)</span></li>
-<li><span class="math inline">\(TM_{mnp}\)</span>振荡模式：先根据边界条件求出<span class="math inline">\(E_z\)</span>，其形式与矩形波导有一定相似性，相位常数<span class="math inline">\(\beta=\frac{p\pi}{l}\)</span>,再进而利用场分量间的关系可以进一步求出其他分量，其中<span class="math inline">\(K=\sqrt{(\frac{m\pi}{a})^2+(\frac{n\pi}{b})^2+(\frac{p\pi}{l})^2},m,n\neq0,p=1,2\dots\)</span></li>
-</ol>
-<h3 id="特性参数">特性参数</h3>
-<ol type="1">
-<li>谐振频率、谐振波长 <span class="math inline">\(f_r=\frac{Kv}{2\pi}\Rightarrow\lambda_r=\frac{v}{f_r}=\frac{2\pi}{K},\therefore f_r=\frac{1}{2\sqrt{\mu\epsilon}}\sqrt{(\frac{m}{a})^2+(\frac{n}{b})^2+(\frac{p}{l})^2},\lambda_r=\frac{2}{\sqrt{(\frac{m}{a})^2+(\frac{n}{b})^2+(\frac{p}{l})^2}}\)</span></li>
-<li>固有品质因数(以<span class="math inline">\(TE_{101}\)</span>为例) <span class="math display">\[Q_0=\frac{abl}{\delta}\frac{a^2+l^2}{2b(a^3+l^3)+al(a^2+l^2)}\]</span> <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-28-15-03-51.png"></li>
-</ol>
-<h2 id="同轴线空腔谐振器">同轴线空腔谐振器</h2>
-<p>同轴腔由一段长为l的同轴线构成，其振荡模式为TEM模。优点：场结构简单、稳定，无色散，无频率下限，工作频带宽 ,缺点：固有品质因数Q值比较低，损耗大，故工作频率不能太高,适用：米波、分米波、厘米波（小功率）低精度的波长计,主要可分为<span class="math inline">\(\lambda/2\)</span>同轴腔：<span class="math inline">\(\lambda_r=\frac{2l}{p}\)</span>和<span class="math inline">\(\lambda/4\)</span>同轴腔:<span class="math inline">\(\lambda_r=\frac{4l}{2p+1}\)</span>与电容加载同轴谐振腔<span class="math inline">\(l&lt;(2p+1)\frac{\lambda_r}{4}\)</span></p>
-<h2 id="微波网络基础">微波网络基础</h2>
-<p>微波网络模型由一个通常称之为“黑箱”的N与外部相连接的若干端口构成。 “黑箱”表示不均匀性，端口是它与外界相联系的“窗口”，电信号由端口输入或输出，并可在端口处进行电压、电流、反射系数和衰减等量的测量。<strong>其优点在于不用关心黑盒内部长的具体实现情况，只需要通过测量的方式知道各端口信号量之间的关系，避免了对内部场分布的复杂计算</strong></p>
-<h3 id="微波网络与传输矩阵">微波网络与传输矩阵</h3>
-<p><img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-28-15-12-47.png"> 线性微波网络（Network），输入电压电流<span class="math inline">\(U_1、I_1\)</span>和输出电压电流<span class="math inline">\(U_2、I_2\)</span>可用传输矩阵[A]联系起来 <span class="math display">\[\begin{bmatrix}
-U_1\\
-I_1\\
-\end{bmatrix}=\begin{bmatrix}
-A_{11}&amp;A_{12}\\
-A_{21}&amp;A_{22}\\
-\end{bmatrix}\begin{bmatrix}
-U_2\\
--I_2\\
-\end{bmatrix}=A\begin{bmatrix}
-U_2\\
--I_2\\
-\end{bmatrix}\]</span> A称为二端口网络的传输矩阵，其元素<span class="math inline">\(A_{11}、A_{12}、A_{21}和A_{22}\)</span>称为传输参数（A参数）,A参数的定义式可以在端口开路和短路的情况下求得，A参数各参数的物理意义为： <span class="math inline">\(A_{11}\)</span>：端口②开路时，端口①到端口②电压传输系数的倒数； <span class="math inline">\(A_{21}\)</span>：端口②开路时，端口①与端口②之间的转移导纳； <span class="math inline">\(A_{21}\)</span>：端口②短路时，端口①到端口②电流传输系数的倒数； <span class="math inline">\(A_{22}\)</span>：端口②短路时，端口①与端口②之间的转移阻抗。</p>
-<p>由于A参数是在网络端口开路和短路的情况下求出的，因此称为混合A参数，并具有明确的物理意义。互易网络:<span class="math inline">\(A_{11}A_{22}-A_{12}A_{21}=1\)</span>对称网络:<span class="math inline">\(A_{11}=A_{22}\)</span></p>
-<h3 id="微波网络的散射参数">微波网络的散射参数</h3>
-<p><img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-28-15-19-43.png"></p>
-<p><span class="math display">\[\begin{bmatrix}
-b_1\\
-b_2\\
-\end{bmatrix}=\begin{bmatrix}
-S_{11}&amp;S_{12}\\
-S_{21}&amp;S_{22}\\
-\end{bmatrix}\begin{bmatrix}
-a_1\\
-a_2\\
-\end{bmatrix}\]</span> 简记为b=Sa,b和a分别为由端口的归一化反射波和归一化入射波所构成的列矩阵，S是一个正方矩阵,称为二端口网络的归一化散射矩阵，其元素称为归一化的散射参数，也称为S参数</p>
-<p>S参量各参数的物理意义为： <span class="math inline">\(S_{11}\)</span>：端口②接匹配负载时，端口①的反射系数； <span class="math inline">\(S_{21}\)</span>：端口②接匹配负载时，端口①到端口②波的传输系数； <span class="math inline">\(S_{22}\)</span>：端口①接匹配负载时，端口②的反射系数； <span class="math inline">\(S_{12}\)</span>：端口①接匹配负载时，端口②到端口①波的传输系数。 可见, ［S］矩阵的各参数是建立在端口接匹配负载基础上的反射系数或传输系数。 这样利用网络输入输出端口的参考面上接匹配负载即可测得散射矩阵的各个参量。 对于互易网络: <span class="math inline">\(S_{12}=S_{21}\)</span> 对于对称网络: <span class="math inline">\(S_{11}=S_{22}\)</span></p>
-<h3 id="二端口网络的工作特性参量">二端口网络的工作特性参量</h3>
-<p>二端口元件是微波系统中用的最多的元件,将这些二端口元件接入到传输系统后，相当于在均匀传输线中插入一个二端口网络,此时其输入端的反射系数不仅与网络参量有关，而且还与输出端所接的负载有关 <img src="/2023/11/27/%E5%BE%AE%E6%B3%A2%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-28-15-25-42.png"></p>
-]]></content>
-      <categories>
-        <category>大学功课</category>
-      </categories>
-      <tags>
-        <tag>微波技术基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数字信号处理第五章知识小结</title>
-    <url>/2023/11/18/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%94-%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="引言">引言</h2>
-<p>由于课程对第五章和第七章要求不高，讲述的知识点不多，所以将其整理到一起。（第七章基本没讲，故直接略过）<strong>注意：第五章前四节的知识点和随机过程讲述的知识点高度重合，故不在此赘述</strong></p>
-<span id="more"></span>
-<h2 id="相关序列和协方差序列的性质">5.5 相关序列和协方差序列的性质</h2>
-<p>设<span class="math inline">\(x_n,y_n\)</span>是两个实平稳随机过程，它们的自相关序列，自协方差序列，互相关序列，互协方差序列为:<span class="math display">\[R_{xx}(m)=E[x_nx_{n+m}]\qquad C_{xx}=E[(x_n-m_x)(x_{n+m}-m_x)]\\R_{xy}(m)=E[x_ny_{n+m}]\qquad C_{xx}=E[(x_n-m_x)(y_{n+m}-m_y)]\]</span></p>
-<p>性质1：</p>
-<p><span class="math inline">\(C_{xx}(m)=R_{xx}(m)-m_x^2\qquad C_{xy}(m)=R_{xy}(m)-m_xm_y\\when \quad m_x=0\quad m_y=0:C_{xx}(m)=R_{xx}(m)\quad C_{xy}(m)=R_{xy}(m)\)</span></p>
-<p>性质2：</p>
-<p><span class="math inline">\(C_{xx}(0)=\sigma_x^2\qquad R_{xx}(0)=E[x_n^2]\)</span></p>
-<p>性质3：</p>
-<p><span class="math inline">\(R_{xx}(m)=R_{xx}(-m)\qquad C_{xx}(m)=C_{xx}(-m)\\R_{xy}(m)=R_{yx}(-m)\qquad C_{xy}(m)=C_{yx}(m)\)</span></p>
-<p>性质4：</p>
-<p><span class="math inline">\(|R_{xy}(m)|\le (R_{xx}(0)R_{yy}(0))^{1/2}\qquad |C_{xy}(m)|\le (C_{xx}(0)C_{yy}(0))^{1/2}\\特例：|R_{xx}(m)|\le R_{xx}(0)\qquad |C_{xx}(m)|\le C_{xx}(0)\)</span></p>
-<p>性质5：若<span class="math inline">\(y_n=x_{n-n_0}\)</span>,则有:<span class="math inline">\(R_{yy}(m)=R_{xx}(m)\qquad C_{yy}(m)=C_{xx}(m)\)</span></p>
-<p>性质6：在随机过程中，两随机过程中时间间隔越大，它们的相关性越小<span class="math display">\[\lim_{m \to \infty}C_{xx}(m)=0 \qquad \lim_{m \to \infty}C_{xy}(m)=0 \\ \lim_{m \to \infty}R_{xx}(m)=m_x^2 \qquad \lim_{m \to \infty}R_{xy}(m)=m_xm_y\]</span> <img src="/2023/11/18/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%94-%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-11-18-16-07-13.png"></p>
-<h2 id="功率谱">5.6 功率谱</h2>
-<h3 id="平稳随机过程的功率谱">平稳随机过程的功率谱</h3>
-<p>协方差序列的Z变换称为平稳随机过程的功率谱<span class="math inline">\(S_{xx}(z)\overset{\underset{\mathrm{\Delta}}{}}{=}\sum_{m=-\infty}^\infty C_{xx}(m)z^{-m}\)</span>。在本课程的讨论中，功率谱总是针对于零均值随机信号，则有：<span class="math inline">\(S_{xx}(z)=\sum_{m=-\infty}^\infty R_{xx}(m)z^{-m}\)</span>，功率谱也可以表述为<span class="math inline">\(S_{xx}(e^{jw})=\sum_{m=-\infty}^\infty R_{xx}(m)e^{-jwm}\)</span>。<strong>这两种表述都是等价的</strong>。对于一个实平稳随机过程，<span class="math inline">\(R_{xx}(m)\)</span>的Fourier变换总是存在的,推导可得<span class="math inline">\(E[x_n^2]=\frac{1}{2\pi}\int_{-\pi}^{\pi} S_{xx}(e^{jw})\, {\rm d}w\)</span>。<strong>功率谱在一个周期内的平均值就是随机过程的平均功率</strong>,功率谱的反变换可表述为<span class="math inline">\(R_{xx}(m)=\frac{1}{2\pi j}\oint_{C} S_{xx}(z)z^{m-1}\, \mathrm{d}z=\frac{1}{2\pi}\int_{-\pi}^{\pi} S_{xx}(e^{jw})e^{jmw}\, {\rm d}w\)</span></p>
-<h3 id="功率谱的性质">功率谱的性质</h3>
-<ol type="1">
-<li>实平稳随机过程的功率谱是非负的</li>
-<li>实平稳随机过程的功率谱是实函数</li>
-<li>实平稳随机过程的功率谱是<span class="math inline">\(w\)</span>的偶函数</li>
-</ol>
-<h3 id="平稳随机过程的互功率谱">平稳随机过程的互功率谱</h3>
-<p>两个平稳随机过程<span class="math inline">\({x_n}\)</span>和<span class="math inline">\({y_n}\)</span>的互功率谱定义为<span class="math display">\[S_{xy}(z)=\sum_{m=-\infty}^\infty R_{xy}(m)z^{-m}\quad S_{xy}(e^{jw})=\sum_{m=-\infty}^\infty R_{xy}(m)e^{-jwm} \]</span>,由上式可得<span class="math inline">\(S_{xy}(e^{jw})=S_{yx}^*(e^{-jw})\)</span></p>
-<h2 id="离散随机信号通过线性非移变系统">5.7 离散随机信号通过线性非移变系统</h2>
-<p>整个过程可表述为： <span class="math inline">\(y(n)=\sum_{k=-\infty}^\infty h(k)x(n-k)=\sum_{k=-\infty}^\infty h(n-k)x(k)\)</span></p>
-<p>其输出的均值可表述为<span class="math inline">\(m_y=m_x \sum_{k=-\infty}^\infty h(k)=m_x H(e^{j0})\)</span></p>
-<p>其输出的自相关序列<span class="math inline">\(R_{yy}(m)=\sum_{k=-\infty}^\infty h(k)\sum_{r=-\infty}^\infty h(r)R_{xx}(m-r+k)\)</span>，进一步化简得<span class="math inline">\(R_{yy}(m)=R_{xx}(m)*R_{hh}(m)=R_{xx}(m)*h(m)*h(-m)\)</span>,其中：<span class="math inline">\(R_{hh}(l)=\sum_{k=-\infty}^\infty h(k)h(l+k)=h(l)*h(-l)\)</span>为系统单位冲激响应的自相关序列</p>
-<p>其输出的功率谱<span class="math inline">\(S_{yy}(z)=S_{xx}(z)S_{hh}(z)\)</span>,若<span class="math inline">\(h(n)\)</span>为实序列,则<span class="math inline">\(S_{hh}(z)=H(z)H(z^{-1})\)</span>。若<span class="math inline">\(h(n)\)</span>为复序列,则<span class="math inline">\(S_{hh}(z)=H(z)H^*(1/z^*)\)</span></p>
-<p>输入输出随机过程的互相关序列<span class="math inline">\(R_{xy}(m)=R_{xx}(m)*h(m)\)</span>,进而可以得到<span class="math inline">\(R_{yy}(m)=R_{xy}(m)*h(-m)\)</span></p>
-<p><strong>如果输入是一个零均值的平稳白噪声随机过程，其方差为<span class="math inline">\(\sigma_x^2\)</span>,自相关序列为<span class="math inline">\(R_{xx}(m)=\sigma_x^2\delta(m)\)</span>,功率谱为<span class="math inline">\(S_{xx}(z)=\sigma_x^2\)</span>,根据<span class="math inline">\(R_{yy}(m)=R_{xy}(m)*h(-m)\)</span>有<span class="math inline">\(R_{xy}(m)=\sigma_x^2h(m)\)</span>,对其进行z变换得<span class="math inline">\(S_{xy}(z)=\sigma_x^2H(z)\)</span></strong></p>
-<p>输出随机过程的方差:<span class="math inline">\(E[y^2(n)]=R_{yy}(0)=R_{xx}(m)=\\\frac{1}{2\pi j}\oint_{C} S_{yy}(z)z^{-1}\, \mathrm{d}z=\frac{1}{2\pi j}\oint_{C} S_{xx}(z)H(z)H(z^{-1})z^{-1}\, \mathrm{d}z\)</span> 式中的积分围线可选择为单位圆</p>
-<p>白噪声<span class="math inline">\(w(n):m_w=0,R_{ww}=\sigma_w^2\delta(m),S_{ww}(z)=\sigma_w^2\qquad S(e^{jw})=\sigma_w^2\)</span></p>
 ]]></content>
       <categories>
         <category>大学功课</category>
@@ -1574,25 +1610,6 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
 <li>fminimax函数 用于求下列模型 <span class="math inline">\(min_xmax_iF_i(x),\\ s.t. \begin{cases} A \cdot x \le b,\\ Aeq \cdot x =beq,\\ lb\le x \le ub\\ c(x)\le0\\ ceq(x)=0\\ \end{cases}\)</span> matlab命令为 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[x,fval]=fminimax(fun,x0,A,b,Aeq,beq,lb,ub,nonlcon,options)</span><br></pre></td></tr></table></figure></li>
 </ol>
 ]]></content>
-  </entry>
-  <entry>
-    <title>次优查找树</title>
-    <url>/2022/05/03/%E6%AC%A1%E4%BC%98%E7%94%9F%E6%88%90%E6%A0%91/</url>
-    <content><![CDATA[<h1 id="次优查找树">次优查找树</h1>
-<h2 id="前言">前言</h2>
-<p>关于静态查找表中对特定关键字进行顺序查找，折半查找或者分块查找，都是在查找表中各关键词被查找概率相同的前提下进行的，然而在查找表中各关键字查找概率不同的情况下，折半查找的效果其实是不好的。在查找成功的情况下，描述查找过程的判定树其带权路径长度之和（用PH表示）最小时，查找性能最优，称该二叉树为静态最优查找树 其中: PH = 所有节点所在的层次数*每个节点对应的概率值 由于构造最优查找树花费的时间代价较高，而且有一种构造方式创建的判定树的查找性能同最优查找树只差1%-2%，称这种极度接近于最优查找树的二叉树为次优查找树</p>
-<span id="more"></span>
-<h2 id="创建方法">创建方法</h2>
-<p>首先取出标准每个关键字及其对应的权值，采用如下公式计算出每个关键字对应的一个值： <span class="math inline">\(\triangle P_i= \left|\sum\limits_{j=i+1}^hw_j-\sum\limits_{j=1}^{i-1}w_j\right|\)</span> 其中 wj 表示每个关键字的权值（被查找到的概率），h 表示关键字的个数。 表中有多少关键字，就会有多少个 △Pi ，取其中最小的做为次优查找树的根结点，然后将表中关键字从第 i 个关键字的位置分成两部分，分别作为该根结点的左子树和右子树。同理，左子树和右子树也这么处理，直到最后构成次优查找树完成。 ## 代码实现 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">typedef int KeyType;　　// 定义关键字类型</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    KeyType key;</span><br><span class="line">&#125;ElemType;　　// 定义元素类型</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">typedef struct BiTNode</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    struct BiTNode *lchild, *rchild;</span><br><span class="line">&#125;BiTNode, *BiTree;</span><br><span class="line"></span><br><span class="line">// 定义变量</span><br><span class="line">int i;</span><br><span class="line">int min;</span><br><span class="line">int dw;</span><br><span class="line"></span><br><span class="line">//创建次优查找树，R数组为查找表，sw数组为存储的各关键字的概率（权值），low和high表示的sw数组中的权值的范围</span><br><span class="line">void SecondOptimal(BiTree T, ElemType R[], float sw[], int low, int high)</span><br><span class="line">&#123;</span><br><span class="line">    // 由有序表R[low...high]及其累计权值表sw（其中sw[0]==0）递归构造次优查找树</span><br><span class="line">    i = low;</span><br><span class="line">    min = abs(sw[high] - sw[low]);</span><br><span class="line">    dw = sw[high] + sw[low - 1];</span><br><span class="line">    // 选择最小的△Pi值</span><br><span class="line">    for (int j = low+1; j &lt;=high; j++)</span><br><span class="line">　　&#123;</span><br><span class="line">        if (abs(dw - sw[j] - sw[j-1]) &lt; min)</span><br><span class="line">　　　　 &#123;</span><br><span class="line">            i = j;</span><br><span class="line">            min = abs(dw - sw[j] - sw[j - 1]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    T = (BiTree)malloc(sizeof(BiTNode));</span><br><span class="line">    T-&gt;data = R[i];　　// 生成结点（第一次生成根）</span><br><span class="line">    if (i == low) </span><br><span class="line">　　 　　T-&gt;lchild = NULL;　　// 左子树空</span><br><span class="line">    else SecondOptimal(T-&gt;lchild, R, sw, low, i - 1);　　// 构造左子树</span><br><span class="line">    if (i == high) </span><br><span class="line">　　 　　T-&gt;rchild = NULL;　　//右子树空</span><br><span class="line">    else </span><br><span class="line">　　　　SecondOptimal(T-&gt;rchild, R, sw, i + 1, high);　　//构造右子树   </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> ## 具体实例 <img src="https://s2.loli.net/2022/05/03/PduZa8y5MegBIEp.png" alt="次优生成树.png"> <strong>注意</strong> 在建立次优查找树时，由于只根据各关键字的P的值进行构建，没有考虑单个关键字的相应权值大小，有时会出现根节点权值比孩子节点权值还小，这时需要适当调整二者位置</p>
-<h2 id="总结">总结</h2>
-<p>由于使用次优查找树和最优查找树的性能差距很小，构造次优查找树的算法的时间复杂度为 O(nlogn)，因此可以使用次优查找树表示概率不等的查找表对应的静态查找表（又称为静态树表）。 ## 参考资料 <a href="https://www.cnblogs.com/lishanlei/p/10707664.html">如是说的博客</a></p>
-]]></content>
-      <categories>
-        <category>数据结构学习笔记</category>
-      </categories>
-      <tags>
-        <tag>数据结构与算法</tag>
-      </tags>
   </entry>
   <entry>
     <title>数字信号处理第四章知识小结</title>
@@ -1775,19 +1792,6 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
       </tags>
   </entry>
   <entry>
-    <title>稀疏矩阵的三元组表示</title>
-    <url>/2022/05/17/%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%89%E5%85%83%E7%BB%84%E8%A1%A8%E7%A4%BA/</url>
-    <content><![CDATA[<h1 id="前言">前言</h1>
-<p>在学习邻接矩阵时，我们会发现一个有意思的现象，有时100*100的矩阵中只储存了10个数据，我们把这种矩阵称为稀疏矩阵，其适用于一个阶数较大的矩阵中的非零元素个数相对于矩阵元素的总个数很小，如果这种稀疏矩阵用邻接矩阵来储存，这是浪费了很多空间的，那么我们应当如何在保留其矩阵信息的前提下，用一个好的结构来节省空间的开支呢？ <span id="more"></span> # 三元组 ## 定义 三元组是一种稀疏矩阵的压缩储存方式，其储存策略是只储存非零元素，它的储存方案是： 1. 储存非零元素 2. 同时储存该非零元素所对应的行下标和列下标 3. 稀疏矩阵中的每一个非零元素由一个三元组元素唯一确定，稀疏矩阵的所有非零元素构成三元组线性表，三元组的i为行下标，j为列下标，data域是对应的元素值 <img src="https://s2.loli.net/2022/05/17/iWxeFrpmwKM6jOB.png" alt="三元组.png"> ## 储存结构 下面直接上代码，注释写的比较清楚 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define MaxSize 100</span><br><span class="line"></span><br><span class="line">//定义三元组线性表中的数据元素存储结构</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    int row;        //行号</span><br><span class="line">    int col;        //列号</span><br><span class="line">    ElemType d;     //元素值，ElemType为数据元素类型</span><br><span class="line"></span><br><span class="line">&#125; TupNode; //三元组定义</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//定义三元组线性表存储结构</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    int rows;                   //行数值</span><br><span class="line">    int cols;                   //列数值</span><br><span class="line">    int nums;                   //非零元素个数</span><br><span class="line">    TupNode data[MaxSize];      //data数据域</span><br><span class="line"></span><br><span class="line">&#125; TSMatrix; //三元组顺序表定义</span><br></pre></td></tr></table></figure> ## 基本运算 ### 扫描二维矩阵，创建三元组 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//以行序方式扫描二维矩阵A，将其非零的元素加入到三元组t</span><br><span class="line">//以3行4列的稀疏矩阵为例</span><br><span class="line">void CreatMat(TSMatrix *t, int arr[3][4])</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    int j;</span><br><span class="line">    t-&gt;rows = 3;</span><br><span class="line">    t-&gt;cols = 4;</span><br><span class="line">    t-&gt;nums = 0;</span><br><span class="line"></span><br><span class="line">    //扫描矩阵中的非零元素</span><br><span class="line">    for(i = 0; i &lt; 3; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(j = 0; j &lt; 4; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            //只存非零值，以三元组方式</span><br><span class="line">            if(arr[i][j] != 0)</span><br><span class="line">            &#123;</span><br><span class="line">                t-&gt;data[t-&gt;nums].row = i;</span><br><span class="line">                t-&gt;data[t-&gt;nums].col = j;</span><br><span class="line">                t-&gt;data[t-&gt;nums].d = arr[i][j];</span><br><span class="line">                t-&gt;nums++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## 将三元组指定位置元素值赋给对象 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//将三元组线性表中指定位置的元素值赋值给变量x</span><br><span class="line">void arr_Assign(TSMatrix t , int *data , int i , int j)</span><br><span class="line">&#123;</span><br><span class="line">    int k = 0;</span><br><span class="line">    //i和j是否合法</span><br><span class="line">    if(i &gt;= t.rows || j &gt;= t.cols)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //找到指定元素的行下标</span><br><span class="line">    while(k &lt; t.nums &amp;&amp; i &gt; t.data[k].row)</span><br><span class="line">    &#123;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //当找到指定元素的行下标后，再找到指定元素的列下标</span><br><span class="line">    while (k &lt; t.nums &amp;&amp; i == t.data[k].row &amp;&amp; j &gt; t.data[k].col)</span><br><span class="line">    &#123;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    //如果指定元素的行和列都相等，说明找到了</span><br><span class="line">    if(t.data[k].row == i &amp;&amp; t.data[k].col)</span><br><span class="line">    &#123;</span><br><span class="line">        *data = t.data[k].d;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        //说明没找到</span><br><span class="line">        *data = 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## 对三元组元素赋值 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//修改三元组元素中的值：执行A[i][j]=x</span><br><span class="line">void arr_Value(TSMatrix *t , int data , int i , int j)</span><br><span class="line">&#123;</span><br><span class="line">    int k = 0;</span><br><span class="line">    int k1;</span><br><span class="line">    //指定的行和列是否合法</span><br><span class="line">    if(i &gt;= t-&gt;rows || j &gt;= t-&gt;cols)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    //先查找行</span><br><span class="line">    while(k &lt; t-&gt;nums &amp;&amp; i &gt; t-&gt;data[k].row)</span><br><span class="line">    &#123;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //查找列</span><br><span class="line">    while(k &lt; t-&gt;nums &amp;&amp; i == t-&gt;data[k].row &amp;&amp; j &gt; t-&gt;data[k].col)</span><br><span class="line">    &#123;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //当找到指定位置时直接修改</span><br><span class="line">    if(i == t-&gt;data[k].row &amp;&amp; j == t-&gt;data[k].col)</span><br><span class="line">    &#123;</span><br><span class="line">        t-&gt;data[k].d = data;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        //如果指定位置不存在，则说明该元素值为0，此时插入</span><br><span class="line">        for(k1 = t-&gt;nums; k1 &gt;= k; k1--)</span><br><span class="line">        &#123;</span><br><span class="line">            t-&gt;data[k1+1].col = t-&gt;data[k1].col;</span><br><span class="line">            t-&gt;data[k1+1].row = t-&gt;data[k1].row;</span><br><span class="line">            t-&gt;data[k1+1].d = t-&gt;data[k1].d;</span><br><span class="line">        &#125;</span><br><span class="line">        //插入数据</span><br><span class="line">        t-&gt;data[k].row = i;</span><br><span class="line">        t-&gt;data[k].col = j;</span><br><span class="line">        t-&gt;data[k].d = data;</span><br><span class="line">        t-&gt;nums++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> # 参考资料 <a href="https://blog.csdn.net/qq_35733751/article/details/80843589">songly_的博客</a></p>
-]]></content>
-      <categories>
-        <category>数据结构学习笔记</category>
-      </categories>
-      <tags>
-        <tag>数据结构与算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>最小生成树(Prim算法，Kruskcal算法)</title>
     <url>/2022/05/11/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
@@ -1820,46 +1824,36 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
       </tags>
   </entry>
   <entry>
-    <title>递归算法</title>
-    <url>/2022/02/01/%E9%80%92%E5%BD%92/</url>
-    <content><![CDATA[<h2 id="递归算法">递归算法</h2>
-<h2 id="什么是递归">什么是递归？</h2>
-<p>递归，在计算机科学中是指一种通过重复把问题分解为同类的子问题而解决问题的方法，通俗来讲，递归表现为函数调用函数本身。在知乎上有一个比喻递归非常形象的例子。 “递归最恰当的比喻，就是查词典。我们使用的词典，本身就是递归，为了解释一个词，需要使用更多的词。当你查一个词，发现这个词的解释中某个词仍然不懂，于是你开始查这第二个词，可惜，第二个词里仍然有不懂的词，于是查第三个词，这样查下去，直到有一个词的解释是你完全能看懂的，那么递归走到了尽头，然后你开始后退，逐个明白之前查过的每一个词，最终，你明白了最开始那个词的意思。”. <span id="more"></span> ### 递归的特点 事实上，递归有两个显著的特征，终止条件和自身调用： * <strong>自身调用</strong>：原问题可以分解为子问题，子问题和原问题的求解方法是一致的，都是调用自身的同一个函数 * <strong>终止条件</strong>：递归必须有一个终止的条件，即不能无线循环的调用自己</p>
-<h3 id="递归与栈的关系">递归与栈的关系</h3>
-<p>递归的过程也可以理解为出入栈的过程 比如说我们利用递归计算3的阶乘，因为3&gt;1,所以进入下一个递归，2&gt;1，再进入下一个递归，1=1，开始计算，依序返回，在这里，我们可以发现先进去的3反而是最后执行的，这就类似于栈的性质</p>
-<h3 id="递归的经典应用场景">递归的经典应用场景</h3>
-<ul>
-<li>阶乘问题</li>
-<li>二叉树深度</li>
-<li>汉诺塔问题</li>
-<li>斐波那契数列</li>
-<li>快速排序，归并排序（分治算法中体现递归）</li>
-<li>遍历文件，解析xml文件</li>
-</ul>
-<h3 id="递归解题思路">递归解题思路</h3>
-<ol type="1">
-<li>定义函数功能</li>
-<li>寻找递归终止条件</li>
-<li>递推函数的等价关系式</li>
-</ol>
-<h3 id="递归存在的问题">递归存在的问题</h3>
-<ol type="1">
-<li>递归调用层级太多，导致栈溢出问题</li>
-<li>递归重复计算，导致效率低下</li>
-</ol>
-<h4 id="栈溢出问题">栈溢出问题：</h4>
-<ul>
-<li>每一次函数调用在内存栈中分配空间，然而每个进程的栈容量是有限的</li>
-<li>当递归调用的层级太多时就会，就会超出栈的容量，从而导致调用栈溢出</li>
-<li>其实，我们在前面小节也讨论了。递归过程类似于出栈入栈，如果递归次数过多，栈的深度就需要越深，最后栈容量就不够了</li>
-</ul>
-<h4 id="重复计算导致效率低下">重复计算导致效率低下</h4>
-<p>递归处理时，有些问题如果不加以处理，会造成多次重复计算，降低程序的运行效率</p>
-<p>参考：https://mp.weixin.qq.com/s/tqGKHZzSyDBgEp-oWsOztQ</p>
+    <title>次优查找树</title>
+    <url>/2022/05/03/%E6%AC%A1%E4%BC%98%E7%94%9F%E6%88%90%E6%A0%91/</url>
+    <content><![CDATA[<h1 id="次优查找树">次优查找树</h1>
+<h2 id="前言">前言</h2>
+<p>关于静态查找表中对特定关键字进行顺序查找，折半查找或者分块查找，都是在查找表中各关键词被查找概率相同的前提下进行的，然而在查找表中各关键字查找概率不同的情况下，折半查找的效果其实是不好的。在查找成功的情况下，描述查找过程的判定树其带权路径长度之和（用PH表示）最小时，查找性能最优，称该二叉树为静态最优查找树 其中: PH = 所有节点所在的层次数*每个节点对应的概率值 由于构造最优查找树花费的时间代价较高，而且有一种构造方式创建的判定树的查找性能同最优查找树只差1%-2%，称这种极度接近于最优查找树的二叉树为次优查找树</p>
+<span id="more"></span>
+<h2 id="创建方法">创建方法</h2>
+<p>首先取出标准每个关键字及其对应的权值，采用如下公式计算出每个关键字对应的一个值： <span class="math inline">\(\triangle P_i= \left|\sum\limits_{j=i+1}^hw_j-\sum\limits_{j=1}^{i-1}w_j\right|\)</span> 其中 wj 表示每个关键字的权值（被查找到的概率），h 表示关键字的个数。 表中有多少关键字，就会有多少个 △Pi ，取其中最小的做为次优查找树的根结点，然后将表中关键字从第 i 个关键字的位置分成两部分，分别作为该根结点的左子树和右子树。同理，左子树和右子树也这么处理，直到最后构成次优查找树完成。 ## 代码实现 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">typedef int KeyType;　　// 定义关键字类型</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    KeyType key;</span><br><span class="line">&#125;ElemType;　　// 定义元素类型</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">typedef struct BiTNode</span><br><span class="line">&#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    struct BiTNode *lchild, *rchild;</span><br><span class="line">&#125;BiTNode, *BiTree;</span><br><span class="line"></span><br><span class="line">// 定义变量</span><br><span class="line">int i;</span><br><span class="line">int min;</span><br><span class="line">int dw;</span><br><span class="line"></span><br><span class="line">//创建次优查找树，R数组为查找表，sw数组为存储的各关键字的概率（权值），low和high表示的sw数组中的权值的范围</span><br><span class="line">void SecondOptimal(BiTree T, ElemType R[], float sw[], int low, int high)</span><br><span class="line">&#123;</span><br><span class="line">    // 由有序表R[low...high]及其累计权值表sw（其中sw[0]==0）递归构造次优查找树</span><br><span class="line">    i = low;</span><br><span class="line">    min = abs(sw[high] - sw[low]);</span><br><span class="line">    dw = sw[high] + sw[low - 1];</span><br><span class="line">    // 选择最小的△Pi值</span><br><span class="line">    for (int j = low+1; j &lt;=high; j++)</span><br><span class="line">　　&#123;</span><br><span class="line">        if (abs(dw - sw[j] - sw[j-1]) &lt; min)</span><br><span class="line">　　　　 &#123;</span><br><span class="line">            i = j;</span><br><span class="line">            min = abs(dw - sw[j] - sw[j - 1]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    T = (BiTree)malloc(sizeof(BiTNode));</span><br><span class="line">    T-&gt;data = R[i];　　// 生成结点（第一次生成根）</span><br><span class="line">    if (i == low) </span><br><span class="line">　　 　　T-&gt;lchild = NULL;　　// 左子树空</span><br><span class="line">    else SecondOptimal(T-&gt;lchild, R, sw, low, i - 1);　　// 构造左子树</span><br><span class="line">    if (i == high) </span><br><span class="line">　　 　　T-&gt;rchild = NULL;　　//右子树空</span><br><span class="line">    else </span><br><span class="line">　　　　SecondOptimal(T-&gt;rchild, R, sw, i + 1, high);　　//构造右子树   </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> ## 具体实例 <img src="https://s2.loli.net/2022/05/03/PduZa8y5MegBIEp.png" alt="次优生成树.png"> <strong>注意</strong> 在建立次优查找树时，由于只根据各关键字的P的值进行构建，没有考虑单个关键字的相应权值大小，有时会出现根节点权值比孩子节点权值还小，这时需要适当调整二者位置</p>
+<h2 id="总结">总结</h2>
+<p>由于使用次优查找树和最优查找树的性能差距很小，构造次优查找树的算法的时间复杂度为 O(nlogn)，因此可以使用次优查找树表示概率不等的查找表对应的静态查找表（又称为静态树表）。 ## 参考资料 <a href="https://www.cnblogs.com/lishanlei/p/10707664.html">如是说的博客</a></p>
 ]]></content>
       <categories>
-        <category>算法学习笔记</category>
+        <category>数据结构学习笔记</category>
       </categories>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>稀疏矩阵的三元组表示</title>
+    <url>/2022/05/17/%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%89%E5%85%83%E7%BB%84%E8%A1%A8%E7%A4%BA/</url>
+    <content><![CDATA[<h1 id="前言">前言</h1>
+<p>在学习邻接矩阵时，我们会发现一个有意思的现象，有时100*100的矩阵中只储存了10个数据，我们把这种矩阵称为稀疏矩阵，其适用于一个阶数较大的矩阵中的非零元素个数相对于矩阵元素的总个数很小，如果这种稀疏矩阵用邻接矩阵来储存，这是浪费了很多空间的，那么我们应当如何在保留其矩阵信息的前提下，用一个好的结构来节省空间的开支呢？ <span id="more"></span> # 三元组 ## 定义 三元组是一种稀疏矩阵的压缩储存方式，其储存策略是只储存非零元素，它的储存方案是： 1. 储存非零元素 2. 同时储存该非零元素所对应的行下标和列下标 3. 稀疏矩阵中的每一个非零元素由一个三元组元素唯一确定，稀疏矩阵的所有非零元素构成三元组线性表，三元组的i为行下标，j为列下标，data域是对应的元素值 <img src="https://s2.loli.net/2022/05/17/iWxeFrpmwKM6jOB.png" alt="三元组.png"> ## 储存结构 下面直接上代码，注释写的比较清楚 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#define MaxSize 100</span><br><span class="line"></span><br><span class="line">//定义三元组线性表中的数据元素存储结构</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    int row;        //行号</span><br><span class="line">    int col;        //列号</span><br><span class="line">    ElemType d;     //元素值，ElemType为数据元素类型</span><br><span class="line"></span><br><span class="line">&#125; TupNode; //三元组定义</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//定义三元组线性表存储结构</span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    int rows;                   //行数值</span><br><span class="line">    int cols;                   //列数值</span><br><span class="line">    int nums;                   //非零元素个数</span><br><span class="line">    TupNode data[MaxSize];      //data数据域</span><br><span class="line"></span><br><span class="line">&#125; TSMatrix; //三元组顺序表定义</span><br></pre></td></tr></table></figure> ## 基本运算 ### 扫描二维矩阵，创建三元组 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//以行序方式扫描二维矩阵A，将其非零的元素加入到三元组t</span><br><span class="line">//以3行4列的稀疏矩阵为例</span><br><span class="line">void CreatMat(TSMatrix *t, int arr[3][4])</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    int j;</span><br><span class="line">    t-&gt;rows = 3;</span><br><span class="line">    t-&gt;cols = 4;</span><br><span class="line">    t-&gt;nums = 0;</span><br><span class="line"></span><br><span class="line">    //扫描矩阵中的非零元素</span><br><span class="line">    for(i = 0; i &lt; 3; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(j = 0; j &lt; 4; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            //只存非零值，以三元组方式</span><br><span class="line">            if(arr[i][j] != 0)</span><br><span class="line">            &#123;</span><br><span class="line">                t-&gt;data[t-&gt;nums].row = i;</span><br><span class="line">                t-&gt;data[t-&gt;nums].col = j;</span><br><span class="line">                t-&gt;data[t-&gt;nums].d = arr[i][j];</span><br><span class="line">                t-&gt;nums++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## 将三元组指定位置元素值赋给对象 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//将三元组线性表中指定位置的元素值赋值给变量x</span><br><span class="line">void arr_Assign(TSMatrix t , int *data , int i , int j)</span><br><span class="line">&#123;</span><br><span class="line">    int k = 0;</span><br><span class="line">    //i和j是否合法</span><br><span class="line">    if(i &gt;= t.rows || j &gt;= t.cols)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //找到指定元素的行下标</span><br><span class="line">    while(k &lt; t.nums &amp;&amp; i &gt; t.data[k].row)</span><br><span class="line">    &#123;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //当找到指定元素的行下标后，再找到指定元素的列下标</span><br><span class="line">    while (k &lt; t.nums &amp;&amp; i == t.data[k].row &amp;&amp; j &gt; t.data[k].col)</span><br><span class="line">    &#123;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    //如果指定元素的行和列都相等，说明找到了</span><br><span class="line">    if(t.data[k].row == i &amp;&amp; t.data[k].col)</span><br><span class="line">    &#123;</span><br><span class="line">        *data = t.data[k].d;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        //说明没找到</span><br><span class="line">        *data = 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> ## 对三元组元素赋值 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//修改三元组元素中的值：执行A[i][j]=x</span><br><span class="line">void arr_Value(TSMatrix *t , int data , int i , int j)</span><br><span class="line">&#123;</span><br><span class="line">    int k = 0;</span><br><span class="line">    int k1;</span><br><span class="line">    //指定的行和列是否合法</span><br><span class="line">    if(i &gt;= t-&gt;rows || j &gt;= t-&gt;cols)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    //先查找行</span><br><span class="line">    while(k &lt; t-&gt;nums &amp;&amp; i &gt; t-&gt;data[k].row)</span><br><span class="line">    &#123;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //查找列</span><br><span class="line">    while(k &lt; t-&gt;nums &amp;&amp; i == t-&gt;data[k].row &amp;&amp; j &gt; t-&gt;data[k].col)</span><br><span class="line">    &#123;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //当找到指定位置时直接修改</span><br><span class="line">    if(i == t-&gt;data[k].row &amp;&amp; j == t-&gt;data[k].col)</span><br><span class="line">    &#123;</span><br><span class="line">        t-&gt;data[k].d = data;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        //如果指定位置不存在，则说明该元素值为0，此时插入</span><br><span class="line">        for(k1 = t-&gt;nums; k1 &gt;= k; k1--)</span><br><span class="line">        &#123;</span><br><span class="line">            t-&gt;data[k1+1].col = t-&gt;data[k1].col;</span><br><span class="line">            t-&gt;data[k1+1].row = t-&gt;data[k1].row;</span><br><span class="line">            t-&gt;data[k1+1].d = t-&gt;data[k1].d;</span><br><span class="line">        &#125;</span><br><span class="line">        //插入数据</span><br><span class="line">        t-&gt;data[k].row = i;</span><br><span class="line">        t-&gt;data[k].col = j;</span><br><span class="line">        t-&gt;data[k].d = data;</span><br><span class="line">        t-&gt;nums++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> # 参考资料 <a href="https://blog.csdn.net/qq_35733751/article/details/80843589">songly_的博客</a></p>
+]]></content>
+      <categories>
+        <category>数据结构学习笔记</category>
+      </categories>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
   </entry>
   <entry>
     <title>计算机网络考前拾遗</title>
@@ -2223,6 +2217,48 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
       </tags>
   </entry>
   <entry>
+    <title>递归算法</title>
+    <url>/2022/02/01/%E9%80%92%E5%BD%92/</url>
+    <content><![CDATA[<h2 id="递归算法">递归算法</h2>
+<h2 id="什么是递归">什么是递归？</h2>
+<p>递归，在计算机科学中是指一种通过重复把问题分解为同类的子问题而解决问题的方法，通俗来讲，递归表现为函数调用函数本身。在知乎上有一个比喻递归非常形象的例子。 “递归最恰当的比喻，就是查词典。我们使用的词典，本身就是递归，为了解释一个词，需要使用更多的词。当你查一个词，发现这个词的解释中某个词仍然不懂，于是你开始查这第二个词，可惜，第二个词里仍然有不懂的词，于是查第三个词，这样查下去，直到有一个词的解释是你完全能看懂的，那么递归走到了尽头，然后你开始后退，逐个明白之前查过的每一个词，最终，你明白了最开始那个词的意思。”. <span id="more"></span> ### 递归的特点 事实上，递归有两个显著的特征，终止条件和自身调用： * <strong>自身调用</strong>：原问题可以分解为子问题，子问题和原问题的求解方法是一致的，都是调用自身的同一个函数 * <strong>终止条件</strong>：递归必须有一个终止的条件，即不能无线循环的调用自己</p>
+<h3 id="递归与栈的关系">递归与栈的关系</h3>
+<p>递归的过程也可以理解为出入栈的过程 比如说我们利用递归计算3的阶乘，因为3&gt;1,所以进入下一个递归，2&gt;1，再进入下一个递归，1=1，开始计算，依序返回，在这里，我们可以发现先进去的3反而是最后执行的，这就类似于栈的性质</p>
+<h3 id="递归的经典应用场景">递归的经典应用场景</h3>
+<ul>
+<li>阶乘问题</li>
+<li>二叉树深度</li>
+<li>汉诺塔问题</li>
+<li>斐波那契数列</li>
+<li>快速排序，归并排序（分治算法中体现递归）</li>
+<li>遍历文件，解析xml文件</li>
+</ul>
+<h3 id="递归解题思路">递归解题思路</h3>
+<ol type="1">
+<li>定义函数功能</li>
+<li>寻找递归终止条件</li>
+<li>递推函数的等价关系式</li>
+</ol>
+<h3 id="递归存在的问题">递归存在的问题</h3>
+<ol type="1">
+<li>递归调用层级太多，导致栈溢出问题</li>
+<li>递归重复计算，导致效率低下</li>
+</ol>
+<h4 id="栈溢出问题">栈溢出问题：</h4>
+<ul>
+<li>每一次函数调用在内存栈中分配空间，然而每个进程的栈容量是有限的</li>
+<li>当递归调用的层级太多时就会，就会超出栈的容量，从而导致调用栈溢出</li>
+<li>其实，我们在前面小节也讨论了。递归过程类似于出栈入栈，如果递归次数过多，栈的深度就需要越深，最后栈容量就不够了</li>
+</ul>
+<h4 id="重复计算导致效率低下">重复计算导致效率低下</h4>
+<p>递归处理时，有些问题如果不加以处理，会造成多次重复计算，降低程序的运行效率</p>
+<p>参考：https://mp.weixin.qq.com/s/tqGKHZzSyDBgEp-oWsOztQ</p>
+]]></content>
+      <categories>
+        <category>算法学习笔记</category>
+      </categories>
+  </entry>
+  <entry>
     <title>通信原理第一四章知识小结</title>
     <url>/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%B8%80%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
@@ -2244,7 +2280,7 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
 <ul>
 <li>定义：每秒传递的比特数(信息量)</li>
 <li>单位：比特/秒(bit/s)简记为b/s,bps</li>
-<li><span class="math inline">\(R_b与R_B\)</span>的关系：<span class="math inline">\(R_b=R_B\cdot log_2 M\)</span></li>
+<li><span class="math inline">\(R_b与R_B\)</span>的关系：<span class="math inline">\(R_b=R_B\cdot log_2 M\)</span>(信息等概)，非等概时有<span class="math inline">\(R_b=R_B\cdot H\)</span></li>
 </ul></li>
 <li>频带利用率
 <ul>
@@ -2258,13 +2294,15 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
 <ol type="1">
 <li>误码率<span class="math inline">\(P_e=\frac{错误码元数}{传输总码元数}=\frac{N_e}{N}\)</span></li>
 <li>误信率<span class="math inline">\(P_b=\frac{错误比特数}{传输总比特数}=\frac{I_e}{I_b}\)</span></li>
+<li>在二进制中有<span class="math inline">\(P_b=P_e\)</span>,M进制有<span class="math inline">\(P_b&lt;P_e\)</span></li>
 </ol>
 <h2 id="第四章信道">第四章：信道</h2>
-<p>信道可以分为物理信道和逻辑信道，本章主要讨论的是物理信道，物理信道可以从物理形态分类为有线信道和无线信道，按信道特性可以分为恒参信道和变参信道</p>
+<p>信道可以分为物理信道和逻辑信道，本章主要讨论的是物理信道，物理信道可以从物理形态分类为有线信道和无线信道，按信道特性可以分为恒参信道和变参信道,其中恒参信道的特性不随时间变化，而随参信道的特性随时间随机变化。<strong>各种有线信道以及无线信道中的无线电中继和卫星通信等视线传播的信道属于恒参信道，其他各种无线信道都属于随参信道 </strong></p>
 <h3 id="无有线信道信道的数学模型">4.1~3 无/有线信道&amp;信道的数学模型</h3>
-<p>无线信道的的电磁波传播方式可分为地波，天波，视线传播，主要划分依据是频率的大小，其中为了增大视线传播距离，采用微波中继，卫星中继，平流层通信等手段</p>
+<p>无线信道的的电磁波传播方式可分为地波，天波，视线传播，主要划分依据是频率的大小，其中为了增大视线传播距离，采用微波中继，卫星中继，平流层通信等手段。</p>
+<p>若讨论自由空间中电磁波在发射天线和接受天线间的传播损耗<span class="math inline">\(L_{fr}\)</span>，可以不加证明的给出如下公式 <span class="math display">\[L_{fr}=\frac{P_T}{P_R}=\frac{16\pi^2d^2}{\lambda^2G_TG_R},\lambda:波长,P_{T/R}:发射机输出/入功率,d:距离\]</span></p>
 <p>有线信道主要包括明线/对称电缆/同轴电缆/光纤</p>
-<p>信道进一步可分为侠义信道和广义信道，前面提到的无线/有限信道均属于狭义信道，而广义信道则可分为调制信道与编码信道，分别研究调制/解调问题与编码/译码问题。</p>
+<p>信道进一步可分为侠义信道和广义信道，前面提到的无线/有限信道均属于狭义信道，而广义信道则可分为调制信道与编码信道，分别研究调制/解调问题与编码/译码问题。 <img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%B8%80%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-28-21-38-03.png"></p>
 <p>信道的数学模型也可进一步分为以下几类：</p>
 <ol type="1">
 <li>调制信道模型：叠加有噪声的线性时变/时不变网络</li>
@@ -2272,58 +2310,12 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
 </ol>
 <h3 id="信道特性对信号传输的影响">4.4 信道特性对信号传输的影响</h3>
 <p>对于恒参信道而言，其可认为为一个线性时不变系统，传输特性可表述为<span class="math inline">\(H(w)=|H(w)e^{j\psi(w)}|\)</span>,若想实现无失真传输，则幅频特性<span class="math inline">\(|H(w)|=K\)</span>,相频特性<span class="math inline">\(\psi(w)=wt_d\)</span>,当系统不满足上面的条件时，会对应的产生幅频失真和相频失真(也叫色散)</p>
-<p>对于随参信道(传输特性随时间随机快变)而言，主要会产生多径效应，具体来说是多径传播会使信号产生瑞利型衰落，并引起频率弥散，多径传播对一个复杂信号来说会导致信道对信号不同的频率成分有不同的衰减--频率选择性衰落，减小衰落的措施一般是使信号带宽<span class="math inline">\(B_s=(1/3\sim 1/5)\Delta f\)</span></p>
+<p>当信道的振幅-频率特性不理想，则信号发生的失真称为频率失真，信号的频率失真会使信号的波形发生畸变，这种畸变会引起相邻码元间发生部分重叠，造成码间串扰</p>
+<p>对于随参信道(传输特性随时间随机快变)而言，主要会产生多径效应，具体来说是多径传播会使信号产生瑞利型衰落，并引起频率弥散，多径传播对一个复杂信号来说会导致信道对信号不同的频率成分有不同的衰减--频率选择性衰落，对于宽带信号来说，若信号带宽大于<span class="math inline">\(1/\tau,\tau\)</span>:信道最大相关带宽，则必然出现强烈的衰落，为了使信号基本不受多径传播的影响，要求信号的带宽小于多径信道的相关带宽，减小衰落的措施一般是使信号带宽<span class="math inline">\(B_s=(1/3\sim 1/5)\Delta f\)</span>(工程上公式)</p>
 <h3 id="信道噪声">4.5 信道噪声</h3>
 <p>噪声类型按噪声来源可分为人为噪声，自然噪声，内部噪声；按噪声性质可分为脉冲噪声，窄带/单频噪声，起伏噪声</p>
 <h3 id="信道容量">4.6 信道容量</h3>
-<p>离散信道容量不做要求，主要讲述连续信道容量，有信息论知识可知，白噪声背景下的连续信道容量为<span class="math inline">\(C=Blog_2(1+\frac{S}{N})(b/s)==Blog_2(1+\frac{S}{n_0B})(b/s)\)</span>,S:信号平均功率(W),带宽B(Hz),<span class="math inline">\(n_0\)</span>:噪声单边功率谱密度,<span class="math inline">\(N=n_0B\)</span>:噪声功率(W)</p>
-<h2 id="参考资料">参考资料</h2>
-<ol type="1">
-<li>《通信原理》（第七版）：樊昌信，曹丽娜</li>
-<li>老师课件</li>
-</ol>
-]]></content>
-      <categories>
-        <category>大学功课</category>
-      </categories>
-      <tags>
-        <tag>通信原理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通信原理第五章知识小结</title>
-    <url>/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="前言">前言</h2>
-<p>本知识小结只针对华中科技大学电子信息与通信学院课程《通信原理》进行总结，不保证满足所有读者需求 <span id="more"></span></p>
-<h2 id="幅度调制线性调制原理">5.1 幅度调制(线性调制)原理</h2>
-<p>线性调制原理与通信电子线路课程中大致类似，可参见<a href="https://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">通信电子线路第六章知识小结</a></p>
-<h2 id="线性调制系统的抗噪声性能">5.2 线性调制系统的抗噪声性能</h2>
-<h3 id="模型与指标">5.2.1 模型与指标</h3>
-<p>分析模型 <img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-18-21-44-04.png"></p>
-<p>性能指标：</p>
-<p>输出信噪比：<span class="math inline">\(\frac{S_o}{N_o}=\frac{\overline{s_i^2(t)}}{\overline{n_i^2(t)}}\)</span> 制度增益：<span class="math inline">\(G=\frac{S_o/N_o}{S_i/N_i}\)</span>,G越大，该调制系统的抗噪性能越好</p>
-<h3 id="dsb-相干解调系统的抗噪性能">5.2.2 DSB-相干解调系统的抗噪性能</h3>
-<p>推导过程不要求，故略过，直接给出结论</p>
-<p><span class="math inline">\(S_i=\frac{1}{2}\overline{m^2(t)},N_i=n_0B,S_o=\frac{1}{4}\overline{m^2(t)},N_o=\frac{1}{4}N_i\Rightarrow G_{DSB}=2\)</span></p>
-<h3 id="ssb-相干解调系统的抗噪性能">5.2.3 SSB-相干解调系统的抗噪性能</h3>
-<p>推导过程不要求，故略过，直接给出结论</p>
-<p><span class="math inline">\(S_i=\frac{1}{4}\overline{m^2(t)},N_i=n_0B,S_o=\frac{1}{16}\overline{m^2(t)},N_o=\frac{1}{4}N_i\Rightarrow G_{SSB}=1\)</span></p>
-<p>但是不能说DSB系统的抗噪声性能优于SSB系统，因为DSB的带宽是SSB带宽的两倍，换算到相同的<span class="math inline">\(S_i,n_0,f_H\)</span>条件下，DSB与SSB的抗噪声性能相同</p>
-<h3 id="am包络检波系统的抗噪声性能">5.2.4 AM包络检波系统的抗噪声性能</h3>
-<ol type="1">
-<li><p>大信噪比时有<span class="math inline">\(G_{AM}=\frac{2\overline{m^2(t)}}{A_0^2+\overline{m^2(t)}}\)</span>,因为<span class="math inline">\(|m(t)|_{max}\le A_0\rightarrow G_{AM}&lt;1\)</span>,当100%调制时，且<span class="math inline">\(m(t)\)</span>为单频正弦时，<span class="math inline">\(G_{AM}=\frac{2}{3}\)</span></p></li>
-<li><p>小信噪比时，信号被扰乱成噪声，导致输出信噪比急剧恶化--门限效应，其是由包络检波器的非线性解调作用引起的</p></li>
-</ol>
-<h2 id="非线性调制角度调制原理">5.3 非线性调制(角度调制)原理</h2>
-<p>其基本原理与通信电子线路课程要求一致，可参见<a href="https://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">通信电子线路第七章知识小结</a></p>
-<p>其中主要补充一下窄带调频和宽带调频，窄带调频是指当调频信号的瞬时相偏满足<span class="math inline">\(|\psi(t)|_{max}=|K_F\int m(t)\, {\rm d}t|_{max}\le\frac{\pi}{6}\)</span>,反之则为宽带调频</p>
-<h2 id="调频系统的抗噪声性能">5.4 调频系统的抗噪声性能</h2>
-<p>大信噪比时，经过推导可得<span class="math inline">\(G_{FM}=3m_f^2(m_f+1)\)</span>，又因为B与<span class="math inline">\(m_f\)</span>成正比,所以可用通过增加传输带宽来改善FM系统的抗噪声性能，但是这种做法并不是无止境的</p>
-<p>小信噪比时也会产生门限效应，在门限值以上时，<span class="math inline">\((S_o/N_o)_{FM},(S_i/N_i)_{FM}\)</span>呈线性关系，且<span class="math inline">\(m_f\)</span>越大，输出信噪比改善越明显，在门限值以下，二者不再是线性关系，而是随<span class="math inline">\((S_i/N_i)_{FM}\)</span>的下降而急剧下降</p>
-<p>为了提高高频信号的信噪比，往往在FM系统两端应用预加重和去加重技术</p>
-<h2 id="各种模拟调制系统的比较">5.5 各种模拟调制系统的比较</h2>
-<p>所有系统在“同等条件”下进行比较：解调器输入功率均为<span class="math inline">\(S_i\)</span>,信道噪声均值为0,单边功率谱密度为<span class="math inline">\(n_0\)</span>,基带信号带宽为<span class="math inline">\(f_m\)</span>,其中AM调幅度为100%,正弦型调制信号</p>
-<p><img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-19-09-58-55.png"> <img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-19-09-59-15.png"> <img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-19-09-59-27.png"></p>
+<p>离散信道容量不做要求，主要讲述连续信道容量，有信息论知识可知，白噪声背景下的连续信道容量为<span class="math inline">\(C=Blog_2(1+\frac{S}{N})(b/s)==Blog_2(1+\frac{S}{n_0B})(b/s),when \quad B\rightarrow \infty, C\approx1.44\frac{S}{n_0}\)</span>,S:信号平均功率(W),带宽B(Hz),<span class="math inline">\(n_0\)</span>:噪声单边功率谱密度,<span class="math inline">\(N=n_0B\)</span>:噪声功率(W)</p>
 <h2 id="参考资料">参考资料</h2>
 <ol type="1">
 <li>《通信原理》（第七版）：樊昌信，曹丽娜</li>
@@ -2394,6 +2386,61 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
 <h3 id="多进制相移键控mpsk">7.4.3 多进制相移键控(MPSK)</h3>
 <p>利用载波的M种不同相位表示数字信息，也可用信号矢量图(星座图)来表示 <img src="/2023/12/19/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-20-15-39-13.png"> M增大，多相制信号可在相同的带宽中传输更多比特的信息，从而提高频带利用率，且相邻信号点的距离会逐渐减小，导致抗噪性能下降，设备复杂</p>
 <p>4PSK也叫正交相移键控(QPSK),利用载波四种不同相位表示数字信息，可视为两个互为正交的2PSK信号合成，其调制可用正交调相法和相位选择法，解调的原理则是分解为两路PSK信号的相干解调，但存在90°的相位模糊，解决方法采用四相相对相位调制QDPSK <img src="/2023/12/19/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-20-15-43-28.png"> <img src="/2023/12/19/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-20-15-44-01.png"> 缺点是最大相位跳变180°，使得包络起伏很大，出现包络零点，频谱扩展大，旁瓣对邻道干扰大，改进思路是改为OQPSK(不要求)</p>
+<h2 id="参考资料">参考资料</h2>
+<ol type="1">
+<li>《通信原理》（第七版）：樊昌信，曹丽娜</li>
+<li>老师课件</li>
+</ol>
+]]></content>
+      <categories>
+        <category>大学功课</category>
+      </categories>
+      <tags>
+        <tag>通信原理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通信原理第五章知识小结</title>
+    <url>/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="前言">前言</h2>
+<p>本知识小结只针对华中科技大学电子信息与通信学院课程《通信原理》进行总结，不保证满足所有读者需求 <span id="more"></span></p>
+<h2 id="幅度调制线性调制原理">5.1 幅度调制(线性调制)原理</h2>
+<p>线性调制原理与通信电子线路课程中大致类似，可参见<a href="https://xiazhi1.github.io/2023/11/25/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%85%AD%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">通信电子线路第六章知识小结</a></p>
+<h3 id="单边带调制ssb">5.1.3 单边带调制(SSB)</h3>
+<p>通信原理课程中详细讲述了SSB信号的产生，而通信电子线路课程对此要求不高，故进行补充</p>
+<p>SSB信号的产生主要可以分为滤波法和相移法</p>
+<ol type="1">
+<li>滤波法 <img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-24-10-17-57.png"> 原理是需要先形成DSB信号，边带滤波即可得上或下边带信号，这要求滤波器<span class="math inline">\(H_{SSB}(w)\)</span>在载频处具有陡峭的截止特性，这也是滤波法的技术难点之一</li>
+<li>相移法 <img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-24-10-20-11.png"> 要求掌握推导流程，设<span class="math inline">\(m(t)=A_mcosw_mt\)</span>,载波<span class="math inline">\(c(t)=cosw_ct\)</span>,则<span class="math inline">\(S_{DSB}(t)=A_mcosw_mt\cdot cosw_ct=\frac{1}{2}A_mcos(w_c-w_m)t+\frac{1}{2}A_mcos(w_c+w_m)t\\S_{USB(LSB)}(t)=\frac{1}{2}A_mcos(w_c\pm w_m)t=\frac{1}{2}m(t)cosw_ct\mp \frac{1}{2}\widehat{m(t)}sinw_ct\)</span>,<span class="math inline">\(\widehat{m(t)}\)</span>是<span class="math inline">\(m(t)\)</span>的希尔伯特变换--幅度不变，相移<span class="math inline">\(\pi/2\)</span> <img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-24-10-30-46.png"> 相移法的技术难点是<span class="math inline">\(H_h(w)\)</span>难以对<span class="math inline">\(m(t)\)</span>的所有频率分量精确相移$/2 $</li>
+</ol>
+<p>其中DSB/SSB/VSB均是抑制载波的已调信号，不能采用简单的包络检波解调，AM信号可以采用，以上所有提到的线性调制方式都可以用相干解调方式解调</p>
+<h2 id="线性调制系统的抗噪声性能">5.2 线性调制系统的抗噪声性能</h2>
+<h3 id="模型与指标">5.2.1 模型与指标</h3>
+<p>分析模型 <img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-18-21-44-04.png"></p>
+<p>性能指标：</p>
+<p>输出信噪比：<span class="math inline">\(\frac{S_o}{N_o}=\frac{\overline{s_i^2(t)}}{\overline{n_i^2(t)}}\)</span> 制度增益：<span class="math inline">\(G=\frac{S_o/N_o}{S_i/N_i}\)</span>,G越大，该调制系统的抗噪性能越好</p>
+<h3 id="dsb-相干解调系统的抗噪性能">5.2.2 DSB-相干解调系统的抗噪性能</h3>
+<p>推导过程不要求，故略过，直接给出结论，注意下面所有的<span class="math inline">\(n_0\)</span>都表示白噪声的单边功率谱密度，若题目给出的是双边功率谱密度，则需要乘2得到单边功率谱密度</p>
+<p><span class="math inline">\(S_i=\frac{1}{2}\overline{m^2(t)},N_i=n_0B,S_o=\frac{1}{4}\overline{m^2(t)},N_o=\frac{1}{4}N_i\Rightarrow G_{DSB}=2\)</span></p>
+<h3 id="ssb-相干解调系统的抗噪性能">5.2.3 SSB-相干解调系统的抗噪性能</h3>
+<p>推导过程不要求，故略过，直接给出结论</p>
+<p><span class="math inline">\(S_i=\frac{1}{4}\overline{m^2(t)},N_i=n_0B,S_o=\frac{1}{16}\overline{m^2(t)},N_o=\frac{1}{4}N_i\Rightarrow G_{SSB}=1\)</span></p>
+<p>但是不能说DSB系统的抗噪声性能优于SSB系统，因为DSB的带宽是SSB带宽的两倍，换算到相同的<span class="math inline">\(S_i,n_0,f_H\)</span>条件下，DSB与SSB的抗噪声性能相同</p>
+<h3 id="am包络检波系统的抗噪声性能">5.2.4 AM包络检波系统的抗噪声性能</h3>
+<ol type="1">
+<li><p>大信噪比时有<span class="math inline">\(G_{AM}=\frac{2\overline{m^2(t)}}{A_0^2+\overline{m^2(t)}}\)</span>,因为<span class="math inline">\(|m(t)|_{max}\le A_0\rightarrow G_{AM}&lt;1\)</span>,当100%调制时，且<span class="math inline">\(m(t)\)</span>为单频正弦时，<span class="math inline">\(G_{AM}=\frac{2}{3}\)</span></p></li>
+<li><p>小信噪比时，信号被扰乱成噪声，导致输出信噪比急剧恶化--门限效应，其是由包络检波器的非线性解调作用引起的</p></li>
+</ol>
+<h2 id="非线性调制角度调制原理">5.3 非线性调制(角度调制)原理</h2>
+<p>其基本原理与通信电子线路课程要求一致，可参见<a href="https://xiazhi1.github.io/2023/11/26/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E4%B8%83%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">通信电子线路第七章知识小结</a></p>
+<p>其中主要补充一下窄带调频和宽带调频，窄带调频是指当调频信号的瞬时相偏满足<span class="math inline">\(|\psi(t)|_{max}=|K_F\int m(t)\, {\rm d}t|_{max}\le\frac{\pi}{6}\)</span>,反之则为宽带调频</p>
+<h2 id="调频系统的抗噪声性能">5.4 调频系统的抗噪声性能</h2>
+<p>大信噪比时，经过推导可得<span class="math inline">\(G_{FM}=3m_f^2(m_f+1)\)</span>，又因为B与<span class="math inline">\(m_f\)</span>成正比,所以可用通过增加传输带宽来改善FM系统的抗噪声性能，但是这种做法并不是无止境的</p>
+<p>小信噪比时也会产生门限效应，在门限值以上时，<span class="math inline">\((S_o/N_o)_{FM},(S_i/N_i)_{FM}\)</span>呈线性关系，且<span class="math inline">\(m_f\)</span>越大，输出信噪比改善越明显，在门限值以下，二者不再是线性关系，而是随<span class="math inline">\((S_i/N_i)_{FM}\)</span>的下降而急剧下降</p>
+<p>为了提高高频信号的信噪比，往往在FM系统两端应用预加重和去加重技术</p>
+<h2 id="各种模拟调制系统的比较">5.5 各种模拟调制系统的比较</h2>
+<p>所有系统在“同等条件”下进行比较：解调器输入功率均为<span class="math inline">\(S_i\)</span>,信道噪声均值为0,单边功率谱密度为<span class="math inline">\(n_0\)</span>,基带信号带宽为<span class="math inline">\(f_m\)</span>,其中AM调幅度为100%,正弦型调制信号</p>
+<p><img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-19-09-58-55.png"> <img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-19-09-59-15.png"> <img src="/2023/12/18/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E7%AC%AC%E4%BA%94%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/2023-12-19-09-59-27.png"></p>
 <h2 id="参考资料">参考资料</h2>
 <ol type="1">
 <li>《通信原理》（第七版）：樊昌信，曹丽娜</li>
@@ -3198,23 +3245,6 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
       </tags>
   </entry>
   <entry>
-    <title>锦标赛排序</title>
-    <url>/2022/05/03/%E9%94%A6%E6%A0%87%E8%B5%9B%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="锦标赛排序">锦标赛排序</h1>
-<h2 id="前言">前言</h2>
-<p>这种排序方式的经典应用来自百度的一道面试题：给出一个长度是N的数组，现在要找出最小的两个元素，最少要多少次比较？</p>
-<span id="more"></span>
-<h2 id="原理">原理</h2>
-<p>竞标赛排序又叫树型排序，属于选择排序的一种，其目的是克服直接选择排序不能保留比较结果，不断重复比较的缺点，它的基本思想是首先取得n个元素的关键词，进行两两比较，得到n/2个比较优胜者，然后再两两比较找到第一小的那个，然后把最小那个元素对应的叶子节点的值变为无穷大，那么在搜索第二小值时，我们就只需要比较最小值叶子节点所在的子树即可，就达到了logn次比较的目标，然后一直重复该过程，所以其时间复杂度为O(n*log2n),空间复杂度为O（N）(需要2n-1个节点存放树) <strong>示意图</strong> <img src="https://s2.loli.net/2022/05/03/Igw4nbJCiX7SLDY.png" alt="锦标赛排序-1.png"> <img src="https://s2.loli.net/2022/05/03/rfcWwBUMAl7uzgp.png" alt="锦标赛排序-2.png"> ## 代码实现（python） <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Node:</span><br><span class="line">    def __init__(self, _data, _id):</span><br><span class="line">        self.data = _data</span><br><span class="line">        self.id = _id</span><br><span class="line">    def show(self):</span><br><span class="line">        print(self.id, self.data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def Adjust(data, idx):</span><br><span class="line">    while (idx != 0):</span><br><span class="line">        if (idx % 2 == 1):</span><br><span class="line">            if (data[idx].data &lt; data[idx + 1].data):</span><br><span class="line">                data[(idx - 1) // 2] = data[idx]</span><br><span class="line">            else:</span><br><span class="line">                data[(idx - 1) // 2] = data[idx + 1]</span><br><span class="line">            idx = (idx - 1) // 2</span><br><span class="line">        else:</span><br><span class="line">            if (data[idx - 1].data &lt; data[idx].data):</span><br><span class="line">                data[idx // 2 - 1] = data[idx - 1]</span><br><span class="line">            else:</span><br><span class="line">                data[idx // 2 - 1] = data[idx]</span><br><span class="line">            idx = idx // 2 - 1</span><br><span class="line">    return data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def Sort(data):</span><br><span class="line">    length = len(data)</span><br><span class="line">    n = 1</span><br><span class="line">    while n &lt; length:</span><br><span class="line">        n &lt;&lt;= 1</span><br><span class="line">        # print(&quot;n=&quot;,n)</span><br><span class="line">    nTreeSize = 2 * n - 1</span><br><span class="line">    nodes = []</span><br><span class="line">    for i in range(nTreeSize):</span><br><span class="line">        nodes.append(Node(0, 0))</span><br><span class="line">    # 初始化竞赛数数据</span><br><span class="line">    for i in range(n - 1, nTreeSize):</span><br><span class="line">        idx = i - (n - 1)</span><br><span class="line">        if idx &lt; length:</span><br><span class="line">            nodes[i] = Node(data[idx], i)</span><br><span class="line">        else:</span><br><span class="line">            nodes[i] = Node(9999, -1)</span><br><span class="line">    for i in range(n - 2, -1, -1):</span><br><span class="line">        if (nodes[i * 2 + 1].data &lt; nodes[i * 2 + 2].data):</span><br><span class="line">            nodes[i] = nodes[i * 2 + 1]</span><br><span class="line">        else:</span><br><span class="line">            nodes[i] = nodes[i * 2 + 2]</span><br><span class="line">    # 实现排序</span><br><span class="line">    B = []</span><br><span class="line">    for i in range(0, length):</span><br><span class="line">        # 取出最小的</span><br><span class="line">        B.append(nodes[0].data)</span><br><span class="line">        nodes[nodes[0].id].data = 9999</span><br><span class="line">        Adjust(nodes, nodes[0].id)</span><br><span class="line">    return B</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    Arr = [2,5,9,1,11,20,15,7,4,6]</span><br><span class="line">    Arr2 = Sort(Arr)</span><br><span class="line">    print(&quot;newArr=&quot;,Arr2)</span><br><span class="line"></span><br></pre></td></tr></table></figure> ## 参考资料 <a href="https://www.cnblogs.com/james1207/p/3323115.html">james1207</a> <a href="https://blog.csdn.net/mmmmmmmmzw/article/details/105216255">mmmmmmmmzw</a></p>
-]]></content>
-      <categories>
-        <category>算法学习笔记</category>
-      </categories>
-      <tags>
-        <tag>数据结构与算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>通信电子线路第四章知识小结</title>
     <url>/2023/12/03/%E9%80%9A%E4%BF%A1%E7%94%B5%E5%AD%90%E7%BA%BF%E8%B7%AF%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/</url>
     <content><![CDATA[<h2 id="前言">前言</h2>
@@ -3276,6 +3306,23 @@ H(z)=\sum_{n=0}^{N-1} h(n)z^{-n}
       </categories>
       <tags>
         <tag>通信电子线路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>锦标赛排序</title>
+    <url>/2022/05/03/%E9%94%A6%E6%A0%87%E8%B5%9B%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="锦标赛排序">锦标赛排序</h1>
+<h2 id="前言">前言</h2>
+<p>这种排序方式的经典应用来自百度的一道面试题：给出一个长度是N的数组，现在要找出最小的两个元素，最少要多少次比较？</p>
+<span id="more"></span>
+<h2 id="原理">原理</h2>
+<p>竞标赛排序又叫树型排序，属于选择排序的一种，其目的是克服直接选择排序不能保留比较结果，不断重复比较的缺点，它的基本思想是首先取得n个元素的关键词，进行两两比较，得到n/2个比较优胜者，然后再两两比较找到第一小的那个，然后把最小那个元素对应的叶子节点的值变为无穷大，那么在搜索第二小值时，我们就只需要比较最小值叶子节点所在的子树即可，就达到了logn次比较的目标，然后一直重复该过程，所以其时间复杂度为O(n*log2n),空间复杂度为O（N）(需要2n-1个节点存放树) <strong>示意图</strong> <img src="https://s2.loli.net/2022/05/03/Igw4nbJCiX7SLDY.png" alt="锦标赛排序-1.png"> <img src="https://s2.loli.net/2022/05/03/rfcWwBUMAl7uzgp.png" alt="锦标赛排序-2.png"> ## 代码实现（python） <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Node:</span><br><span class="line">    def __init__(self, _data, _id):</span><br><span class="line">        self.data = _data</span><br><span class="line">        self.id = _id</span><br><span class="line">    def show(self):</span><br><span class="line">        print(self.id, self.data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def Adjust(data, idx):</span><br><span class="line">    while (idx != 0):</span><br><span class="line">        if (idx % 2 == 1):</span><br><span class="line">            if (data[idx].data &lt; data[idx + 1].data):</span><br><span class="line">                data[(idx - 1) // 2] = data[idx]</span><br><span class="line">            else:</span><br><span class="line">                data[(idx - 1) // 2] = data[idx + 1]</span><br><span class="line">            idx = (idx - 1) // 2</span><br><span class="line">        else:</span><br><span class="line">            if (data[idx - 1].data &lt; data[idx].data):</span><br><span class="line">                data[idx // 2 - 1] = data[idx - 1]</span><br><span class="line">            else:</span><br><span class="line">                data[idx // 2 - 1] = data[idx]</span><br><span class="line">            idx = idx // 2 - 1</span><br><span class="line">    return data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def Sort(data):</span><br><span class="line">    length = len(data)</span><br><span class="line">    n = 1</span><br><span class="line">    while n &lt; length:</span><br><span class="line">        n &lt;&lt;= 1</span><br><span class="line">        # print(&quot;n=&quot;,n)</span><br><span class="line">    nTreeSize = 2 * n - 1</span><br><span class="line">    nodes = []</span><br><span class="line">    for i in range(nTreeSize):</span><br><span class="line">        nodes.append(Node(0, 0))</span><br><span class="line">    # 初始化竞赛数数据</span><br><span class="line">    for i in range(n - 1, nTreeSize):</span><br><span class="line">        idx = i - (n - 1)</span><br><span class="line">        if idx &lt; length:</span><br><span class="line">            nodes[i] = Node(data[idx], i)</span><br><span class="line">        else:</span><br><span class="line">            nodes[i] = Node(9999, -1)</span><br><span class="line">    for i in range(n - 2, -1, -1):</span><br><span class="line">        if (nodes[i * 2 + 1].data &lt; nodes[i * 2 + 2].data):</span><br><span class="line">            nodes[i] = nodes[i * 2 + 1]</span><br><span class="line">        else:</span><br><span class="line">            nodes[i] = nodes[i * 2 + 2]</span><br><span class="line">    # 实现排序</span><br><span class="line">    B = []</span><br><span class="line">    for i in range(0, length):</span><br><span class="line">        # 取出最小的</span><br><span class="line">        B.append(nodes[0].data)</span><br><span class="line">        nodes[nodes[0].id].data = 9999</span><br><span class="line">        Adjust(nodes, nodes[0].id)</span><br><span class="line">    return B</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    Arr = [2,5,9,1,11,20,15,7,4,6]</span><br><span class="line">    Arr2 = Sort(Arr)</span><br><span class="line">    print(&quot;newArr=&quot;,Arr2)</span><br><span class="line"></span><br></pre></td></tr></table></figure> ## 参考资料 <a href="https://www.cnblogs.com/james1207/p/3323115.html">james1207</a> <a href="https://blog.csdn.net/mmmmmmmmzw/article/details/105216255">mmmmmmmmzw</a></p>
+]]></content>
+      <categories>
+        <category>算法学习笔记</category>
+      </categories>
+      <tags>
+        <tag>数据结构与算法</tag>
       </tags>
   </entry>
 </search>
