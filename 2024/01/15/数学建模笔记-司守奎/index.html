@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://xiazhi1.github.io/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-35-14.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-34-48.png">
 <meta property="article:published_time" content="2024-01-15T08:31:03.000Z">
-<meta property="article:modified_time" content="2024-01-15T08:36:28.063Z">
+<meta property="article:modified_time" content="2024-01-15T10:40:31.877Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="数学建模">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-01-15 16:31:03 / 修改时间：16:36:28" itemprop="dateCreated datePublished" datetime="2024-01-15T16:31:03+08:00">2024-01-15</time>
+              <time title="创建时间：2024-01-15 16:31:03 / 修改时间：18:40:31" itemprop="dateCreated datePublished" datetime="2024-01-15T16:31:03+08:00">2024-01-15</time>
             </span>
 
           
@@ -279,7 +279,12 @@
 <li>定义：整数规划的一种特殊情况，变量仅取值0或1 应用范围可分为以下几种情况</li>
 </ol>
 <h4 id="相互排斥的约束条件">相互排斥的约束条件</h4>
-<p>也就是说题目中的某一种条件只有一个量，如果给了这个1，同类的都为0，较为典型的问题有运输问题，只用一种方式运输，用火车运了，其他的运输栏都为0，其约束条件可进一步简化为 <span class="math inline">\(y_i=\begin{cases} 1,第i个元素起约束作用\\ 0,第i个元素不起作用，i=1,2.....,m\\ \end{cases}\)</span> $a_{i1}x_1+...a_{in}x_nb_i+(1-y_i)M,i=1,2...,m,\ y_1++y_m=1 $ 由约束条件很容易看出，当<span class="math inline">\(y_i\)</span>等于1,就只有这个约束起作用，其他的都是多余的</p>
+<p>也就是说题目中的某一种条件只有一个量，如果给了这个1，同类的都为0，较为典型的问题有运输问题，只用一种方式运输，用火车运了，其他的运输栏都为0，其约束条件可进一步简化为 <span class="math display">\[y_i=\begin{cases}
+1,第i个元素起约束作用\\
+0,第i个元素不起作用，i=1,2.....,m\\
+\end{cases}\]</span> <span class="math display">\[a_{i1}x_1+...a_{in}x_n\le b_i+(1-y_i)M,i=1,2...,m,\\
+y_1+\dots+y_m=1
+\]</span> 由约束条件很容易看出，当<span class="math inline">\(y_i\)</span>等于1,就只有这个约束起作用，其他的都是多余的</p>
 <h4 id="固定费用的问题">固定费用的问题</h4>
 <p>在讨论线性规划时，有些问题要求固定费用，这种问题可以通过改变为混合整数规划来解决，数学模型可表示为 <span class="math inline">\(y_i\epsilon\le x_i\le y_i M\)</span> 其中<span class="math inline">\(\epsilon\)</span>为充分小的正常数；M为充分大的正常数，表明<span class="math inline">\(x_i&gt;0\)</span>时，<span class="math inline">\(y_i\)</span>必须为1，<span class="math inline">\(x_i=0\)</span>时<span class="math inline">\(y_i\)</span>必须为0,<span class="math inline">\([x_i]\)</span>表示采用i方式生产时产量，<span class="math inline">\(y_i\)</span>表示是否用第i种方式生产</p>
 <h4 id="指派问题">指派问题</h4>
@@ -325,19 +330,25 @@
 <h4 id="二次规划">二次规划</h4>
 <ol type="1">
 <li>定义：若某非线性规划的目标函数为自变量x的二次函数，约束条件又全为线性的，称这种规划为二次规划</li>
-<li>Matlab中二次规划的数学模型可表述为 $min, x<sup>THx+f</sup>Tx,\ s.t.
-<span class="math display">\[\begin{cases}
+<li>Matlab中二次规划的数学模型可表述为 <span class="math display">\[min\, \frac{1}{2}x^THx+f^Tx,\\
+s.t. \begin{cases}
 Ax\le b\\
 Aeq \cdot x=beq,\\
 lb\le x\le ub
-\end{cases}\]</span>
-H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=quadprog(H,f,A,b,Aeq,beq,lb,ub,x0,options)</span><br></pre></td></tr></table></figure></li>
+\end{cases}
+H为实对称矩阵，\\
+\]</span> matlab求解二次规划的命令为 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=quadprog(H,f,A,b,Aeq,beq,lb,ub,x0,options)</span><br></pre></td></tr></table></figure></li>
 </ol>
 <h4 id="罚函数法">罚函数法</h4>
 <ol type="1">
 <li>利用罚函数法可以将非线性规划问题的求解转化为求一系列无约束极值的问题，也把这种方法叫做序列无约束最小化技术</li>
 <li>罚函数求解非线性规划问题的思想是利用问题中的约束函数作出适当的罚函数，由此构造出带参数的增广目标函数，把问题转换为无约束非线性规划问题，主要有两种形式，一种叫外罚函数法，另一种叫内罚函数法</li>
-<li>外罚函数法： 考虑问题：<span class="math inline">\(minf(x)\\ s.t.\begin{cases} g_i(x) \le 0,i=1,...,r\\ h_j(x) \ge 0,j=1,...,s\\ k_m(x) =0,m=1,...,t \end{cases}\)</span>取一个充分大的数M&gt;0,构造函数<span class="math inline">\(P(x,M)=f(x)+M\sum_{i=1}^nmax(g_i(x),0)-M\sum_{j=1}^nmin(h_j(x),0)+M\sum_{m=1}^n |k_m(x)|\)</span>,则以增广目标函数<span class="math inline">\(P(x,M)\)</span>为目标函数的无约束极值问题<span class="math inline">\(minP(x,M)\)</span>的最优解也是原问题的最优解</li>
+<li>外罚函数法： 考虑问题：<span class="math display">\[minf(x)\\
+s.t.\begin{cases}
+g_i(x) \le 0,i=1,...,r\\
+h_j(x) \ge 0,j=1,...,s\\
+k_m(x) =0,m=1,...,t
+\end{cases}\]</span>取一个充分大的数M&gt;0,构造函数<span class="math inline">\(P(x,M)=f(x)+M\sum_{i=1}^nmax(g_i(x),0)-M\sum_{j=1}^nmin(h_j(x),0)+M\sum_{m=1}^n |k_m(x)|\)</span>,则以增广目标函数<span class="math inline">\(P(x,M)\)</span>为目标函数的无约束极值问题<span class="math inline">\(minP(x,M)\)</span>的最优解也是原问题的最优解</li>
 <li><ol type="1">
 <li>如果非线性规划问题要求实时算法，可以使用罚函数算法，但计算精度较低</li>
 <li>如果不要求实时算法，要求高精度,可以使用lingo或matlab的fmincon命令求解</li>
@@ -347,7 +358,15 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
 <ol type="1">
 <li><p>在matlab工具箱中，用于求解约束最优化问题的函数有fminbnd,fmincon,quadprog,fseminf,fminimax函数</p></li>
 <li><p>fminbnd函数 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=fminbnd(fun,x1,x2,options) </span><br><span class="line"># 用于求单变量非线性函数在[x1,x2]上极小值</span><br><span class="line"># 返回极小点x和函数的极小值</span><br></pre></td></tr></table></figure></p></li>
-<li><p>fseminf函数 用于求下列模型 <span class="math inline">\(minf(x),\\ s.t. \begin{cases} A \cdot x \le b,\\ Aeq \cdot x =beq,\\ lb\le x \le ub\\ c(x)\le0\\ ceq(x)\le0\\ K_i(x,w_i)\le0,1\le i\le n \end{cases}其中c(x),ceq(x)为向量函数，K_i(x,w_i)为标量函数,w_1...为附加变量\)</span> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=fseminf(fun,x0,ntheta,seminfcon,A,b,Aeq,beq,lb,ub)</span><br></pre></td></tr></table></figure></p>
+<li><p>fseminf函数 用于求下列模型 <span class="math display">\[minf(x),\\
+s.t. \begin{cases}
+A \cdot x \le b,\\
+Aeq \cdot x =beq,\\
+lb\le x \le ub\\
+c(x)\le0\\
+ceq(x)\le0\\
+K_i(x,w_i)\le0,1\le i\le n
+\end{cases}其中c(x),ceq(x)为向量函数，K_i(x,w_i)为标量函数,w_1...为附加变量\]</span> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=fseminf(fun,x0,ntheta,seminfcon,A,b,Aeq,beq,lb,ub)</span><br></pre></td></tr></table></figure></p>
 <p>fun定义目标函数f(x),x0为x初始值，ntheta是半无穷约束<span class="math inline">\(K_i(x,w_i)\)</span>个数，函数seminfcon用于定义非线性不等式约束<span class="math inline">\(c(x)\)</span>,非线性等式约束<span class="math inline">\(ceq(x)\)</span>和半无穷约束<span class="math inline">\(K_i(x,w_i)\)</span>的函数，seminfcon有两个输入参量x,s,s是推荐的采样步长 可以不使用</p></li>
 <li><p>fminimax函数 用于求下列模型 <span class="math inline">\(min_xmax_iF_i(x),\\ s.t. \begin{cases} A \cdot x \le b,\\ Aeq \cdot x =beq,\\ lb\le x \le ub\\ c(x)\le0\\ ceq(x)=0\\ \end{cases}\)</span> matlab命令为 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=fminimax(fun,x0,A,b,Aeq,beq,lb,ub,nonlcon,options)</span><br></pre></td></tr></table></figure></p></li>
 </ol>
@@ -368,16 +387,18 @@ H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="hi
 <li>狄克斯特拉(Dijkstra)算法:基本思想为按距<span class="math inline">\(u_0\)</span>从近到远为顺序，依次求得<span class="math inline">\(u_0\)</span>到G的各顶点的最短路和距离，直至<span class="math inline">\(v_0\)</span>（或直至G所有顶点）</li>
 </ol>
 <h4 id="两个指定顶点间最短路的数学规划模型">两个指定顶点间最短路的数学规划模型</h4>
-假设有向图有n个顶点，现要求从顶点<span class="math inline">\(v_1-&gt;v_n\)</span>的最短路，仍然用E表示弧的集合，设<span class="math inline">\(W=(w_{ij})_{n×n}\)</span>为邻接矩阵，其分量为：<span class="math inline">\(w_{ij}=\begin{cases} 弧v_iv_j的权值，v_iv_j\in E\\ ∞，其他， \end{cases}\)</span> 决策变量为<span class="math inline">\(x_{ij}\)</span>,当<span class="math inline">\(x_{ij}=1\)</span>,说明弧<span class="math inline">\(v_iv_j\)</span>位于顶点<span class="math inline">\(v_1\)</span>到顶点<span class="math inline">\(v_n\)</span>的最短路上，否则<span class="math inline">\(x_{ij}=0\)</span>,其数学规划表达式为$min<em>{v_iv_jE}w</em>{ij}x_{ij},\ s.t.
-<span class="math display">\[\begin{cases}
+<p>假设有向图有n个顶点，现要求从顶点<span class="math inline">\(v_1-&gt;v_n\)</span>的最短路，仍然用E表示弧的集合，设<span class="math inline">\(W=(w_{ij})_{n×n}\)</span>为邻接矩阵，其分量为：<span class="math display">\[w_{ij}=\begin{cases}
+弧v_iv_j的权值，v_iv_j\in E\\
+∞，其他，
+\end{cases}\]</span> 决策变量为<span class="math inline">\(x_{ij}\)</span>,当<span class="math inline">\(x_{ij}=1\)</span>,说明弧<span class="math inline">\(v_iv_j\)</span>位于顶点<span class="math inline">\(v_1\)</span>到顶点<span class="math inline">\(v_n\)</span>的最短路上，否则<span class="math inline">\(x_{ij}=0\)</span>,其数学规划表达式为<span class="math display">\[min\sum_{v_iv_j\in E}w_{ij}x_{ij},\\
+s.t. \begin{cases}
 \sum_{j=1,v_iv_j\in E}^n x_{ij}-\sum_{j=1,v_jv_i\in E}^n x_{ji}=\begin{cases}
 1,i=1\\
 -1,i=n\\
 0,i\ne1,n
 \end{cases}\\
 x_{ij}=0或1
-\end{cases}\]</span>
-<p>$</p>
+\end{cases}    \]</span></p>
 <h4 id="每对顶点之间的最短路径">每对顶点之间的最短路径</h4>
 <p>计算赋权图各队顶点之间的最短路径，调用方法有两种</p>
 <ol type="1">
@@ -402,11 +423,19 @@ x_{ij}=0或1
 最大流问题的线性规划表示
 </div></li>
 </ol>
-<p><span class="math inline">\(max\quad v(f),\\ s.t.\begin{cases} \sum_{j:(v_i,v_j)\in A}f_{ij}-\sum_{j:(v_j,v_i\in A)}f_{ji}=\begin{cases} v(f),i=s\\ -v(f),i=t\\ 0,i\ne s,t, \end{cases}\\ 0\le f_{ij} \le c_{ij},\forall(v_i,v_j)\in A \end{cases}\)</span></p>
+<p><span class="math display">\[max\quad v(f),\\
+s.t.\begin{cases}
+\sum_{j:(v_i,v_j)\in A}f_{ij}-\sum_{j:(v_j,v_i\in A)}f_{ji}=\begin{cases}
+v(f),i=s\\
+-v(f),i=t\\
+0,i\ne s,t,
+\end{cases}\\
+0\le f_{ij} \le c_{ij},\forall(v_i,v_j)\in A
+\end{cases}\]</span></p>
 <h3 id="最小费用最大流问题">最小费用最大流问题</h3>
 <h4 id="最小费用最大流">最小费用最大流</h4>
-给定网络D=(V,A,C),每一弧<span class="math inline">\((v_i,v_j)\in A\)</span>上，除了已给容量<span class="math inline">\(c_{ij}\)</span>外，还给了一个单位流量的费用<span class="math inline">\(b(v_i,v_j)\ge 0(b_{ij})\)</span>，所谓最小费用最大流问题就是求一个发点<span class="math inline">\(v_s\)</span>到收点<span class="math inline">\(v_t\)</span>的最大流，使流的总输送费用<span class="math inline">\(\sum_{(v_i,v_j)\in A}b_{ij}f_{ij}\)</span>取最小值，最小费用最大值问题可以归结为两个线性规划问题，首先用一个线性规划模型求出最大流量<span class="math inline">\(v(f_{max})\)</span>，再用一个线性规划模型求出最大流对应最小费用 $min <em>{(v_i,v_j)A}b</em>{ij}f_{ij}\ s.t.
-<span class="math display">\[\begin{cases}
+<p>给定网络D=(V,A,C),每一弧<span class="math inline">\((v_i,v_j)\in A\)</span>上，除了已给容量<span class="math inline">\(c_{ij}\)</span>外，还给了一个单位流量的费用<span class="math inline">\(b(v_i,v_j)\ge 0(b_{ij})\)</span>，所谓最小费用最大流问题就是求一个发点<span class="math inline">\(v_s\)</span>到收点<span class="math inline">\(v_t\)</span>的最大流，使流的总输送费用<span class="math inline">\(\sum_{(v_i,v_j)\in A}b_{ij}f_{ij}\)</span>取最小值，最小费用最大值问题可以归结为两个线性规划问题，首先用一个线性规划模型求出最大流量<span class="math inline">\(v(f_{max})\)</span>，再用一个线性规划模型求出最大流对应最小费用 <span class="math display">\[min \sum_{(v_i,v_j)\in A}b_{ij}f_{ij}\\
+s.t. \begin{cases}
 0\le f_{ij} \le c_{ij},\forall(v_i,v_j)\in A\\
 \sum_{j:(v_i,v_j)\in A}f_{ij}-\sum_{j:(v_j,v_i\in A)}f_{ji}=d_i\\
 d_i=\begin{cases}
@@ -414,22 +443,22 @@ v(f_{max}),i=s\\
 -v(f_{max}),i=t\\
 0,i\ne s,t,\\
 \end{cases}\\
-\end{cases}\]</span>
-<p>$ <span class="math inline">\(v_{f_{max}}\)</span><a href="#网络最大流问题">上节</a>求得最大流流量</p>
+\end{cases}
+\]</span> <span class="math inline">\(v_{f_{max}}\)</span><a href="#网络最大流问题">上节</a>求得最大流流量</p>
 <h3 id="matlab的图论工具箱">Matlab的图论工具箱</h3>
 <p><img src="/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-35-48.png"></p>
 <h3 id="旅行商tsp问题">旅行商(TSP)问题</h3>
 <ol type="1">
 <li>问题描述：一推销员准备前往若干城市推销商品，然后回到驻地，如何为他设计一条最短的旅行路线(从驻地出发，经过每个城市恰好一次，最后返回驻地)，这个问题就被称为旅行商问题</li>
 <li>数学抽象：用图论术语表示，就是在一个赋权完全图中，找出一个有最小权的Hamilton圈，这个圈就叫最优圈</li>
-<li>数学模型：设城市的个数为n，<span class="math inline">\(d_{ij}\)</span>是两个城市i与j之间的距离，<span class="math inline">\(x_{ij}=0 or 1\)</span>(1表示走过城市i到城市j的路，0表示没有选择走这条路)，则有 $min <em>{ij}d</em>{ij}x_{ij}\ s.t.
-<span class="math display">\[\begin{cases}
+<li>数学模型：设城市的个数为n，<span class="math inline">\(d_{ij}\)</span>是两个城市i与j之间的距离，<span class="math inline">\(x_{ij}=0 or 1\)</span>(1表示走过城市i到城市j的路，0表示没有选择走这条路)，则有 <span class="math display">\[min \sum_{i\ne j}d_{ij}x_{ij}\\
+s.t. \begin{cases}
 \sum_{j=1}^n x_{ij}=1,i=1,2,\dots,n,(每个点只有一条边出去)\\
 \sum_{i=1}^n x_{ij}=1,i=1,2,\dots,n,(每个点只有一条边进去)\\
 \sum_{i,j\in s}x_{ij}\le|s|-1,2\le|s|\le n-1,s\subset{1,2,\dots,n},即s为{1,2,\dots,n}的真子集(除起点终点外，各点不构成圈)\\
 x_{ij}\in {0,1},i,j=1,2,\dots,n,i\ne j
-\end{cases}\]</span>
-$</li>
+\end{cases}
+\]</span></li>
 </ol>
 <h3 id="计划评审方法和关键路线法">计划评审方法和关键路线法</h3>
 <p>这两个方法是网络分析的重要组成部分，已经合并为一种方法，国外称PERT/CPM，国内称为统筹方法</p>
@@ -456,9 +485,21 @@ $</li>
 <h4 id="计划网络图的计算">计划网络图的计算</h4>
 <ol type="1">
 <li>建立计划网络图 <img src="/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-34-48.png"></li>
-<li>写出相应的规划问题 <span class="math inline">\(min\sum_{i\in V}x_i\\ s.t\begin{cases} x_j\ge x_i+t_{ij},(i,j)\in A,i,j\in V\\ x_i\ge 0,i\in V\\ \end{cases}\)</span> V为所有时间集合，A为所有作业集合，<span class="math inline">\(x_i\)</span>为事件i的开始时间，<span class="math inline">\(t_{ij}\)</span>为作业(i,j)的计划时间</li>
+<li>写出相应的规划问题 <span class="math display">\[min\sum_{i\in V}x_i\\
+s.t\begin{cases}
+x_j\ge x_i+t_{ij},(i,j)\in A,i,j\in V\\
+x_i\ge 0,i\in V\\
+\end{cases}\]</span> V为所有时间集合，A为所有作业集合，<span class="math inline">\(x_i\)</span>为事件i的开始时间，<span class="math inline">\(t_{ij}\)</span>为作业(i,j)的计划时间</li>
 <li>问题求解</li>
-<li>将关键路线看为最长路 如果将关键路线看成最长路,则可以按照求最短路的方法(将求极小改为求极大)求出关键路线 设<span class="math inline">\(x_{ij}\)</span>为0-1变量，当作业(i,j)位于关键路线上取1，否则取0，数学规划问题写成 <span class="math inline">\(max\sum_{(i,j)\in A}t_{ij}x_{ij}\\ s.t.\begin{cases} \sum_{j:(i,j)\in A}x_{ij}-\sum_{j:(j,i)\in A}x_{ji}=\begin{cases} 1,i=1,\\ -1,i=n,\\ 0,i\ne1,n,\\ \end{cases}\\ x_{ij}=0 or 1,(i,j)\in A \end{cases}\)</span></li>
+<li>将关键路线看为最长路 如果将关键路线看成最长路,则可以按照求最短路的方法(将求极小改为求极大)求出关键路线 设<span class="math inline">\(x_{ij}\)</span>为0-1变量，当作业(i,j)位于关键路线上取1，否则取0，数学规划问题写成 <span class="math display">\[max\sum_{(i,j)\in A}t_{ij}x_{ij}\\
+s.t.\begin{cases}
+\sum_{j:(i,j)\in A}x_{ij}-\sum_{j:(j,i)\in A}x_{ji}=\begin{cases}
+1,i=1,\\
+-1,i=n,\\
+0,i\ne1,n,\\
+\end{cases}\\
+x_{ij}=0 or 1,(i,j)\in A
+\end{cases}\]</span></li>
 </ol>
 <h2 id="插值与拟合">插值与拟合</h2>
 <p>若仅已知函数<span class="math inline">\(f(x)\)</span>在某区间<span class="math inline">\([a,b]\)</span>上一系列点上的值<span class="math inline">\(y_i=f(x_i),i=0,1,\dots,n\)</span>，当需要在这些节点间的x上的函数值时，有两种方法：插值法，拟合法，二者都是根据一组数据构造一个函数作为近似，由于近似的要求不同，二者在数学方法上完全不同，需要我们根据实际情况考虑</p>
@@ -467,7 +508,12 @@ $</li>
 <h4 id="分段线性插值">分段线性插值</h4>
 <p>简单来说，将每两个相邻的节点用直线连起来，如此形成的一条折线就是分段线性插值函数，记住<span class="math inline">\(I_n(x_i)=y_i\)</span>,且<span class="math inline">\(I_n(x)\)</span>在每个小区间<span class="math inline">\([x_i,x_{i+1}]\)</span>是线性函数<span class="math inline">\((i=0,1,...,n-1)\)</span> <span class="math inline">\(I_n(x)\)</span>可以表示<span class="math inline">\(I_n(x)=\sum_{i=0}^ny_il_i(x)\)</span>,其中 <span class="math inline">\(l_i(x)=\begin{cases} \frac{x-x_{i-1}}{x_i-x_{i-1}},x\in[x_{i-1},x_i],i\ne 0,\\ \frac{x-x_{i+1}}{x_i-x_{i+1}},x\in[x_i,x_{i+1}],i\ne n,\\ 0,else\\ \end{cases}\)</span> <span class="math inline">\(l_n(x)\)</span>有良好的收敛性，即对于<span class="math inline">\(x\in[a,b]\)</span>,有<span class="math inline">\(\lim_{n \to \infty}I_n(x)=f(x)\)</span>,用<span class="math inline">\(I_n(x)\)</span>计算x点的插值时，只用到x左右的两个节点，计算量与节点个数n无关，但n越大，分段越多，插值误差越小</p>
 <h4 id="拉格朗日插值多项式">拉格朗日插值多项式</h4>
-<p>拉格朗日(Lagrange)插值的基函数为<span class="math inline">\(l_i(x)=\frac{(x-x_0)...(x-x_{i-1})(x-x_{i+1})...(x-x_n)}{(x_i-x_0)...(x_i-x_{i-1})(x_i-x_{i+1})...(x_i-x_n)}\\ =\prod_{j=0,j\ne i}^n \frac{x-x_j}{x_i-x_j},i=0,1,...,n\\ l_i(x)\)</span>是n次多项式，满足<span class="math inline">\(l_i(x_j)=\begin{cases} 0,j\ne i 1,j=i \end{cases}\)</span> 综上，拉格朗日插值函数<span class="math inline">\(L_n(x)=\sum_{i=0}^ny_il_i(x)=\sum_{i=0}^ny_i(\prod_{j=0,j\ne i}^n\frac{x-x_j}{x_i-x_j})\)</span></p>
+<p>拉格朗日(Lagrange)插值的基函数为<span class="math display">\[l_i(x)=\frac{(x-x_0)...(x-x_{i-1})(x-x_{i+1})...(x-x_n)}{(x_i-x_0)...(x_i-x_{i-1})(x_i-x_{i+1})...(x_i-x_n)}\\
+=\prod_{j=0,j\ne i}^n \frac{x-x_j}{x_i-x_j},i=0,1,...,n\\
+l_i(x)是n次多项式，满足l_i(x_j)=\begin{cases}
+0,j\ne i\\
+1,j=i
+\end{cases}\]</span> 综上，拉格朗日插值函数<span class="math display">\[L_n(x)=\sum_{i=0}^ny_il_i(x)=\sum_{i=0}^ny_i(\prod_{j=0,j\ne i}^n\frac{x-x_j}{x_i-x_j})\]</span></p>
 <h4 id="样条插值">样条插值</h4>
 <p>对于一些要求插值曲线具有较高的光滑程度，有连续曲率的数学物理问题，这时需要用样条插值</p>
 <ol type="1">
@@ -546,17 +592,18 @@ $</li>
 <li>循环变动，通常是周期为一年以上，由非季节因素引起的涨落起伏波形相似的波动</li>
 <li>不规则变动，通常分为突然变动和随机变动</li>
 </ol>
-<p>通常用<span class="math inline">\(T_t\)</span>表示长期趋势项，<span class="math inline">\(S_t\)</span>表示季节变动趋势项，<span class="math inline">\(C_t\)</span>表示循环变动趋势项，<span class="math inline">\(R_t\)</span>表示随机干扰项，常见确定性时间序列模型类型如下 1. 加法模型： <span class="math inline">\(y_t=T_t+S_t+C_t+R_t\)</span> 2. 乘法模型： <span class="math inline">\(y_t=T_t\cdot S_t\cdot C_t\cdot R_t\)</span> 3. 混合模型： <span class="math inline">\(y_t=T_t\cdot S_t+R_t\\  y_t=S_t+T_t\cdot R_t\)</span> <span class="math inline">\(y_t\)</span>为观测目标的观测记录，均值<span class="math inline">\(E(R_t)=0\)</span>,方差<span class="math inline">\(Var(R_t)=\sigma^2\)</span> 如果在预测时间范围以内，无突然变动且随机变动的方差较小，且有理由认为过去和现在的演变趋势将继续发展到未来时，可用一些经验方法进行预测</p>
+<p>通常用<span class="math inline">\(T_t\)</span>表示长期趋势项，<span class="math inline">\(S_t\)</span>表示季节变动趋势项，<span class="math inline">\(C_t\)</span>表示循环变动趋势项，<span class="math inline">\(R_t\)</span>表示随机干扰项，常见确定性时间序列模型类型如下 1. 加法模型： <span class="math inline">\(y_t=T_t+S_t+C_t+R_t\)</span> 2. 乘法模型： <span class="math inline">\(y_t=T_t\cdot S_t\cdot C_t\cdot R_t\)</span> 3. 混合模型： <span class="math display">\[y_t=T_t\cdot S_t+R_t\\
+   y_t=S_t+T_t\cdot R_t\]</span> <span class="math inline">\(y_t\)</span>为观测目标的观测记录，均值<span class="math inline">\(E(R_t)=0\)</span>,方差<span class="math inline">\(Var(R_t)=\sigma^2\)</span> 如果在预测时间范围以内，无突然变动且随机变动的方差较小，且有理由认为过去和现在的演变趋势将继续发展到未来时，可用一些经验方法进行预测</p>
 <h4 id="移动平均法">移动平均法</h4>
-<p>设观测序列为<span class="math inline">\(y_1,...,y_T\)</span>,取移动平均的项数N&lt;T,一次移动平均值计算公式为： <span class="math inline">\(M_t^(1)=\frac{1}{N}(y_t+y_{t-1}+\dots+y_{t-N+1})=\frac{1}{N}(y_{t-1}+\dots+y_{t_N})+\frac{1}{N}(y_t-y_{t-N})=M_{t-1}^(1)+\frac{1}{N}(y_t-y_{t-N})\)</span></p>
-<p>二次移动平均值计算公式为 <span class="math inline">\(M_t^(2)=\frac{1}{N}(M_t^(1)+\dots+M_{t-N+1}^(1))=M_{t-1}^(2)+\frac{1}{N}(M_t^(1)-M_{t-N}^(1))\)</span> 当预测目标的基本趋势是在某一水平上下波动时，可用一次移动平均方法建立预测模型,即 <span class="math inline">\(\hat{y_{t+1} }=M_t^(1)=\frac{1}{N}(y_t+\dots+y_{t-N+1}),t=N,N+1,\dots,T\)</span> 其预测标准误差为<span class="math inline">\(S=\sqrt{\frac{\sum_{t=N+1}^T(\hat{y_t}-y_t)^2}{T-N}}\)</span></p>
+<p>设观测序列为<span class="math inline">\(y_1,...,y_T\)</span>,取移动平均的项数N&lt;T,一次移动平均值计算公式为： <span class="math display">\[M_t^{(1)}=\frac{1}{N}(y_t+y_{t-1}+\dots+y_{t-N+1})\\=\frac{1}{N}(y_{t-1}+\dots+y_{t_N})+\frac{1}{N}(y_t-y_{t-N})=M_{t-1}^{(1)}+\frac{1}{N}(y_t-y_{t-N})\]</span></p>
+<p>二次移动平均值计算公式为 <span class="math display">\[M_t^{(2)}=\frac{1}{N}(M_t^{(1)}+\dots+M_{t-N+1}^{(1)})=M_{t-1}^{(2)}+\frac{1}{N}(M_t^{(1)}-M_{t-N}^{(1)})\]</span> 当预测目标的基本趋势是在某一水平上下波动时，可用一次移动平均方法建立预测模型,即 <span class="math display">\[\hat{y_{t+1} }=M_t^{(1)}=\frac{1}{N}(y_t+\dots+y_{t-N+1}),t=N,N+1,\dots,T\]</span> 其预测标准误差为<span class="math display">\[S=\sqrt{\frac{\sum_{t=N+1}^T(\hat{y_t}-y_t)^2}{T-N}}\]</span></p>
 <p>最近N期序列值的平均值作为未来各期的预测结果，一般N取值为:<span class="math inline">\(5\le N\le 200\)</span>,当历史序列的基本趋势变化不大且序列中随机变动成分较多时，N的取值应较大一些,否则N的取值应小一些，在有确定的季节变动周期资料中，移动平均的项数应取周期长度，选择最佳N值的一个有效方法是编辑若干模型的预测误差，预测误差最小值为好</p>
 <p>当预测目标基本趋势和某一线性模型吻合时，常用二次移动平均法，但序列同时存在线性趋势和周期波动时，可用趋势移动平均法建立预测模型： <span class="math inline">\(\hat{y_{T+m}}=a_T+b_Tm,m=1,2,\dots\)</span>,式中 <span class="math inline">\(a_T=2M_T^{(1)}-M_T^{(2)};b_T=\frac{2}{N-1}(M_T^{(1)}-M_T^{(2)})\)</span></p>
 <h4 id="指数平滑法">指数平滑法</h4>
 <p>一般来说历史数据对未来值的影响是随时间间隔增长而递减的，而上述移动平均法的权数都是两端项权数小，中间项权数大，不符合上诉规律，更好的方法是对各期观测值依时间顺序进行加权平均作为预测值，<strong>指数平滑法</strong>就满足这一要求，且具有简单递推形式</p>
 <p>指数平滑法根据平滑次数的的不同，又分为一次指数平滑法，二次指数平滑法，和三次指数平滑法等</p>
 <p><strong>一次指数平滑法</strong> 1. 预测模型</p>
-<p>设时间序列为<span class="math inline">\(y_1,y_2,...,y_t,...,\alpha\)</span>为加权系数,<span class="math inline">\(0&lt;\alpha&lt;1\)</span>,一次指数平滑公式为: <span class="math inline">\(S_t^(1)=\alpha y_t+(1-\alpha)S_{t-1}^{(1)}=S_{t-1}^{(1)}+\alpha(y_t-S_{t-1}^{(1)})\)</span> 以这种平滑值进行预测，就是一次指数平滑法，预测模型为<span class="math inline">\(\hat{y_{t+1}}=S_t^{(1)}=\alpha y_t+(1-\alpha)\hat{y_t}\)</span></p>
+<p>设时间序列为<span class="math inline">\(y_1,y_2,...,y_t,...,\alpha\)</span>为加权系数,<span class="math inline">\(0&lt;\alpha&lt;1\)</span>,一次指数平滑公式为: <span class="math inline">\(S_t^{(1)}=\alpha y_t+(1-\alpha)S_{t-1}^{(1)}=S_{t-1}^{(1)}+\alpha(y_t-S_{t-1}^{(1)})\)</span> 以这种平滑值进行预测，就是一次指数平滑法，预测模型为<span class="math inline">\(\hat{y_{t+1}}=S_t^{(1)}=\alpha y_t+(1-\alpha)\hat{y_t}\)</span></p>
 <ol start="2" type="1">
 <li><p>加权系数的选择</p>
 <p>加权系数<span class="math inline">\(\alpha\)</span>的大小决定了在新预测值中新数据和原预测值所占的比重，<span class="math inline">\(\alpha\)</span>越大，新数据所占比重越大，原预测值所占比重越小，也可将上式改为<span class="math inline">\(\hat{t_{t+1}}=\hat{y_t}+\alpha(y_t-\hat{y_t})\)</span></p>
@@ -606,7 +653,24 @@ $</li>
 <li>ARMA序列的预报 时间序列的m步预报，是根据<span class="math inline">\({X_k,X_{k-1},...}\)</span>的取值对未来k+m时刻的随机变量<span class="math inline">\(X_{k+m}(m&gt;0)\)</span>做出估计，估计量记作<span class="math inline">\(\hat{X_k}(m)\)</span>，是<span class="math inline">\({X_k,X_{k-1},...}\)</span>的线性组合
 <ul>
 <li>AR(p)序列的预报:<span class="math inline">\(\begin{cases}  \hat{X_k(1)}=\psi_1X_k+\psi_2X_{k-1}+\dots+\psi_pX_{k-p+1}\\  \hat{X_k(2)}=\psi_1X_k(1)+\psi_2X_{k}+\dots+\psi_pX_{k-p+2}\\  ...\\  \hat{X_k(p)}=\psi_1X_k(p-1)+\psi_2X_{k}(p-2)+\dots+\psi_pX_{k}\\  \hat{X_k(m)}=\psi_1X_k(m-1)+\psi_2X_{k}(m-2)+\dots+\psi_p\hat{X_k(m-p)},m&gt;p\\ \end{cases}\)</span> 由此可见<span class="math inline">\(\hat{X_K}(m)(m\ge1)\)</span>仅依赖于<span class="math inline">\(X_t\)</span>的k时刻以前的p个时刻的值<span class="math inline">\(X_K,X_{k-1},\dots,X_{k-p+1}\)</span>,这是AR(p)序列预报的特点</li>
-<li>MA(q)和ARMA(p,q)序列的预报 MA(q)序列 <span class="math inline">\(\hat{X_{k+1}^{(q)}}=\begin{bmatrix}  \theta_1 &amp;1&amp;0&amp;\cdots&amp;0\\  \theta_2 &amp;0&amp;1&amp;\cdots&amp;0\\  \vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\  \theta_{q-1} &amp;0&amp;0&amp;\cdots&amp;1\\  \theta_q &amp;0&amp;0&amp;\cdots&amp;0\\ \end{bmatrix}\hat{X_{k}^{(q)}}-\begin{bmatrix} \theta_1\\ \theta_2\\ \vdots\\ \theta_1 \end{bmatrix}X_{k+1}\)</span> 递推初值可取<span class="math inline">\(\hat{X_{k_0}^{(q)}}=0(k_0)\)</span>较小，因为模型可逆性保证递推式渐进稳定，即当n充分大后，初始误差影响可以逐渐消失 ARMA(p,q)序列 <span class="math inline">\(\hat{X_{k+1}^{(q)}}=\begin{bmatrix}  -G_1 &amp;1&amp;0&amp;\cdots&amp;0\\  -G_2 &amp;0&amp;1&amp;\cdots&amp;0\\  \vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\  -G_{q-1} &amp;0&amp;0&amp;\cdots&amp;1\\  -G_q+\psi_q^* &amp;\psi_{q-1}^* &amp;\psi_{q-2}^*&amp;\cdots&amp;\psi_1^*\\ \end{bmatrix}\hat{X_{k}^{(q)}}+\begin{bmatrix} G_1\\ G_2\\ \vdots\\ G_q\\ \end{bmatrix}X_{k+1}+\begin{bmatrix} 0\\ 0\\ \vdots\\ 0\\ \sum_{j=q+1}^p\psi_j^*X_{k+q+1-j}\\ \end{bmatrix},G_j:X_t=\sum_{j=0}^∞G_j\epsilon_{t-j}\)</span> 实际中，模型参数是未知的，若已建立了时间序列的模型，则理论模型的未知参数可用其估计替代，再用上面介绍的方法预报</li>
+<li>MA(q)和ARMA(p,q)序列的预报 MA(q)序列 <span class="math inline">\(\hat{X_{k+1}^{(q)}}=\begin{bmatrix}  \theta_1 &amp;1&amp;0&amp;\cdots&amp;0\\  \theta_2 &amp;0&amp;1&amp;\cdots&amp;0\\  \vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\  \theta_{q-1} &amp;0&amp;0&amp;\cdots&amp;1\\  \theta_q &amp;0&amp;0&amp;\cdots&amp;0\\ \end{bmatrix}\hat{X_{k}^{(q)}}-\begin{bmatrix} \theta_1\\ \theta_2\\ \vdots\\ \theta_1 \end{bmatrix}X_{k+1}\)</span> 递推初值可取<span class="math inline">\(\hat{X_{k_0}^{(q)}}=0(k_0)\)</span>较小，因为模型可逆性保证递推式渐进稳定，即当n充分大后，初始误差影响可以逐渐消失 ARMA(p,q)序列 <span class="math display">\[\hat{X_{k+1}^{(q)}}=\begin{bmatrix}
+ -G_1 &amp;1&amp;0&amp;\cdots&amp;0\\
+ -G_2 &amp;0&amp;1&amp;\cdots&amp;0\\
+ \vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
+ -G_{q-1} &amp;0&amp;0&amp;\cdots&amp;1\\
+ -G_q+\psi_q^* &amp;\psi_{q-1}^* &amp;\psi_{q-2}^*&amp;\cdots&amp;\psi_1^*\\
+\end{bmatrix}\hat{X_{k}^{(q)}}\\+\begin{bmatrix}
+G_1\\
+G_2\\
+\vdots\\
+G_q\\
+\end{bmatrix}X_{k+1}+\begin{bmatrix}
+0\\
+0\\
+\vdots\\
+0\\
+\sum_{j=q+1}^p\psi_j^*X_{k+q+1-j}\\
+\end{bmatrix},G_j:X_t=\sum_{j=0}^∞G_j\epsilon_{t-j}\]</span> 实际中，模型参数是未知的，若已建立了时间序列的模型，则理论模型的未知参数可用其估计替代，再用上面介绍的方法预报</li>
 </ul></li>
 </ol>
 <h3 id="时间序列的matlab相关工具箱及命令">时间序列的Matlab相关工具箱及命令</h3>
