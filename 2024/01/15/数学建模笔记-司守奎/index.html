@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avarar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="数学建模笔记（司守奎） 线性规划  定义： 在一组线性条件限制下，求一线性目标函数最大或最小的问题 标准的matlab形式：\(min f^T x,\) \(s.t. \begin{cases} A\cdot x \le b\\ Aeq \cdot x &#x3D; beq \\ lb \le x \le ub \end{cases}\) 其中\(f,x,b,beq,lb,u\)为列向量，\(A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学建模笔记(司守奎)">
+<meta property="og:url" content="http://xiazhi1.github.io/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/index.html">
+<meta property="og:site_name" content="夏至的个人博客">
+<meta property="og:description" content="数学建模笔记（司守奎） 线性规划  定义： 在一组线性条件限制下，求一线性目标函数最大或最小的问题 标准的matlab形式：\(min f^T x,\) \(s.t. \begin{cases} A\cdot x \le b\\ Aeq \cdot x &#x3D; beq \\ lb \le x \le ub \end{cases}\) 其中\(f,x,b,beq,lb,u\)为列向量，\(A">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-35-48.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-35-14.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-34-48.png">
+<meta property="article:published_time" content="2024-01-15T08:31:03.000Z">
+<meta property="article:modified_time" content="2024-01-15T08:36:28.063Z">
+<meta property="article:author" content="夏至">
+<meta property="article:tag" content="数学建模">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiazhi1.github.io/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-35-48.png">
+
+<link rel="canonical" href="http://xiazhi1.github.io/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数学建模笔记(司守奎) | 夏至的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夏至的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数学建模笔记(司守奎)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-15 16:31:03 / 修改时间：16:36:28" itemprop="dateCreated datePublished" datetime="2024-01-15T16:31:03+08:00">2024-01-15</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>25k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>23 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<h1 id="数学建模笔记司守奎">数学建模笔记（司守奎）</h1>
+<h2 id="线性规划">线性规划</h2>
+<ol type="1">
+<li>定义： 在一组线性条件限制下，求一线性目标函数最大或最小的问题</li>
+<li>标准的matlab形式：<span class="math inline">\(min f^T x,\)</span> <span class="math inline">\(s.t. \begin{cases} A\cdot x \le b\\ Aeq \cdot x = beq \\ lb \le x \le ub \end{cases}\)</span> 其中<span class="math inline">\(f,x,b,beq,lb,u\)</span>为列向量，<span class="math inline">\(A，Aeq\)</span>为矩阵</li>
+<li>matlab相关求解命令为 <span class="math inline">\([x,val]=linprog(f,A,b,Aeq,beq,lb,ub)\)</span></li>
+</ol>
+<span id="more"></span>
+<h2 id="整数规划">整数规划</h2>
+<ol type="1">
+<li>定义： 数学规划中的变量（部分或全部）限制为整数时，称为整数规划</li>
+<li>分类： 根据变量整数是部分还是全部可分为纯整数规划和混合整数规划</li>
+<li>求解方法：
+<ol type="1">
+<li>分支定界法（纯或混）</li>
+<li>割平面法（纯或混）</li>
+<li>隐枚举法（01规划）
+<ul>
+<li>过滤隐枚举法</li>
+<li>分支隐枚举法</li>
+</ul></li>
+<li>匈牙利法（指派问题）</li>
+<li>蒙特卡洛法（各种类型）</li>
+</ol></li>
+</ol>
+<h3 id="型整数规划">0-1型整数规划</h3>
+<ol type="1">
+<li>定义：整数规划的一种特殊情况，变量仅取值0或1 应用范围可分为以下几种情况</li>
+</ol>
+<h4 id="相互排斥的约束条件">相互排斥的约束条件</h4>
+<p>也就是说题目中的某一种条件只有一个量，如果给了这个1，同类的都为0，较为典型的问题有运输问题，只用一种方式运输，用火车运了，其他的运输栏都为0，其约束条件可进一步简化为 <span class="math inline">\(y_i=\begin{cases} 1,第i个元素起约束作用\\ 0,第i个元素不起作用，i=1,2.....,m\\ \end{cases}\)</span> $a_{i1}x_1+...a_{in}x_nb_i+(1-y_i)M,i=1,2...,m,\ y_1++y_m=1 $ 由约束条件很容易看出，当<span class="math inline">\(y_i\)</span>等于1,就只有这个约束起作用，其他的都是多余的</p>
+<h4 id="固定费用的问题">固定费用的问题</h4>
+<p>在讨论线性规划时，有些问题要求固定费用，这种问题可以通过改变为混合整数规划来解决，数学模型可表示为 <span class="math inline">\(y_i\epsilon\le x_i\le y_i M\)</span> 其中<span class="math inline">\(\epsilon\)</span>为充分小的正常数；M为充分大的正常数，表明<span class="math inline">\(x_i&gt;0\)</span>时，<span class="math inline">\(y_i\)</span>必须为1，<span class="math inline">\(x_i=0\)</span>时<span class="math inline">\(y_i\)</span>必须为0,<span class="math inline">\([x_i]\)</span>表示采用i方式生产时产量，<span class="math inline">\(y_i\)</span>表示是否用第i种方式生产</p>
+<h4 id="指派问题">指派问题</h4>
+<p>指派问题描述的是分配n个人去做n件事情，每个人做且仅做一件事情，且分配第i个人去做第j件事情，花费<span class="math inline">\(C_{ij}\)</span>单位时间，求如何分配使总时间最小，这类问题的关键就是要求出分配矩阵，数学形式可表现为 <span class="math inline">\(x_{ij}=\begin{cases} 1,第i人做第j项工作\\ 0,第i人做第j项工作\\ \end{cases}\)</span> 数学模型为：<span class="math inline">\(min \sum_{i=1}^N \sum_{j=1}^N c_{ij}x_{ij}\)</span> <span class="math inline">\(s.t. \begin{cases}  \sum_{i=1}^N x_{ij}=1,i=1,2,...,n\\  \sum_{j=1}^N x_{ij}=1,j=1,2,...,n\\  x_{ij}=0 or 1,i,j=1,...,n  \end{cases}\)</span></p>
+<h3 id="蒙特卡洛法随机取样法">蒙特卡洛法（随机取样法）</h3>
+<ol type="1">
+<li>又被称为计算机随机模拟法，它是基于对大量数据的统计结果来实现一些确定性问题的计算</li>
+<li>使用该方法必须使用计算机生成相关分布的随机数</li>
+</ol>
+<h3 id="整数线性规划的计算机求解">整数线性规划的计算机求解</h3>
+<ol type="1">
+<li>整数规划的求解用Lingo等专用软件比较方便，对于整数线性规划也可以用matlab的intlinprog函数求解，<strong>但其的缺点是必须把所有的决策变量化为一维决策变量，变量替换后，约束条件很难写出</strong>，最好用lingo</li>
+<li>matlab求解混合整数线性规划的命令是</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">【x,fval】=intlinprog(f,intcon,A,b,Aeq,beq,lb,ub)</span><br></pre></td></tr></table></figure>
+<p>对应以下数学模型 <span class="math inline">\(min_x f^Tx,\)</span> <span class="math inline">\(s.t. \begin{cases} x(intcon)为整数\\ A \cdot x \le b,\\ Aeq \cdot x =beq,\\ lb \le x \le ub \\ \end{cases}\)</span> 式中：<span class="math inline">\(f,x,intcon,b,beq,lb,ub为列向量；A，Aeq为矩阵\)</span></p>
+<h2 id="非线性规划">非线性规划</h2>
+<h3 id="非线性规划模型">非线性规划模型</h3>
+<ol type="1">
+<li>定义：如果目标函数或约束条件中包含非线性函数，就称这种规划问题为非线性规划问题</li>
+<li>通过投资决策问题归纳非线性规划数学模型的一般形式 总资金A元，投资第i个项目花<span class="math inline">\(a_i\)</span>元，预计可收益<span class="math inline">\(b_i\)</span>元 选择最佳投资方案 投资决策变量 <span class="math inline">\(x_i=\begin{cases} 1,决定投资第i个项目\\ 0,决定不投资第i个项目\\ \end{cases}\)</span> 则该模型可用下列数学模型表示 <span class="math inline">\(max\, Q = \frac{\sum_{i=1}^n b_i x_i} {\sum_{i=1}^n a_i x_i} s.t. \begin{cases} 0 &lt; \sum_{i=1}^n a_i x_i \le A ,\\ x_i(1-x_i)=0,i=1,...,n\\ \end{cases}\)</span></li>
+<li>根据2中例题，非线性规划问题可进一步概括为： <span class="math inline">\(min\,f(x)\\ s.t. \begin{cases} h_j(x)\le0,j=1,2,...,q\\ g_i(x)=0,i=1,2,...,p\\ \end{cases}\)</span> 其中<span class="math inline">\(x=[x_1,...,x_n]^T\)</span>为模型的决策变量，<span class="math inline">\(f\)</span>为目标函数，<span class="math inline">\(g_i和h_j\)</span>为约束函数，<span class="math inline">\(g_i(x)=0\)</span>为等式约束，<span class="math inline">\(h_j(x)\le0\)</span>为不等式约束</li>
+<li>对一个实际问题，要将其规为非线性规划问题时，一般要注意以下几点
+<ol type="1">
+<li>确定供选方案</li>
+<li>提出追求目标</li>
+<li>给出价值标准</li>
+<li>寻求限制条件</li>
+</ol></li>
+<li>线性规划与非线性规划的区别：线性规划最优解只能在可行域的边界上达到（特别是顶点），而非线性规划最优解可在可行域任一点达到</li>
+<li>非线性规划的matlab表示 <span class="math inline">\(minf(x)\\ s.t. \begin{cases} A\cdot x \le b,\\ Aeq \cdot x=beq,\\ c(x)\le0\\ ceq(x)=0,\\ lb\le x \le ub \end{cases}\)</span> 式中的<span class="math inline">\(f(x)\)</span>为标量函数，<span class="math inline">\(A,b,Aeq,beq,lb,ub\)</span>为相应维数的矩阵和向量，<span class="math inline">\(c(x),ceq(x)\)</span>为非线性向量函数 matlab命令为</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=fmincon(fun,x0,A,b,Aeq,beq,lb,ub,nonlcon,options)</span><br><span class="line"># x返回决策变量x的取值，fval返回目标函数取值，fun是M文件自定义函数f(x),x0是x的初始值</span><br><span class="line">nonlcon是用M文件定义的c(x)ceq(x)，options定义优化参数</span><br></pre></td></tr></table></figure>
+<h3 id="无约束问题的matlab解法">无约束问题的Matlab解法</h3>
+<ol type="1">
+<li>在matlab工具箱中，用于求无约束极小值的函数有fminunc和fminsearch，用法分别为</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=fminunc(fun,x0,options)</span><br><span class="line">[x,fval]=fminsearch(fun,x0,options) #只能求初始值附近的一个极小值点</span><br></pre></td></tr></table></figure>
+<h3 id="约束极值问题">约束极值问题</h3>
+<ol type="1">
+<li>定义：带有约束条件的极值问题，也叫规划问题</li>
+</ol>
+<h4 id="二次规划">二次规划</h4>
+<ol type="1">
+<li>定义：若某非线性规划的目标函数为自变量x的二次函数，约束条件又全为线性的，称这种规划为二次规划</li>
+<li>Matlab中二次规划的数学模型可表述为 $min, x<sup>THx+f</sup>Tx,\ s.t.
+<span class="math display">\[\begin{cases}
+Ax\le b\\
+Aeq \cdot x=beq,\\
+lb\le x\le ub
+\end{cases}\]</span>
+H为实对称矩阵，\ $ matlab求解二次规划的命令为 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=quadprog(H,f,A,b,Aeq,beq,lb,ub,x0,options)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="罚函数法">罚函数法</h4>
+<ol type="1">
+<li>利用罚函数法可以将非线性规划问题的求解转化为求一系列无约束极值的问题，也把这种方法叫做序列无约束最小化技术</li>
+<li>罚函数求解非线性规划问题的思想是利用问题中的约束函数作出适当的罚函数，由此构造出带参数的增广目标函数，把问题转换为无约束非线性规划问题，主要有两种形式，一种叫外罚函数法，另一种叫内罚函数法</li>
+<li>外罚函数法： 考虑问题：<span class="math inline">\(minf(x)\\ s.t.\begin{cases} g_i(x) \le 0,i=1,...,r\\ h_j(x) \ge 0,j=1,...,s\\ k_m(x) =0,m=1,...,t \end{cases}\)</span>取一个充分大的数M&gt;0,构造函数<span class="math inline">\(P(x,M)=f(x)+M\sum_{i=1}^nmax(g_i(x),0)-M\sum_{j=1}^nmin(h_j(x),0)+M\sum_{m=1}^n |k_m(x)|\)</span>,则以增广目标函数<span class="math inline">\(P(x,M)\)</span>为目标函数的无约束极值问题<span class="math inline">\(minP(x,M)\)</span>的最优解也是原问题的最优解</li>
+<li><ol type="1">
+<li>如果非线性规划问题要求实时算法，可以使用罚函数算法，但计算精度较低</li>
+<li>如果不要求实时算法，要求高精度,可以使用lingo或matlab的fmincon命令求解</li>
+</ol></li>
+</ol>
+<h4 id="matlab求约束极值问题">matlab求约束极值问题</h4>
+<ol type="1">
+<li><p>在matlab工具箱中，用于求解约束最优化问题的函数有fminbnd,fmincon,quadprog,fseminf,fminimax函数</p></li>
+<li><p>fminbnd函数 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=fminbnd(fun,x1,x2,options) </span><br><span class="line"># 用于求单变量非线性函数在[x1,x2]上极小值</span><br><span class="line"># 返回极小点x和函数的极小值</span><br></pre></td></tr></table></figure></p></li>
+<li><p>fseminf函数 用于求下列模型 <span class="math inline">\(minf(x),\\ s.t. \begin{cases} A \cdot x \le b,\\ Aeq \cdot x =beq,\\ lb\le x \le ub\\ c(x)\le0\\ ceq(x)\le0\\ K_i(x,w_i)\le0,1\le i\le n \end{cases}其中c(x),ceq(x)为向量函数，K_i(x,w_i)为标量函数,w_1...为附加变量\)</span> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=fseminf(fun,x0,ntheta,seminfcon,A,b,Aeq,beq,lb,ub)</span><br></pre></td></tr></table></figure></p>
+<p>fun定义目标函数f(x),x0为x初始值，ntheta是半无穷约束<span class="math inline">\(K_i(x,w_i)\)</span>个数，函数seminfcon用于定义非线性不等式约束<span class="math inline">\(c(x)\)</span>,非线性等式约束<span class="math inline">\(ceq(x)\)</span>和半无穷约束<span class="math inline">\(K_i(x,w_i)\)</span>的函数，seminfcon有两个输入参量x,s,s是推荐的采样步长 可以不使用</p></li>
+<li><p>fminimax函数 用于求下列模型 <span class="math inline">\(min_xmax_iF_i(x),\\ s.t. \begin{cases} A \cdot x \le b,\\ Aeq \cdot x =beq,\\ lb\le x \le ub\\ c(x)\le0\\ ceq(x)=0\\ \end{cases}\)</span> matlab命令为 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[x,fval]=fminimax(fun,x0,A,b,Aeq,beq,lb,ub,nonlcon,options)</span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<h2 id="图与网络模型及方法">图与网络模型及方法</h2>
+<h3 id="图的基本概念与数据结构">图的基本概念与数据结构</h3>
+<ul>
+<li>基本概念 图可由顶点集V和边集E表示，G=(V,E)，若各边加上方向则为有向图，否则为无向图，另外赋权图是指每条边都有一个(或多个)实数对应的图，该实数称为这条边的权，赋权图在实际情况中非常有用</li>
+<li>数据结构 图的数据结构主要有两种方法
+<ol type="1">
+<li>邻接矩阵表示法</li>
+<li>稀疏矩阵表示法</li>
+</ol></li>
+</ul>
+<h3 id="最短路问题">最短路问题</h3>
+<h4 id="两个指定顶点之间的最短路径">两个指定顶点之间的最短路径</h4>
+<p><strong>问题简述</strong>：给定一个连接若干个城镇的铁路网络，在这个网络的两个指定城镇间，找一条最短铁路线 <strong>模型抽象</strong>：该问题我们可以构建一个赋权图G=(V,E,W),其中顶点集V表示各个小城镇，E为边的集合，邻接矩阵W表示各顶点间的距离，若顶点间无边，则w=∞，则问题可转换为求赋权图G中指定两个顶点<span class="math inline">\(u_0,v_0\)</span>间具有最小权的路，这条路称为<span class="math inline">\(u_0,v_0\)</span>间的最短路，它的权称为二者间的距离，记为<span class="math inline">\(d(u_0,v_0)\)</span> <strong>常用方法</strong>：</p>
+<ol type="1">
+<li>狄克斯特拉(Dijkstra)算法:基本思想为按距<span class="math inline">\(u_0\)</span>从近到远为顺序，依次求得<span class="math inline">\(u_0\)</span>到G的各顶点的最短路和距离，直至<span class="math inline">\(v_0\)</span>（或直至G所有顶点）</li>
+</ol>
+<h4 id="两个指定顶点间最短路的数学规划模型">两个指定顶点间最短路的数学规划模型</h4>
+假设有向图有n个顶点，现要求从顶点<span class="math inline">\(v_1-&gt;v_n\)</span>的最短路，仍然用E表示弧的集合，设<span class="math inline">\(W=(w_{ij})_{n×n}\)</span>为邻接矩阵，其分量为：<span class="math inline">\(w_{ij}=\begin{cases} 弧v_iv_j的权值，v_iv_j\in E\\ ∞，其他， \end{cases}\)</span> 决策变量为<span class="math inline">\(x_{ij}\)</span>,当<span class="math inline">\(x_{ij}=1\)</span>,说明弧<span class="math inline">\(v_iv_j\)</span>位于顶点<span class="math inline">\(v_1\)</span>到顶点<span class="math inline">\(v_n\)</span>的最短路上，否则<span class="math inline">\(x_{ij}=0\)</span>,其数学规划表达式为$min<em>{v_iv_jE}w</em>{ij}x_{ij},\ s.t.
+<span class="math display">\[\begin{cases}
+\sum_{j=1,v_iv_j\in E}^n x_{ij}-\sum_{j=1,v_jv_i\in E}^n x_{ji}=\begin{cases}
+1,i=1\\
+-1,i=n\\
+0,i\ne1,n
+\end{cases}\\
+x_{ij}=0或1
+\end{cases}\]</span>
+<p>$</p>
+<h4 id="每对顶点之间的最短路径">每对顶点之间的最短路径</h4>
+<p>计算赋权图各队顶点之间的最短路径，调用方法有两种</p>
+<ol type="1">
+<li>Dijkstra算法 每次以不同的顶点作为起点，用Dijkstra算法算出该起点到其余顶点的最短路径，反复执行n-1次操作，就可得到从每一个顶点到其他顶点的最短路径，时间复杂度为<span class="math inline">\(O(n^3)\)</span></li>
+<li>Floyd算法 递推产生一个矩阵序列<span class="math inline">\(A_1,...,A_k,...,A_n\)</span>,其中矩阵<span class="math inline">\(A_k\)</span>的第i行第j列元素<span class="math inline">\(A_k(i,j)\)</span>表示从顶点<span class="math inline">\(v_i\)</span>到顶点<span class="math inline">\(v_j\)</span>的路径经过顶点序号不大于k的最短路径长度，计算时用迭代公式<span class="math inline">\(A_k(i,j)=min(A_{k-1}(i,j),A_{k-1}(i,k)+A_{k-1}(k,j))\)</span>,k是迭代次数，i,j,k=1,2,...n,最后当k=n时，<span class="math inline">\(A_n\)</span>即是各顶点间的最短通路值</li>
+</ol>
+<h3 id="最小生成树问题">最小生成树问题</h3>
+<h4 id="基本概念">基本概念</h4>
+<p>连通的无圈图叫做树，记为T，其度为1的顶点称为叶子节点，显然有边的树至少有两个叶子顶点 若图G=(V(G),E(G))和树T=(V(T),E(T))满足<span class="math inline">\(V(G)=V(T),E(T)\subset E(G)\)</span>，则称T是G的生成树，图G连通的充要条件是G有生成树</p>
+<h4 id="最小生成树">最小生成树</h4>
+<p>欲修筑连接n个城市的铁路，已知i城与j城之间的铁路造价为<span class="math inline">\(c_{ij}\)</span>,设计一个线路图使总造价最低，这个问题的数学模型是在连通赋权图上求权最小的生成树，赋权图具有最小权的生成树叫做最小生成树 <strong>常用算法</strong>： 构造连通赋权图G=(V,E,W)的最小生成树，设置两个集合P和Q,其中P用于存放G的最小生成树的顶点，集合Q存放G的最小生成树的边。令集合P的初值为<span class="math inline">\(P={V_1}\)</span>(假设构造最小生成树时，从顶点<span class="math inline">\(v_1\)</span>)出发，集合Q的初值为<span class="math inline">\(Q=\varnothing\)</span></p>
+<ol type="1">
+<li>prim算法 从所有<span class="math inline">\(p\in P,v\in V-P\)</span>的边中，选取具有最小权值的边pv，将顶点v加入集合P中,将边pv加入集合Q中，如此重复，直到P=V时，最小生成树构造完毕，这是集合Q包含了最小生成树的所有边。</li>
+<li>Kruskal算法 选<span class="math inline">\(e_1\in E(G)\)</span>，使得<span class="math inline">\(e_1\)</span>是权值最小的边, 若<span class="math inline">\(e_1,e_2,...,e_i,e_{i+1}\)</span>已选好，则从E(G)-{<span class="math inline">\(e_1,e_2,...,e_i\)</span>}中选取<span class="math inline">\(e_{i+1}\)</span>,使得<span class="math inline">\({e_1,e_2,...,e_i,e_{i+1}}\)</span>中无圈，<span class="math inline">\(e_{i+1}\)</span>是E(G)-<span class="math inline">\({e_1,e_2,...,e_i}\)</span>中权值最小的边，直到选得<span class="math inline">\(e_{|V|-1}\)</span>为止</li>
+</ol>
+<h3 id="网络最大流问题">网络最大流问题</h3>
+<h4 id="基本概念-1">基本概念</h4>
+<ol type="1">
+<li>网络：给一个有向图D=(V,A),其中A为弧集，在V中指定一点，称为发点(记为<span class="math inline">\(v_s\)</span>),另一点称为收点(记为<span class="math inline">\(v_t\)</span>)，其余点为中间点，对于每一条弧<span class="math inline">\((v_i,v_j)\in A\)</span>，对应有一个<span class="math inline">\(c(v_i,v_j)\ge 0(或简写为c_{ij})\)</span>,称为弧的容量，通常把这样的有向图叫做一个网络，记为D=(V,A,C),其中C={<span class="math inline">\(c_{ij}\)</span>}</li>
+<li>流：定义在弧集合A的一个函数<span class="math inline">\(f={f_{ij}={f(v_i,v_j)}}\)</span>，并称<span class="math inline">\(f_{ij}\)</span>为弧<span class="math inline">\((v_i,v_j)\)</span>上的流量</li>
+<li><div id="hei">
+最大流问题的线性规划表示
+</div></li>
+</ol>
+<p><span class="math inline">\(max\quad v(f),\\ s.t.\begin{cases} \sum_{j:(v_i,v_j)\in A}f_{ij}-\sum_{j:(v_j,v_i\in A)}f_{ji}=\begin{cases} v(f),i=s\\ -v(f),i=t\\ 0,i\ne s,t, \end{cases}\\ 0\le f_{ij} \le c_{ij},\forall(v_i,v_j)\in A \end{cases}\)</span></p>
+<h3 id="最小费用最大流问题">最小费用最大流问题</h3>
+<h4 id="最小费用最大流">最小费用最大流</h4>
+给定网络D=(V,A,C),每一弧<span class="math inline">\((v_i,v_j)\in A\)</span>上，除了已给容量<span class="math inline">\(c_{ij}\)</span>外，还给了一个单位流量的费用<span class="math inline">\(b(v_i,v_j)\ge 0(b_{ij})\)</span>，所谓最小费用最大流问题就是求一个发点<span class="math inline">\(v_s\)</span>到收点<span class="math inline">\(v_t\)</span>的最大流，使流的总输送费用<span class="math inline">\(\sum_{(v_i,v_j)\in A}b_{ij}f_{ij}\)</span>取最小值，最小费用最大值问题可以归结为两个线性规划问题，首先用一个线性规划模型求出最大流量<span class="math inline">\(v(f_{max})\)</span>，再用一个线性规划模型求出最大流对应最小费用 $min <em>{(v_i,v_j)A}b</em>{ij}f_{ij}\ s.t.
+<span class="math display">\[\begin{cases}
+0\le f_{ij} \le c_{ij},\forall(v_i,v_j)\in A\\
+\sum_{j:(v_i,v_j)\in A}f_{ij}-\sum_{j:(v_j,v_i\in A)}f_{ji}=d_i\\
+d_i=\begin{cases}
+v(f_{max}),i=s\\
+-v(f_{max}),i=t\\
+0,i\ne s,t,\\
+\end{cases}\\
+\end{cases}\]</span>
+<p>$ <span class="math inline">\(v_{f_{max}}\)</span><a href="#网络最大流问题">上节</a>求得最大流流量</p>
+<h3 id="matlab的图论工具箱">Matlab的图论工具箱</h3>
+<p><img src="/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-35-48.png"></p>
+<h3 id="旅行商tsp问题">旅行商(TSP)问题</h3>
+<ol type="1">
+<li>问题描述：一推销员准备前往若干城市推销商品，然后回到驻地，如何为他设计一条最短的旅行路线(从驻地出发，经过每个城市恰好一次，最后返回驻地)，这个问题就被称为旅行商问题</li>
+<li>数学抽象：用图论术语表示，就是在一个赋权完全图中，找出一个有最小权的Hamilton圈，这个圈就叫最优圈</li>
+<li>数学模型：设城市的个数为n，<span class="math inline">\(d_{ij}\)</span>是两个城市i与j之间的距离，<span class="math inline">\(x_{ij}=0 or 1\)</span>(1表示走过城市i到城市j的路，0表示没有选择走这条路)，则有 $min <em>{ij}d</em>{ij}x_{ij}\ s.t.
+<span class="math display">\[\begin{cases}
+\sum_{j=1}^n x_{ij}=1,i=1,2,\dots,n,(每个点只有一条边出去)\\
+\sum_{i=1}^n x_{ij}=1,i=1,2,\dots,n,(每个点只有一条边进去)\\
+\sum_{i,j\in s}x_{ij}\le|s|-1,2\le|s|\le n-1,s\subset{1,2,\dots,n},即s为{1,2,\dots,n}的真子集(除起点终点外，各点不构成圈)\\
+x_{ij}\in {0,1},i,j=1,2,\dots,n,i\ne j
+\end{cases}\]</span>
+$</li>
+</ol>
+<h3 id="计划评审方法和关键路线法">计划评审方法和关键路线法</h3>
+<p>这两个方法是网络分析的重要组成部分，已经合并为一种方法，国外称PERT/CPM，国内称为统筹方法</p>
+<h4 id="计划网络图">计划网络图</h4>
+<p>计划网络图中通常用圆圈表示事件，用箭线表示工作，用这种方法画出的网络图为计划网络图 <img src="/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-35-14.png"> 虚作业用虚箭线表示，表示工时为0，不消耗任何资源的虚构作业，作用只是为了正确表述工作的前向后继关系 <strong>关键路线</strong>: 在计划网络图中，称从初始事件到最终事件的由各项工作连贯组成的一条路为路线，具有累计作业时间最长的路线称为关键路线</p>
+<h4 id="时间参数">时间参数</h4>
+<ol type="1">
+<li>事件时间参数
+<ol type="1">
+<li>事件的最早时间</li>
+<li>事件的最迟时间</li>
+</ol></li>
+<li>工作时间参数
+<ol type="1">
+<li>工作的最早可能开工时间与最早可能完工时间</li>
+<li>最迟必须开工时间和最迟必须完工时间</li>
+</ol></li>
+<li>时差
+<ol type="1">
+<li>工作总时差</li>
+<li>工作单时差</li>
+</ol></li>
+</ol>
+<h4 id="计划网络图的计算">计划网络图的计算</h4>
+<ol type="1">
+<li>建立计划网络图 <img src="/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/2024-01-15-16-34-48.png"></li>
+<li>写出相应的规划问题 <span class="math inline">\(min\sum_{i\in V}x_i\\ s.t\begin{cases} x_j\ge x_i+t_{ij},(i,j)\in A,i,j\in V\\ x_i\ge 0,i\in V\\ \end{cases}\)</span> V为所有时间集合，A为所有作业集合，<span class="math inline">\(x_i\)</span>为事件i的开始时间，<span class="math inline">\(t_{ij}\)</span>为作业(i,j)的计划时间</li>
+<li>问题求解</li>
+<li>将关键路线看为最长路 如果将关键路线看成最长路,则可以按照求最短路的方法(将求极小改为求极大)求出关键路线 设<span class="math inline">\(x_{ij}\)</span>为0-1变量，当作业(i,j)位于关键路线上取1，否则取0，数学规划问题写成 <span class="math inline">\(max\sum_{(i,j)\in A}t_{ij}x_{ij}\\ s.t.\begin{cases} \sum_{j:(i,j)\in A}x_{ij}-\sum_{j:(j,i)\in A}x_{ji}=\begin{cases} 1,i=1,\\ -1,i=n,\\ 0,i\ne1,n,\\ \end{cases}\\ x_{ij}=0 or 1,(i,j)\in A \end{cases}\)</span></li>
+</ol>
+<h2 id="插值与拟合">插值与拟合</h2>
+<p>若仅已知函数<span class="math inline">\(f(x)\)</span>在某区间<span class="math inline">\([a,b]\)</span>上一系列点上的值<span class="math inline">\(y_i=f(x_i),i=0,1,\dots,n\)</span>，当需要在这些节点间的x上的函数值时，有两种方法：插值法，拟合法，二者都是根据一组数据构造一个函数作为近似，由于近似的要求不同，二者在数学方法上完全不同，需要我们根据实际情况考虑</p>
+<h3 id="插值方法">插值方法</h3>
+<p>在工程和数学应用中，若在平面上给定一组离散点列，要求一条曲线，把这些点按次序连接起来，称为插值，若已知n+1点<span class="math inline">\((x_i,y_i)(i=0,1,...,n)\)</span>,下面详细介绍各种插值函数</p>
+<h4 id="分段线性插值">分段线性插值</h4>
+<p>简单来说，将每两个相邻的节点用直线连起来，如此形成的一条折线就是分段线性插值函数，记住<span class="math inline">\(I_n(x_i)=y_i\)</span>,且<span class="math inline">\(I_n(x)\)</span>在每个小区间<span class="math inline">\([x_i,x_{i+1}]\)</span>是线性函数<span class="math inline">\((i=0,1,...,n-1)\)</span> <span class="math inline">\(I_n(x)\)</span>可以表示<span class="math inline">\(I_n(x)=\sum_{i=0}^ny_il_i(x)\)</span>,其中 <span class="math inline">\(l_i(x)=\begin{cases} \frac{x-x_{i-1}}{x_i-x_{i-1}},x\in[x_{i-1},x_i],i\ne 0,\\ \frac{x-x_{i+1}}{x_i-x_{i+1}},x\in[x_i,x_{i+1}],i\ne n,\\ 0,else\\ \end{cases}\)</span> <span class="math inline">\(l_n(x)\)</span>有良好的收敛性，即对于<span class="math inline">\(x\in[a,b]\)</span>,有<span class="math inline">\(\lim_{n \to \infty}I_n(x)=f(x)\)</span>,用<span class="math inline">\(I_n(x)\)</span>计算x点的插值时，只用到x左右的两个节点，计算量与节点个数n无关，但n越大，分段越多，插值误差越小</p>
+<h4 id="拉格朗日插值多项式">拉格朗日插值多项式</h4>
+<p>拉格朗日(Lagrange)插值的基函数为<span class="math inline">\(l_i(x)=\frac{(x-x_0)...(x-x_{i-1})(x-x_{i+1})...(x-x_n)}{(x_i-x_0)...(x_i-x_{i-1})(x_i-x_{i+1})...(x_i-x_n)}\\ =\prod_{j=0,j\ne i}^n \frac{x-x_j}{x_i-x_j},i=0,1,...,n\\ l_i(x)\)</span>是n次多项式，满足<span class="math inline">\(l_i(x_j)=\begin{cases} 0,j\ne i 1,j=i \end{cases}\)</span> 综上，拉格朗日插值函数<span class="math inline">\(L_n(x)=\sum_{i=0}^ny_il_i(x)=\sum_{i=0}^ny_i(\prod_{j=0,j\ne i}^n\frac{x-x_j}{x_i-x_j})\)</span></p>
+<h4 id="样条插值">样条插值</h4>
+<p>对于一些要求插值曲线具有较高的光滑程度，有连续曲率的数学物理问题，这时需要用样条插值</p>
+<ol type="1">
+<li>样条函数的概念 数学上将具有一定光滑性的分段多项式称为样条函数，具体地说，给定区间[a,b]的一个分划：<span class="math inline">\(\delta:a=x_0&lt;x_1&lt;\dots&lt;x_{n-1}&lt;x_n=b\)</span> 如果函数S(x)满足
+<ol type="1">
+<li>在每个小区间<span class="math inline">\([x_i,x_{i+1}](i=0,1,...,n-1)\)</span>上S(x)是m次多项式</li>
+<li>S(x)在[a,b]上具有m-1阶连续导数 则称S(x)为关于分划<span class="math inline">\(\delta\)</span>的m次样条函数，其图形为m次样条曲线</li>
+</ol></li>
+<li>三次样条插值 利用样条函数进行插值，称为样条插值，三次样条插值函数就是把上面S(x)中的m=3,但是仅有这些条件是不足与确定所有待定参数，还需要额外的边界条件 常用的三次样条函数的边界条件有三种类型：
+<ol type="1">
+<li><span class="math inline">\(S&#39;(a)=y_0&#39;,S&#39;(b)=y_n&#39;\)</span>,有这种边界条件建立的样条插值函数称为<span class="math inline">\(f(x)\)</span>的完备三次样条插值函数，若<span class="math inline">\(f&#39;(x)\)</span>不知道，我们可以要求S'(x)与f'(x)在端点处近似相等，这时以<span class="math inline">\(x_0,x_1,x_2,x_3\)</span>为节点做一个三次Newton插值多项式,有这种边界条件建立的三次样条称为f(x)的Lagrange三次样条插值函数</li>
+<li><span class="math inline">\(S&quot;(a)=y_0&quot;,S&quot;(b)=y_n&quot;,when y_0&quot;=y_n&quot;=0\)</span>,称为自然边界条件</li>
+<li><span class="math inline">\(S&#39;(a+0)=S&#39;(b-0),S&quot;(a+0)=S&quot;(b-0)\)</span>,称为周期条件</li>
+</ol></li>
+</ol>
+<h4 id="matlab插值工具箱">Matlab插值工具箱</h4>
+<ol type="1">
+<li>一维插值函数</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y=interp1(x0,y0,x,&#x27;method&#x27;)</span><br><span class="line">method 指定插值方法，默认为线性插值，其值可为</span><br><span class="line">&#x27;nearest&#x27; 最近项插值</span><br><span class="line">&#x27;linear&#x27; 线性插值</span><br><span class="line">&#x27;spline&#x27; 立方线条插值</span><br><span class="line">&#x27;cubic&#x27; 立方插值</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>三次样条插值</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pp=csape(x0,y0,conds,valconds);y=fnval(pp,x);</span><br><span class="line">csape的返回值是pp形式，要求插值点函数值必须调用fnval，conds指定插值边界条件，valconds指定边界导数值</span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li><p>二维插值 若节点是二维的，插值函数就是二元函数，即曲面</p>
+<ol type="1">
+<li>插值节点为网格节点</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z=interp2(x0,y0,z0,x,y,&#x27;method&#x27;)</span><br><span class="line">x0,y0分别为m,n维向量,表示节点,z0为n×m矩阵，表示节点值,x,y为一维数组，表示插值点，z表示得到的插值</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>插值节点为散乱节点</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ZI=griddata(x,y,z,XI,YI)</span><br><span class="line">x,y,z指数据点横纵竖坐标,XI,YI给定的插值点横纵坐标,ZI网格(XI,YI)的函数值</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="曲线拟合的线性最小二乘法">曲线拟合的线性最小二乘法</h3>
+<h4 id="线性最小二乘法">线性最小二乘法</h4>
+<p>曲线拟合：已知一组(二维)数据，即平面上n个点<span class="math inline">\((x_i,y_i),i=1,2,...,n,x_i\)</span>互不相同，寻求一个函数(曲线)<span class="math inline">\(y=f(x)\)</span>,使<span class="math inline">\(f(x)\)</span>在某种准则下雨所有数据点最为接近，即曲线拟合的最好。 线性最小二乘法是解决曲线拟合最常用的方法，基本思路是，令 <span class="math inline">\(f(x)=a_1r_1(x)+a_2r_2(x)+\dots+a_mr_m(x)\)</span>,式中:<span class="math inline">\(r_k(x)\)</span>为事先选定好的一组线性无关的函数，<span class="math inline">\(a_k\)</span>为待定系数<span class="math inline">\((k=1,2,...,m&lt;n)\)</span> 拟合准则是使<span class="math inline">\(y_i(i=1,2,...,n)\)</span>与<span class="math inline">\(f(x_i)\)</span>的距离<span class="math inline">\(\delta_i\)</span>的平方和最小，称为最小二乘准则</p>
+<h4 id="最小二乘法的matlab实现">最小二乘法的Matlab实现</h4>
+<ol type="1">
+<li>解方程组方法</li>
+<li>多项式拟合法</li>
+</ol>
+<h3 id="最小二乘优化">最小二乘优化</h3>
+<p>在无约束优化问题中，有些重要的特殊情形，比如目标函数有若干个函数的平方和构成，这类函数可以写成<span class="math inline">\(F(x)=\sum_{i=1}^mf_i^2(x),x\in R^n,x=[x_1,...,x_n]^T,m\ge n\)</span> 把极小化这类函数的问题<span class="math inline">\(min F(x)=\sum_{i=1}^mf_i^2(x)\)</span>称为最小二乘优化问题 matlab也提供一些函数优化此问题,有lsqlin,leqcurvefit,leqnonlin,lsqnonneg,也可以直接调用工具箱里命令cftool,该命令给出一维数据拟合的交互式环境</p>
+<h3 id="曲线拟合和函数逼近">曲线拟合和函数逼近</h3>
+<p>曲线拟合是指已知一组离散数据<span class="math inline">\({(x_i,y_i),i=1,...,n}\)</span>，选择一个较简单的函数<span class="math inline">\(f(x)\)</span>(如多项式),在一定准则(如最小二乘准则)下，最接近这些数据 如果已知一个较为复杂的连续函数<span class="math inline">\(y(x),x\in[a,b]\)</span>,要求选择一个较简单的函数<span class="math inline">\(f(x)\)</span>,在一定准则下最接近<span class="math inline">\(y(x)\)</span>，就是函数逼近 与曲线拟合的最小二乘准则对应，函数逼近常用的一种准则是最小平方逼近，即<span class="math inline">\(J=\int_{a}^{b} [f(x)-y(x)]^2\, {\rm d}x\)</span>达到最小，与曲线拟合一样，选一组函数构造<span class="math inline">\(f(x)\)</span>,代入使J达到最小</p>
+<h2 id="微分方程建模感觉不太重要">微分方程建模(感觉不太重要)</h2>
+<p>对于生活中的实际问题，我们往往需要将其化为微分方程的定解问题来求解，大致可分为以下几步：</p>
+<ol type="1">
+<li>根据实际要求要求确定要研究的量(自变量，未知函数，必要的参数)并确定坐标系</li>
+<li>找出这些量所满足的基本规律(物理的，几何的，化学的或生物的等)</li>
+<li>运用这些规律列出方程和定解条件 列方程常见方法：
+<ul>
+<li>按规律直接列方程</li>
+<li>微元分析法与任意区域取积分方法</li>
+<li>模拟近似法</li>
+</ul></li>
+</ol>
+<h3 id="matlab求微分方程的符号解">Matlab求微分方程的符号解</h3>
+<p>用matlab求解常微分方程的符号解，首先定义符号向量，然后调用命令dsolve，dsolve调用格式为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[y1,...,yN]=dsolve(eqns,conds,Name,Value)</span><br><span class="line">eqns符号微分方程(组)，conds，初值条件或边值条件，Name,Value可选的成对参数</span><br></pre></td></tr></table></figure>
+<h2 id="数理统计感觉不太重要">数理统计(感觉不太重要)</h2>
+<p>数理统计研究对象主要是受随机因素影响的数据，面对一批数据进行分析建模，首先要掌握参数估计和假设检验这两个数理统计中最基本方法，给定数据符合一定分布要求后，才能建立回归分析和方差分析等数学模型</p>
+<h2 id="时间序列">时间序列</h2>
+<h3 id="简介">简介</h3>
+<p>将预测对象按照时间顺序排列起来，构成一个所谓的时间序列，从所构成的这一组时间序列过去的变化规律，推断今后变化的可能性及变化趋势，变化规律，就是时间序列预测法</p>
+<p>时间序列法其实也是一种回归模型，其基于原理是：一方面承认事物发展的延续性，运用过去时间序列的数据进行统计分析就能推测事物发展趋势，另一方面又充分考虑到偶然因素影响产生的随机性</p>
+<p>其<strong>优点</strong>是简单易行，便于掌握，能充分运用原时间序列的各项数据，计算速度快，对模型参数有动态确定能力，精度较好，采用组合的时间序列或将时间序列和其他模型组合效果更好</p>
+<p>其<strong>缺点</strong>是不能反映事物内在联系，不能分析两个因素间相关关系，只适用于短期预测</p>
+<h3 id="确定性时间序列分析方法">确定性时间序列分析方法</h3>
+<p>时间序列预测技术就是通过对预测目标自身时间序列的处理，来研究其变化趋势，一个时间序列往往是一下几类变化形式的叠加或耦合</p>
+<ol type="1">
+<li>长期趋势变动，他指时间序列朝着一定的方向持续上升或下降，或停留在某一水平上的倾向，反映了客观事物的主要变化趋势。</li>
+<li>季节变动</li>
+<li>循环变动，通常是周期为一年以上，由非季节因素引起的涨落起伏波形相似的波动</li>
+<li>不规则变动，通常分为突然变动和随机变动</li>
+</ol>
+<p>通常用<span class="math inline">\(T_t\)</span>表示长期趋势项，<span class="math inline">\(S_t\)</span>表示季节变动趋势项，<span class="math inline">\(C_t\)</span>表示循环变动趋势项，<span class="math inline">\(R_t\)</span>表示随机干扰项，常见确定性时间序列模型类型如下 1. 加法模型： <span class="math inline">\(y_t=T_t+S_t+C_t+R_t\)</span> 2. 乘法模型： <span class="math inline">\(y_t=T_t\cdot S_t\cdot C_t\cdot R_t\)</span> 3. 混合模型： <span class="math inline">\(y_t=T_t\cdot S_t+R_t\\  y_t=S_t+T_t\cdot R_t\)</span> <span class="math inline">\(y_t\)</span>为观测目标的观测记录，均值<span class="math inline">\(E(R_t)=0\)</span>,方差<span class="math inline">\(Var(R_t)=\sigma^2\)</span> 如果在预测时间范围以内，无突然变动且随机变动的方差较小，且有理由认为过去和现在的演变趋势将继续发展到未来时，可用一些经验方法进行预测</p>
+<h4 id="移动平均法">移动平均法</h4>
+<p>设观测序列为<span class="math inline">\(y_1,...,y_T\)</span>,取移动平均的项数N&lt;T,一次移动平均值计算公式为： <span class="math inline">\(M_t^(1)=\frac{1}{N}(y_t+y_{t-1}+\dots+y_{t-N+1})=\frac{1}{N}(y_{t-1}+\dots+y_{t_N})+\frac{1}{N}(y_t-y_{t-N})=M_{t-1}^(1)+\frac{1}{N}(y_t-y_{t-N})\)</span></p>
+<p>二次移动平均值计算公式为 <span class="math inline">\(M_t^(2)=\frac{1}{N}(M_t^(1)+\dots+M_{t-N+1}^(1))=M_{t-1}^(2)+\frac{1}{N}(M_t^(1)-M_{t-N}^(1))\)</span> 当预测目标的基本趋势是在某一水平上下波动时，可用一次移动平均方法建立预测模型,即 <span class="math inline">\(\hat{y_{t+1} }=M_t^(1)=\frac{1}{N}(y_t+\dots+y_{t-N+1}),t=N,N+1,\dots,T\)</span> 其预测标准误差为<span class="math inline">\(S=\sqrt{\frac{\sum_{t=N+1}^T(\hat{y_t}-y_t)^2}{T-N}}\)</span></p>
+<p>最近N期序列值的平均值作为未来各期的预测结果，一般N取值为:<span class="math inline">\(5\le N\le 200\)</span>,当历史序列的基本趋势变化不大且序列中随机变动成分较多时，N的取值应较大一些,否则N的取值应小一些，在有确定的季节变动周期资料中，移动平均的项数应取周期长度，选择最佳N值的一个有效方法是编辑若干模型的预测误差，预测误差最小值为好</p>
+<p>当预测目标基本趋势和某一线性模型吻合时，常用二次移动平均法，但序列同时存在线性趋势和周期波动时，可用趋势移动平均法建立预测模型： <span class="math inline">\(\hat{y_{T+m}}=a_T+b_Tm,m=1,2,\dots\)</span>,式中 <span class="math inline">\(a_T=2M_T^{(1)}-M_T^{(2)};b_T=\frac{2}{N-1}(M_T^{(1)}-M_T^{(2)})\)</span></p>
+<h4 id="指数平滑法">指数平滑法</h4>
+<p>一般来说历史数据对未来值的影响是随时间间隔增长而递减的，而上述移动平均法的权数都是两端项权数小，中间项权数大，不符合上诉规律，更好的方法是对各期观测值依时间顺序进行加权平均作为预测值，<strong>指数平滑法</strong>就满足这一要求，且具有简单递推形式</p>
+<p>指数平滑法根据平滑次数的的不同，又分为一次指数平滑法，二次指数平滑法，和三次指数平滑法等</p>
+<p><strong>一次指数平滑法</strong> 1. 预测模型</p>
+<p>设时间序列为<span class="math inline">\(y_1,y_2,...,y_t,...,\alpha\)</span>为加权系数,<span class="math inline">\(0&lt;\alpha&lt;1\)</span>,一次指数平滑公式为: <span class="math inline">\(S_t^(1)=\alpha y_t+(1-\alpha)S_{t-1}^{(1)}=S_{t-1}^{(1)}+\alpha(y_t-S_{t-1}^{(1)})\)</span> 以这种平滑值进行预测，就是一次指数平滑法，预测模型为<span class="math inline">\(\hat{y_{t+1}}=S_t^{(1)}=\alpha y_t+(1-\alpha)\hat{y_t}\)</span></p>
+<ol start="2" type="1">
+<li><p>加权系数的选择</p>
+<p>加权系数<span class="math inline">\(\alpha\)</span>的大小决定了在新预测值中新数据和原预测值所占的比重，<span class="math inline">\(\alpha\)</span>越大，新数据所占比重越大，原预测值所占比重越小，也可将上式改为<span class="math inline">\(\hat{t_{t+1}}=\hat{y_t}+\alpha(y_t-\hat{y_t})\)</span></p>
+<p>这可看出新预测值是根据预测误差对原预测值进行修正得到的，<span class="math inline">\(\alpha\)</span>越大，修正幅度越大 其选取规则如下：</p>
+<ul>
+<li>如果时间序列波动不大，比较平稳，则α可取小一点以减少修正幅度，使预测模型能包含较长时间序列的信息</li>
+<li>如果时间序列具有迅速且明显的变动倾向，则α应取大一点，使预测模型灵敏度高一些，以便迅速跟上数据的变化</li>
+</ul></li>
+<li><p>初始值的确定</p>
+<p>用一次平滑法预测，除了选择合适的<span class="math inline">\(\alpha\)</span>，还要确定初始值<span class="math inline">\(s_0^{(1)}\)</span>,初始值是预测者估计指定的</p></li>
+</ol>
+<p><strong>二次指数平滑法</strong> 一次指数平滑法虽然克服了移动平均法的缺点，但当时间序列变动出现直线趋势时，用该方法预测由明显滞后偏差，应用二次指数平滑，用滞后偏差的规律建立直线趋势模型，计算公式如下 <span class="math inline">\(\begin{cases} S_t^{(1)}=\alpha y_t+(1-\alpha)S_{t-1}^{(1)}\\ S_t^{(2)}=\alpha S_t^{(1)}+(1-\alpha)S_{t-1}^{(2)} \end{cases}\)</span> 式中：<span class="math inline">\(S_t^{(1)}\)</span>为一次指数的平滑值，<span class="math inline">\(S_t^{(2)}\)</span>为二次平滑函数的平滑值</p>
+<p>当时间序列<span class="math inline">\({y_t}\)</span>从某时期开始具有直线趋势，可用直线趋势模型 <span class="math inline">\(\hat{y_{t+m}}=a_t+b_tm,m=1,2,\dots,\)</span> <span class="math inline">\(\begin{cases}  a_t=2S_t^{(1)}-S_t^{(2)},\\  b_t=\frac{\alpha}{1-\alpha}(S_t^{(1)}-S_t^{(2)}) \end{cases}\)</span>进行预测</p>
+<p><strong>三次指数平滑法</strong> 当时间序列的变动表现为二次曲线趋势，需要用三次指数平滑法，其在二次指数平滑基础上，再进行一次平滑，计算公式为 <span class="math inline">\(\begin{cases}  S_t^{(1)}=\alpha y_t+(1-\alpha)S_{t-1}^{(1)}\\  S_t^{(2)}=\alpha S_t^{(1)}+(1-\alpha)S_{t-1}^{(2)}\\  S_t^{(3)}=\alpha S_t^{(2)}+(1-\alpha)S_{t-1}^{(3)} \end{cases}\)</span> <span class="math inline">\(S_t^{(3)}\)</span>为三次指数平滑值</p>
+<p>其预测模型为: <span class="math inline">\(\hat{y_{t+m}}=a_t+b_tm+C_tm^2,m=1,2,\dots,\)</span> <span class="math inline">\(\begin{cases}  a_t=3S_t^{(1)}-3S_t^{(2)}+S_t^{(3)},\\  b_t=\frac{\alpha}{2(1-\alpha)^2}((6-5\alpha)S_t^{(1)}-2(5-4\alpha)S_t^{(2)}+(4-3\alpha)S_t^{(3)})\\  c_t=\frac{\alpha^2}{2(1-\alpha)^2}(S_t^{(1)}-2S_t^{(2)}+S_t^{(3)}) \end{cases}\)</span></p>
+<h4 id="差分指数平滑法">差分指数平滑法</h4>
+<p>我们也可以从数据变换角度解决一次指数平滑法的滞后偏差问题，差分方法就是改变数据变动趋势的简易方法</p>
+<p>下面以一阶差分指数平滑法为例，其公式如下 <span class="math inline">\(\nabla y_t=y_t-y_{t-1} \\ \nabla \hat{y_{t+1}}=\alpha \nabla y_t+(1-\alpha)\nabla\hat{y_t} \\\hat{y_{t+1}}=\nabla\hat{y_{t+1}}+y_t,\nabla\)</span>为差分记号</p>
+<h4 id="具有季节性特点的时间序列的预测">具有季节性特点的时间序列的预测</h4>
+<p>对于季节性时间序列的预测，要在数学上完全拟合其变化曲线是非常困难的，但预测的目的是为了找到时间序列的变化趋势，尽可能的做到精确，下面介绍季节系数法，计算步骤如下 1. 收集m年的每年各季度或各月份的时间序列样本数据<span class="math inline">\(a_{ij}\)</span>,i表示年份序号，j表示季度(月份)序号 2. 计算每年所有季度或月份算术平均值<span class="math inline">\(\bar{a}=\frac{1}{k}\sum_{i=1}^m\sum_{j=1}^n a_{ij},k=mn\)</span> 3. 计算同季度或同月份数据的算术平均值<span class="math inline">\(\bar{a_{.j}}=\frac{1}{m}\sum_{i=1}^ma_{ij}\)</span> 4. 计算季度(月份)系数<span class="math inline">\(b_j=\frac{\bar{a_{.j}}}{\bar{a}}\)</span> 5. 预测计算，当时间序列按季度列出，先求出预测年份(下一年)的年加权平均<span class="math inline">\(y_{m+1}=\frac{\sum_{i=1}^mw_iy_j}{\sum_{i=1}^mw_i}  \\y_i=\sum_{j=1}^na_{ij}\)</span>为第i年年合计数，<span class="math inline">\(w_i\)</span>为第i年权数,<span class="math inline">\(w_i=i\)</span>,再计算预测年份的季度平均值<span class="math inline">\(\bar{y_{m+1}}=y_{m+1}/n\)</span>,最后预测年份第j季度的预测值为<span class="math inline">\(y_{m+1,j}=b_j\bar{y_{m+1}}\)</span></p>
+<h3 id="平稳时间序列模型">平稳时间序列模型</h3>
+<p>这里的平稳指的是宽平稳，其特性是序列的统计特性不随时间Pinyin而变化，即均值和协方差不随时间平移而变化</p>
+<h4 id="时间序列的基本概念">时间序列的基本概念</h4>
+<p><em>平稳序列</em>:设随机序列<span class="math inline">\({X_t,t=0,\pm1,\pm2,...}\)</span>满足 - <span class="math inline">\(E(X_t)=\mu\)</span>=常数 - <span class="math inline">\(\gamma_{t+k,t}=\gamma_k(k=0,\pm1,\pm2,...)\)</span>与t无关，则称<span class="math inline">\(X_t\)</span>为平稳随机序列,坚持平稳序列</p>
+<p><em>平稳白噪声序列</em>:设平稳序列<span class="math inline">\({\epsilon_t,t=0,\pm1,\pm2,...}\)</span>的自协方差函数为<span class="math inline">\(\gamma_k=\sigma^2\delta_{k,0}=\begin{cases}  0,k\ne0\\  \sigma^2,k=0 \end{cases}\)</span> 则称该序列为平稳白噪声序列</p>
+<p><em>偏相关函数</em>:考虑由<span class="math inline">\({X_{t-1},X_{t-2},...,X_{t-k}}\)</span>对<span class="math inline">\(X_t\)</span>的线性最小均方估计，即选择系数<span class="math inline">\(\psi_{k,1},\psi_{k,2},...,\psi_{k,k}\)</span>,使得<span class="math inline">\(min\quad\delta=E[(X_t-\sum_{j=1}^k\psi_{k,j}X_{t-j})^2]\)</span>,<span class="math inline">\({\psi_{k,k},k=1,2,\dots}\)</span>称为<span class="math inline">\(X_t\)</span>的偏相关函数</p>
+<p><em>ARMA时间序列</em>:ARMA时间序列可以分为三种类型 1. AR序列，即自回归序列(Auto Regressive Model) 设<span class="math inline">\({X_t,t=0,\pm1,\pm2,...}\)</span>为零均值平稳序列，满足下列模型 <span class="math inline">\(X_t=\psi_1 X_{t-1}+\psi_2 X_{t-2}+\dots+\psi_p X_{t-p}+\epsilon_t\)</span> <span class="math inline">\(\epsilon_t\)</span>为零均值，方差为<span class="math inline">\(\delta_\epsilon^2\)</span>的平稳白噪声，<span class="math inline">\(X_t\)</span>为阶数为p的自回归序列，简称AR(p)序列，<span class="math inline">\(\psi=[\psi_1,\psi_2,...,\psi_p]^T\)</span>为自回归参数向量,其分量为自回归系数 引入后移算子B辅助定义，算子B定义<span class="math inline">\(BX_t\equiv X_{t-1},B^kX_t\equiv X_{t-k}\)</span> 记算子多项式<span class="math inline">\(\psi(B)=1-\psi_1B-\psi_2B^2-...-\psi_pB^p\)</span> 则AR序列可改写为<span class="math inline">\(\psi(B)X_t=\epsilon_t\)</span></p>
+<ol start="2" type="1">
+<li><p>MA序列，即移动平均序列(Moving Average Model) 设<span class="math inline">\({X_t,t=0,\pm1,\pm2,...}\)</span>为零均值平稳序列，满足下列模型 <span class="math inline">\(X_t=\epsilon_t-\theta_1 \epsilon_{t-1}-\dots-\theta_q \epsilon_{t-q}\)</span> <span class="math inline">\(\epsilon_t\)</span>为零均值，方差为<span class="math inline">\(\delta_\epsilon^2\)</span>的平稳白噪声，<span class="math inline">\(X_t\)</span>为阶数为q的移动平均序列，简称MA(q)序列，<span class="math inline">\(\theta=[\theta_1,\theta_2,...,\theta_p]^T\)</span>为移动平均参数向量,其分量为移动平均系数，引入线性后移算子B，再定义一个和上面类似多项式,则可MA序列改写为<span class="math inline">\(X_t=\theta(B)\epsilon_t\)</span></p></li>
+<li><p>ARMA序列，即自回归移动平均序列(Auto Regressive Moving Model) 设<span class="math inline">\({X_t,t=0,\pm1,\pm2,...}\)</span>为零均值平稳序列，满足下列模型 <span class="math inline">\(X_t-\psi_1 X_{t-1}-\psi_2 X_{t-2}-\dots-\psi_p X_{t-p}=\epsilon_t-\theta_1 \epsilon_{t-1}-\dots-\theta_q \epsilon_{t-q}\)</span> <span class="math inline">\(\epsilon_t\)</span>为零均值，方差为<span class="math inline">\(\delta_\epsilon^2\)</span>的平稳白噪声，<span class="math inline">\(X_t\)</span>为阶数为p,q的移动平均序列，简称ARMA(p,q)序列,利用后移算子可表为<span class="math inline">\(\psi(B)(X_t-\mu)-\theta(B)\epsilon_t\)</span></p>
+<p>对于算子多项式<span class="math inline">\(\psi(B),\theta(B)\)</span>通常还要做下列假定</p>
+<ol type="1">
+<li>二者无公共因子，且<span class="math inline">\(\psi_p\ne0,\theta_q\ne0\)</span></li>
+<li><span class="math inline">\(\psi(B)=0\)</span>的根全在单位圆外，称为模型平稳性条件</li>
+<li><span class="math inline">\(\theta(B)=0\)</span>的根全在单位圆外，称为模型可逆性条件</li>
+</ol></li>
+</ol>
+<h4 id="arma模型的构建和预报">ARMA模型的构建和预报</h4>
+<p>在实际问题建模中，首先要进行模型的识别和定阶，即要判断AR(p),MA(q),ARMA(p,q)模型的类别，并估计阶数p,q，其实都归结到模型的定阶问题，当模型定阶后，就要对模型参数<span class="math inline">\(\psi,\theta\)</span>进行估计，完成后还需要对模型进行检验，检验<span class="math inline">\(\epsilon_t\)</span>是否为平稳白噪声</p>
+<ol type="1">
+<li>ARMA模型的构建
+<ul>
+<li>ARMA模型定阶的AIC准则：选p,q使<span class="math inline">\(min \quad AIC-nln\hat{\delta_\epsilon^2}+2(p+q+1)\)</span>,若序列含未知均值参数，修正为2(p+q+2)</li>
+<li>ARMA模型的参数估计：直接用Matalb工具箱即可</li>
+<li>ARMA模型检验的<span class="math inline">\(\chi^2\)</span>检验：给定显著性水平<span class="math inline">\(\alpha\)</span>，查表得上<span class="math inline">\(\alpha\)</span>分位数<span class="math inline">\(\chi_{\alpha}^2(L-r)\)</span>,当<span class="math inline">\(\chi^2&gt;chi_{\alpha}^2(L)\)</span>认为模型检验未通过</li>
+</ul></li>
+<li>ARMA序列的预报 时间序列的m步预报，是根据<span class="math inline">\({X_k,X_{k-1},...}\)</span>的取值对未来k+m时刻的随机变量<span class="math inline">\(X_{k+m}(m&gt;0)\)</span>做出估计，估计量记作<span class="math inline">\(\hat{X_k}(m)\)</span>，是<span class="math inline">\({X_k,X_{k-1},...}\)</span>的线性组合
+<ul>
+<li>AR(p)序列的预报:<span class="math inline">\(\begin{cases}  \hat{X_k(1)}=\psi_1X_k+\psi_2X_{k-1}+\dots+\psi_pX_{k-p+1}\\  \hat{X_k(2)}=\psi_1X_k(1)+\psi_2X_{k}+\dots+\psi_pX_{k-p+2}\\  ...\\  \hat{X_k(p)}=\psi_1X_k(p-1)+\psi_2X_{k}(p-2)+\dots+\psi_pX_{k}\\  \hat{X_k(m)}=\psi_1X_k(m-1)+\psi_2X_{k}(m-2)+\dots+\psi_p\hat{X_k(m-p)},m&gt;p\\ \end{cases}\)</span> 由此可见<span class="math inline">\(\hat{X_K}(m)(m\ge1)\)</span>仅依赖于<span class="math inline">\(X_t\)</span>的k时刻以前的p个时刻的值<span class="math inline">\(X_K,X_{k-1},\dots,X_{k-p+1}\)</span>,这是AR(p)序列预报的特点</li>
+<li>MA(q)和ARMA(p,q)序列的预报 MA(q)序列 <span class="math inline">\(\hat{X_{k+1}^{(q)}}=\begin{bmatrix}  \theta_1 &amp;1&amp;0&amp;\cdots&amp;0\\  \theta_2 &amp;0&amp;1&amp;\cdots&amp;0\\  \vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\  \theta_{q-1} &amp;0&amp;0&amp;\cdots&amp;1\\  \theta_q &amp;0&amp;0&amp;\cdots&amp;0\\ \end{bmatrix}\hat{X_{k}^{(q)}}-\begin{bmatrix} \theta_1\\ \theta_2\\ \vdots\\ \theta_1 \end{bmatrix}X_{k+1}\)</span> 递推初值可取<span class="math inline">\(\hat{X_{k_0}^{(q)}}=0(k_0)\)</span>较小，因为模型可逆性保证递推式渐进稳定，即当n充分大后，初始误差影响可以逐渐消失 ARMA(p,q)序列 <span class="math inline">\(\hat{X_{k+1}^{(q)}}=\begin{bmatrix}  -G_1 &amp;1&amp;0&amp;\cdots&amp;0\\  -G_2 &amp;0&amp;1&amp;\cdots&amp;0\\  \vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\  -G_{q-1} &amp;0&amp;0&amp;\cdots&amp;1\\  -G_q+\psi_q^* &amp;\psi_{q-1}^* &amp;\psi_{q-2}^*&amp;\cdots&amp;\psi_1^*\\ \end{bmatrix}\hat{X_{k}^{(q)}}+\begin{bmatrix} G_1\\ G_2\\ \vdots\\ G_q\\ \end{bmatrix}X_{k+1}+\begin{bmatrix} 0\\ 0\\ \vdots\\ 0\\ \sum_{j=q+1}^p\psi_j^*X_{k+q+1-j}\\ \end{bmatrix},G_j:X_t=\sum_{j=0}^∞G_j\epsilon_{t-j}\)</span> 实际中，模型参数是未知的，若已建立了时间序列的模型，则理论模型的未知参数可用其估计替代，再用上面介绍的方法预报</li>
+</ul></li>
+</ol>
+<h3 id="时间序列的matlab相关工具箱及命令">时间序列的Matlab相关工具箱及命令</h3>
+<p>Matlab时间序列的相关指令在系统辨识，计量经济学，金融工具箱内</p>
+<h3 id="arima序列与季节性序列">ARIMA序列与季节性序列</h3>
+<p>在实践中遇到的时间序列往往有三个特性，趋势性，季节性，非平稳性，一般采用差分方法或其他时间序列变化方法消除趋势性季节性，使变换后序列为平稳序列，并假设为ARMA序列，再用上面介绍方法研究。</p>
+<h4 id="arima序列及其预报">ARIMA序列及其预报</h4>
+<p>对于非平稳序列，可借助差分运算使其平稳化，若<span class="math inline">\({X_t,t=0,\pm1,\pm2,...}\)</span>为非平稳序列，若存在正整数d，使<span class="math inline">\(\nabla^dX_t=W_t\)</span>，且<span class="math inline">\({W_t,t=0,\pm1,\pm2,...}\)</span>是ARMA(p,q)序列，称<span class="math inline">\(X_t\)</span>为ARIMA(p,d,q)序列</p>
+<p>ARIMA序列的预报(d=1,d=2) 设<span class="math inline">\({X_t,t=0,\pm1,\pm2,...}\)</span>是ARIMA(p,d,q)序列 1. <span class="math inline">\(d=1,\nabla X_t=W_t \to\hat{X_k(m)}=\hat{X_k}(m-1)+\hat{W_k}(m)=X_k+\sum_{j=1}^m\hat{W_k}(j)\)</span> 2. <span class="math inline">\(d=2,\nabla^2 X_t=\hat{W_k}(m) \to\hat{X_k(m)}=X_k+\sum_{j=1}^m\hat{W_k}(j)(m+1-j)+m(X_k-X_{k-1})\)</span></p>
+<h4 id="季节性序列及其预报">季节性序列及其预报</h4>
+<p>由季节性因素或其他周期因素引起的周期性变化的时间序列，称为季节性时间序列，相应的模型为季节性模型，一般的，对周期为s的序列，先进行差分运算<span class="math inline">\(\nabla_sX_t=(1-B^s)X_t,\\\nabla_s^d=(1-B^s)^dX_t\)</span>,然后再进行ARIMA建模</p>
+<h2 id="支持向量机">支持向量机</h2>
+<p>支持向量机是数据挖掘中一项新技术，借助最优化方法解决机器学习问题的新工具，在模式识别等领域获得了广泛应用，其主要思想是找到一个超平面，使得它能够尽可能多地将两类数据点正确分开，同时使分开的两类数据点距离分类面最远</p>
+<h3 id="支持向量分类机的基本原理">支持向量分类机的基本原理</h3>
+<p>根据给定的训练集，<span class="math inline">\(T={[a_1,y_1],[a_2,y_2],\dots,[a_t,y_t]}\in(\Omega\times Y)^l\)</span>,<span class="math inline">\(a_i\in\Omega=R^n,\Omega\)</span>为输入空间，输入空间的每一个点<span class="math inline">\(a_i\)</span>由n个属性特征组成，<span class="math inline">\(y_i\in Y={-1,1},i=1,\dots,l\)</span> 寻找<span class="math inline">\(R^n\)</span>上的一个实值函数<span class="math inline">\(g(x)\)</span>,以便用分类函数<span class="math inline">\(f(x)=sgn(g(x))\)</span>推断任意一个模式x所对应的y值的问题为分类问题</p>
+<h4 id="线性可分支持向量分类机">线性可分支持向量分类机</h4>
+<p>考虑训练集T,若<span class="math inline">\(\exists \omega\in R^n,b\in R,\epsilon(&gt;0)\)</span>，使得对所有使<span class="math inline">\(y_i=1\)</span>的<span class="math inline">\(a_i\)</span>有<span class="math inline">\((\omega\cdots a_i)+b\ge\epsilon\)</span>,这里<span class="math inline">\((\omega\cdots a_i)\)</span>表示向量<span class="math inline">\(\omega,a_i\)</span>的内积，而对所有使<span class="math inline">\(y_i=-1\)</span>的<span class="math inline">\(a_i\)</span>有<span class="math inline">\((\omega\cdots a_i)+b\le-\epsilon\)</span>,则称训练集T线性可分，称相应的分类问题是线性可分的</p>
+<p><em>规范超平面</em>：空间<span class="math inline">\(R^n\)</span>中超平面都可以写为<span class="math inline">\((\omega\cdot x)+b=0\)</span>的形式，参数<span class="math inline">\((w,b)\)</span>乘以任何一个非零参数后得到的是同一个超平面，定义满足条件<span class="math inline">\(\begin{cases}y_i[(\omega\cdot a_i+b)]\ge 0,\\min_{i=1,...,l}|(\omega\cdot a_i)+b|=1,i=1,...,l\\\end{cases}\)</span>的超平面为训练集T的规范超平面，</p>
+<p><strong>当训练集T为线性可分时，存在唯一的规范超平面<span class="math inline">\((\omega\cdot x)+b=0\)</span>,使得<span class="math inline">\(\begin{cases}(\omega\cdot a_i)+b\ge 1,y_i=1\\(\omega\cdot a_i)+b\le -1,y_i=-1 \end{cases}\)</span>，其中=正负1的被称为普通支持向量</strong></p>
+<p>支持向量机一般又可分为以下几类 - 线性支持向量机：除了普通支持向量分布在两个边界，其余的所有样本点分布在分类边界以外，这是构造的超平面是<strong>硬间隔超平面</strong>，若存在样本点在边界之间，需要进行软化处理，这是获得的就是<strong>软间隔超平面</strong>，软化方法就是加入一个调节因子</p>
+<ul>
+<li><p>非线性可分支持向量机：当两个凸包重合太大了，也就是软化的方法不适用的时候，采用映射的方法，换到另外一个高维空间域里进行分类。通过引进从输入空间 X 到另一个高维的 Hilbert 空间 H 的变换，空间H叫做特征空间。</p></li>
+<li><p>C-支持向量机（非线性不可分）：映射到高维H空间之后还是不能直接可分，在H空间进行软化再分类。</p></li>
+</ul>
+<p>该模型主要是利用图像学原理，通过对凸包的研究把求超平面的问题转化成求约束下的优化问题，从而利用拉格朗日算子和KTT条件来求解。</p>
+<h3 id="支持向量机的matlab命令">支持向量机的Matlab命令</h3>
+<p>Matlab支持向量机的命令有，训练支持向量机分类器的函数svmtrain,使用支持向量机分类的函数svmclassify,指定支持向量机函数使用的序列最小化参数函数svmsmoset</p>
+<h2 id="多元分析">多元分析</h2>
+<p>多元分析是多变量的统计分析方法，是数理统计中应用广泛的一个重要分支</p>
+<h3 id="聚类分析">聚类分析</h3>
+<p>将认识对象进行分类是人类认识世界的一种重要方法，聚类分析作为一种定量方法，可以从数据分析的角度，给出一个更精确，细致的分类工具，聚类分析又被称为群分析，是对多个样本(或指标)进行定量分类的一种多元统计分析方法，对样本进行分类称为<strong>Q型聚类分析</strong>，对指标进行分类称为<strong>R型聚类分析</strong></p>
+<h4 id="q型聚类分析">Q型聚类分析</h4>
+<ol type="1">
+<li><p>样本的相似性度量 要用数量化方法对事物进行分类，就必须用数量化方法描述事物之间的相似程度，对每个样本点的相似程度，一般利用距离来衡量，在这里距离的选择有很多种，最常用的是<strong>闵氏距离</strong>，绝对值距离，欧几里得距离，切比雪夫距离都是其的一些特例，其中最常用的还是<strong>欧几里得距离</strong>，其主要优点是当坐标轴进行正交旋转时，欧氏距离是保持不变的，因此，若对原坐标系进行平移和旋转变换，则变换后样本点的距离和变换前完全相同，闵氏距离也有一些缺点，<strong>需要量纲一致，需要避免变量的多重相关性</strong> 针对其缺点，马氏距离做出了相应的改进</p></li>
+<li><p>类与类间的相似性度量 度量方法如下：</p>
+<ul>
+<li>最短距离法</li>
+<li>最长距离法</li>
+<li>重心法</li>
+<li>类平均法</li>
+<li>离差平方和法</li>
+</ul></li>
+<li><p>聚类图 Q型聚类结果可由一个聚类图表示出来，生成步骤如下</p>
+<ol type="1">
+<li>计算n个样本点两两之间的距离<span class="math inline">\({d_{ij}}\)</span>,记为矩阵<span class="math inline">\(D=(d_{ij})_{n\times n}\)</span></li>
+<li>首先构造n个类，每一个类只包含一个样本点，每一类的平台高度均为0</li>
+<li>合并距离最近的两类为新类，并且以这两类的距离值作为聚类图的平台高度</li>
+<li>计算新类与当前各类的距离，若类的个数已经等于1，转入步骤5，否则回到步骤3</li>
+<li>画聚类图</li>
+<li>决定类的个数和类</li>
+</ol></li>
+<li><p>Matlab聚类分析的相关指令 pdist,linkage,cluster,zsore,dendrogram,clusterdata</p></li>
+</ol>
+<h4 id="r型聚类法">R型聚类法</h4>
+<p>在实际工作中，变量聚类法的应用非常重要，人们希望能研究变量间的相似关系，按照变量的相似关系把它们聚合成若干个类，进而找出影响系统的主要因素 1. 变量相似性度量 在对变量进行聚类分析时，首先要确定变量的相似性度量，常用的变量相似性度量有<strong>相关系数</strong>和<strong>夹角余弦</strong> 各种定义的相似度量均需具有以下两个性质 1. <span class="math inline">\(|r_{jk}\le 1|,r_{jk}=r_{kj}\)</span>，越接近1，二者越相关，越接近0，相似性越弱 2. 变量聚类法 类似系统聚类法，在变量聚类中常用的是最长距离法和最短距离法</p>
+<h3 id="主成分分析">主成分分析</h3>
+<p>主成分分析的主要目的是希望用较少的变量去解释原来资料中大部分变异，通常是选出比元素变量个数少，能解释大部分资料中变异的几个新变量，即所谓的主成分，并用以解释资料的综合性指标，本质上是一种<strong>降维方法</strong></p>
+<h4 id="分析步骤">分析步骤</h4>
+<ol type="1">
+<li>构建初始数据矩阵：矩阵的每一行表示一个样本，每一列表示一个原始指标，矩阵中每一个元素表示某一个样本在某一个指标下的得分</li>
+<li>计算相关系数矩阵：对初始数据矩阵中的各个指标，求出相关系数矩阵</li>
+<li>计算特征值和特征向量：计算样本相关系数矩阵的特征值和特征向量，计算完成和对特征值进行从大到小的排序</li>
+<li>计算主成分贡献率和累积贡献率：每一个特征值对应一个主成分和贡献率，某特征值的贡献率=该特征值/所有特征值的和，该特征值对应的主成分即为对应的特征向量</li>
+<li>选择保留的主成分：一般取累积贡献率超过80%的那些主成分作为最终结果，特征值对应的特征向量即为主成分的系数</li>
+<li>利用系数分析主成分代表的含义</li>
+<li>利用主成分进行后续的分析过程</li>
+</ol>
+<h4 id="不足与注意事项">不足与注意事项</h4>
+<p><strong>不足</strong>：主成分的含义解释一般都带有一些模糊性，不像原始变量那样清楚确切，这是变量降维过程中必须付出的代价，只有当主成分个数远小于原始变量的个数才使用主成分分析</p>
+<p><strong>注意事项</strong>： 在评价类模型中，不能先用主成分分析后再对主成分进行评价。</p>
+<p>主成分分析可以用于聚类。因为聚类结果的维度往往很高，这时可以通过主成分分析法对聚类结果降维，从而在二维或三维空间中作出聚类结果图</p>
+<h3 id="因子分析">因子分析</h3>
+<p>因子分析可以看为主成分分析的推广，也是多元统计分析中常用的一种降维方式，他们的差别体现在： 1. 主成分分析将方差划分为不同的正交成分，而因子分析把方差划分为不同的起因因子 2. 主成分分析只是变量变换，因子分析需要构造因子模型 3. 主成分分析原始变量的线性组合表示新的综合变量，即主成分。因子分析潜在的假想变量和随机影响变量的线性组合表示原始变量</p>
+<h4 id="因子分析模型">因子分析模型</h4>
+<p>数学模型：<span class="math inline">\(\mathbf{X-\mu=\Lambda F+\epsilon}\\\mathbf{X,\mu,\Lambda,F,\epsilon}=\begin{bmatrix}X_1\\X_2\\\vdots\\X_p\end{bmatrix},\begin{bmatrix}\mu_1\\\mu_2\\\vdots\\\mu_p\end{bmatrix},\begin{bmatrix}\alpha_{11}\quad\alpha_{12}\quad\cdots\quad\alpha_{1m}\\\alpha_{21}\quad\alpha_{22}\quad\cdots\quad\alpha_{2m}\\\vdots\qquad\vdots\quad\ddots\quad\vdots\\\alpha_{p1}\quad\alpha_{p2}\quad\cdots\quad\alpha_{pm}\end{bmatrix},\begin{bmatrix}F_1\\F_2\\\vdots\\F_p\end{bmatrix},\begin{bmatrix}\epsilon_1\\\epsilon_2\\\vdots\\\epsilon_p\end{bmatrix}\)</span>,在上式中 称<span class="math inline">\(F_1,F_2,...,F_p\)</span>为公共因子，是不可观测的变量，其系数称为载荷因子，<span class="math inline">\(\epsilon_i\)</span>是特殊因子，不能被前m个公共因子包含的部分</p>
+<h4 id="因子载荷矩阵的估计方法">因子载荷矩阵的估计方法</h4>
+<p>用于估计<span class="math inline">\(\mathbf{\Lambda}\)</span> 1. 主成分分析法 2. 主因子法 3. 最大似然估计法</p>
+<h4 id="因子旋转正交变换">因子旋转(正交变换)</h4>
+<p>对因子载荷矩阵进行旋转的目的是使因子载荷矩阵结构简化，使载荷矩阵每列或行的元素平方值向0和1两极分化，主要正交旋转法有：方差最大法，四次方最大法，等量最大法</p>
+<h4 id="因子得分">因子得分</h4>
+<p>上述小节解决了用公共因子的线性组合表示一组观测变量的问题，如果利用因子做其他研究，比如作为自变量来做回归分析，对样本分类或平均，需要对公共因子测度，给出公共因子的值，其数学模型就是将上述数学模型的<span class="math inline">\(\mathbf{\mu}\)</span>移到等式右边 常用方法有: 巴斯莱特因子得分(加权最小二乘法),回归方法</p>
+<p><strong>因子分析的步骤</strong>： 1. 选择分析的变量 2. 计算所选的原始变量的相关系数矩阵 3. 提出公共因子 4. 因子旋转 5. 计算因子得分</p>
+<h3 id="判别分析">判别分析</h3>
+<p>判别分析是根据所研究的个体的观测指标来推断该个体所属类型的一种统计方法，用统计方法表述，就是已有q个总体<span class="math inline">\(X_1,X_2,...,X_q\)</span>,他们的分布函数为<span class="math inline">\(F_1(x),F_2(x),...,F_q(x)\)</span>，对于给定样本X,要判断它来自哪个总体</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" rel="tag"># 数学建模</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/14/jittor%E4%B8%8Epytorch%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%80%E8%A7%88/" rel="prev" title="jittor与pytorch的区别一览">
+      <i class="fa fa-chevron-left"></i> jittor与pytorch的区别一览
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0%E5%8F%B8%E5%AE%88%E5%A5%8E"><span class="nav-number">1.</span> <span class="nav-text">数学建模笔记（司守奎）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92"><span class="nav-number">1.1.</span> <span class="nav-text">线性规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E8%A7%84%E5%88%92"><span class="nav-number">1.2.</span> <span class="nav-text">整数规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%8B%E6%95%B4%E6%95%B0%E8%A7%84%E5%88%92"><span class="nav-number">1.2.1.</span> <span class="nav-text">0-1型整数规划</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E4%BA%92%E6%8E%92%E6%96%A5%E7%9A%84%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">相互排斥的约束条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BA%E5%AE%9A%E8%B4%B9%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">固定费用的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E6%B4%BE%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">指派问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95%E9%9A%8F%E6%9C%BA%E5%8F%96%E6%A0%B7%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">蒙特卡洛法（随机取样法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%B1%82%E8%A7%A3"><span class="nav-number">1.2.3.</span> <span class="nav-text">整数线性规划的计算机求解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92"><span class="nav-number">1.3.</span> <span class="nav-text">非线性规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">非线性规划模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%BA%A6%E6%9D%9F%E9%97%AE%E9%A2%98%E7%9A%84matlab%E8%A7%A3%E6%B3%95"><span class="nav-number">1.3.2.</span> <span class="nav-text">无约束问题的Matlab解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F%E6%9E%81%E5%80%BC%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.3.</span> <span class="nav-text">约束极值问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E8%A7%84%E5%88%92"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">二次规划</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%9A%E5%87%BD%E6%95%B0%E6%B3%95"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">罚函数法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#matlab%E6%B1%82%E7%BA%A6%E6%9D%9F%E6%9E%81%E5%80%BC%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">matlab求约束极值问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E5%8F%8A%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">图与网络模型及方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.4.1.</span> <span class="nav-text">图的基本概念与数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.2.</span> <span class="nav-text">最短路问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E6%8C%87%E5%AE%9A%E9%A1%B6%E7%82%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">两个指定顶点之间的最短路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E6%8C%87%E5%AE%9A%E9%A1%B6%E7%82%B9%E9%97%B4%E6%9C%80%E7%9F%AD%E8%B7%AF%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A7%84%E5%88%92%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">两个指定顶点间最短路的数学规划模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%8F%E5%AF%B9%E9%A1%B6%E7%82%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">每对顶点之间的最短路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.3.</span> <span class="nav-text">最小生成树问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">最小生成树</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%9C%80%E5%A4%A7%E6%B5%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.4.</span> <span class="nav-text">网络最大流问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-1"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">基本概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%B4%B9%E7%94%A8%E6%9C%80%E5%A4%A7%E6%B5%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.5.</span> <span class="nav-text">最小费用最大流问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E8%B4%B9%E7%94%A8%E6%9C%80%E5%A4%A7%E6%B5%81"><span class="nav-number">1.4.5.1.</span> <span class="nav-text">最小费用最大流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#matlab%E7%9A%84%E5%9B%BE%E8%AE%BA%E5%B7%A5%E5%85%B7%E7%AE%B1"><span class="nav-number">1.4.6.</span> <span class="nav-text">Matlab的图论工具箱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%85%E8%A1%8C%E5%95%86tsp%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.7.</span> <span class="nav-text">旅行商(TSP)问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E5%88%92%E8%AF%84%E5%AE%A1%E6%96%B9%E6%B3%95%E5%92%8C%E5%85%B3%E9%94%AE%E8%B7%AF%E7%BA%BF%E6%B3%95"><span class="nav-number">1.4.8.</span> <span class="nav-text">计划评审方法和关键路线法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E5%88%92%E7%BD%91%E7%BB%9C%E5%9B%BE"><span class="nav-number">1.4.8.1.</span> <span class="nav-text">计划网络图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%8F%82%E6%95%B0"><span class="nav-number">1.4.8.2.</span> <span class="nav-text">时间参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E5%88%92%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">1.4.8.3.</span> <span class="nav-text">计划网络图的计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%80%BC%E4%B8%8E%E6%8B%9F%E5%90%88"><span class="nav-number">1.5.</span> <span class="nav-text">插值与拟合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%80%BC%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.1.</span> <span class="nav-text">插值方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%AE%B5%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">分段线性插值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">拉格朗日插值多项式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B7%E6%9D%A1%E6%8F%92%E5%80%BC"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">样条插值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#matlab%E6%8F%92%E5%80%BC%E5%B7%A5%E5%85%B7%E7%AE%B1"><span class="nav-number">1.5.1.4.</span> <span class="nav-text">Matlab插值工具箱</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88%E7%9A%84%E7%BA%BF%E6%80%A7%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">1.5.2.</span> <span class="nav-text">曲线拟合的线性最小二乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">线性最小二乘法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95%E7%9A%84matlab%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">最小二乘法的Matlab实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E4%BC%98%E5%8C%96"><span class="nav-number">1.5.3.</span> <span class="nav-text">最小二乘优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88%E5%92%8C%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91"><span class="nav-number">1.5.4.</span> <span class="nav-text">曲线拟合和函数逼近</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E5%BB%BA%E6%A8%A1%E6%84%9F%E8%A7%89%E4%B8%8D%E5%A4%AA%E9%87%8D%E8%A6%81"><span class="nav-number">1.6.</span> <span class="nav-text">微分方程建模(感觉不太重要)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#matlab%E6%B1%82%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E7%AC%A6%E5%8F%B7%E8%A7%A3"><span class="nav-number">1.6.1.</span> <span class="nav-text">Matlab求微分方程的符号解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%E6%84%9F%E8%A7%89%E4%B8%8D%E5%A4%AA%E9%87%8D%E8%A6%81"><span class="nav-number">1.7.</span> <span class="nav-text">数理统计(感觉不太重要)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97"><span class="nav-number">1.8.</span> <span class="nav-text">时间序列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.8.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E6%80%A7%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95"><span class="nav-number">1.8.2.</span> <span class="nav-text">确定性时间序列分析方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87%E6%B3%95"><span class="nav-number">1.8.2.1.</span> <span class="nav-text">移动平均法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E5%B9%B3%E6%BB%91%E6%B3%95"><span class="nav-number">1.8.2.2.</span> <span class="nav-text">指数平滑法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%AE%E5%88%86%E6%8C%87%E6%95%B0%E5%B9%B3%E6%BB%91%E6%B3%95"><span class="nav-number">1.8.2.3.</span> <span class="nav-text">差分指数平滑法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E6%9C%89%E5%AD%A3%E8%8A%82%E6%80%A7%E7%89%B9%E7%82%B9%E7%9A%84%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E9%A2%84%E6%B5%8B"><span class="nav-number">1.8.2.4.</span> <span class="nav-text">具有季节性特点的时间序列的预测</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E7%A8%B3%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.8.3.</span> <span class="nav-text">平稳时间序列模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.8.3.1.</span> <span class="nav-text">时间序列的基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#arma%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%9E%84%E5%BB%BA%E5%92%8C%E9%A2%84%E6%8A%A5"><span class="nav-number">1.8.3.2.</span> <span class="nav-text">ARMA模型的构建和预报</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E7%9A%84matlab%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7%E7%AE%B1%E5%8F%8A%E5%91%BD%E4%BB%A4"><span class="nav-number">1.8.4.</span> <span class="nav-text">时间序列的Matlab相关工具箱及命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arima%E5%BA%8F%E5%88%97%E4%B8%8E%E5%AD%A3%E8%8A%82%E6%80%A7%E5%BA%8F%E5%88%97"><span class="nav-number">1.8.5.</span> <span class="nav-text">ARIMA序列与季节性序列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#arima%E5%BA%8F%E5%88%97%E5%8F%8A%E5%85%B6%E9%A2%84%E6%8A%A5"><span class="nav-number">1.8.5.1.</span> <span class="nav-text">ARIMA序列及其预报</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%A3%E8%8A%82%E6%80%A7%E5%BA%8F%E5%88%97%E5%8F%8A%E5%85%B6%E9%A2%84%E6%8A%A5"><span class="nav-number">1.8.5.2.</span> <span class="nav-text">季节性序列及其预报</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA"><span class="nav-number">1.9.</span> <span class="nav-text">支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E5%88%86%E7%B1%BB%E6%9C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">1.9.1.</span> <span class="nav-text">支持向量分类机的基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%8F%AF%E5%88%86%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E5%88%86%E7%B1%BB%E6%9C%BA"><span class="nav-number">1.9.1.1.</span> <span class="nav-text">线性可分支持向量分类机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA%E7%9A%84matlab%E5%91%BD%E4%BB%A4"><span class="nav-number">1.9.2.</span> <span class="nav-text">支持向量机的Matlab命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%85%83%E5%88%86%E6%9E%90"><span class="nav-number">1.10.</span> <span class="nav-text">多元分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90"><span class="nav-number">1.10.1.</span> <span class="nav-text">聚类分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#q%E5%9E%8B%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90"><span class="nav-number">1.10.1.1.</span> <span class="nav-text">Q型聚类分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#r%E5%9E%8B%E8%81%9A%E7%B1%BB%E6%B3%95"><span class="nav-number">1.10.1.2.</span> <span class="nav-text">R型聚类法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="nav-number">1.10.2.</span> <span class="nav-text">主成分分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.10.2.1.</span> <span class="nav-text">分析步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E8%B6%B3%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.10.2.2.</span> <span class="nav-text">不足与注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90"><span class="nav-number">1.10.3.</span> <span class="nav-text">因子分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.10.3.1.</span> <span class="nav-text">因子分析模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%A0%E5%AD%90%E8%BD%BD%E8%8D%B7%E7%9F%A9%E9%98%B5%E7%9A%84%E4%BC%B0%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="nav-number">1.10.3.2.</span> <span class="nav-text">因子载荷矩阵的估计方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%A0%E5%AD%90%E6%97%8B%E8%BD%AC%E6%AD%A3%E4%BA%A4%E5%8F%98%E6%8D%A2"><span class="nav-number">1.10.3.3.</span> <span class="nav-text">因子旋转(正交变换)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%A0%E5%AD%90%E5%BE%97%E5%88%86"><span class="nav-number">1.10.3.4.</span> <span class="nav-text">因子得分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90"><span class="nav-number">1.10.4.</span> <span class="nav-text">判别分析</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="夏至"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">夏至</p>
+  <div class="site-description" itemprop="description">人生不是短程跑，而是马拉松。在自己的时区里，一切都准时</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiazhi1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiazhi1" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2194625680@qq.com" title="E-Mail → mailto:2194625680@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏至</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">184k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:48</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
