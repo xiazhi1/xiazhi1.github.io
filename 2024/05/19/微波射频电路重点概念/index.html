@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avarar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言 主要根据老师发的pdf的概念进行详细介绍和扩展">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微波射频电路重点概念">
+<meta property="og:url" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:site_name" content="夏至的个人博客">
+<meta property="og:description" content="前言 主要根据老师发的pdf的概念进行详细介绍和扩展">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-05-19-09-53-47.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-27-16-32-52.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-27-16-40-05.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-27-16-40-57.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-27-16-47-13.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-28-16-12-39.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-28-16-23-16.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-13-59-45.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-14-00-34.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-15-58-26.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-16-08-45.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-16-10-52.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-16-14-07.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-16-43-49.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-16-46-49.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-30-11-19-31.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-30-15-21-52.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-30-15-44-19.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-30-15-59-11.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-30-15-59-47.png">
+<meta property="article:published_time" content="2024-05-19T01:51:43.000Z">
+<meta property="article:modified_time" content="2024-05-19T02:24:34.806Z">
+<meta property="article:author" content="夏至">
+<meta property="article:tag" content="微波射频电路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-05-19-09-53-47.png">
+
+<link rel="canonical" href="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>微波射频电路重点概念 | 夏至的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夏至的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          微波射频电路重点概念
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-05-19 09:51:43 / 修改时间：10:24:34" itemprop="dateCreated datePublished" datetime="2024-05-19T09:51:43+08:00">2024-05-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E5%AD%A6%E5%8A%9F%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">大学功课</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言">前言</h2>
+<p>主要根据老师发的pdf的概念进行详细介绍和扩展</p>
+<span id="more"></span>
+<h2 id="第四章噪声与非线性失真">第四章：噪声与非线性失真</h2>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-05-19-09-53-47.png"></p>
+<h3 id="噪声系数和等效噪声温度的概念">1.噪声系数和等效噪声温度的概念</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-27-16-32-52.png"> 噪声系数定义：<span class="math inline">\(F=\frac{SNR_i}{SNR_o}=\frac{P_i/N_i}{P_o/N_o}&gt;1=1+\frac{\overline{(V_n+I_nR_S)^2}}{4kTR_sB}\)</span> 由上式可知：有噪网络的噪声系数一定大于1，噪声系数与网络内部噪声大小和外部源噪声都有关，与源噪声温度T有关--测量噪声系数时，规定标准噪声温度<span class="math inline">\(T_0=290k\)</span>,与源内阻<span class="math inline">\(R_s\)</span>有关--噪声匹配--噪声系数最小--最佳源内阻</p>
+<p>等效噪声温度定义：将网络视为无噪，其内部噪声折合到输入源端，视为由某电阻在温度<span class="math inline">\(T_e\)</span>产生的白噪声 <img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-27-16-40-05.png"></p>
+<p><strong>习题2.1补充</strong>：均方值噪声电压电流计算公式 <span class="math display">\[\overline{V_n^2}=4kTRB,\overline{I_n^2}=\frac{4kTB}{R},k=1.380*10^{-23}J/K:波尔茨曼常数\]</span></p>
+<p><strong>习题2.4补充</strong>：多级线性网络级联的噪声系数， 已知级间均匹配，带宽均为B,则有以下关系： 总噪声系数<span class="math inline">\(F=F_1+\frac{F_2-1}{G_{p1}}+\frac{F_3-1}{G_{p1}G_{p2}}+...\)</span> 总等效噪声温度<span class="math inline">\(T_e=T_{e1}+\frac{T_{e2}}{G_{p1}}+\frac{T_{e3}}{G_{p1}G_{p2}}+...\)</span></p>
+<p>结论如下</p>
+<ol type="1">
+<li>系统前级，特别是第一级的噪声系数对系统影响最大</li>
+<li>增大第一级的增益可以减少后级对系统噪声系数的影响</li>
+</ol>
+<p>等效噪声温度与噪声系数的关系如下图 <img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-27-16-40-57.png"></p>
+<h3 id="为什么无源网络的噪声系数f等于插入损耗l">2.为什么无源网络的噪声系数F等于插入损耗L？</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-27-16-47-13.png"></p>
+<h3 id="有源器件非线性的影响有哪些一个信号两个以上信号">3.有源器件非线性的影响有哪些？（一个信号，两个以上信号）</h3>
+<ol type="1">
+<li>输入端仅有一个信号：谐波；增益压缩</li>
+<li>输入端有两个以上信号：堵塞；交叉调制；互相调制</li>
+</ol>
+<h3 id="db增益压缩点的概念和产生的原因">4.1dB增益压缩点的概念和产生的原因？</h3>
+<p>1dB增益压缩点定义为使增益比线性放大器增益下降1dB所对应的输入信号幅度值，其产生原因是在晶体管放大器当信号增大时，出现饱和，平均跨导随输入信号幅度的增大而减小。</p>
+<p><strong>所以要注意在计算题中遇到1dB压缩点时，此时的实际增益等于线性放大器原增益-1dB</strong></p>
+<h3 id="三阶互调的概念和产生的原因">5.三阶互调的概念和产生的原因？</h3>
+<p>三阶互调定义：由非线性器件的三次方项引起的互调称为三阶互调，其产生原因是两个以上信号通过非线性器件时产生的组合频率（主要由非线性三次方项产生）形成对有用信号的干扰</p>
+<h3 id="三阶互调失真比和三阶互调截点的概念以及它们之间的关系">6.三阶互调失真比和三阶互调截点的概念，以及它们之间的关系</h3>
+<p>三阶互调失真比IMD3定义：某一输入信号幅度<span class="math inline">\(V_m\)</span>下，三阶互调分量的幅度与基波幅度之比：<span class="math inline">\(IMD3=\frac{3a_3V_m^2}{4a_1}\)</span>,也可表示为功率之比:<span class="math inline">\(P_{IMD3}=\frac{P_{03}}{P_{01}}=(IMD3)^2\rightarrow P_{IMD3}(dB)=P_{03}(dBm)-P_{01}(dBm)\)</span></p>
+<p>三阶互调截点<span class="math inline">\(IP_3\)</span>定义：三阶互调截点为三阶互调功率和基波功率相等的点，此点对应的输入功率表示为<span class="math inline">\(IIP_3\)</span>，对应的输出功率表示为<span class="math inline">\(OIP_3\)</span></p>
+<p>三阶互调失真比与三阶互调截点的关系可通过下例具体说明 <img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-28-16-12-39.png"></p>
+<h3 id="灵敏度的定义和计算公式">7.灵敏度的定义和计算公式</h3>
+<p>灵敏度定义：在给定接收机的解调器前端所要求的最低信噪比条件下，接收机所能检测的最低输入电平（功率） <img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-28-16-23-16.png"> 灵敏度<span class="math inline">\(P_{in,min}(dBm)=k[T_a+(F-1)T_0](dBm/HZ)+10l gB+(SNR)_{o,min}(dB)\)</span> 其中除SNR外的部分被称为基底噪声<span class="math inline">\(F_t\)</span>,其描述了系统的总噪声,当<span class="math inline">\(T_a=T_0\)</span>时，基底噪声<span class="math inline">\(F_t\)</span>可简化为<span class="math inline">\(F_t(dBm)=-174(dBm/Hz)+NF(dB)+10lgB\)</span></p>
+<p>从上面的表达式可得出以下结论：系统的基底噪声越大，要求输出的信噪比越高（输出信号质量好），为保证此输出质量所要输入的信号最低电平就越高，即灵敏度越低</p>
+<h3 id="动态范围的定义和公式">8.动态范围的定义和公式</h3>
+<p>接收机(或放大器)动态范围=<span class="math inline">\(\frac{允许的最大输入电平P_{in,max}}{允许的最小输入电平P_{in,min}}\)</span>,影响最小输入电平的因素--基底噪声，影响最大输入电平的因素--非线性失真,用dB表示为<span class="math inline">\(DR_l(dB)=P_{in,max}(dBm)-P_{in,min}(dBm)\)</span></p>
+<p>定义方法：</p>
+<ol type="1">
+<li>线性动态范围<span class="math inline">\(DR_l:P_{in,max} 1dB压缩点对应的输入电平/P_{in,min} 灵敏度\)</span></li>
+<li>无杂散动态范围<span class="math inline">\(DR_f:P_{in,max} 1dB压缩点对应的输入电平/P_{in,min} 基底噪声\)</span>,其对数定义为<span class="math inline">\(DR_f=\frac{1}{3}[2IIP_3(dBm)+F_t(dB)]-[F_t(dB)+(SNR)_{o,min}(dB)]\)</span></li>
+</ol>
+<h2 id="第五章发射接收机结构">第五章：发射、接收机结构</h2>
+<h3 id="射频发射机的基本组成及功能">1.射频发射机的基本组成及功能</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-13-59-45.png"></p>
+<h3 id="射频接收机的基本组成及功能">2.射频接收机的基本组成及功能</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-14-00-34.png"></p>
+<h3 id="超外差式接收机结构方案框图与设计动机为什么要下变频">3.超外差式接收机结构方案(框图)与设计动机(为什么要下变频)</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-15-58-26.png"></p>
+<p><strong>为什么要下变频？</strong></p>
+<ol type="1">
+<li>为了解决选择性，因为GSM通信系统的特点是信道带宽远比载频小，这导致射频段选择信道非常困难，因为其要求滤波器Q值极高，同一接收机如果应用于不同信道的话，射频滤波器的中心频率必须变化，解决措施就是降低频率选信道，这是下变频的原因之一</li>
+<li>为了使接收机达到稳定的高增益，经过下变频后增益分散在各频段，易稳定，中频频率低且固定，增益大而稳定</li>
+<li>在较低的固定中频上解调或A/D变换也相对容易</li>
+</ol>
+<h3 id="超外差式接收机的主要缺点高中频和低中频的利弊">4.超外差式接收机的主要缺点，高中频和低中频的利弊</h3>
+<p>超外差式接收机的主要缺点在于变频器引入了众多的组合频率干扰，引起了寄生通道干扰，其中镜像频率干扰是其中一种重要的寄生通道干扰</p>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-16-08-45.png"></p>
+<h3 id="二次变频接收机结构方案框图与设计动机为什么要二次变频">5.二次变频接收机结构方案(框图)与设计动机(为什么要二次变频)</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-16-10-52.png"></p>
+<p><strong>设计动机</strong>：为了解决中频选择碰到的‘灵敏度’和‘选择性’的矛盾，可以采用二次混频方案，也可以说是为了兼顾前面高中频和低中频的利弊，设计出的最佳方案</p>
+<p><strong>中频选择原则</strong>：I中频采用高中频值，以提高镜像频率抗拒比，II中频采用低中频值，利于提取有用信道，抑制邻道干扰</p>
+<h3 id="直接下变频接收机结构方案框图特征与优缺点">6.直接下变频接收机结构方案(框图)，特征与优缺点</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-16-14-07.png"></p>
+<h3 id="镜像抑制接收机结构方案框图与工作原理">7.镜像抑制接收机结构方案(框图)与工作原理</h3>
+<p>镜像抑制接收机是采用改变电路结构来抑制超差式接收机中的镜像频率干扰，用两个相互正交的两个本振信号去与来自LNA的射频信号混频，再将其中一路相移90°，然后叠加，就可以得到抑制镜像频率的中频信号，<strong>这是因为正交信号混频后再相移叠加会将其中的镜像频率抵消掉</strong></p>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-16-43-49.png"></p>
+<h3 id="数字中频接收机结构方案框图特征与优缺点">8.数字中频接收机结构方案(框图)，特征与优缺点</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-29-16-46-49.png"></p>
+<h3 id="直接变换与两步变换发射机方案的概念各自优缺点">9.直接变换与两步变换发射机方案的概念，各自优缺点</h3>
+<ol type="1">
+<li>直接变换法：将调制和上变频合二为一，在一个电路里完成</li>
+<li>两步法：将调制和上变频分开，先在较低的中频上进行调制，然后将已调信号上变频搬移到发射的载频上</li>
+<li>直接变换法简单，但是有明显的缺点，由于发射信号是以本振频率为中心的通带信号，经功率放大或发射后的强信号会泄漏或反射回来影响本振，牵引本振频率。</li>
+<li>两次变换法明显可以减弱直接变换法的缺点，而且由于调制是在较低的中频上进行，正交的两支路容易一致。其缺点是二次上变换后必须采用滤波器滤除另一个不要的边带，为了达到发射机的性能指标，对这个滤波器的要求是比较高的。</li>
+</ol>
+<h2 id="第七章射频放大器设计">第七章：射频放大器设计</h2>
+<h3 id="射频放大器七个主要指标的定义">1.射频放大器七个主要指标的定义</h3>
+<ol type="1">
+<li>工作频率和带宽：工作频率就是放大器能够正常工作的频率范围<span class="math inline">\(f_1~f_2\)</span>，最大的工作频率与最小的工作频率之差就是放大器的带宽B</li>
+<li>增益：增益是表示放大电路对有用信号的放大能力，通常用在中心频率上用功率增益G表示:<span class="math inline">\(G=P_{out}/P_{in}\)</span>,增益通常用分贝(dB)表示</li>
+<li>输入输出反射系数及电压驻波比(VSWR):反射系数<span class="math inline">\(\Gamma\)</span>表征放大器的输入输出端口对信号反射的大小，即失配程度，一般用放大器两端口的S参数<span class="math inline">\(S_{11},S_{22}\)</span>来计算，并用dB表示。反射系数一般是一个复数，包含幅度和相位，电压驻波比(VSWR)等于<span class="math inline">\(VSWR=\frac{1+|\Gamma|}{1-|\Gamma|}\)</span></li>
+<li>噪声系数：噪声系数NF是用来描述放大器本身产生噪声电平大小，定义F如下，<span class="math inline">\(F=\frac{输入端信噪比}{输出端信噪比}=\frac{S_i/N_i}{S_o/N_o}=\frac{S_i/N_i}{S_i\cdot}=\frac{N_o}{G\cdot N_i}=1+N_x\)</span>,<span class="math inline">\(N_x\)</span>是由放大器内部产生的噪声，噪声系数一般用dB表示<span class="math inline">\(NF=10lgF\)</span></li>
+<li>增益平坦度：指在一定温度下，在整个工作频率范围内，放大器增益变化的范围。增益平坦度可由下式定义：<span class="math inline">\(\Delta G=|G_{max}-G_{min}|dB,\Delta G:增益平坦度,G_{max}/G_{min}:增益-频率曲线幅度最大/小值\)</span></li>
+<li>1dB压缩点输出功率<span class="math inline">\(P_{1dB}\)</span>：当功率增益比小信号线性增益G0下降1dB时，称为“1dB压缩点增益<span class="math inline">\(G_{1dB}\)</span> ” ，对应的输出功率称为“1dB压缩点输出功率<span class="math inline">\(P_{1dB}\)</span>。<span class="math inline">\(P_{1dB}\)</span>是表示一个放大器的非线性特性和功率输出能力的一项重要指标</li>
+<li>三阶截点(<span class="math inline">\(IP3\)</span>):三阶截点是描述放大器线性程度的一个重要指标。 IP3可以从基波分量和三阶互调分量与输入功率之间的关系曲线得到，它们线性延长的交点，即为三阶截点（IP3）</li>
+</ol>
+<h3 id="双分立元件l形匹配网络设计方法结合圆图">2.双分立元件L形匹配网络设计方法(结合圆图)</h3>
+<p>Smith圆图可以相对快速并精确的设计匹配网络，且其复杂程度几乎和匹配网络的元件数目无关，此外通过观察阻抗在Smith圆图上的变换过程，可以体会到每个电路元件对实现特定匹配状态的贡献，负载连接电抗元件之后在Smith圆图上的效果有以下三点：</p>
+<ol type="1">
+<li>电抗元件与复数阻抗串联将导致圆图上的相应阻抗点沿等电阻圆移动</li>
+<li>并联将导致Smith圆图上的相应导纳点沿等电导圆移动</li>
+<li>如果连接的是电感，则Smith圆图中参量点将向上半圆移动，如果连接的是电容，则参量点将向下半圆移动</li>
+</ol>
+<p>其常规设计程序包括以下六个步骤</p>
+<ol type="1">
+<li>求出归一化源阻抗和负载阻抗</li>
+<li>在Smith圆图中过源阻抗的相应点画出等电阻圆和等电导圆</li>
+<li>在Smith圆图中过负载阻抗的共轭复数点画出等电阻圆和等电导圆</li>
+<li>找出第二步和第三步所画圆的交点，交点的个数就是可能存在的L型匹配网络的数目</li>
+<li>先沿着相应的圆将源阻抗点移动到上述交点，然后再沿相应的圆移动到负载的共轭点，根据这两次移动过程就可以求出电感和电容的归一化值</li>
+<li>根据给定的工作频率确定电感和电容的实际值</li>
+</ol>
+<h3 id="无源偏置电路的设计方法">3.无源偏置电路的设计方法</h3>
+<p>偏置网络分为无源网络和有源网络，无源网络是最简单的偏置电路，通常由电阻网络构成，它为射频晶体管提供合适的工作电压和电流</p>
+<h3 id="为什么低噪声放大器要放在接收机前级结合圆图说明低噪声放大器噪声匹配为什么一般不选择最小噪声系数">4.为什么低噪声放大器要放在接收机前级？结合圆图说明低噪声放大器噪声匹配为什么一般不选择最小噪声系数</h3>
+<p>接收机的前端为了保证整个系统的噪声要求，在低噪声前提下对信号进行放大是系统的基本要求，因此接收机初级放大器都是低噪声放大器。</p>
+<p>因为放大器的低噪声要求和其他参数，如稳定性，增益等相冲突，最小噪声系数的点可能会是一个不稳定区域内点，因此设计低噪声放大器一般很难直接选用最小噪声点，而是在优先考虑噪声系数的情况下，保证放大器的稳定和增益与噪声系数的兼顾原则。</p>
+<h3 id="前馈线性化技术的框图和工作原理">5.前馈线性化技术的框图和工作原理</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-30-11-19-31.png"></p>
+<h2 id="第八章微波混频器">第八章：微波混频器</h2>
+<h3 id="线性频谱搬移时域和频域特性">1.线性频谱搬移，时域和频域特性</h3>
+<p>混频的本质是在做线性频谱搬移，其时域特性表现为：输入输出波形相同，载频不同，频域特性表现为：输入输出频谱结构，带宽相同，载频不同</p>
+<h3 id="混频器的四个主要指标定义增益噪声三阶截点隔离度">2.混频器的四个主要指标定义(增益，噪声，三阶截点，隔离度)</h3>
+<ol type="1">
+<li>增益：混频器的增益为频率变换增益，定义为输出中频信号的大小与输入射频信号大小之比。电压增益<span class="math inline">\(A_v\)</span>与功率增益<span class="math inline">\(G_p\)</span>分别定义为<span class="math inline">\(A_v=\frac{V_{IF}}{V_{RF}},G_p=\frac{P_{IF}}{P_{RF}}\)</span></li>
+<li>噪声：混频器的噪声有两种定义，分别为单边噪声和双边噪声，单边噪声是指射频信号位于本振的一边，经过混频后，镜像频段和射频信号段一起被搬移到中频的噪声，双边噪声是指射频信号位于本振的两边，不存在镜像频率带来的噪声，仅考虑射频信号端的噪声，单边噪声是双边噪声的两倍(高3dB)</li>
+<li>三阶互调截点：设混频器输入两个射频信号<span class="math inline">\(f_{RF1},f_{RF2}\)</span>,它们的三阶互调分量与本振混频后也位于中频带宽内，就会对有用中频产生干扰。与放大器的三阶互调截点定义相同，是三阶互调产生的中频分量与有用中频相等时的输入信号功率记为<span class="math inline">\(IIP_3\)</span></li>
+<li>隔离度：混频器三个端口的任意两个端口之间的距离都很重要，隔离度一般大于20dB，滤波电路可以对信号隔离有一定帮助</li>
+</ol>
+<h3 id="单管跨导混频器工作原理线性时变工作状态时变偏置和时变跨导">3.单管跨导混频器工作原理(线性时变工作状态，时变偏置和时变跨导)</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-30-15-21-52.png"></p>
+<p>单管跨导混频器的线性时变工作状态必须满足的条件</p>
+<ol type="1">
+<li>两个输入：<span class="math inline">\(v_{RF}(t)=V_{RF}cos\omega_{RF}t,v_{LO}(t)=V_{LO}cos\omega_{LO}t\)</span></li>
+<li>一大一小：且<span class="math inline">\(V_{LO}&gt;&gt;V_{RF}\)</span></li>
+</ol>
+<p>时变偏置：<span class="math inline">\(V_{GSQ}(t)=-V_{GG}+v_{LO}(t)\)</span> 时变跨导：<span class="math inline">\(g_m(t)=g_{m0}+g_{m1}cos\omega_{LO}(t)+g_{m2}cos2\omega_{LO}t+\dots\)</span> 变频跨导：<span class="math inline">\(g_{fc}=\frac{I_{IF}}{V_{RF}}=\frac{1}{2}g_{m1}\)</span>,时变跨导基波分量的一半 变频增益：<span class="math inline">\(A_v=g_{fc}R_L\)</span></p>
+<ol type="1">
+<li>不同的本振幅度，变频跨导不同</li>
+<li>相同的本振幅度下，偏置不同，变频跨导也不同</li>
+<li>中频输出回路的功能是选频滤波和阻抗变换</li>
+<li>中频陷波的目的是为了减少混入输入端的中频干扰和噪声</li>
+<li>本振注入方式可以从栅极或源极注入，栅极注入的优点是需要的本振功率小但是LO口和RF口隔离度差，源极注入的优点是隔离度好但缺点是负反馈导致混频增益下降，且需提供更多输入功率</li>
+</ol>
+<h3 id="吉尔伯特双平衡混频器工作原理射频小信号本振大信号和优点">4.吉尔伯特双平衡混频器工作原理(射频小信号，本振大信号)和优点</h3>
+<p><strong>应用目的:改善混频器口间隔离不好的缺点，电路特点：射频级为差分输入输出线性放大器，本振级为双差分对开关，中频输出口为平衡输出</strong></p>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-30-15-44-19.png"></p>
+<p>该模拟乘法器并不能真正实现两个信号的相乘，但可以按两个信号的大小情况讨论其输出</p>
+<ol type="1">
+<li><span class="math inline">\(v_1,v_2\)</span>均为小信号，则输出电流可简化为<span class="math inline">\(i=I_0(\frac{q}{2kT})^2v_1v_2\)</span>,其实现了输入电压<span class="math inline">\(v_1,v_2\)</span>的理想相乘--<strong>输出频率等于<span class="math inline">\(w_1\pm w_2\)</span>,幅度成正比</strong>，缺点是输入信号动态范围小，层级系数<span class="math inline">\(I_0(\frac{q}{2kT})^2\)</span>与温度T有关</li>
+<li>一个为大信号一个为小信号，输出电流则正比于小信号幅度和小信号放大级跨导，与大信号幅度无关-----优点：输出不含射频和本振分量，口间隔离好；线性范围较大，<strong>输出频率等于<span class="math inline">\(pw_2+w_1(P=1,3,5...)\)</span></strong></li>
+<li>均为大信号，输出电流与两输入信号幅度均无关，<strong>输出频率等于<span class="math inline">\(（2m-1）w_2+（2n-1）w_1(P=1,3,5...)\)</span></strong></li>
+</ol>
+<p>优点：</p>
+<ol type="1">
+<li>口间隔离好--输出不含射频和本振分量</li>
+<li>线性范围较大--射频输入极是差分放大器，线性范围比单管大；输出采用双平衡，抵消了射频的偶次失真项</li>
+</ol>
+<h2 id="第九章射频振荡器">第九章：射频振荡器</h2>
+<h3 id="反馈型振荡器的三个条件平衡条件起振条件稳定条件">1.反馈型振荡器的三个条件(平衡条件，起振条件，稳定条件)</h3>
+<ol type="1">
+<li>平衡条件：反馈振荡器的环路增益为<span class="math inline">\(T(jw)=A(jw)\cdot F(jw)\)</span>,振荡平衡时，在频率<span class="math inline">\(\omega_{osc}\)</span>有<span class="math inline">\(T(jw_{osc})=1\)</span>,振幅平衡条件：<span class="math inline">\(|T(jw_{osc})|=|A(jw_{osc})F(jw_{osc})|=1\)</span>,相位平衡条件:<span class="math inline">\(\psi_{T(jw_{osc})}=2n\pi\)</span></li>
+<li>起振条件：振幅条件：<span class="math inline">\(|T(jw)|=|A(jw)F(jw)|&gt;1\)</span>,相位平衡条件:<span class="math inline">\(\psi_{T(jw)}=0\)</span></li>
+<li>稳定条件：振幅条件：<span class="math inline">\(\frac{\alpha T}{\alpha V_i}|_{平衡点}&lt;0\)</span>,相位条件：<span class="math inline">\(\frac{\alpha \psi_T}{\alpha w}|_{平衡点}&lt;0\)</span></li>
+</ol>
+<h3 id="锁相环pll的结构框图工作原理和特点">2.锁相环PLL的结构框图，工作原理和特点</h3>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-30-15-59-11.png"></p>
+<p>工作原理与特点</p>
+<p><img src="/2024/05/19/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF%E9%87%8D%E7%82%B9%E6%A6%82%E5%BF%B5/2024-04-30-15-59-47.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BE%AE%E6%B3%A2%E5%B0%84%E9%A2%91%E7%94%B5%E8%B7%AF/" rel="tag"># 微波射频电路</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/" rel="prev" title="数学建模笔记(司守奎)">
+      <i class="fa fa-chevron-left"></i> 数学建模笔记(司守奎)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%E5%99%AA%E5%A3%B0%E4%B8%8E%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%A4%B1%E7%9C%9F"><span class="nav-number">2.</span> <span class="nav-text">第四章：噪声与非线性失真</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%99%AA%E5%A3%B0%E7%B3%BB%E6%95%B0%E5%92%8C%E7%AD%89%E6%95%88%E5%99%AA%E5%A3%B0%E6%B8%A9%E5%BA%A6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">1.噪声系数和等效噪声温度的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%97%A0%E6%BA%90%E7%BD%91%E7%BB%9C%E7%9A%84%E5%99%AA%E5%A3%B0%E7%B3%BB%E6%95%B0f%E7%AD%89%E4%BA%8E%E6%8F%92%E5%85%A5%E6%8D%9F%E8%80%97l"><span class="nav-number">2.2.</span> <span class="nav-text">2.为什么无源网络的噪声系数F等于插入损耗L？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%BA%90%E5%99%A8%E4%BB%B6%E9%9D%9E%E7%BA%BF%E6%80%A7%E7%9A%84%E5%BD%B1%E5%93%8D%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%80%E4%B8%AA%E4%BF%A1%E5%8F%B7%E4%B8%A4%E4%B8%AA%E4%BB%A5%E4%B8%8A%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.3.</span> <span class="nav-text">3.有源器件非线性的影响有哪些？（一个信号，两个以上信号）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#db%E5%A2%9E%E7%9B%8A%E5%8E%8B%E7%BC%A9%E7%82%B9%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BA%A7%E7%94%9F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.4.</span> <span class="nav-text">4.1dB增益压缩点的概念和产生的原因？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E9%98%B6%E4%BA%92%E8%B0%83%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BA%A7%E7%94%9F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.5.</span> <span class="nav-text">5.三阶互调的概念和产生的原因？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E9%98%B6%E4%BA%92%E8%B0%83%E5%A4%B1%E7%9C%9F%E6%AF%94%E5%92%8C%E4%B8%89%E9%98%B6%E4%BA%92%E8%B0%83%E6%88%AA%E7%82%B9%E7%9A%84%E6%A6%82%E5%BF%B5%E4%BB%A5%E5%8F%8A%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.6.</span> <span class="nav-text">6.三阶互调失真比和三阶互调截点的概念，以及它们之间的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%81%B5%E6%95%8F%E5%BA%A6%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="nav-number">2.7.</span> <span class="nav-text">7.灵敏度的定义和计算公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%85%AC%E5%BC%8F"><span class="nav-number">2.8.</span> <span class="nav-text">8.动态范围的定义和公式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%8F%91%E5%B0%84%E6%8E%A5%E6%94%B6%E6%9C%BA%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">第五章：发射、接收机结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%84%E9%A2%91%E5%8F%91%E5%B0%84%E6%9C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90%E5%8F%8A%E5%8A%9F%E8%83%BD"><span class="nav-number">3.1.</span> <span class="nav-text">1.射频发射机的基本组成及功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%84%E9%A2%91%E6%8E%A5%E6%94%B6%E6%9C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90%E5%8F%8A%E5%8A%9F%E8%83%BD"><span class="nav-number">3.2.</span> <span class="nav-text">2.射频接收机的基本组成及功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E5%A4%96%E5%B7%AE%E5%BC%8F%E6%8E%A5%E6%94%B6%E6%9C%BA%E7%BB%93%E6%9E%84%E6%96%B9%E6%A1%88%E6%A1%86%E5%9B%BE%E4%B8%8E%E8%AE%BE%E8%AE%A1%E5%8A%A8%E6%9C%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%B8%8B%E5%8F%98%E9%A2%91"><span class="nav-number">3.3.</span> <span class="nav-text">3.超外差式接收机结构方案(框图)与设计动机(为什么要下变频)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E5%A4%96%E5%B7%AE%E5%BC%8F%E6%8E%A5%E6%94%B6%E6%9C%BA%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BC%BA%E7%82%B9%E9%AB%98%E4%B8%AD%E9%A2%91%E5%92%8C%E4%BD%8E%E4%B8%AD%E9%A2%91%E7%9A%84%E5%88%A9%E5%BC%8A"><span class="nav-number">3.4.</span> <span class="nav-text">4.超外差式接收机的主要缺点，高中频和低中频的利弊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E5%8F%98%E9%A2%91%E6%8E%A5%E6%94%B6%E6%9C%BA%E7%BB%93%E6%9E%84%E6%96%B9%E6%A1%88%E6%A1%86%E5%9B%BE%E4%B8%8E%E8%AE%BE%E8%AE%A1%E5%8A%A8%E6%9C%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BA%8C%E6%AC%A1%E5%8F%98%E9%A2%91"><span class="nav-number">3.5.</span> <span class="nav-text">5.二次变频接收机结构方案(框图)与设计动机(为什么要二次变频)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%B8%8B%E5%8F%98%E9%A2%91%E6%8E%A5%E6%94%B6%E6%9C%BA%E7%BB%93%E6%9E%84%E6%96%B9%E6%A1%88%E6%A1%86%E5%9B%BE%E7%89%B9%E5%BE%81%E4%B8%8E%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">3.6.</span> <span class="nav-text">6.直接下变频接收机结构方案(框图)，特征与优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E6%8A%91%E5%88%B6%E6%8E%A5%E6%94%B6%E6%9C%BA%E7%BB%93%E6%9E%84%E6%96%B9%E6%A1%88%E6%A1%86%E5%9B%BE%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">3.7.</span> <span class="nav-text">7.镜像抑制接收机结构方案(框图)与工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%B8%AD%E9%A2%91%E6%8E%A5%E6%94%B6%E6%9C%BA%E7%BB%93%E6%9E%84%E6%96%B9%E6%A1%88%E6%A1%86%E5%9B%BE%E7%89%B9%E5%BE%81%E4%B8%8E%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">3.8.</span> <span class="nav-text">8.数字中频接收机结构方案(框图)，特征与优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%8F%98%E6%8D%A2%E4%B8%8E%E4%B8%A4%E6%AD%A5%E5%8F%98%E6%8D%A2%E5%8F%91%E5%B0%84%E6%9C%BA%E6%96%B9%E6%A1%88%E7%9A%84%E6%A6%82%E5%BF%B5%E5%90%84%E8%87%AA%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">3.9.</span> <span class="nav-text">9.直接变换与两步变换发射机方案的概念，各自优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0%E5%B0%84%E9%A2%91%E6%94%BE%E5%A4%A7%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.</span> <span class="nav-text">第七章：射频放大器设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%84%E9%A2%91%E6%94%BE%E5%A4%A7%E5%99%A8%E4%B8%83%E4%B8%AA%E4%B8%BB%E8%A6%81%E6%8C%87%E6%A0%87%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">4.1.</span> <span class="nav-text">1.射频放大器七个主要指标的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E5%88%86%E7%AB%8B%E5%85%83%E4%BB%B6l%E5%BD%A2%E5%8C%B9%E9%85%8D%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95%E7%BB%93%E5%90%88%E5%9C%86%E5%9B%BE"><span class="nav-number">4.2.</span> <span class="nav-text">2.双分立元件L形匹配网络设计方法(结合圆图)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E6%BA%90%E5%81%8F%E7%BD%AE%E7%94%B5%E8%B7%AF%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text">3.无源偏置电路的设计方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%8E%E5%99%AA%E5%A3%B0%E6%94%BE%E5%A4%A7%E5%99%A8%E8%A6%81%E6%94%BE%E5%9C%A8%E6%8E%A5%E6%94%B6%E6%9C%BA%E5%89%8D%E7%BA%A7%E7%BB%93%E5%90%88%E5%9C%86%E5%9B%BE%E8%AF%B4%E6%98%8E%E4%BD%8E%E5%99%AA%E5%A3%B0%E6%94%BE%E5%A4%A7%E5%99%A8%E5%99%AA%E5%A3%B0%E5%8C%B9%E9%85%8D%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E8%88%AC%E4%B8%8D%E9%80%89%E6%8B%A9%E6%9C%80%E5%B0%8F%E5%99%AA%E5%A3%B0%E7%B3%BB%E6%95%B0"><span class="nav-number">4.4.</span> <span class="nav-text">4.为什么低噪声放大器要放在接收机前级？结合圆图说明低噪声放大器噪声匹配为什么一般不选择最小噪声系数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E9%A6%88%E7%BA%BF%E6%80%A7%E5%8C%96%E6%8A%80%E6%9C%AF%E7%9A%84%E6%A1%86%E5%9B%BE%E5%92%8C%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">4.5.</span> <span class="nav-text">5.前馈线性化技术的框图和工作原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0%E5%BE%AE%E6%B3%A2%E6%B7%B7%E9%A2%91%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">第八章：微波混频器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E9%A2%91%E8%B0%B1%E6%90%AC%E7%A7%BB%E6%97%B6%E5%9F%9F%E5%92%8C%E9%A2%91%E5%9F%9F%E7%89%B9%E6%80%A7"><span class="nav-number">5.1.</span> <span class="nav-text">1.线性频谱搬移，时域和频域特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E9%A2%91%E5%99%A8%E7%9A%84%E5%9B%9B%E4%B8%AA%E4%B8%BB%E8%A6%81%E6%8C%87%E6%A0%87%E5%AE%9A%E4%B9%89%E5%A2%9E%E7%9B%8A%E5%99%AA%E5%A3%B0%E4%B8%89%E9%98%B6%E6%88%AA%E7%82%B9%E9%9A%94%E7%A6%BB%E5%BA%A6"><span class="nav-number">5.2.</span> <span class="nav-text">2.混频器的四个主要指标定义(增益，噪声，三阶截点，隔离度)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E7%AE%A1%E8%B7%A8%E5%AF%BC%E6%B7%B7%E9%A2%91%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E7%BA%BF%E6%80%A7%E6%97%B6%E5%8F%98%E5%B7%A5%E4%BD%9C%E7%8A%B6%E6%80%81%E6%97%B6%E5%8F%98%E5%81%8F%E7%BD%AE%E5%92%8C%E6%97%B6%E5%8F%98%E8%B7%A8%E5%AF%BC"><span class="nav-number">5.3.</span> <span class="nav-text">3.单管跨导混频器工作原理(线性时变工作状态，时变偏置和时变跨导)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%89%E5%B0%94%E4%BC%AF%E7%89%B9%E5%8F%8C%E5%B9%B3%E8%A1%A1%E6%B7%B7%E9%A2%91%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%B0%84%E9%A2%91%E5%B0%8F%E4%BF%A1%E5%8F%B7%E6%9C%AC%E6%8C%AF%E5%A4%A7%E4%BF%A1%E5%8F%B7%E5%92%8C%E4%BC%98%E7%82%B9"><span class="nav-number">5.4.</span> <span class="nav-text">4.吉尔伯特双平衡混频器工作原理(射频小信号，本振大信号)和优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0%E5%B0%84%E9%A2%91%E6%8C%AF%E8%8D%A1%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">第九章：射频振荡器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E9%A6%88%E5%9E%8B%E6%8C%AF%E8%8D%A1%E5%99%A8%E7%9A%84%E4%B8%89%E4%B8%AA%E6%9D%A1%E4%BB%B6%E5%B9%B3%E8%A1%A1%E6%9D%A1%E4%BB%B6%E8%B5%B7%E6%8C%AF%E6%9D%A1%E4%BB%B6%E7%A8%B3%E5%AE%9A%E6%9D%A1%E4%BB%B6"><span class="nav-number">6.1.</span> <span class="nav-text">1.反馈型振荡器的三个条件(平衡条件，起振条件，稳定条件)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E7%9B%B8%E7%8E%AFpll%E7%9A%84%E7%BB%93%E6%9E%84%E6%A1%86%E5%9B%BE%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%92%8C%E7%89%B9%E7%82%B9"><span class="nav-number">6.2.</span> <span class="nav-text">2.锁相环PLL的结构框图，工作原理和特点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="夏至"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">夏至</p>
+  <div class="site-description" itemprop="description">人生不是短程跑，而是马拉松。在自己的时区里，一切都准时</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiazhi1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiazhi1" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2194625680@qq.com" title="E-Mail → mailto:2194625680@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏至</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">191k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:54</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
