@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-16-43-38.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-19-20-15.png">
 <meta property="article:published_time" content="2024-09-16T03:16:14.000Z">
-<meta property="article:modified_time" content="2024-09-18T11:23:40.047Z">
+<meta property="article:modified_time" content="2024-09-18T12:12:44.888Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="计算机视觉">
@@ -222,7 +222,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-09-18 19:23:40" itemprop="dateModified" datetime="2024-09-18T19:23:40+08:00">2024-09-18</time>
+                <time title="修改时间：2024-09-18 20:12:44" itemprop="dateModified" datetime="2024-09-18T20:12:44+08:00">2024-09-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +255,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.5k</span>
+              <span>8.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -294,11 +294,11 @@
     p_{k,2i+1} = cos(\frac{k}{10000^{2i/d}})
 \end{cases}\qquad(1)\]</span></p>
 <p>其中<span class="math inline">\(d\)</span>为位置向量的维度，<span class="math inline">\(k\)</span>为位置索引，<span class="math inline">\(i\)</span>为维度索引。</p>
-<p>三角式位置编码的特点是拥有显式生成规律，其具有一定的外推性，另外得益于三角函数的性质，位置<span class="math inline">\(\alpha+\beta\)</span>的向量可表示为位置为<span class="math inline">\(\alpha\)</span>和<span class="math inline">\(\beta\)</span>的向量的线性组合，这使得三角函数天生具有相对位置计算的性质。可惜的是这类绝对位置编码最近很少使用，<strong>待考证其原因。</strong></p>
+<p>三角式位置编码的特点是拥有显式生成规律，其具有一定的外推性，另外得益于三角函数的性质，位置<span class="math inline">\(\alpha+\beta\)</span>的向量可表示为位置为<span class="math inline">\(\alpha\)</span>和<span class="math inline">\(\beta\)</span>的向量的线性组合，这使得三角函数天生具有相对位置计算的性质。可惜的是这类绝对位置编码最近很少使用，<strong>待通过实验考证其原因。</strong></p>
 <h3 id="递归式">递归式</h3>
 <p>在递归式绝对位置编码中，其往往实现为在输入之后衔接一层RNN，然后再接Transformer,那么其在结构上就有了通过RNN学习到位置信息的可能，比如从一个向量<span class="math inline">\(p_0\)</span>开始，通过<span class="math inline">\(p_{k+1} = f(p_k)\)</span>得到位置<span class="math inline">\(k+1\)</span>的位置向量，在ICML2020的论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2003.09229">《Learning to Encode Position for Transformer with Continuous Dynamical Model》</a>中，作者提出用微分方程建模位置编码，<span class="math inline">\(dp_t/d_t=h(p_t,t)\)</span>，并使用神经网络来拟合<span class="math inline">\(h(p_t)\)</span>，从而得到位置向量。此方法也被称为<strong>FLOATER</strong>。</p>
 <h2 id="relative-position-embedding">Relative Position Embedding</h2>
-<p>与绝对位置编码不同的是，相对位置编码并没有完整的去建模每个输入的位置信息，而是在计算Attention的时候考虑了当前位置和被attention的位置的相对距离，对于相对位置编码来说，其实现上可能相较绝对位置编码更为复杂，但是其可解释性和灵活性更强。</p>
+<p>与绝对位置编码不同的是，相对位置编码并没有完整的去建模每个输入的位置信息，而是在计算Attention的时候考虑了当前位置和被attention的位置的相对距离，对于相对位置编码来说，其实现上可能相较绝对位置编码更为复杂，但是其可解释性和灵活性更强。<strong>往往相对位置编码能取得比绝对位置编码更灵活的外推性能</strong></p>
 <h3 id="经典式">经典式</h3>
 <p>相对位置编码起源于Google论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/1803.02155">《Self-Attention with Relative Position Representations》</a>，后面的各种相对位置编码变体基本上也是在此基础上的不同修改。</p>
 <p>一般认为，相对位置编码是从绝对位置编码启发而来，考虑一般的带绝对位置编码的Attention: <span class="math display">\[\begin{cases}
@@ -321,13 +321,13 @@ R_{i,j}^V = p_V[clip(i-j,p_{min},p_{max})]\qquad(6)\]</span></p>
 <p>T5式相对位置编码源自于T5<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/1910.10683">《Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer》</a>，里面对展开式(7)进行了更详细的含义划分，其分别理解为"输入-输入"，"输入-位置"，"位置-输入"，"位置-位置"四项注意力组合，其认为输入信息和位置信息应该是独立的，那么"输入-位置"和"位置-输入"的注意力可以删掉 而其实位置-位置的注意力是一个只依赖于<span class="math inline">\((i,j)\)</span>的标量，可以直接作为参数训练出来，即简化为 <span class="math display">\[x_iW_QW_K^Tx_j^T=\beta_{i,j}\qquad(9)\]</span></p>
 <p>也就是其只是在Attention矩阵的基础上加一个可训练的偏置项<span class="math inline">\(\beta_{i,j}\)</span> 就实现了相对位置编码。</p>
 <h3 id="deberta式">DeBERTa式</h3>
-<p>DeBERTa式相对位置编码源自于DeBERTa<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2006.03654">《DeBERTa: Decoding-enhanced BERT with Disentangled Attention》</a>，其也是从展开式(7)出发，但是其丢弃的是第四项位置-位置注意力，保留第2、3项并且替换为相对位置编码 <span class="math display">\[q_ik_j^T = x_iW_QW_K^Tx_j^T+x_iW_QW_K^TR_{i,j}^T+R_{j,i}W_QW_{K}^Tx_{j}^T\qquad(10)\]</span></p>
+<p>DeBERTa式相对位置编码源自于DeBERTa<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2006.03654">《DeBERTa: Decoding-enhanced BERT with Disentangled Attention》</a>，其也是从展开式(7)出发，但是其丢弃的是第四项"位置-位置"注意力，保留第2、3项并且替换为相对位置编码 <span class="math display">\[q_ik_j^T = x_iW_QW_K^Tx_j^T+x_iW_QW_K^TR_{i,j}^T+R_{j,i}W_QW_{K}^Tx_{j}^T\qquad(10)\]</span></p>
 <h2 id="other-position-embedding">Other Position Embedding</h2>
 <h3 id="复数式">复数式</h3>
 <p>该想法来自论文<a target="_blank" rel="noopener" href="https://openreview.net/attachment?id=Hke-WTVtwr&amp;name=original_pdf">《Encoding word order in complex embeddings 》</a>。其使用复数域词向量编码词序，是第一个将复数的虚部域具体含义(词序)联系起来的工作。其推导出了复数域的词向量形式： <span class="math display">\[f(j,pos)=[r_{j,1}e^{i(w_{j,1}pos+\theta_{j,1})},\dots,r_{j,2}e^{i(w_{j,2}pos+\theta_{j,2})},\dots,r_{j,D}e^{i(w_{j,D}pos+\theta_{j,D})}]\qquad(11)\\r_j:振幅,w_j:角频率，\theta_j：初相位\]</span></p>
 <p>复数词向量的振幅<span class="math inline">\(r_j\)</span>只与词<span class="math inline">\(w_j\)</span>有关，对应token embedding。 角频率<span class="math inline">\(w_j\)</span>可以表示词对位置的敏感程度，角频率越小对位置越不敏感，但其缺点在于因为需要维护振幅、角频率和初相位，参数量相当于三倍</p>
 <h3 id="rope">RoPE</h3>
-<p>RoPE由苏剑林老师在<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2104.09864">《ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING》</a>中提出，其将绝对位置编码和相对位置编码融为一体。简单来说其对attention里面的向量内积先用复数表示为: <span class="math display">\[&lt;q_m,k_n&gt;=Re[q_mk_n^*]\qquad(12)\]</span> 进一步将<span class="math inline">\(q_m,k_n\)</span>分别乘以<span class="math inline">\(e^{im\theta},e^{in\theta}\)</span>变为<span class="math inline">\(q_me^{im\theta},k_ne^{in\theta}\)</span>,然后放到内积变为: <span class="math display">\[&lt;q_me^{im\theta},k_ne^{in\theta}&gt;=Re[q_mk_n^*e^{i(m-n)\theta}]\qquad(13)\]</span> 上式就得出了内积只依赖于相对位置<span class="math inline">\(m-n\)</span>的结论，巧妙地将绝对位置和相对位置结合到一起。 这样一来，我们得到了二维情况下用复数表示的RoPE: <span class="math display">\[f(q,m)=R_f(q,m)e^{i\theta_f(q,m)}=||q||e^{i(\theta(q)+m\theta)}\qquad(14)\]</span> 还可以将其写为矩阵形式： <span class="math display">\[f(q,m)=\begin{pmatrix}
+<p>RoPE由苏神在<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2104.09864">《ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING》</a>中提出，其将绝对位置编码和相对位置编码融为一体。简单来说其对attention里面的向量内积先用复数表示为: <span class="math display">\[&lt;q_m,k_n&gt;=Re[q_mk_n^*]\qquad(12)\]</span> 进一步将<span class="math inline">\(q_m,k_n\)</span>分别乘以<span class="math inline">\(e^{im\theta},e^{in\theta}\)</span>变为<span class="math inline">\(q_me^{im\theta},k_ne^{in\theta}\)</span>,然后放到内积变为: <span class="math display">\[&lt;q_me^{im\theta},k_ne^{in\theta}&gt;=Re[q_mk_n^*e^{i(m-n)\theta}]\qquad(13)\]</span> 上式就得出了内积只依赖于相对位置<span class="math inline">\(m-n\)</span>的结论，巧妙地将绝对位置和相对位置结合到一起。 这样一来，我们得到了二维情况下用复数表示的RoPE: <span class="math display">\[f(q,m)=R_f(q,m)e^{i\theta_f(q,m)}=||q||e^{i(\theta(q)+m\theta)}\qquad(14)\]</span> 还可以将其写为矩阵形式： <span class="math display">\[f(q,m)=\begin{pmatrix}
     cos m\theta &amp; -sin m\theta \\
     sin m\theta &amp; cos m\theta \\
 \end{pmatrix}\begin{pmatrix}
@@ -338,7 +338,7 @@ R_{i,j}^V = p_V[clip(i-j,p_{min},p_{max})]\qquad(6)\]</span></p>
 <h2 id="length-extrapolation">Length Extrapolation</h2>
 <p>长度外推一般指的是不需要用长序列数据进行额外的训练，只用短序列语料对模型进行训练，就可以得到一个能够处理和预测长序列的模型。但是值得注意的是长度外推不能以牺牲远程依赖为代价，这样还不如直接截断文本进行生成。</p>
 <p>在长度外推问题中，遇到的主要问题有以下两点： 1. 预测时用到了没有被训练过的位置编码 2. 预测时注意力机制所处理的tokens数量远超训练时的数量</p>
-<p>事实上，对于相对位置编码的Transformer可以通过简单的Attention Mask一次性解决上述问题，并取得解决SOTA的效果。其具体操作时将预测时的attention变为局部attention, 每个token只看到训练长度个token 且此时的局部attention也不会比训练时使用更多的位置编码, 这样就一次性解决了上面的问题，且不用重新训练模型。</p>
+<p>事实上，对于相对位置编码的Transformer可以通过简单的Attention Mask一次性解决上述问题，并取得接近SOTA的效果。其具体操作时将预测时的attention变为局部attention, 每个token只看到训练长度个token 且此时的局部attention也不会比训练时使用更多的位置编码, 这样就一次性解决了上面的问题，且不用重新训练模型。</p>
 <h3 id="alibi">ALIBI</h3>
 <p>ALIBI是第一篇明确研究Transformer长度外推性的工作，其出自论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2108.12409">《Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation》</a>。它主要是在Softmax之前，将attention的计算从<span class="math inline">\(q_m^Tk_n\)</span>改为 <span class="math display">\[q_m^Tk_n-\lambda|m-n|\qquad (16)\]</span> ALIBI相较于上面用attention mask解决长度外推问题的基线模型，减去的非负矩阵更光滑 <img src="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-15-58-00.png"> 但是从(16)中可以看出ALIBI是只能辨别相对距离远近，而无法正确识别位置信息的,因为<span class="math inline">\(|m-n|=|n-m|\)</span>。其主要是在单项语言模型上效果较好，因为单项语言模型不加位置编码也能取到较好效果</p>
 <h3 id="kerple">KERPLE</h3>
@@ -352,9 +352,9 @@ R_{i,j}^V = p_V[clip(i-j,p_{min},p_{max})]\qquad(6)\]</span></p>
 <h3 id="xpos">XPOS</h3>
 <p>XPOS出自论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2212.10554">A Length-Extrapolatable Transformer</a>, 其是对RoPE的推广： <span class="math display">\[RoPE:q_m\rightarrow R_mq_m, k_n\rightarrow R_nk_n\qquad XPOS: q_m\rightarrow R_mq_m\xi^m,k_n\rightarrow R_nk_n\xi^{-n}\qquad(19)\]</span> 这样一来attention的计算变为 <span class="math display">\[q_m^Tk_n=q_m^TR_{n-m}k_n\xi^{m-n}\qquad(20)\]</span> 最后的结果只依赖于相对位置<span class="math inline">\(m-n\)</span>,但其指数部分是<span class="math inline">\(m-n\)</span>而非绝对值，导致其总有一边是发散的</p>
 <h3 id="基于rope的长度外推">基于RoPE的长度外推</h3>
-<p>最近一年内，大部分的LLM的长度外推新工作都集中在研究基于RoPE的长度外推，其备受推崇的原因在于： 1. RoPE不带显示的远程衰减，这对于旨在Long Context的模型至关重要 2. RoPE是一种真正的位置编码，通过不同频率的三角函数有效区分长程短程，达到了类似层次位置编码的效果 3. RoPE直接作用于Q、K，不改变Attention形式，与Flash Attention更契合，更容易Scale Up</p>
+<p>最近一年内，大部分的LLM的长度外推新工作都集中在研究基于RoPE的长度外推，其备受推崇的原因在于： 1. RoPE不带显式的远程衰减，这对于旨在Long Context的模型至关重要 2. RoPE是一种真正的位置编码，通过不同频率的三角函数有效区分长程短程，达到了类似层次位置编码的效果 3. RoPE直接作用于Q、K，不改变Attention形式，与Flash Attention更契合，更容易Scale Up</p>
 <h4 id="pi">PI</h4>
-<p>PI(Positional Interpolation) 由Meta在论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2306.15595">《Extending Context Window of Large Language Models via Positional Interpolation》</a>提出，其通过位置内插的方法将预测长文本的位置编码乘上放缩因子<span class="math inline">\(\frac{L_{train}}{L_{test}}\)</span>缩放到训练长度内，但其缺点是会压缩临近Token的距离，扰乱局部分辨率，但其优势在于可以通过微调快速弥补此处的问题，适用于做模型初始化后做进一步微调得到长文本模型。</p>
+<p>PI(Positional Interpolation) 由Meta在论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2306.15595">《Extending Context Window of Large Language Models via Positional Interpolation》</a>提出，其通过位置内插的方法将预测长文本的位置编码乘上放缩因子<span class="math inline">\(\frac{L_{train}}{L_{test}}\)</span>缩放到训练长度内，但其缺点是会压缩临近Token的距离，扰乱局部分辨率，比如训练时长度为n，推理时长度为4n，做缩放时就会导致不同token之间的距离被压缩为原来的<span class="math inline">\(1/4\)</span>，但其优势在于可以通过微调快速弥补此处的问题，适用于做模型初始化，然后再进一步微调得到长文本模型。</p>
 <h4 id="leaky-rerope-and-rerope">Leaky ReRoPE and ReRoPE</h4>
 <p>直接外推的问题是远处越界，位置内插的问题是局部失真，Leaky ReRoPE和ReRoPE通过先设定一个窗口大小<span class="math inline">\(w\)</span>,再将相对位置分为两部分，在窗口不改变相对位置实现"局部不失真"，在窗口外使用位置内插实现"远处不越界" <img src="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-16-43-38.png"></p>
 <p>如果将内插因子<span class="math inline">\(k\)</span>取到无穷大，即可得到极简的ReRoPE，在窗口外的位置编码都变为<span class="math inline">\(w\)</span>,则其对任意长的序列都不会越界，但问题在于二者的实现稍微麻烦，因为二者的相对位置是分段线性的，所以朴素实现需要算两次Attention矩阵后再拼接</p>
@@ -365,11 +365,11 @@ R_{i,j}^V = p_V[clip(i-j,p_{min},p_{max})]\qquad(6)\]</span></p>
     1,\qquad r_i&gt;\tau\\
     0,\qquad r_i&lt;1\\
     \frac{r_i-1}{\tau-1}.\qquad others
-\end{cases}\qquad(21)\]</span> <img src="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-19-20-15.png"> YaRN认为较大的较大的<span class="math inline">\(\theta_i\)</span>意味着转速越快，周期越短，于是在<span class="math inline">\(m−n\)</span>从0到<span class="math inline">\(L_{train}−1\)</span>期间，它已经被转了很多圈，也就是说圆上的每一个点几乎都被训练过，因此这些<span class="math inline">\(\theta_i\)</span>几乎不存在OOD问题；相反，对于较小的<span class="math inline">\(\theta_i\)</span>，当<span class="math inline">\(m−n\)</span>从<span class="math inline">\(0\)</span>到<span class="math inline">\(L_{train}−1\)</span>时它可能还没转完一圈，这种情况下被训练过的点顶多只是圆上的一条弧，如果测试时遇到更大的<span class="math inline">\(L_{test}\)</span>，那么就超出了训练过的弧范围，从而有无法预估的表现，这时候就需要通过内插将它压缩到原本的弧内。</p>
-<p>具体到上面的公式中的<span class="math inline">\(\theta_i\)</span>,可以算出周期为<span class="math inline">\(T_i=2\pi/\theta_i\)</span>,然后定义训练时所转的“圈数”为<span class="math inline">\(r_i=\frac{\theta_iL_{train}}{L_{test}}\)</span>,再设一个阈值<span class="math inline">\(\tau\)</span>区分是否充分训练 二者间线性插值过渡即可得出上述推导</p>
+\end{cases}\qquad(21)\]</span> <img src="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-19-20-15.png"> YaRN认为较大的<span class="math inline">\(\theta_i\)</span>意味着转速越快，周期越短，于是在<span class="math inline">\(m−n\)</span>从0到<span class="math inline">\(L_{train}−1\)</span>期间，它已经被转了很多圈，也就是说圆上的每一个点几乎都被训练过，因此这些<span class="math inline">\(\theta_i\)</span>几乎不存在OOD问题；相反，对于较小的<span class="math inline">\(\theta_i\)</span>，当<span class="math inline">\(m−n\)</span>从<span class="math inline">\(0\)</span>到<span class="math inline">\(L_{train}−1\)</span>时它可能还没转完一圈，这种情况下被训练过的点顶多只是圆上的一条弧，如果测试时遇到更大的<span class="math inline">\(L_{test}\)</span>，那么就超出了训练过的弧范围，从而有无法预估的表现，这时候就需要通过内插将它压缩到原本的弧内。</p>
+<p>具体到上面的公式中的<span class="math inline">\(\theta_i\)</span>,可以算出周期为<span class="math inline">\(T_i=2\pi/\theta_i\)</span>,然后定义训练时所转的“圈数”为<span class="math inline">\(r_i=\frac{\theta_iL_{train}}{L_{test}}\)</span>,再设一个阈值<span class="math inline">\(\tau\)</span>区分是否充分训练 二者间再使用线性插值过渡即可得出上述表达式</p>
 <h4 id="dynamic-scaling">Dynamic Scaling</h4>
 <p>上面提到的免训练长度外推方法，都无法使得模型在训练长度<span class="math inline">\(L_{train}\)</span>内的效果保持不变,一般的解决方法时随着训练长度变化动态调整各个外推方法的Scale因子，这就是<strong>Dynamic Scaling</strong></p>
-<p>以YaRN为例，里面与长度相关的缩放因子是<span class="math inline">\(s=\frac{L_{test}}{L_{train}}\)</span>, Dynamic Scaling将其换为动态的<span class="math inline">\(s(pos)=\frac{max(L_{train},pos+1)}{L_{train}}\)</span>, 其中pos是当前token的位置编号，这个改动意味着Dynamic Scaling试图为每个位置找到最小的、理论上对模型效果影响也最小的Scale因子</p>
+<p>以YaRN为例，里面与长度相关的缩放因子是<span class="math inline">\(s=\frac{L_{test}}{L_{train}}\)</span>, Dynamic Scaling将其换为动态的<span class="math inline">\(s(pos)=\frac{max(L_{train},pos+1)}{L_{train}}\)</span>, 其中pos是当前token的位置编号，这个改动意味着Dynamic Scaling试图为每个位置找到最小的、理论上对模型效果影响也最小的Scale因子。在此设计下，能避免在追求长度外推的过程中带来的训练长度内的效果下降。</p>
 <h2 id="reference">Reference</h2>
 <ol type="1">
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/626828066">【OpenLLM 009】大模型基础组件之位置编码-万字长文全面解读LLM中的位置编码与长度外推性（上）</a></li>
