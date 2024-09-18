@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avarar.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="z1mX4l2yB4wOvYR7VLRbV5rLo0RgoTR4kbteu1mq6XU" />
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiazhi1.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction 与RNN、CNN等模型不同，Transformer模型中用到的attention机制无法捕捉输入顺序，这导致其无法区分不同位置的Token，因此我们需要额外引入位置信息到Transformer中，这也就引发了研究者们对位置编码的研究，具体而言，位置编码大体上可以分为以下几类：  绝对位置编码： 直接将位置信息以某种方式编码成向量，加入到输入中。 相对位置编码： 对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Survey of Positional Encoding in Transformer">
+<meta property="og:url" content="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/index.html">
+<meta property="og:site_name" content="夏至的个人博客">
+<meta property="og:description" content="Introduction 与RNN、CNN等模型不同，Transformer模型中用到的attention机制无法捕捉输入顺序，这导致其无法区分不同位置的Token，因此我们需要额外引入位置信息到Transformer中，这也就引发了研究者们对位置编码的研究，具体而言，位置编码大体上可以分为以下几类：  绝对位置编码： 直接将位置信息以某种方式编码成向量，加入到输入中。 相对位置编码： 对">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-15-58-00.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-16-43-38.png">
+<meta property="og:image" content="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-19-20-15.png">
+<meta property="article:published_time" content="2024-09-16T03:16:14.000Z">
+<meta property="article:modified_time" content="2024-09-18T11:23:40.047Z">
+<meta property="article:author" content="夏至">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="计算机视觉">
+<meta property="article:tag" content="自然语言处理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-15-58-00.png">
+
+<link rel="canonical" href="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>A Survey of Positional Encoding in Transformer | 夏至的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夏至的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          A Survey of Positional Encoding in Transformer
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-16 11:16:14" itemprop="dateCreated datePublished" datetime="2024-09-16T11:16:14+08:00">2024-09-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 19:23:40" itemprop="dateModified" datetime="2024-09-18T19:23:40+08:00">2024-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">自然语言处理</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="introduction">Introduction</h2>
+<p>与RNN、CNN等模型不同，Transformer模型中用到的attention机制无法捕捉输入顺序，这导致其无法区分不同位置的Token，因此我们需要额外引入<strong>位置信息</strong>到Transformer中，这也就引发了研究者们对位置编码的研究，具体而言，位置编码大体上可以分为以下几类：</p>
+<ul>
+<li>绝对位置编码： 直接将位置信息以某种方式编码成向量，加入到输入中。</li>
+<li>相对位置编码： 对Attention结构进行微调，使其有能力辨别不同位置的Token</li>
+<li>其他位置编码： 包括相对位置编码和绝对位置编码的混合使用等其他不同寻常的位置编码</li>
+</ul>
+<p>此外，对于位置编码而言，其长度外推性也是一个十分重要的考量，在此我们将单开一个章节讨论各种位置编码的长度外推性。</p>
+<span id="more"></span>
+<h2 id="absolute-position-embedding">Absolute Position Embedding</h2>
+<p>从形式上来看，绝对位置编码是相对实现起来较为简单的方案，一般来说，绝对位置编码会被加入到输入中。即在输入的第<span class="math inline">\(k\)</span>个向量<span class="math inline">\(x_k\)</span>中加入位置向量<span class="math inline">\(p_k\)</span>，即<span class="math inline">\(x_k&#39; = x_k + p_k\)</span>。具体而言，绝对位置编码还可以分为以下几个小类</p>
+<h3 id="训练式">训练式</h3>
+<p>最简单的方法是不进行特意设计位置编码，而是直接将位置编码可作为可训练参数，与模型其他参数一起，在训练过程中更新。这种方法因为其简单的实现方法往往应用较广，BERT,GPT等语言模型都是用这种方法。视觉里面的许多模型也使用这种方法，例如Mage, MAE , MAR等我们较为关注的掩码自回归模型等。</p>
+<p>对于训练式位置编码，虽然其简单易实现，但是其最大的缺点是其没有外推性，即如果预训练最大长度为512时，那么在推理的时候，模型也就最多只能处理长度为512的序列。但也并非绝对，在苏神的博客<a target="_blank" rel="noopener" href="https://kexue.fm/archives/7947">层次分解位置编码，让BERT可以处理超长文本</a>中，提出了通过使用层次分解位置编码，让BERT可以处理超长文本。其核心思路是通过层次分解，在已训练好的绝对位置编码向量上，通过线性插值的方式，得到新的位置编码向量。这样一来能实现在原来的参数基础上，能表示<span class="math inline">\(n^2\)</span>的长度编码，且前n个位置编码与原编码相容。</p>
+<h3 id="三角式">三角式</h3>
+<p>三角式绝对位置编码，则是在Transformer原文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/1706.03762">《Attention is all you need》</a>中提出的显式解，其公式表达为： <span class="math display">\[\begin{cases}
+    p_{k,2i} = sin(\frac{k}{10000^{2i/d}}) \\
+    p_{k,2i+1} = cos(\frac{k}{10000^{2i/d}})
+\end{cases}\qquad(1)\]</span></p>
+<p>其中<span class="math inline">\(d\)</span>为位置向量的维度，<span class="math inline">\(k\)</span>为位置索引，<span class="math inline">\(i\)</span>为维度索引。</p>
+<p>三角式位置编码的特点是拥有显式生成规律，其具有一定的外推性，另外得益于三角函数的性质，位置<span class="math inline">\(\alpha+\beta\)</span>的向量可表示为位置为<span class="math inline">\(\alpha\)</span>和<span class="math inline">\(\beta\)</span>的向量的线性组合，这使得三角函数天生具有相对位置计算的性质。可惜的是这类绝对位置编码最近很少使用，<strong>待考证其原因。</strong></p>
+<h3 id="递归式">递归式</h3>
+<p>在递归式绝对位置编码中，其往往实现为在输入之后衔接一层RNN，然后再接Transformer,那么其在结构上就有了通过RNN学习到位置信息的可能，比如从一个向量<span class="math inline">\(p_0\)</span>开始，通过<span class="math inline">\(p_{k+1} = f(p_k)\)</span>得到位置<span class="math inline">\(k+1\)</span>的位置向量，在ICML2020的论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2003.09229">《Learning to Encode Position for Transformer with Continuous Dynamical Model》</a>中，作者提出用微分方程建模位置编码，<span class="math inline">\(dp_t/d_t=h(p_t,t)\)</span>，并使用神经网络来拟合<span class="math inline">\(h(p_t)\)</span>，从而得到位置向量。此方法也被称为<strong>FLOATER</strong>。</p>
+<h2 id="relative-position-embedding">Relative Position Embedding</h2>
+<p>与绝对位置编码不同的是，相对位置编码并没有完整的去建模每个输入的位置信息，而是在计算Attention的时候考虑了当前位置和被attention的位置的相对距离，对于相对位置编码来说，其实现上可能相较绝对位置编码更为复杂，但是其可解释性和灵活性更强。</p>
+<h3 id="经典式">经典式</h3>
+<p>相对位置编码起源于Google论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/1803.02155">《Self-Attention with Relative Position Representations》</a>，后面的各种相对位置编码变体基本上也是在此基础上的不同修改。</p>
+<p>一般认为，相对位置编码是从绝对位置编码启发而来，考虑一般的带绝对位置编码的Attention: <span class="math display">\[\begin{cases}
+    q_i = (x_i + p_i)W_Q \\
+    k_j = (x_j + p_j)W_K \\
+    v_j = (x_j + p_j)W_V \\
+    a_{i,j} = softmax(q_i k_j^T) \\
+    o_i = \sum_{j} a_{i,j} v_j
+\end{cases}\qquad(2)\]</span></p>
+<p>在此处，初步展开<span class="math inline">\(q_ik_j^T\)</span>，有： <span class="math display">\[q_ik_j^T = (x_i + p_i)W_Q(x_j + p_j)^TW_K^T = (x_iW_Q+p_iW_Q)(W_K^Tx_j^T+W_K^Tp_j^T)\qquad (3) \]</span></p>
+<p>为了引入相对位置信息，Google将第一项位置去掉，第二项<span class="math inline">\(p_jW_K^T\)</span>保留，并将其记为<span class="math inline">\(R_{i-j}\)</span>，即： <span class="math display">\[a_{i,j}=softmax(x_iW_Q(x_jW_K+R_{i,j}^K)^T)\qquad(4)\]</span> 并将<span class="math inline">\(o_i\)</span>表达式中的<span class="math inline">\(p_jW_v\)</span>替换为<span class="math inline">\(R_{i,j}^V\)</span>，即： <span class="math display">\[o_i = \sum_{j} a_{i,j} (x_jW_V+R_{i,j}^V)\qquad(5)\]</span></p>
+<p>替代的向量<span class="math inline">\(R_{i,j}^K\)</span>和<span class="math inline">\(R_{i,j}^V\)</span> 通常是只依赖与相对距离<span class="math inline">\(i-j\)</span>,并会进行截断以适应不同的距离 <span class="math display">\[R_{i,j}^K = p_K[clip(i-j,p_{min},p_{max})]\\
+R_{i,j}^V = p_V[clip(i-j,p_{min},p_{max})]\qquad(6)\]</span></p>
+<p>这样就通过有限个位置编码实现了表达任意长度的相对位置(因为进行了截断操作)。</p>
+<h3 id="xlnet式">XLNET式</h3>
+<p>XLNET式源自Transformer-XL<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/1901.02860">《Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context》</a>，其源自于对上面的<span class="math inline">\(q_ik_j^T\)</span>的完全展开： <span class="math display">\[q_ik_j^T = x_iW_QW_K^T x_j^T+x_iW_QW_K^Tp_j^T+p_iW_QW_K^Tx_j^T+p_iW_QW_K^Tp_j^T\qquad(7)\]</span></p>
+<p>Transformer-XL的做法是直接将上式的<span class="math inline">\(p_j\)</span>替换为相对位置向量<span class="math inline">\(R_{i-j}\)</span>，两个<span class="math inline">\(p_i\)</span>则直接替换为两个可训练的向量<span class="math inline">\(u,v\)</span>: <span class="math display">\[x_iW_QW_K^Tx_j^T+x_iW_QW_{K,R}^TR_{i-j}^T+uW_K^Tx_j^T+vW_{K,R}^TR_{i-j}^T\qquad(8)\]</span></p>
+<p>此外，<span class="math inline">\(v_j\)</span>上的位置偏置就直接去掉了，直接令<span class="math inline">\(o_i=\sum_ja_{i,j}x_jW_V\)</span>，从此工作后，后面的相对位置编码工作都只加到Attention矩阵而不加到<span class="math inline">\(v_j\)</span>上去了。</p>
+<h3 id="t5式">T5式</h3>
+<p>T5式相对位置编码源自于T5<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/1910.10683">《Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer》</a>，里面对展开式(7)进行了更详细的含义划分，其分别理解为"输入-输入"，"输入-位置"，"位置-输入"，"位置-位置"四项注意力组合，其认为输入信息和位置信息应该是独立的，那么"输入-位置"和"位置-输入"的注意力可以删掉 而其实位置-位置的注意力是一个只依赖于<span class="math inline">\((i,j)\)</span>的标量，可以直接作为参数训练出来，即简化为 <span class="math display">\[x_iW_QW_K^Tx_j^T=\beta_{i,j}\qquad(9)\]</span></p>
+<p>也就是其只是在Attention矩阵的基础上加一个可训练的偏置项<span class="math inline">\(\beta_{i,j}\)</span> 就实现了相对位置编码。</p>
+<h3 id="deberta式">DeBERTa式</h3>
+<p>DeBERTa式相对位置编码源自于DeBERTa<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2006.03654">《DeBERTa: Decoding-enhanced BERT with Disentangled Attention》</a>，其也是从展开式(7)出发，但是其丢弃的是第四项位置-位置注意力，保留第2、3项并且替换为相对位置编码 <span class="math display">\[q_ik_j^T = x_iW_QW_K^Tx_j^T+x_iW_QW_K^TR_{i,j}^T+R_{j,i}W_QW_{K}^Tx_{j}^T\qquad(10)\]</span></p>
+<h2 id="other-position-embedding">Other Position Embedding</h2>
+<h3 id="复数式">复数式</h3>
+<p>该想法来自论文<a target="_blank" rel="noopener" href="https://openreview.net/attachment?id=Hke-WTVtwr&amp;name=original_pdf">《Encoding word order in complex embeddings 》</a>。其使用复数域词向量编码词序，是第一个将复数的虚部域具体含义(词序)联系起来的工作。其推导出了复数域的词向量形式： <span class="math display">\[f(j,pos)=[r_{j,1}e^{i(w_{j,1}pos+\theta_{j,1})},\dots,r_{j,2}e^{i(w_{j,2}pos+\theta_{j,2})},\dots,r_{j,D}e^{i(w_{j,D}pos+\theta_{j,D})}]\qquad(11)\\r_j:振幅,w_j:角频率，\theta_j：初相位\]</span></p>
+<p>复数词向量的振幅<span class="math inline">\(r_j\)</span>只与词<span class="math inline">\(w_j\)</span>有关，对应token embedding。 角频率<span class="math inline">\(w_j\)</span>可以表示词对位置的敏感程度，角频率越小对位置越不敏感，但其缺点在于因为需要维护振幅、角频率和初相位，参数量相当于三倍</p>
+<h3 id="rope">RoPE</h3>
+<p>RoPE由苏剑林老师在<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2104.09864">《ROFORMER: ENHANCED TRANSFORMER WITH ROTARY POSITION EMBEDDING》</a>中提出，其将绝对位置编码和相对位置编码融为一体。简单来说其对attention里面的向量内积先用复数表示为: <span class="math display">\[&lt;q_m,k_n&gt;=Re[q_mk_n^*]\qquad(12)\]</span> 进一步将<span class="math inline">\(q_m,k_n\)</span>分别乘以<span class="math inline">\(e^{im\theta},e^{in\theta}\)</span>变为<span class="math inline">\(q_me^{im\theta},k_ne^{in\theta}\)</span>,然后放到内积变为: <span class="math display">\[&lt;q_me^{im\theta},k_ne^{in\theta}&gt;=Re[q_mk_n^*e^{i(m-n)\theta}]\qquad(13)\]</span> 上式就得出了内积只依赖于相对位置<span class="math inline">\(m-n\)</span>的结论，巧妙地将绝对位置和相对位置结合到一起。 这样一来，我们得到了二维情况下用复数表示的RoPE: <span class="math display">\[f(q,m)=R_f(q,m)e^{i\theta_f(q,m)}=||q||e^{i(\theta(q)+m\theta)}\qquad(14)\]</span> 还可以将其写为矩阵形式： <span class="math display">\[f(q,m)=\begin{pmatrix}
+    cos m\theta &amp; -sin m\theta \\
+    sin m\theta &amp; cos m\theta \\
+\end{pmatrix}\begin{pmatrix}
+    q_0\\
+    q_1
+\end{pmatrix}\qquad(15)\]</span></p>
+<p>其优势是通过绝对位置编码的方式实现了相对位置编码，现在得到了广泛使用</p>
+<h2 id="length-extrapolation">Length Extrapolation</h2>
+<p>长度外推一般指的是不需要用长序列数据进行额外的训练，只用短序列语料对模型进行训练，就可以得到一个能够处理和预测长序列的模型。但是值得注意的是长度外推不能以牺牲远程依赖为代价，这样还不如直接截断文本进行生成。</p>
+<p>在长度外推问题中，遇到的主要问题有以下两点： 1. 预测时用到了没有被训练过的位置编码 2. 预测时注意力机制所处理的tokens数量远超训练时的数量</p>
+<p>事实上，对于相对位置编码的Transformer可以通过简单的Attention Mask一次性解决上述问题，并取得解决SOTA的效果。其具体操作时将预测时的attention变为局部attention, 每个token只看到训练长度个token 且此时的局部attention也不会比训练时使用更多的位置编码, 这样就一次性解决了上面的问题，且不用重新训练模型。</p>
+<h3 id="alibi">ALIBI</h3>
+<p>ALIBI是第一篇明确研究Transformer长度外推性的工作，其出自论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2108.12409">《Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation》</a>。它主要是在Softmax之前，将attention的计算从<span class="math inline">\(q_m^Tk_n\)</span>改为 <span class="math display">\[q_m^Tk_n-\lambda|m-n|\qquad (16)\]</span> ALIBI相较于上面用attention mask解决长度外推问题的基线模型，减去的非负矩阵更光滑 <img src="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-15-58-00.png"> 但是从(16)中可以看出ALIBI是只能辨别相对距离远近，而无法正确识别位置信息的,因为<span class="math inline">\(|m-n|=|n-m|\)</span>。其主要是在单项语言模型上效果较好，因为单项语言模型不加位置编码也能取到较好效果</p>
+<h3 id="kerple">KERPLE</h3>
+<p>KERPLE来自论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2205.09921">《KERPLE: Kernelized Relative Positional Embedding for Length Extrapolation》</a>,是ALIBI的简单推广，引入了两个训练参数<span class="math inline">\(r_1,r_2\)</span>来一般化式(16): <span class="math display">\[\begin{cases}
+    q_m^Tk_n-r_1|m-n|^{r_2},\qquad r_1&gt;0,0&lt;r_2\le2\\
+    q_m^Tk_n-r_1log(1+r_2|m-n|),\qquad r_1,r_2&gt;0\\
+\end{cases}\qquad(17)\]</span></p>
+<p>其既完成了一般化又有可训练参数</p>
+<h3 id="sandwich">Sandwich</h3>
+<p>Sandwich出自论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2212.10356">《Dissecting Transformer Length Extrapolation via the Lens of Receptive Field Analysis》</a>，将式(16)替换为 <span class="math display">\[q_m^Tk_n+\lambda p_m^Tp_n\qquad(18)\]</span> 其中<span class="math inline">\(p_m,p_n\)</span>是Sinusoidal 位置编码，<span class="math inline">\(\lambda&gt;0\)</span>是超参数</p>
+<h3 id="xpos">XPOS</h3>
+<p>XPOS出自论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2212.10554">A Length-Extrapolatable Transformer</a>, 其是对RoPE的推广： <span class="math display">\[RoPE:q_m\rightarrow R_mq_m, k_n\rightarrow R_nk_n\qquad XPOS: q_m\rightarrow R_mq_m\xi^m,k_n\rightarrow R_nk_n\xi^{-n}\qquad(19)\]</span> 这样一来attention的计算变为 <span class="math display">\[q_m^Tk_n=q_m^TR_{n-m}k_n\xi^{m-n}\qquad(20)\]</span> 最后的结果只依赖于相对位置<span class="math inline">\(m-n\)</span>,但其指数部分是<span class="math inline">\(m-n\)</span>而非绝对值，导致其总有一边是发散的</p>
+<h3 id="基于rope的长度外推">基于RoPE的长度外推</h3>
+<p>最近一年内，大部分的LLM的长度外推新工作都集中在研究基于RoPE的长度外推，其备受推崇的原因在于： 1. RoPE不带显示的远程衰减，这对于旨在Long Context的模型至关重要 2. RoPE是一种真正的位置编码，通过不同频率的三角函数有效区分长程短程，达到了类似层次位置编码的效果 3. RoPE直接作用于Q、K，不改变Attention形式，与Flash Attention更契合，更容易Scale Up</p>
+<h4 id="pi">PI</h4>
+<p>PI(Positional Interpolation) 由Meta在论文<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2306.15595">《Extending Context Window of Large Language Models via Positional Interpolation》</a>提出，其通过位置内插的方法将预测长文本的位置编码乘上放缩因子<span class="math inline">\(\frac{L_{train}}{L_{test}}\)</span>缩放到训练长度内，但其缺点是会压缩临近Token的距离，扰乱局部分辨率，但其优势在于可以通过微调快速弥补此处的问题，适用于做模型初始化后做进一步微调得到长文本模型。</p>
+<h4 id="leaky-rerope-and-rerope">Leaky ReRoPE and ReRoPE</h4>
+<p>直接外推的问题是远处越界，位置内插的问题是局部失真，Leaky ReRoPE和ReRoPE通过先设定一个窗口大小<span class="math inline">\(w\)</span>,再将相对位置分为两部分，在窗口不改变相对位置实现"局部不失真"，在窗口外使用位置内插实现"远处不越界" <img src="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-16-43-38.png"></p>
+<p>如果将内插因子<span class="math inline">\(k\)</span>取到无穷大，即可得到极简的ReRoPE，在窗口外的位置编码都变为<span class="math inline">\(w\)</span>,则其对任意长的序列都不会越界，但问题在于二者的实现稍微麻烦，因为二者的相对位置是分段线性的，所以朴素实现需要算两次Attention矩阵后再拼接</p>
+<h4 id="ntk-rope">NTK-RoPE</h4>
+<p>NTK-RoPE的思路是将原本是<span class="math inline">\(\theta_i=10000^{-2i/d}\)</span>,现在改为了<span class="math inline">\(\theta_i=(10000k)^{-2i/d}\)</span>,<span class="math inline">\(k\)</span>的取值是通过令<span class="math inline">\(i=d/2-1\)</span>时的Scale正好等于内插Scale<span class="math inline">\(\frac{L_{train}}{L_{test}}\)</span>,求解得出<span class="math inline">\(k=(\frac{L_{test}}{L_{train}})^{d/(d-2)}\)</span></p>
+<h4 id="yarn">YaRN</h4>
+<p>YaRN出自<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2309.00071">《 YaRN: Efficient Context Window Extension of Large Language Models》</a>，是一种免训练长度外推方案，其只改变<span class="math inline">\(\theta_i\)</span>的值，不改变Attention和RoPE形式，所以不会有额外的实现成本和推理成本，其可用公式表达为： <span class="math display">\[\theta_i^{new}=[\gamma_i+(1-\gamma_i)\frac{L_{train}}{L_{test}}]\theta_i,\gamma_i=\begin{cases}
+    1,\qquad r_i&gt;\tau\\
+    0,\qquad r_i&lt;1\\
+    \frac{r_i-1}{\tau-1}.\qquad others
+\end{cases}\qquad(21)\]</span> <img src="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-19-20-15.png"> YaRN认为较大的较大的<span class="math inline">\(\theta_i\)</span>意味着转速越快，周期越短，于是在<span class="math inline">\(m−n\)</span>从0到<span class="math inline">\(L_{train}−1\)</span>期间，它已经被转了很多圈，也就是说圆上的每一个点几乎都被训练过，因此这些<span class="math inline">\(\theta_i\)</span>几乎不存在OOD问题；相反，对于较小的<span class="math inline">\(\theta_i\)</span>，当<span class="math inline">\(m−n\)</span>从<span class="math inline">\(0\)</span>到<span class="math inline">\(L_{train}−1\)</span>时它可能还没转完一圈，这种情况下被训练过的点顶多只是圆上的一条弧，如果测试时遇到更大的<span class="math inline">\(L_{test}\)</span>，那么就超出了训练过的弧范围，从而有无法预估的表现，这时候就需要通过内插将它压缩到原本的弧内。</p>
+<p>具体到上面的公式中的<span class="math inline">\(\theta_i\)</span>,可以算出周期为<span class="math inline">\(T_i=2\pi/\theta_i\)</span>,然后定义训练时所转的“圈数”为<span class="math inline">\(r_i=\frac{\theta_iL_{train}}{L_{test}}\)</span>,再设一个阈值<span class="math inline">\(\tau\)</span>区分是否充分训练 二者间线性插值过渡即可得出上述推导</p>
+<h4 id="dynamic-scaling">Dynamic Scaling</h4>
+<p>上面提到的免训练长度外推方法，都无法使得模型在训练长度<span class="math inline">\(L_{train}\)</span>内的效果保持不变,一般的解决方法时随着训练长度变化动态调整各个外推方法的Scale因子，这就是<strong>Dynamic Scaling</strong></p>
+<p>以YaRN为例，里面与长度相关的缩放因子是<span class="math inline">\(s=\frac{L_{test}}{L_{train}}\)</span>, Dynamic Scaling将其换为动态的<span class="math inline">\(s(pos)=\frac{max(L_{train},pos+1)}{L_{train}}\)</span>, 其中pos是当前token的位置编号，这个改动意味着Dynamic Scaling试图为每个位置找到最小的、理论上对模型效果影响也最小的Scale因子</p>
+<h2 id="reference">Reference</h2>
+<ol type="1">
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/626828066">【OpenLLM 009】大模型基础组件之位置编码-万字长文全面解读LLM中的位置编码与长度外推性（上）</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/629015933">【OpenLLM 010】大模型基础组件之位置编码-万字长文全面解读LLM中的位置编码与长度外推性（ 中）</a></li>
+<li>苏剑林. (Mar. 23, 2021). 《Transformer升级之路：2、博采众长的旋转式位置编码 》[Blog post]. Retrieved from https://kexue.fm/archives/8265</li>
+<li>苏剑林. (Feb. 03, 2021). 《让研究人员绞尽脑汁的Transformer位置编码 》[Blog post]. Retrieved from https://kexue.fm/archives/8130</li>
+<li>苏剑林. (Jan. 26, 2024). 《Transformer升级之路：16、“复盘”长度外推技术 》[Blog post]. Retrieved from https://kexue.fm/archives/9948</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag"># 计算机视觉</a>
+              <a href="/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" rel="tag"># 自然语言处理</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/06/15/%E7%94%B5%E6%B3%A2%E4%BC%A0%E6%92%AD%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/" rel="prev" title="电波传播知识小结">
+      <i class="fa fa-chevron-left"></i> 电波传播知识小结
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#absolute-position-embedding"><span class="nav-number">2.</span> <span class="nav-text">Absolute Position Embedding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">训练式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E8%A7%92%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">三角式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">递归式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#relative-position-embedding"><span class="nav-number">3.</span> <span class="nav-text">Relative Position Embedding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">经典式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xlnet%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">XLNET式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#t5%E5%BC%8F"><span class="nav-number">3.3.</span> <span class="nav-text">T5式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deberta%E5%BC%8F"><span class="nav-number">3.4.</span> <span class="nav-text">DeBERTa式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#other-position-embedding"><span class="nav-number">4.</span> <span class="nav-text">Other Position Embedding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%95%B0%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">复数式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rope"><span class="nav-number">4.2.</span> <span class="nav-text">RoPE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#length-extrapolation"><span class="nav-number">5.</span> <span class="nav-text">Length Extrapolation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#alibi"><span class="nav-number">5.1.</span> <span class="nav-text">ALIBI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kerple"><span class="nav-number">5.2.</span> <span class="nav-text">KERPLE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sandwich"><span class="nav-number">5.3.</span> <span class="nav-text">Sandwich</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xpos"><span class="nav-number">5.4.</span> <span class="nav-text">XPOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Erope%E7%9A%84%E9%95%BF%E5%BA%A6%E5%A4%96%E6%8E%A8"><span class="nav-number">5.5.</span> <span class="nav-text">基于RoPE的长度外推</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pi"><span class="nav-number">5.5.1.</span> <span class="nav-text">PI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#leaky-rerope-and-rerope"><span class="nav-number">5.5.2.</span> <span class="nav-text">Leaky ReRoPE and ReRoPE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ntk-rope"><span class="nav-number">5.5.3.</span> <span class="nav-text">NTK-RoPE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yarn"><span class="nav-number">5.5.4.</span> <span class="nav-text">YaRN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dynamic-scaling"><span class="nav-number">5.5.5.</span> <span class="nav-text">Dynamic Scaling</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="夏至"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">夏至</p>
+  <div class="site-description" itemprop="description">人生不是短程跑，而是马拉松。在自己的时区里，一切都准时</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiazhi1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiazhi1" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2194625680@qq.com" title="E-Mail → mailto:2194625680@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏至</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">239k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:37</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

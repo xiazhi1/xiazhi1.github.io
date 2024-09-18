@@ -182,6 +182,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="夏至">
+      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夏至的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/" class="post-title-link" itemprop="url">A Survey of Positional Encoding in Transformer</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-09-16 11:16:14" itemprop="dateCreated datePublished" datetime="2024-09-16T11:16:14+08:00">2024-09-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-09-18 19:23:40" itemprop="dateModified" datetime="2024-09-18T19:23:40+08:00">2024-09-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">自然语言处理</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="introduction">Introduction</h2>
+<p>与RNN、CNN等模型不同，Transformer模型中用到的attention机制无法捕捉输入顺序，这导致其无法区分不同位置的Token，因此我们需要额外引入<strong>位置信息</strong>到Transformer中，这也就引发了研究者们对位置编码的研究，具体而言，位置编码大体上可以分为以下几类：</p>
+<ul>
+<li>绝对位置编码： 直接将位置信息以某种方式编码成向量，加入到输入中。</li>
+<li>相对位置编码： 对Attention结构进行微调，使其有能力辨别不同位置的Token</li>
+<li>其他位置编码： 包括相对位置编码和绝对位置编码的混合使用等其他不同寻常的位置编码</li>
+</ul>
+<p>此外，对于位置编码而言，其长度外推性也是一个十分重要的考量，在此我们将单开一个章节讨论各种位置编码的长度外推性。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2024/06/15/%E7%94%B5%E6%B3%A2%E4%BC%A0%E6%92%AD%E7%9F%A5%E8%AF%86%E5%B0%8F%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -556,99 +666,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://xiazhi1.github.io/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="夏至">
-      <meta itemprop="description" content="人生不是短程跑，而是马拉松。在自己的时区里，一切都准时">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="夏至的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/" class="post-title-link" itemprop="url">数学建模笔记(司守奎)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-01-15 16:31:03" itemprop="dateCreated datePublished" datetime="2024-01-15T16:31:03+08:00">2024-01-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-18 11:58:05" itemprop="dateModified" datetime="2024-01-18T11:58:05+08:00">2024-01-18</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>25k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>23 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<h1 id="数学建模笔记司守奎">数学建模笔记（司守奎）</h1>
-<h2 id="线性规划">线性规划</h2>
-<ol type="1">
-<li>定义： 在一组线性条件限制下，求一线性目标函数最大或最小的问题</li>
-<li>标准的matlab形式：<span class="math inline">\(min f^T x,\)</span> <span class="math inline">\(s.t. \begin{cases} A\cdot x \le b\\ Aeq \cdot x = beq \\ lb \le x \le ub \end{cases}\)</span> 其中<span class="math inline">\(f,x,b,beq,lb,u\)</span>为列向量，<span class="math inline">\(A，Aeq\)</span>为矩阵</li>
-<li>matlab相关求解命令为 <span class="math inline">\([x,val]=linprog(f,A,b,Aeq,beq,lb,ub)\)</span></li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/01/15/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AC%94%E8%AE%B0-%E5%8F%B8%E5%AE%88%E5%A5%8E/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -720,20 +737,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -781,12 +798,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">231k</span>
+    <span title="站点总字数">239k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:30</span>
+    <span title="站点阅读时长">3:37</span>
 </div>
 
         
