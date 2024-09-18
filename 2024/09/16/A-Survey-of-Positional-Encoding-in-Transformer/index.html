@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-16-43-38.png">
 <meta property="og:image" content="http://xiazhi1.github.io/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-19-20-15.png">
 <meta property="article:published_time" content="2024-09-16T03:16:14.000Z">
-<meta property="article:modified_time" content="2024-09-18T12:12:44.888Z">
+<meta property="article:modified_time" content="2024-09-18T12:26:48.699Z">
 <meta property="article:author" content="夏至">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="计算机视觉">
@@ -222,7 +222,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-09-18 20:12:44" itemprop="dateModified" datetime="2024-09-18T20:12:44+08:00">2024-09-18</time>
+                <time title="修改时间：2024-09-18 20:26:48" itemprop="dateModified" datetime="2024-09-18T20:26:48+08:00">2024-09-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +255,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.7k</span>
+              <span>9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -359,13 +359,13 @@ R_{i,j}^V = p_V[clip(i-j,p_{min},p_{max})]\qquad(6)\]</span></p>
 <p>直接外推的问题是远处越界，位置内插的问题是局部失真，Leaky ReRoPE和ReRoPE通过先设定一个窗口大小<span class="math inline">\(w\)</span>,再将相对位置分为两部分，在窗口不改变相对位置实现"局部不失真"，在窗口外使用位置内插实现"远处不越界" <img src="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-16-43-38.png"></p>
 <p>如果将内插因子<span class="math inline">\(k\)</span>取到无穷大，即可得到极简的ReRoPE，在窗口外的位置编码都变为<span class="math inline">\(w\)</span>,则其对任意长的序列都不会越界，但问题在于二者的实现稍微麻烦，因为二者的相对位置是分段线性的，所以朴素实现需要算两次Attention矩阵后再拼接</p>
 <h4 id="ntk-rope">NTK-RoPE</h4>
-<p>NTK-RoPE的思路是将原本是<span class="math inline">\(\theta_i=10000^{-2i/d}\)</span>,现在改为了<span class="math inline">\(\theta_i=(10000k)^{-2i/d}\)</span>,<span class="math inline">\(k\)</span>的取值是通过令<span class="math inline">\(i=d/2-1\)</span>时的Scale正好等于内插Scale<span class="math inline">\(\frac{L_{train}}{L_{test}}\)</span>,求解得出<span class="math inline">\(k=(\frac{L_{test}}{L_{train}})^{d/(d-2)}\)</span></p>
+<p>NTK-RoPE的思路是将原本是<span class="math inline">\(\theta_i=10000^{-2i/d}\)</span>,现在改为了<span class="math inline">\(\theta_i=(10000k)^{-2i/d}\)</span>,<span class="math inline">\(k\)</span>的取值是通过令<span class="math inline">\(i=d/2-1\)</span>时的Scale正好等于内插Scale<span class="math inline">\(\frac{L_{train}}{L_{test}}\)</span>,得出方程 <span class="math display">\[(10000k)^{-2i/d}|_{i=d/2-1}=\frac{L_{train}}{L_{test}}(10000)^{-2i/d}|_{i=d/2-1}\qquad(21)\]</span> 求解得出 <span class="math display">\[k=(\frac{L_{test}}{L_{train}})^{d/(d-2)}\qquad(22)\]</span> 这样的设计基于作者对NTK的经验，判断高频<span class="math inline">\((i\rightarrow0)\)</span>是学习相对距离的，不用改变，低频<span class="math inline">\((i\rightarrow d/2-1)\)</span>是学习绝对距离的，所以要进行内插，其实际上只能让模型正常外推到<span class="math inline">\(L_{test}/2\)</span>。因为从实际情况来看,只让最后一个<span class="math inline">\(i=d/2-1\)</span>做完整内插，这种内插是不够充分的，于是作者推出了后续的YaRN。</p>
 <h4 id="yarn">YaRN</h4>
 <p>YaRN出自<a target="_blank" rel="noopener" href="https://papers.cool/arxiv/2309.00071">《 YaRN: Efficient Context Window Extension of Large Language Models》</a>，是一种免训练长度外推方案，其只改变<span class="math inline">\(\theta_i\)</span>的值，不改变Attention和RoPE形式，所以不会有额外的实现成本和推理成本，其可用公式表达为： <span class="math display">\[\theta_i^{new}=[\gamma_i+(1-\gamma_i)\frac{L_{train}}{L_{test}}]\theta_i,\gamma_i=\begin{cases}
     1,\qquad r_i&gt;\tau\\
     0,\qquad r_i&lt;1\\
     \frac{r_i-1}{\tau-1}.\qquad others
-\end{cases}\qquad(21)\]</span> <img src="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-19-20-15.png"> YaRN认为较大的<span class="math inline">\(\theta_i\)</span>意味着转速越快，周期越短，于是在<span class="math inline">\(m−n\)</span>从0到<span class="math inline">\(L_{train}−1\)</span>期间，它已经被转了很多圈，也就是说圆上的每一个点几乎都被训练过，因此这些<span class="math inline">\(\theta_i\)</span>几乎不存在OOD问题；相反，对于较小的<span class="math inline">\(\theta_i\)</span>，当<span class="math inline">\(m−n\)</span>从<span class="math inline">\(0\)</span>到<span class="math inline">\(L_{train}−1\)</span>时它可能还没转完一圈，这种情况下被训练过的点顶多只是圆上的一条弧，如果测试时遇到更大的<span class="math inline">\(L_{test}\)</span>，那么就超出了训练过的弧范围，从而有无法预估的表现，这时候就需要通过内插将它压缩到原本的弧内。</p>
+\end{cases}\qquad(23)\]</span> <img src="/2024/09/16/A-Survey-of-Positional-Encoding-in-Transformer/2024-09-18-19-20-15.png"> YaRN认为较大的<span class="math inline">\(\theta_i\)</span>意味着转速越快，周期越短，于是在<span class="math inline">\(m−n\)</span>从0到<span class="math inline">\(L_{train}−1\)</span>期间，它已经被转了很多圈，也就是说圆上的每一个点几乎都被训练过，因此这些<span class="math inline">\(\theta_i\)</span>几乎不存在OOD问题；相反，对于较小的<span class="math inline">\(\theta_i\)</span>，当<span class="math inline">\(m−n\)</span>从<span class="math inline">\(0\)</span>到<span class="math inline">\(L_{train}−1\)</span>时它可能还没转完一圈，这种情况下被训练过的点顶多只是圆上的一条弧，如果测试时遇到更大的<span class="math inline">\(L_{test}\)</span>，那么就超出了训练过的弧范围，从而有无法预估的表现，这时候就需要通过内插将它压缩到原本的弧内。</p>
 <p>具体到上面的公式中的<span class="math inline">\(\theta_i\)</span>,可以算出周期为<span class="math inline">\(T_i=2\pi/\theta_i\)</span>,然后定义训练时所转的“圈数”为<span class="math inline">\(r_i=\frac{\theta_iL_{train}}{L_{test}}\)</span>,再设一个阈值<span class="math inline">\(\tau\)</span>区分是否充分训练 二者间再使用线性插值过渡即可得出上述表达式</p>
 <h4 id="dynamic-scaling">Dynamic Scaling</h4>
 <p>上面提到的免训练长度外推方法，都无法使得模型在训练长度<span class="math inline">\(L_{train}\)</span>内的效果保持不变,一般的解决方法时随着训练长度变化动态调整各个外推方法的Scale因子，这就是<strong>Dynamic Scaling</strong></p>
@@ -542,7 +542,7 @@ R_{i,j}^V = p_V[clip(i-j,p_{min},p_{max})]\qquad(6)\]</span></p>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:37</span>
+    <span title="站点阅读时长">3:38</span>
 </div>
 
         
